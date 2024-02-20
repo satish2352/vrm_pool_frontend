@@ -31,6 +31,7 @@ export class LoginComponent {
           // Handle error when token is missing
           console.error('Token missing in response');
           this.error = 'Authentication failed. Please try again.';
+          alert('Enter Valid Data')
         }
       },
       error: (error: any) => {
