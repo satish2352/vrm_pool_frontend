@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'screen1', pathMatch: 'full' },
     { path: 'allsup', component: AllSupervisorComponent },
     { path: 'allagent', component: AllAgentComponent },
-    { path: 'uploadsupervisor', component:UploadsupervisorComponent },
+    { path: 'uploadsupervisor', component: UploadsupervisorComponent },
     { path: 'uploadagent', component: UploadagentComponent },
     { path: 'allcalllog', component: AllcalllogComponent },
 
