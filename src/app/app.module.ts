@@ -12,6 +12,10 @@ import { AllAgentComponent } from './all-agent/all-agent.component';
 import { UploadsupervisorComponent } from './upload/uploadsupervisor/uploadsupervisor.component';
 import { UploadagentComponent } from './upload/uploadagent/uploadagent.component';
 import { AllcalllogComponent } from './allcalllog/allcalllog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -29,6 +33,12 @@ import { AllcalllogComponent } from './allcalllog/allcalllog.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  
+    
+
     
   
    

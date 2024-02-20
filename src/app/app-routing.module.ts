@@ -12,7 +12,7 @@ import { AllcalllogComponent } from './allcalllog/allcalllog.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin-dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'admin-dashboard', component: AdminDashboardComponent,

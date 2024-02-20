@@ -1,5 +1,8 @@
+
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +10,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private router: Router) {} 
-  signIn() {
-    // Perform authentication logic here
+  email: string = '';
+  password: string = '';
+  error: string = '';
+
+  constructor(private authService: HelperService,private router: Router) { }
 
 
-    // Navigate to the admin dashboard on successful sign-in
-    this.router.navigate(['/admin-dashboard']);
+  login() {
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response: any) => {
+        // Assuming response contains a token
+        if (response && response.token) {
+          // Handle successful login
+          console.log('Login successful', response);
+          this.authService.saveToken(response.token);
+          console.log("Token saved successfully");
+          this.router.navigate(['/admin-dashboard']);
+        } else {
+          // Handle error when token is missing
+          console.error('Token missing in response');
+          this.error = 'Authentication failed. Please try again.';
+        }
+      },
+      error: (error: any) => {
+        // Handle login error
+        console.error('Login error', error);
+        this.error = 'email or password is incorrect';
+      }
+    });
   }
 }
