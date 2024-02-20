@@ -18,7 +18,12 @@ export class LoginComponent {
 
 
   login() {
-    this.authService.login(this.email, this.password).subscribe({
+    var data ={
+      'email':this.email,
+      'password':this.password
+    }
+    alert(this.email)
+    this.authService.login(data).subscribe({
       next: (response: any) => {
         // Assuming response contains a token
         if (response && response.token) {

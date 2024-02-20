@@ -13,8 +13,8 @@ export class HelperService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
+  login(data:object)  {
+    return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
   saveToken(token: string) {
