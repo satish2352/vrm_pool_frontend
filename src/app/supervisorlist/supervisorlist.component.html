@@ -1,0 +1,119 @@
+<div class="content-wrapper mt-5">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>All Supervisor</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">DataTables New</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="form-group">
+                            <div class="card card-default">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile"  (change)="onFileSelected($event)">
+                                            <label class="custom-file-label" for="exampleInputFile">Upload file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button class="input-group-text"  (click)="onUpload()">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-">
+                                            <div class="form-group">
+                                                <label>File Wise Data</label>
+                                                <select class="form-control" (change)="onSelectChange($event.target)">
+                                                    <option value="" disabled selected>Choose File</option>
+                                                    <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
+                                                        {{ file?.fileId }}
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Contact No</th>
+                                        <th>Upload Failed | Success </th>
+                                        <th>Upload Failed Reason </th>
+                                        <th>Created At </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr *ngFor="let alluploadedusers of alllist">
+                                        <td>{{1}}</td>
+                                        <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
+                                            alluploadedusers.lname }}</td>
+                                        <td>{{ alluploadedusers.email }}</td>
+                                        <td>{{ alluploadedusers.mobile }}</td>
+                                        <td> <span *ngIf="alluploadedusers.is_inserted==true"
+                                                style="background-color: green;color: whitesmoke;text-transform: capitalize;">
+                                                Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
+                                                style="background-color: red;color: whitesmoke;text-transform: capitalize;">
+                                                Failed </span></td>
+                                        <td><span *ngIf="alluploadedusers.is_inserted==false"
+                                                style="text-transform: capitalize;">{{
+                                                alluploadedusers.reason }}</span></td>
+                                        <td>{{ alluploadedusers.createdAt }}</td>
+                                        <!-- |date:'dd/MM/yyyy'}}</td> -->
+                                    </tr>
+
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

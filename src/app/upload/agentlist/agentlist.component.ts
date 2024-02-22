@@ -3,41 +3,54 @@ import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 
 @Component({
-  selector: 'app-uploadsupervisor',
-  templateUrl: './uploadsupervisor.component.html',
-  styleUrls: ['./uploadsupervisor.component.sass']
+  selector: 'app-agentlist',
+  templateUrl: './agentlist.component.html',
+  styleUrls: ['./agentlist.component.sass']
 })
-export class UploadsupervisorComponent {
+export class AgentlistComponent {
+
   selectedFile!: File;
   p: number = 1;
   alllist: any = [];
-  alllistFileWise: any = [];
+  supervisorList: any = [];
+  supervisorSelected: any;
 
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) { }
 
 
   ngOnInit(): void {
- 
+
     this.getAllSupervisorList();
     this.getHistoryFileIdWise({});
-  }
-
-  onSelectChange(val:any) {
-    console.log()
-    this.getHistoryFileIdWise({ fileId: val.value});
+    this.getAllAgentList();
   }
 
 
-  getAllSupervisorList() {
-    this.helperService.getAllSupervisorUploadedList().subscribe(list => {
+
+  getAllAgentList() {
+    this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
-        this.alllistFileWise = list['data'];
+        this.alllist = list['data'];
       }
     });
   }
 
-  getHistoryFileIdWise(data:any) {
+  onSelectChange(val: any) {
+    console.log()
+    this.supervisorSelected = val.value;
+  }
+
+
+  getAllSupervisorList() {
+    this.helperService.getAllSupervisorList().subscribe(list => {
+      if (list['result'] == true) {
+        this.supervisorList = list['data'];
+      }
+    });
+  }
+
+  getHistoryFileIdWise(data: any) {
     this.helperService.getHistoryFileIdWise(data).subscribe(list => {
       if (list['result'] == true) {
         this.alllist = list['data'];
@@ -49,7 +62,10 @@ export class UploadsupervisorComponent {
     this.selectedFile = event.target.files[0];
   }
   onUpload(): void {
-    this.helperService.uploadFile(this.selectedFile)
+    const formData: FormData = new FormData();
+    formData.append('file', this.selectedFile,this.selectedFile.name);
+    formData.append('superviserId', this.supervisorSelected);
+    this.helperService.uploadFileAgent(formData)
       .subscribe(response => this.downLoadFile(response, "application/ms-excel"));
   }
 
@@ -63,5 +79,6 @@ export class UploadsupervisorComponent {
   }
 
 }
+
 
 

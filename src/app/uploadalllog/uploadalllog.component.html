@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>All Agent</h1>
+                    <h1>Upload Excel Sheet </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,23 +29,25 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact No</th>
-                                        <th>Address </th>
-                                        <th>Pass</th>
+                                        <th>Click Here</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr *ngFor="let agent of alllist">
-                                       
-                                        <td>{{ agent.to_name }}</td>
-                                        <td>{{ agent.from_number }}</td>
-                                        <td>{{ agent.to_number }}</td>
-                                        <td>{{ agent.app_id }}</td>
-                                        <td>{{ agent.leg1_status }}</td>
+
+                                    <tr>
+
+                                    <tr *ngFor="let file of alllistFileWise">
+
+                                        <td>{{1}}</td>
+                                        <td>{{ file?.fileId }}</td>
+                                        <td><button (click)="getDownload( file?.fileId)">Download</button></td>
                                     </tr>
+
 
 
 

@@ -1,66 +1,136 @@
-<div class="content-wrapper mt-5">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Upload Users</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Advanced Form</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="content-header">
-    <div class="container-fluid">
-    <div class="row mb-2">
-    <div class="col-sm-6">
-    <h1>Supervisor Upload</h1>
-    </div>
-    <div class="col-sm-6">
-    <ol class="breadcrumb float-sm-right">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Validation</li>
-    </ol>
-    </div>
-    </div>
-    </div>
-    </section>
-    
-    <section class="content">
-    <div class="container-fluid">
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="card card-default">
+                    <div class="card-header">
+
+
+                        <input type="file" (change)="onFileSelected($event)" />
+                        <button (click)="onUpload()">Upload</button>
+
+                        <h3 class="card-title">Select User</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>File Wise Data</label>
+                                    <select (change)="onSelectChange($event.target)">
+                                        <option value="" disabled selected>Choose File</option>
+                                        <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
+                                            {{ file?.fileId }}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="card-body">
     <div class="row">
-    
-    <div class="col-md-12">
-    
-    <div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Supervisor</label>
+          <select class="form-control select2" style="width: 100%;">
+            <option *ngFor="let supervisor of supervisors" [value]="supervisor.id">{{ supervisor.name }}</option>
+          </select>
+        </div>
+      </div>
     </div>
-    
-    
-    <form id="quickForm">
-    <div class="card-body">
-    <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+  </div> -->
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+
+
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Contact No</th>
+                                            <th>Upload Failed | Success </th>
+                                            <th>Upload Failed Reason </th>
+                                            <th>Created At </th>
+                                            <th>File Id </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr *ngFor="let alluploadedusers of alllist">
+                                            <td>{{1}}</td>
+                                            <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
+                                                alluploadedusers.lname }}</td>
+                                            <td>{{ alluploadedusers.email }}</td>
+                                            <td>{{ alluploadedusers.mobile }}</td>
+                                            <td> <span *ngIf="alluploadedusers.is_inserted==true"
+                                                    style="background-color: green;color: whitesmoke;text-transform: capitalize;">
+                                                    Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
+                                                    style="background-color: red;color: whitesmoke;text-transform: capitalize;">
+                                                    Failed </span></td>
+                                            <td><span *ngIf="alluploadedusers.is_inserted==false"
+                                                    style="text-transform: capitalize;">{{
+                                                    alluploadedusers.reason }}</span></td>
+                                            <td>{{ alluploadedusers.createdAt }}</td>
+                                            <td>{{ alluploadedusers.fileId }}</td>
+                                            <!-- |date:'dd/MM/yyyy'}}</td> -->
+                                        </tr>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
     </div>
-    <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group mb-0">
-    <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
-    <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
-    </div>
-    </div>
-    </div>
-    
-<div class="card-footer">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </form>
-    </div>
-    
-    </div>
-    
-    
-    <div class="col-md-6">
-    </div>
-    
-    </div>
-    
-    </div>
-    </section>
-    
-    </div>
+</div>

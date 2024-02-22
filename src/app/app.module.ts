@@ -10,12 +10,14 @@ import { Screen1Component } from './screen1/screen1.component';
 import { AllSupervisorComponent } from './all-supervisor/all-supervisor.component';
 import { AllAgentComponent } from './all-agent/all-agent.component';
 import { UploadsupervisorComponent } from './upload/uploadsupervisor/uploadsupervisor.component';
-import { UploadagentComponent } from './upload/uploadagent/uploadagent.component';
 import { AllcalllogComponent } from './allcalllog/allcalllog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import {JwtInterceptor} from './jwt.interceptor'
+import {ErrorInterceptor} from './errorinterceptor.interceptor';
+import { SupervisorlistComponent } from './supervisorlist/supervisorlist.component';
+import { AgentlistComponent } from './upload/agentlist/agentlist.component';
+import { UploadalllogComponent } from './uploadalllog/uploadalllog.component'
 
 
 @NgModule({
@@ -28,15 +30,18 @@ import { HttpClientModule } from '@angular/common/http';
     AllSupervisorComponent,
     AllAgentComponent,
     UploadsupervisorComponent,
-    UploadagentComponent,
-    AllcalllogComponent
+    AllcalllogComponent,
+    SupervisorlistComponent,
+    AgentlistComponent,
+    UploadalllogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   
     
 
@@ -44,7 +49,15 @@ import { HttpClientModule } from '@angular/common/http';
   
    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor , multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
