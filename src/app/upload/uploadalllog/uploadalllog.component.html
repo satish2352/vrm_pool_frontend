@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>All Agent</h1>
+                    <h1>Upload Excel Sheet </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -21,49 +21,30 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                        </div>
-
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact No</th>
-                                        <th>Address </th>
-                                        <th>Pass</th>
+                                        <th>Click Here</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr
+                                        *ngFor="let file of alllistFileWise | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
 
-                                    <tr *ngFor="let agent of alllist">
-                                       
-                                        <td>{{ agent.to_name }}</td>
-                                        <td>{{ agent.from_number }}</td>
-                                        <td>{{ agent.to_number }}</td>
-                                        <td>{{ agent.app_id }}</td>
-                                        <td>{{ agent.leg1_status }}</td>
+                                        <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                        <td>{{ file?.fileId }}</td>
+                                        <td><button (click)="getDownload( file?.fileId)">Download</button></td>
                                     </tr>
-
-
-
                                 </tbody>
-
                             </table>
                         </div>
-
+                        <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
-
 </div>

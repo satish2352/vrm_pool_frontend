@@ -21,46 +21,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
-
-
-
-                        <!-- <div class="card card-default">
-                            <div class="card-header ">
-                                <input type="file" (change)="onFileSelected($event)" />
-                                <button (click)="onUpload()">Upload</button>
-
-                                <h3 class="card-title">Select User</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div> -->
-                        <div class="card card-default">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" (change)="onFileSelected($event)" />
-                                        <label class="custom-file-label" for="exampleInputFile">Upload file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <button class="input-group-text" (click)="onUpload()">Upload</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Select Supervisor</label>
                                         <select class="form-control" (change)="onSelectChange($event.target)">
-                                            <option value="" disabled selected>Choose File</option>
+                                            <option value="" disabled selected>Choose Supervisor</option>
                                             <option *ngFor="let userList of supervisorList" [value]="userList.id">
                                                 {{ userList.fname }} {{ userList.mname }} {{ userList.lname }}
                                             </option>
@@ -69,10 +36,24 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label>Upload Agent</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                    (change)="onFileSelected($event)">
+                                                <label class="custom-file-label" for="exampleInputFile">Upload
+                                                    file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button class="input-group-text" (click)="onUpload()">Upload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="card-body">
@@ -90,18 +71,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
-                                <tr *ngFor="let alluploadedusers of alllist">
-                                    <td>{{1}}</td>
+                                <tr
+                                    *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                    <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                     <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
                                         alluploadedusers.lname }}</td>
                                     <td>{{ alluploadedusers.email }}</td>
                                     <td>{{ alluploadedusers.mobile }}</td>
-                                    <td> <span *ngIf="alluploadedusers.is_inserted==true"
-                                            style="background-color: green;color: whitesmoke;text-transform: capitalize;">
+                                    <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
                                             Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
-                                            style="background-color: red;color: whitesmoke;text-transform: capitalize;">
+                                            class="badge badge-danger">
                                             Failed </span></td>
                                     <td><span *ngIf="alluploadedusers.is_inserted==false"
                                             style="text-transform: capitalize;">{{
@@ -109,23 +88,13 @@
                                     <td>{{ alluploadedusers.createdAt }}</td>
                                     <!-- |date:'dd/MM/yyyy'}}</td> -->
                                 </tr>
-
-
-
                             </tbody>
-
                         </table>
                     </div>
-
+                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                 </div>
-
-
-
             </div>
-
         </div>
-
-
     </section>
 
 </div>

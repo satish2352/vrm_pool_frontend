@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadsupervisorComponent } from './uploadsupervisor.component';
+import { UploadsupervisorComponent } from './uploadfilelog.component';
 
 describe('UploadsupervisorComponent', () => {
   let component: UploadsupervisorComponent;

@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
-import { HelperService } from '../helper.service';
+import { HelperService } from '../../helper.service';
 @Component({
   selector: 'app-uploadalllog',
   templateUrl: './uploadalllog.component.html',
@@ -11,7 +11,8 @@ export class UploadalllogComponent {
  
 
   selectedFile!: File;
-  p: number = 1;
+  pagesize: number = 3;
+  currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
 

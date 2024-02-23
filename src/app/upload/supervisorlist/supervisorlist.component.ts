@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HelperService } from '../helper.service';
+import { HelperService } from 'src/app/helper.service';
 
 @Component({
   selector: 'app-supervisorlist',
@@ -8,7 +8,8 @@ import { HelperService } from '../helper.service';
 })
 export class SupervisorlistComponent {
   selectedFile!: File;
-  p: number = 1;
+  pagesize: number = 1;
+  currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
 
@@ -54,3 +55,4 @@ export class SupervisorlistComponent {
     }
   }
 }
+

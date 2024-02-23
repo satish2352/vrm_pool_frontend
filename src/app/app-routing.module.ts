@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Dashboard_Components/login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { From1Component } from './from1/from1.component';
-import { Screen1Component } from './screen1/screen1.component';
-import { AllSupervisorComponent } from './all-supervisor/all-supervisor.component';
-import { AllAgentComponent } from './all-agent/all-agent.component';
-import { UploadsupervisorComponent } from './upload/uploadsupervisor/uploadsupervisor.component';
-import { AllcalllogComponent } from './allcalllog/allcalllog.component';
+import { From1Component } from './Dashboard_Components/from1/from1.component';
+import { Screen1Component } from './Dashboard_Components/screen1/screen1.component';
+import { AllSupervisorComponent } from './Call_logs/all-supervisor/all-supervisor.component';
+import { AllAgentComponent } from './Call_logs/all-agent/all-agent.component';
+import { UploadsupervisorComponent } from './upload/uploadfilelog/uploadfilelog.component';
+import { AllcalllogComponent } from './Dashboard_Components/allcalllog/allcalllog.component';
 // import { SupervisorlistComponent } from './supervisorlist/supervisorlist.component';
 // import { AgentlistComponent } from './upload/agentlist/agentlist.component';
-import { UploadalllogComponent } from './uploadalllog/uploadalllog.component';
+import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.component';
 import { AgentlistComponent } from './upload/agentlist/agentlist.component';
-import { SupervisorlistComponent } from './supervisorlist/supervisorlist.component';
+import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
 
 
 const routes: Routes = [

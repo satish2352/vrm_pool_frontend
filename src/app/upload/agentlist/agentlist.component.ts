@@ -5,12 +5,13 @@ import { HelperService } from '../../helper.service';
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',
-  styleUrls: ['./agentlist.component.sass']
+  styleUrls: ['./agentlist.component.scss']
 })
 export class AgentlistComponent {
 
   selectedFile!: File;
-  p: number = 1;
+  pagesize: number = 3;
+  currentpage:number =1;
   alllist: any = [];
   supervisorList: any = [];
   supervisorSelected: any;

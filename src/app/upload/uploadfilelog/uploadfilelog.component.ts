@@ -4,12 +4,13 @@ import { HelperService } from '../../helper.service';
 
 @Component({
   selector: 'app-uploadsupervisor',
-  templateUrl: './uploadsupervisor.component.html',
-  styleUrls: ['./uploadsupervisor.component.sass']
+  templateUrl: './uploadfilelog.component.html',
+  styleUrls: ['./uploadfilelog.component.sass']
 })
 export class UploadsupervisorComponent {
   selectedFile!: File;
-  p: number = 1;
+  pagesize: number = 3;
+  currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HelperService } from '../helper.service';
+import { HelperService } from '../../helper.service';
 
 @Component({
   selector: 'app-all-supervisor',
@@ -7,7 +7,8 @@ import { HelperService } from '../helper.service';
   styleUrls: ['./all-supervisor.component.sass']
 })
 export class AllSupervisorComponent {
-  p: number = 1;
+  pagesize: number = 3;
+  currentpage:number =1;
   alllist: any = [];
 
   constructor(

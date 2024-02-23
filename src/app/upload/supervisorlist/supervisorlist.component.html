@@ -21,45 +21,50 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="form-group">
-                            <div class="card card-default">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile"  (change)="onFileSelected($event)">
-                                            <label class="custom-file-label" for="exampleInputFile">Upload file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <button class="input-group-text"  (click)="onUpload()">Upload</button>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-">
-                                            <div class="form-group">
-                                                <label>File Wise Data</label>
-                                                <select class="form-control" (change)="onSelectChange($event.target)">
-                                                    <option value="" disabled selected>Choose File</option>
-                                                    <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
-                                                        {{ file?.fileId }}
-                                                    </option>
-                                                </select>
+                        <div class="card">
 
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <label>Upload Supervisor</label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                        (change)="onFileSelected($event)">
+                                                    <label class="custom-file-label" for="exampleInputFile">Upload
+                                                        file</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <button class="input-group-text"
+                                                        (click)="onUpload()">Upload</button>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>File Wise Data</label>
+                                            <select class="form-control" (change)="onSelectChange($event.target)">
+                                                <option value="" disabled selected>Choose File</option>
+                                                <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
+                                                    {{ file?.fileId }}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-
-                       
 
 
-                        <div class="card-header">
-                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
                         </div>
 
                         <div class="card-body">
@@ -77,43 +82,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-
-                                    <tr *ngFor="let alluploadedusers of alllist">
-                                        <td>{{1}}</td>
+                                    <tr
+                                        *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                        <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                         <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
                                             alluploadedusers.lname }}</td>
                                         <td>{{ alluploadedusers.email }}</td>
                                         <td>{{ alluploadedusers.mobile }}</td>
                                         <td> <span *ngIf="alluploadedusers.is_inserted==true"
-                                                style="background-color: green;color: whitesmoke;text-transform: capitalize;">
+                                                class="badge badge-success">
                                                 Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
-                                                style="background-color: red;color: whitesmoke;text-transform: capitalize;">
+                                                class="badge badge-danger">
                                                 Failed </span></td>
                                         <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                 style="text-transform: capitalize;">{{
                                                 alluploadedusers.reason }}</span></td>
                                         <td>{{ alluploadedusers.createdAt }}</td>
-                                        <!-- |date:'dd/MM/yyyy'}}</td> -->
                                     </tr>
-
-
-
                                 </tbody>
-
                             </table>
                         </div>
-
+                        <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
 </div>

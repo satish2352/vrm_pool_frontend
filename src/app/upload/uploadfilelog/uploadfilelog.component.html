@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Upload Users</h1>
+                        <h1>Upload File Log </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -16,67 +16,48 @@
             </div>
         </section>
 
-        <section class="content">
-            <div class="container-fluid">
-
-                <div class="card card-default">
-                    <div class="card-header">
 
 
-                        <input type="file" (change)="onFileSelected($event)" />
-                        <button (click)="onUpload()">Upload</button>
-
-                        <h3 class="card-title">Select User</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>File Wise Data</label>
-                                    <select (change)="onSelectChange($event.target)">
-                                        <option value="" disabled selected>Choose File</option>
-                                        <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
-                                            {{ file?.fileId }}
-                                        </option>
-                                    </select>
-
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Upload File Log</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile"
+                                        (change)="onFileSelected($event)">
+                                    <label class="custom-file-label" for="exampleInputFile">Upload
+                                        file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="input-group-text" (click)="onUpload()">Upload</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <!-- <div class="card-body">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>Supervisor</label>
-          <select class="form-control select2" style="width: 100%;">
-            <option *ngFor="let supervisor of supervisors" [value]="supervisor.id">{{ supervisor.name }}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div> -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>File Wise Data</label>
+                            <select class="form-control" (change)="onSelectChange($event.target)">
+                                <option value="" disabled selected>Choose File</option>
+                                <option *ngFor="let file of alllistFileWise" [value]="file?.fileId">
+                                    {{ file?.fileId }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-
-
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
@@ -89,22 +70,20 @@
                                             <th>Upload Failed Reason </th>
                                             <th>Created At </th>
                                             <th>File Id </th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-                                        <tr *ngFor="let alluploadedusers of alllist">
-                                            <td>{{1}}</td>
+                                        <tr
+                                            *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                             <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
                                                 alluploadedusers.lname }}</td>
                                             <td>{{ alluploadedusers.email }}</td>
                                             <td>{{ alluploadedusers.mobile }}</td>
                                             <td> <span *ngIf="alluploadedusers.is_inserted==true"
-                                                    style="background-color: green;color: whitesmoke;text-transform: capitalize;">
+                                                    class="badge badge-success">
                                                     Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
-                                                    style="background-color: red;color: whitesmoke;text-transform: capitalize;">
+                                                    class="badge badge-danger">
                                                     Failed </span></td>
                                             <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                     style="text-transform: capitalize;">{{
@@ -113,22 +92,13 @@
                                             <td>{{ alluploadedusers.fileId }}</td>
                                             <!-- |date:'dd/MM/yyyy'}}</td> -->
                                         </tr>
-
-
-
                                     </tbody>
-
                                 </table>
                             </div>
-
+                            <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                         </div>
-
-
-
                     </div>
-
                 </div>
-
             </div>
 
         </section>

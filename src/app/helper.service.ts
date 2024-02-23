@@ -72,6 +72,17 @@ export class HelperService {
     const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
+ 
+  getAllAgentbySuperviserList(data:any): Observable<any> {
+  
+    const formData: FormData = new FormData();
+    return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
+  }
+
+
+  getCallLogSingleRow(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/getReportsSingleRow`, data);
+  }
 
   getAllAgentList(): Observable<any> {
     let data = {
