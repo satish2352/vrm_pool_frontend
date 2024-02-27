@@ -11,7 +11,7 @@ export class UploadalllogComponent {
  
 
   selectedFile!: File;
-  pagesize: number = 3;
+  pagesize: number = 10;
   currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
@@ -36,10 +36,16 @@ export class UploadalllogComponent {
     });
   }
 
-  getDownload(fileId:any) {
-    alert(fileId)
-
-  }
+  downloadFileIdWise(data: any) {
+    const fileUrl = "http://13.234.59.130:3000/api/downloadFile?fileId="+data;
+    var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
+    if (preview) {
+        preview.setAttribute("href", fileUrl);
+        preview.click();
+    } else {
+        console.error("Element with id 'hiddenLink' not found.");
+    }
+}
 
 }
 

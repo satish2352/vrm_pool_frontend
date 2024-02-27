@@ -1,12 +1,15 @@
+
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
+
 @Component({
-  selector: 'app-allcalllog',
-  templateUrl: './allcalllog.component.html',
-  styleUrls: ['./allcalllog.component.sass']
+  selector: 'app-allcalllogsupervisor',
+  templateUrl: './allcalllogsupervisor.component.html',
+  styleUrls: ['./allcalllogsupervisor.component.sass']
 })
-export class AllcalllogComponent {
+export class AllcalllogsupervisorComponent {
+
   pagesize: number = 10;
   currentpage: number = 1;
   alllist: any = [];
@@ -19,7 +22,9 @@ export class AllcalllogComponent {
   todateSelected: any;
   agentList: any = []
   constructor(private helperService: HelperService,
-    private fileDownloadService: FileDownloadService) { }
+    private fileDownloadService: FileDownloadService) {
+      this.supervisorSelected = localStorage.getItem('user_id')
+     }
 
 
   ngOnInit(): void {
@@ -51,24 +56,7 @@ export class AllcalllogComponent {
     });
   }
 
-  onSelectChangeSupervisor(val: any) {
-    this.supervisorSelected = val.value;
-    this.getAllAgentbySuperviserList() 
-    var data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
-      'direction': ''
 
-    }
-
-    this.getCallLogSingleRow(data)
-
-
-  }
 
   onSelectChangeAgent(val: any) {
     this.agentSelected = val.value;
@@ -136,6 +124,11 @@ export class AllcalllogComponent {
     }
 
     this.getCallLogSingleRow(data)
+  }
+
+
+  onSelectChangeStatus(val:any) {
+
   }
 
 

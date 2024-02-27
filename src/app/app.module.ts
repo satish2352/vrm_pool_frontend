@@ -20,6 +20,9 @@ import { AgentlistComponent } from './upload/agentlist/agentlist.component';
 import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.component'
 import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DashboardsuperComponent } from './supervisor/dashboardsuper/dashboardsuper.component';
+import { AllcalllogsupervisorComponent } from './supervisor/allcalllogsupervisor/allcalllogsupervisor.component';
+import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetailsforfilelog.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AllcalllogComponent,
     SupervisorlistComponent,
     AgentlistComponent,
-    UploadalllogComponent
+    UploadalllogComponent,
+    DashboardsuperComponent,
+    AllcalllogsupervisorComponent,
+    GetdetailsforfilelogComponent
   ],
   imports: [
     BrowserModule,

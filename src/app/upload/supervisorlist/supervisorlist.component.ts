@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
 
 @Component({
@@ -8,13 +9,14 @@ import { HelperService } from 'src/app/helper.service';
 })
 export class SupervisorlistComponent {
   selectedFile!: File;
-  pagesize: number = 1;
+  pagesize: number = 10;
   currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
 
   constructor(
     private helperService: HelperService,
+    public router: Router,
  ) { }
 
   ngOnInit(): void {
@@ -54,5 +56,39 @@ export class SupervisorlistComponent {
       alert('Please disable your Pop-up blocker and try again.');
     }
   }
+  
+
+  // downloadFileIdWise(data: any,type:any) {
+  //   this.helperService.downloadbyFileIdWise(data,type).subscribe(list => {
+  //     if (list['result'] == true) {
+  //       this.alllist = list['data'];
+  //     }
+
+  //     // 
+
+  //   });
+  // }
+
+  downloadFileIdWise(data: any) {
+        const fileUrl = "http://13.234.59.130:3000/api/downloadFile?fileId="+data;
+        var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
+        if (preview) {
+            preview.setAttribute("href", fileUrl);
+            preview.click();
+        } else {
+            console.error("Element with id 'hiddenLink' not found.");
+        }
+  }
+
+
+  
+
+  showDetails(data: any) {
+    this.router.navigate(['/admin-dashboard/','get-details',data]);
+  }
+
+  
+  
+
 }
 

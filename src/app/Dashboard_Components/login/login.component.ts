@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       next: (response: any) => {
         if (response && response.token) {
           console.log('Login successful', response);
-          this.authService.saveToken(response.token);
+          this.authService.saveToken(response.token,response.data.user_type,response.data.id);
           console.log("Token saved successfully");
           this.router.navigate(['/admin-dashboard']);
         } else {

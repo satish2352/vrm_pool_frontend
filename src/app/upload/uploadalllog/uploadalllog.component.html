@@ -19,6 +19,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <a id="hiddenLink" target="_blank" style="display: none;" download></a>
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -26,8 +27,11 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>Name</th>
-                                        <th>Click Here</th>
+                                        <th>File Id</th>
+                                        <th>Inserted Count</th>
+                                        <th>Failed Count</th>
+                                        <th>Created at</th>
+                                        <th>Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,7 +40,10 @@
 
                                         <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                         <td>{{ file?.fileId }}</td>
-                                        <td><button (click)="getDownload( file?.fileId)">Download</button></td>
+                                        <td>{{ file?.insertedCount }}</td>
+                                        <td>{{ file?.failedCount }}</td>
+                                        <td>{{ file?.createdAt }}</td>
+                                        <td><button (click)="downloadFileIdWise(file.fileId)">download</button></td>
                                     </tr>
                                 </tbody>
                             </table>

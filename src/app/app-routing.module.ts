@@ -13,6 +13,8 @@ import { AllcalllogComponent } from './Dashboard_Components/allcalllog/allcalllo
 import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.component';
 import { AgentlistComponent } from './upload/agentlist/agentlist.component';
 import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
+import { AllcalllogsupervisorComponent } from './supervisor/allcalllogsupervisor/allcalllogsupervisor.component';
+import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetailsforfilelog.component';
 
 
 const routes: Routes = [
@@ -26,10 +28,17 @@ const routes: Routes = [
     { path: 'all-sup', component: AllSupervisorComponent },
     { path: 'all-agent', component: AllAgentComponent },
     { path: 'upload-all-users', component: UploadsupervisorComponent },
-    { path: 'all-call-log', component: AllcalllogComponent },
+    { path: 'all-call-log-admin', component: AllcalllogComponent },
+    { path: 'all-call-log-super', component: AllcalllogsupervisorComponent },
     { path: 'supervisor-list', component: SupervisorlistComponent },
     { path: 'agent-list', component: AgentlistComponent },
     { path: 'upload-all-log', component: UploadalllogComponent },
+
+
+    {
+      path: 'get-details/:id',
+      component: GetdetailsforfilelogComponent
+    },
 
     ]
   },

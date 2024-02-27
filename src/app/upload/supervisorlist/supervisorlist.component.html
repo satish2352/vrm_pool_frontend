@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
+                        <a id="hiddenLink" target="_blank" style="display: none;"  download></a>
                         <div class="card">
 
                             <div class="card-body">
@@ -72,32 +72,42 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact No</th>
-                                        <th>Upload Failed | Success </th>
-                                        <th>Upload Failed Reason </th>
+                                        <th>File_ID</th>
+                                        <th>Inserted Count </th>
+                                        <th> Failed Count </th>
                                         <th>Created At </th>
+                                        <th>Download </th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
+                                    <tr 
                                         *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                         <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                        <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
-                                            alluploadedusers.lname }}</td>
-                                        <td>{{ alluploadedusers.email }}</td>
-                                        <td>{{ alluploadedusers.mobile }}</td>
-                                        <td> <span *ngIf="alluploadedusers.is_inserted==true"
+                                        <td>{{ alluploadedusers.fileId }}</td>
+                                        <td>{{alluploadedusers.insertedCount}} </td>
+                                        <td>{{alluploadedusers.failedCount}} </td>
+                                    
+                                        <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true"
                                                 class="badge badge-success">
                                                 Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
                                                 class="badge badge-danger">
-                                                Failed </span></td>
-                                        <td><span *ngIf="alluploadedusers.is_inserted==false"
+                                                Failed </span></td> -->
+                                        <!-- <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                 style="text-transform: capitalize;">{{
-                                                alluploadedusers.reason }}</span></td>
-                                        <td>{{ alluploadedusers.createdAt }}</td>
+                                                alluploadedusers.reason }}</span></td> -->
+                                                <td>{{ alluploadedusers.createdAt }}</td>
+                                        <td>
+                                            
+                                            <button class="btn btn-primary" (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button> &nbsp;
+                                            <button class="btn btn-primary" (click)="showDetails(alluploadedusers.fileId)">View</button>
+
+                                            
+                                        
+                                        
+                                        </td>
+
+
                                     </tr>
                                 </tbody>
                             </table>

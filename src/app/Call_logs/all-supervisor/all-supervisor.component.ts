@@ -7,7 +7,7 @@ import { HelperService } from '../../helper.service';
   styleUrls: ['./all-supervisor.component.sass']
 })
 export class AllSupervisorComponent {
-  pagesize: number = 3;
+  pagesize: number = 10;
   currentpage:number =1;
   alllist: any = [];
 

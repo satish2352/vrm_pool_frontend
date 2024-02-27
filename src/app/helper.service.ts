@@ -1,7 +1,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,29 +17,35 @@ export class HelperService {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
-  saveToken(token: string) {
+  saveToken(token: string,user_type: string,user_id: string) {
     localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem('user_type', user_type);
+    localStorage.setItem('user_id', user_id);
   }
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
-  removeToken() {
-    localStorage.removeItem(this.tokenKey);
+  getAllFileIdWiseLog(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
+
+
 
   // getHeaders(): HttpHeaders {
   //   const token = this.getToken();
   //   return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   // }
-  logout(): void {
-    this.removeToken();
+  logout() {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('user_type');
+    localStorage.removeItem('user_id');
   }
   uploadFile(file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
-    return this.http.post<any>(`${this.apiUrl}/uploadBulkUsers`, formData, {
+    return this.http.post<any>(`${this.apiUrl}/uploadSupervisers`, formData, {
       // headers: this.getHeaders()
     });
   }
@@ -109,6 +115,9 @@ export class HelperService {
   getHistoryFileIdWise (data:any): Observable<any> {
     
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
+  }
+  downloadbyFileIdWise (data:any,type:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/downloadFile?fileId=`+data+`&type=`+type);
   }
 }
 

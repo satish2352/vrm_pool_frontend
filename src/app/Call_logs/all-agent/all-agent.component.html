@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>All Agent List</h1>
+                    <h1>All Agent Reports</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,22 +25,41 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact No</th>
-                                        <th>Address </th>
-                                        <th>Pass</th>
+                                        <th>Sr No</th>
+                                        <th>Direction</th>
+                                        <th>Exotel_number</th>
+                                        <th>Mobile </th>
+                                        <th>From_name</th>
+                                        <th>To_number</th>
+                                        <th>To_name</th>
+                                        <th>Status</th>
+                                        <th>Start_time</th>
+                                        <th>End_time</th>
+                                        <th>Duration</th>
+                                        <th>Price</th>
+                                        <th>Disconnected_by</th>
+                                        <th>Recording_url</th>
                                     </tr>
+
+                                    
                                 </thead>
                                 <tbody>
                                     <tr
                                         *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                         <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                        <td>{{ agent.to_name }}</td>
-                                        <td>{{ agent.from_number }}</td>
+                                        <td>{{ agent.direction }}</td>
+                                        <td>{{ agent.exotel_number }}</td>
+                                        <td>{{ agent.mobile }}</td>
+                                        <td>{{ agent.from_name }}</td>
                                         <td>{{ agent.to_number }}</td>
-                                        <td>{{ agent.app_id }}</td>
-                                        <td>{{ agent.leg1_status }}</td>
+                                        <td>{{ agent.to_name }}</td>
+                                        <td>{{ agent.status }}</td>
+                                        <td>{{ agent.start_time }}</td>
+                                        <td>{{ agent.end_time }}</td>
+                                        <td>{{ agent.duration }}</td>
+                                        <td>{{ agent.price }}</td>
+                                        <td>{{ agent.disconnected_by }}</td>
+                                        <td>{{ agent.recording_url }}</td>
                                     </tr>
                                 </tbody>
                             </table>
