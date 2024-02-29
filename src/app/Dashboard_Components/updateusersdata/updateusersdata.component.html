@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Update User Details</h1>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            [value]="userdata.name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile No:</label>
+                                        <input type="text" class="form-control" formControlName="mobile"
+                                            [value]="userdata.mobile">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" formControlName="email"
+                                            [value]="userdata.email">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</div>

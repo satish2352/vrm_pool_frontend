@@ -44,4 +44,9 @@ export class AdminAlluserlistComponent {
     });
 
   }
+  updateusers(mobile:any){
+    console.log(mobile);
+    
+    this.router.navigate(['/admin-dashboard/', 'update-users-data', mobile]);
+  }
 }

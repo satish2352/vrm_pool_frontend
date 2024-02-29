@@ -52,8 +52,8 @@
                                             <td>{{ users.name }}</td>
                                             <td>{{users.mobile}} </td>
                                             <td>{{users.email}} </td>
-                                            <td><button class="btn btn-primary">Edit</button></td>
-                                            <td><button class="btn btn-primary">Toggle</button></td>
+                                            <td><button class="btn btn-primary"  *ngIf="users.user_type == '2'" (click)="updateusers(users.id)">Edit</button><span *ngIf="users.user_type == '3'"> NA</span></td>
+                                            <td><button class="btn btn-primary"  *ngIf="users.user_type == '2'">Toggle</button><span *ngIf="users.user_type == '3'"> NA</span></td>
                                             <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
                                                     (click)="userspasschange(users)">Change
                                                     PassWord </button>

@@ -1,6 +1,4 @@
-
-
- <div class="center-container">
+<div class="center-container">
   <div class="login-box">
     <div class="login-logo">
       <a href="../../index2.html"><b>Vrm</b>Pool</a>
@@ -8,7 +6,7 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <form  [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="input-group mb-3">
             <input formControlName="mobile" id="mobile" type="email" class="form-control" placeholder="mobile">
             <div class="input-group-append">
@@ -29,7 +27,7 @@
             <div class="col-8">
               <div class="icheck-primary">
                 <p class="mb-1">
-                  <a href="#" (click)="resetpass()">I forgot my password</a>
+                  <a routerLink="#" (click)="navigateToPage()">I forgot my password</a>
                 </p>
               </div>
             </div>
@@ -38,10 +36,9 @@
             </div>
           </div>
         </form>
-     
-     
-      
+
       </div>
     </div>
   </div>
-</div> 
+</div>
+<router-outlet></router-outlet>

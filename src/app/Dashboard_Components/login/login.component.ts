@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from '../../helper.service';
@@ -66,6 +67,9 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
+  }
+  navigateToPage() {
+    this.router.navigate(['/reset-password']);
   }
   resetpass() {
     alert('Change Password')

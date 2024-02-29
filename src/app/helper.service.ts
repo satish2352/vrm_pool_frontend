@@ -122,10 +122,7 @@ export class HelperService {
   downloadbyFileIdWise (data:any,type:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/downloadFile?fileId=`+data+`&type=`+type);
   }
-  resetpassword (data:any): Observable<any> {
-    
-    return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
-  }
+
   changepassword (data:any): Observable<any> {
     
     return this.http.post<any>(`${this.apiUrl}/changePassword`, data);
@@ -135,6 +132,24 @@ export class HelperService {
     // const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
+  getOtpbymobile(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/sendOTP`, data);
+  }
+  resetpassword(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/resetPassword`, data);
+  }
+  updateuser(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/updateUser`, data);
+  }
+  
+  getsingleuser(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/getUser`, data);
+  }
+
 }
 
 

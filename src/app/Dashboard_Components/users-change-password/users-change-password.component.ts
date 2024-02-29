@@ -15,7 +15,7 @@ export class UsersChangePasswordComponent implements OnInit {
   id: any;
   constructor(private authService: HelperService, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
     private toastr: ToastrService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -43,22 +43,26 @@ export class UsersChangePasswordComponent implements OnInit {
     if (password !== confirmPassword) {
       console.log('Passwords do not match');
       this.toastr.error('Passwords do not match', 'Error');
-
       return;
     }
 
-    this.authService.changepassword(data).subscribe({
-      next: (response: any) => {
-        console.log('Password changed successfully', response);
-        this.toastr.success('Password changed successfully', 'Success');
-
-        // Handle success scenario here
-      },
-      error: (error: any) => {
-        console.error('Error changing password', error);
-        this.toastr.error('Error changing password', 'Error');
-        // Handle error scenario here
+    this.authService.changepassword(data).subscribe(
+      {
+        next: (response: any) => {
+          if (response.result === true) {
+          console.log('Password changed successfully', response);
+          this.toastr.success('Password changed successfully', 'Success');
+          }
+          else {
+            this.toastr.error('Error updating user data', 'Error');
+          }
+        },
+        error: (error: any) => {
+          console.error('Error changing password', error);
+          this.toastr.error('Error changing password', 'Error');
+          // Handle error scenario here
+        }
       }
-    });
+    );
   }
 }

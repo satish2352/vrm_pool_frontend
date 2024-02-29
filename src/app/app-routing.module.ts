@@ -20,12 +20,16 @@ import { AllagentlistComponent } from './supervisor/allagentlist/allagentlist.co
 import { ChangePasswordComponent } from './changepassword/changepassword.component';
 import { AdminAlluserlistComponent } from './Dashboard_Components/admin-alluserlist/admin-alluserlist.component';
 import { UsersChangePasswordComponent } from './Dashboard_Components/users-change-password/users-change-password.component';
-ChangePasswordComponent
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login', component: LoginComponent,
+  },
+
   {
     path: 'admin-dashboard', component: AdminDashboardComponent,
     children: [{ path: 'screen1', component: Screen1Component },
@@ -45,11 +49,13 @@ const routes: Routes = [
     { path: 'change-password', component: ChangePasswordComponent },
     { path: 'admin-all-user-list', component: AdminAlluserlistComponent },
     { path: 'users-change-password', component: UsersChangePasswordComponent },
-
+    { path: 'update-users-data/:id', component: UpdateusersdataComponent },
     ]
   },
   // { path: '**', component: LoginComponent }
-
+  {
+    path: 'reset-password', component: ResetpasswordComponent,
+  },
 ];
 
 @NgModule({

@@ -29,6 +29,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AdminAlluserlistComponent } from './Dashboard_Components/admin-alluserlist/admin-alluserlist.component';
 import { UsersChangePasswordComponent } from './Dashboard_Components/users-change-password/users-change-password.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
+
+
 
 
 
@@ -53,7 +57,11 @@ import { ToastrModule } from 'ngx-toastr';
     AllagentlistComponent,
     ChangePasswordComponent,
     AdminAlluserlistComponent,
-    UsersChangePasswordComponent
+    UsersChangePasswordComponent,
+    ResetpasswordComponent,
+    UpdateusersdataComponent,
+   
+ 
   ],
   imports: [
     BrowserModule,
