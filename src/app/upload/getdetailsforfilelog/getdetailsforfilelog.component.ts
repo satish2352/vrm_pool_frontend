@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { HelperService } from '../helper.service';
+import { HelperService } from '../../helper.service';
 
 @Component({
   selector: 'app-getdetailsforfilelog',

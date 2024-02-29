@@ -14,7 +14,13 @@ import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.compon
 import { AgentlistComponent } from './upload/agentlist/agentlist.component';
 import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
 import { AllcalllogsupervisorComponent } from './supervisor/allcalllogsupervisor/allcalllogsupervisor.component';
-import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetailsforfilelog.component';
+import { GetdetailsforfilelogComponent } from './upload/getdetailsforfilelog/getdetailsforfilelog.component';
+
+import { AllagentlistComponent } from './supervisor/allagentlist/allagentlist.component';
+import { ChangePasswordComponent } from './changepassword/changepassword.component';
+import { AdminAlluserlistComponent } from './Dashboard_Components/admin-alluserlist/admin-alluserlist.component';
+import { UsersChangePasswordComponent } from './Dashboard_Components/users-change-password/users-change-password.component';
+ChangePasswordComponent
 
 
 const routes: Routes = [
@@ -33,12 +39,12 @@ const routes: Routes = [
     { path: 'supervisor-list', component: SupervisorlistComponent },
     { path: 'agent-list', component: AgentlistComponent },
     { path: 'upload-all-log', component: UploadalllogComponent },
+    { path: 'get-details/:id', component: GetdetailsforfilelogComponent },
 
-
-    {
-      path: 'get-details/:id',
-      component: GetdetailsforfilelogComponent
-    },
+    { path: 'supervisor/agent-list', component: AllagentlistComponent },
+    { path: 'change-password', component: ChangePasswordComponent },
+    { path: 'admin-all-user-list', component: AdminAlluserlistComponent },
+    { path: 'users-change-password', component: UsersChangePasswordComponent },
 
     ]
   },

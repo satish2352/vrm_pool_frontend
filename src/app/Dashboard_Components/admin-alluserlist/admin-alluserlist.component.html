@@ -1,0 +1,77 @@
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>All Users List</h1>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Select User Type</label>
+                                    <select class="form-control" (change)="listsepration($event.target)">
+                                        <option value="" disabled selected>Choose User Type</option>
+                                        <option value="2"> Supervisors</option>
+                                        <option value="3"> Agents</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Supervisor/Agent</th>
+                                            <th>Name </th>
+                                            <th>Mobile No</th>
+                                            <th>Email ID</th>
+                                            <th>Edit</th>
+                                            <th>Enable/Disable</th>
+                                            <th>Change PassWord</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                            <td><span *ngIf="users.user_type == '2'"> Supervisor</span><span
+                                                    *ngIf="users.user_type == '3'"> Agent</span></td>
+                                            <td>{{ users.name }}</td>
+                                            <td>{{users.mobile}} </td>
+                                            <td>{{users.email}} </td>
+                                            <td><button class="btn btn-primary">Edit</button></td>
+                                            <td><button class="btn btn-primary">Toggle</button></td>
+                                            <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
+                                                    (click)="userspasschange(users)">Change
+                                                    PassWord </button>
+                                                <span *ngIf="users.user_type == '3'"> NA</span>
+                                            </td>
+
+
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

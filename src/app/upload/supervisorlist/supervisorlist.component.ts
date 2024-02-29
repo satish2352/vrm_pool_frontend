@@ -58,16 +58,6 @@ export class SupervisorlistComponent {
   }
   
 
-  // downloadFileIdWise(data: any,type:any) {
-  //   this.helperService.downloadbyFileIdWise(data,type).subscribe(list => {
-  //     if (list['result'] == true) {
-  //       this.alllist = list['data'];
-  //     }
-
-  //     // 
-
-  //   });
-  // }
 
   downloadFileIdWise(data: any) {
         const fileUrl = "http://13.234.59.130:3000/api/downloadFile?fileId="+data;

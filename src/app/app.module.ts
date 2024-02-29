@@ -20,9 +20,17 @@ import { AgentlistComponent } from './upload/agentlist/agentlist.component';
 import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.component'
 import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DashboardsuperComponent } from './supervisor/dashboardsuper/dashboardsuper.component';
+// import { DashboardsuperComponent } from './supervisor/dashboardsuper/dashboardsuper.component';
 import { AllcalllogsupervisorComponent } from './supervisor/allcalllogsupervisor/allcalllogsupervisor.component';
-import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetailsforfilelog.component';
+import { GetdetailsforfilelogComponent } from './upload/getdetailsforfilelog/getdetailsforfilelog.component';
+import { AllagentlistComponent } from './supervisor/allagentlist/allagentlist.component';
+import { ChangePasswordComponent } from './changepassword/changepassword.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AdminAlluserlistComponent } from './Dashboard_Components/admin-alluserlist/admin-alluserlist.component';
+import { UsersChangePasswordComponent } from './Dashboard_Components/users-change-password/users-change-password.component';
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 
 @NgModule({
@@ -39,9 +47,13 @@ import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetails
     SupervisorlistComponent,
     AgentlistComponent,
     UploadalllogComponent,
-    DashboardsuperComponent,
+    // DashboardsuperComponent,
     AllcalllogsupervisorComponent,
-    GetdetailsforfilelogComponent
+    GetdetailsforfilelogComponent,
+    AllagentlistComponent,
+    ChangePasswordComponent,
+    AdminAlluserlistComponent,
+    UsersChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -49,14 +61,11 @@ import { GetdetailsforfilelogComponent } from './getdetailsforfilelog/getdetails
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule,
+    ToastrModule.forRoot()
     
     
-  
-    
-
-    
-  
    
   ],
   providers: [

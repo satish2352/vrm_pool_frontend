@@ -6,12 +6,7 @@
                     <div class="col-sm-6">
                         <h1>All call Log</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Advanced Form</li>
-                        </ol>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -33,37 +28,56 @@
                     <div class="col-md-12">
                         <div class="card-body">
                             <div class="row">
-                            
+
+
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Agent</label>
-                                        <select class="form-control" (change)="onSelectChangeAgent($event.target)">
-                                            <option value="" disabled selected>Choose Agent</option>
-                                            <option *ngFor="let userListAgent of allagentbysupervisorList"
-                                                [value]="userListAgent.id">
-                                                {{ userListAgent.fname }} {{ userListAgent.mname }} {{
-                                                userListAgent.lname
-                                                }}
-                                            </option>
-                                        </select>
+                                        <label>Agents</label>
+                                        <ng-multiselect-dropdown
+                                            [placeholder]="'Choose Agent'"
+                                            [data]="allagentbysupervisorList"
+                                            [(ngModel)]="selectedAgents"
+                                            [settings]="dropdownSettings"
+                                            (ngModelChange)="onSelectChangeAgent($event)">
+                                        </ng-multiselect-dropdown>
                                     </div>
                                 </div>
+                                
+                                
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" class="form-control"
-                                                (change)="fromdate($event.target)" />
-
+                                            <input type="date" class="form-control" (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>From Time</label>
+                                        <div class="input-group" id="fromtime">
+                                            <input type="time" class="form-control" (change)="fromtime($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>To Date</label>
                                         <div class="input-group" id="todate">
                                             <input type="date" class="form-control" (change)="todate($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>To Time</label>
+                                        <div class="input-group" id="totime">
+                                            <input type="time" class="form-control" (change)="totime($event.target)" />
                                         </div>
                                     </div>
                                 </div>
@@ -98,6 +112,7 @@
                                             <th>Sr.No</th>
                                             <th>Name </th>
                                             <th>Mobile No</th>
+                                            <th>Email_ID</th>
                                             <th>Completed Count</th>
                                             <th>Missed Count</th>
                                             <th>Incoming Count </th>
@@ -114,6 +129,7 @@
                                             <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                             <td>{{item.user.mname}} {{item.user.lname}}</td>
                                             <td>{{item.user.mobile}}</td>
+                                            <td>{{item.user.email}}</td>
                                             <td>{{item.completed_count}}</td>
                                             <td>{{item.missed_count}}</td>
                                             <td>{{item.incoming_count}}</td>

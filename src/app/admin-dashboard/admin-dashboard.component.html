@@ -1,7 +1,7 @@
 <div class="wrapper">
 
   <div class="preloader flex-column justify-content-center align-items-center">
-   
+
     <img class="animation__wobble" src="assets/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
@@ -55,7 +55,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        
+
 
 
 
@@ -117,22 +117,29 @@
           <span *ngIf="user_type =='1'">
 
             <li class="nav-item menu-open">
-              <a routerLink="screen1" class="nav-link active">
+              <a routerLink="screen1" class="nav-link ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>VRM_Dashboard</p>
               </a>
-  
+
             </li>
 
             <li class="nav-item menu-open">
-              <a routerLink="all-call-log-admin" class="nav-link active">
+              <a routerLink="all-call-log-admin" class="nav-link ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>All Call log</p>
               </a>
-  
+
+            </li>
+            <li class="nav-item menu-open">
+              <a routerLink="admin-all-user-list" class="nav-link ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>All Users</p>
+              </a>
+
             </li>
 
-            
+
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
@@ -171,9 +178,6 @@
 
               </ul>
             </li>
-
-
-
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
@@ -199,19 +203,34 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item menu-open">
+              <a routerLink="change-password" class="nav-link " >
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Change PassWord</p>
+              </a>
+
+            </li>
           </span>
 
-
+          <!-- Supervisor DASHBORAD -->
           <span *ngIf="user_type =='2'">
             <li class="nav-item menu-open">
               <a routerLink="all-call-log-super" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>All Call log</p>
               </a>
-  
+              <a routerLink="supervisor/agent-list" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p> User List</p>
+              </a>
+              <a routerLink="change-password" class="nav-link ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Change PassWord</p>
+              </a>
             </li>
           </span>
 
+   
 
 
           <li class="nav-item menu-open">
@@ -233,14 +252,14 @@
 
 
 
-
+  <!-- 
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="#">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.2.0
     </div>
-  </footer>
+  </footer> -->
 </div>
 
 

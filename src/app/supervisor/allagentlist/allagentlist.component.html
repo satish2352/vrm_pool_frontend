@@ -1,0 +1,60 @@
+<div class="content-wrapper mt-5">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Agent List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">DataTables</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Name </th>
+                                        <th>Mobile No</th>
+                                        <th>Email_ID</th>
+                                       
+                                       
+
+                                    </tr>
+
+
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                        <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                        <td>{{ agent.name }} </td>
+                                        <td>{{ agent.mobile }}</td>
+                                        <td>{{ agent.email }}</td>
+                                        
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

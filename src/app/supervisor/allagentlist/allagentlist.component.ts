@@ -1,0 +1,41 @@
+import { Component } from '@angular/core';
+import { HelperService } from 'src/app/helper.service';
+
+@Component({
+  selector: 'app-allagentlist',
+  templateUrl: './allagentlist.component.html',
+  styleUrls: ['./allagentlist.component.sass']
+})
+export class AllagentlistComponent {
+  pagesize: number = 10;
+  currentpage:number =1;
+  alllist: any = [];
+  supervisorSelected:any;
+  constructor(
+    private helperService: HelperService,
+ ) { }
+ ngOnInit(): void {
+  this.getAllAgentbySuperviserList();
+}
+// getAllAgentList() {
+//   this.helperService.getAllExotelAgentList().subscribe(list => {
+//     if (list['result'] == true) {
+//       this.alllist = list['data'];
+//     }
+//   });
+// }
+
+getAllAgentbySuperviserList() {
+  let data = {
+    'superviserId': this.supervisorSelected,
+    'user_type': 3
+  }
+  this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
+    if (list['result'] == true) {
+      this.alllist = list['data'];
+    }
+  });
+}
+
+}
+

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from '../helper.service';
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -8,8 +9,12 @@ import { HelperService } from '../helper.service';
 })
 export class AdminDashboardComponent {
   user_type :any
+
+  
   constructor(private router: Router,
-    private helperService: HelperService) {
+    private helperService: HelperService) 
+    
+    {
     this.user_type = localStorage.getItem('user_type')
   }
 
@@ -25,4 +30,5 @@ export class AdminDashboardComponent {
     this.helperService.logout()
     this.router.navigate(['/login']);
   }
+  
 }

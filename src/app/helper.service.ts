@@ -78,6 +78,9 @@ export class HelperService {
     const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
+  getAllUsersList(): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/getUserlist`, null);
+  }
  
   getAllAgentbySuperviserList(data:any): Observable<any> {
   
@@ -118,6 +121,19 @@ export class HelperService {
   }
   downloadbyFileIdWise (data:any,type:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/downloadFile?fileId=`+data+`&type=`+type);
+  }
+  resetpassword (data:any): Observable<any> {
+    
+    return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
+  }
+  changepassword (data:any): Observable<any> {
+    
+    return this.http.post<any>(`${this.apiUrl}/changePassword`, data);
+  }
+  getAllUsersList1(data:any): Observable<any> {
+   
+    // const formData: FormData = new FormData();
+    return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
 }
 

@@ -29,7 +29,7 @@
                                         <select class="form-control" (change)="onSelectChange($event.target)">
                                             <option value="" disabled selected>Choose Supervisor</option>
                                             <option *ngFor="let userList of supervisorList" [value]="userList.id">
-                                                {{ userList.fname }} {{ userList.mname }} {{ userList.lname }}
+                                                {{ userList.name }}
                                             </option>
                                         </select>
 
@@ -61,9 +61,9 @@
                             <thead>
                                 <tr>
                                     <th>Sr.No</th>
-                                    <th>fileId</th>
-                                    <th>inserted Count</th>
-                                    <th>failedCount</th>
+                                    <th>File_Id</th>
+                                    <th>Inserted Count</th>
+                                    <th>Failed Count</th>
                                     <th>Created At </th>
                                     <th>Download </th>
 

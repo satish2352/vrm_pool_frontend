@@ -17,7 +17,21 @@ export class AllcalllogComponent {
 
   fromdateSelected: any;
   todateSelected: any;
-  agentList: any = []
+  totimeSelected: any;
+  fromtimeSelected: any;
+  agentList: any = [];
+
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    allowSearchFilter: true
+  };
+
+  selectedAgents: any[] = []; // To store selected agents
+
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) { }
 
@@ -32,12 +46,14 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': '',
       'agent_id': '',
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
     this.getCallLogSingleRow(data);
     this.getAllAgentList();
-    this. getAllAgentbySuperviserList()
+    this.getAllAgentbySuperviserList()
 
   }
 
@@ -53,7 +69,7 @@ export class AllcalllogComponent {
 
   onSelectChangeSupervisor(val: any) {
     this.supervisorSelected = val.value;
-    this.getAllAgentbySuperviserList() 
+    this.getAllAgentbySuperviserList()
     var data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -61,7 +77,9 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
 
@@ -71,7 +89,13 @@ export class AllcalllogComponent {
   }
 
   onSelectChangeAgent(val: any) {
-    this.agentSelected = val.value;
+
+    const keyToExtract = 'id';
+
+    // Extract values based on the key
+    this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+
+
     var data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -79,7 +103,9 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
 
@@ -89,7 +115,7 @@ export class AllcalllogComponent {
 
   onSelectChange(val: any) {
     this.supervisorSelected = val.value;
- 
+
     var data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -97,12 +123,14 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
 
     this.getCallLogSingleRow(data)
-    
+
   }
 
 
@@ -116,11 +144,32 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
     this.getCallLogSingleRow(data)
   }
+
+  fromtime(val: any) {
+    console.log(val.value)
+    this.fromtimeSelected = val.value;
+    var data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
+    }
+    this.getCallLogSingleRow(data)
+  }
+
 
   todate(val: any) {
     this.todateSelected = val.value;
@@ -131,13 +180,32 @@ export class AllcalllogComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
 
     this.getCallLogSingleRow(data)
   }
 
+
+  totime(val: any) {
+    this.totimeSelected = val.value;
+    var data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
+    }
+    this.getCallLogSingleRow(data)
+  }
 
 
 
@@ -150,7 +218,7 @@ export class AllcalllogComponent {
   }
   getAllAgentbySuperviserList() {
     let data = {
-      'superviserId':this.supervisorSelected,
+      'superviserId': this.supervisorSelected,
       'user_type': 3
     }
     this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
@@ -168,6 +236,27 @@ export class AllcalllogComponent {
     });
   }
 
+
+  //   onSelectedAgentsChange(val:any) {
+
+  //  console.log(val);
+
+
+
+  //   }
+
+
+
+
+  // onSelectAgents(item: any) {
+  //   console.log('Selected agents:', this.selectedAgents);
+  //   // Add your logic here
+  // }
+
+  onDeSelectAgents(item: any) {
+    console.log('Deselected agents:', this.selectedAgents);
+    // Add your logic here
+  }
 
 
 

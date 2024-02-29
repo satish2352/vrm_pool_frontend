@@ -76,6 +76,7 @@
                                         <th>Inserted Count </th>
                                         <th> Failed Count </th>
                                         <th>Created At </th>
+                                        <th>View </th>
                                         <th>Download </th>
 
                                     </tr>
@@ -99,13 +100,9 @@
                                                 <td>{{ alluploadedusers.createdAt }}</td>
                                         <td>
                                             
-                                            <button class="btn btn-primary" (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button> &nbsp;
                                             <button class="btn btn-primary" (click)="showDetails(alluploadedusers.fileId)">View</button>
-
-                                            
-                                        
-                                        
                                         </td>
+                                        <td><button class="btn btn-primary" (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button></td>
 
 
                                     </tr>

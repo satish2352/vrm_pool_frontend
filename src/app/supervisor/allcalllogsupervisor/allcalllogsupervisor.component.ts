@@ -17,14 +17,29 @@ export class AllcalllogsupervisorComponent {
   supervisorSelected: any;
   agentSelected: any;
   allagentbysupervisorList: any;
-
+  totimeSelected: any;
+  fromtimeSelected: any;
   fromdateSelected: any;
   todateSelected: any;
-  agentList: any = []
+  agentList: any = [];
+
+
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    allowSearchFilter: true
+  };
+
+  selectedAgents: any[] = []; // To store selected agents
+
+
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) {
-      this.supervisorSelected = localStorage.getItem('user_id')
-     }
+    this.supervisorSelected = localStorage.getItem('user_id')
+  }
 
 
   ngOnInit(): void {
@@ -35,14 +50,16 @@ export class AllcalllogsupervisorComponent {
       'fromdate': '',
       'todate': '',
       'status': '',
-      'supervisor_id': '',
+      'supervisor_id': localStorage.getItem('id'),
       'agent_id': '',
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
     this.getCallLogSingleRow(data);
     this.getAllAgentList();
-    this. getAllAgentbySuperviserList()
+    this.getAllAgentbySuperviserList()
 
   }
 
@@ -67,7 +84,10 @@ export class AllcalllogsupervisorComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
 
     }
 
@@ -77,7 +97,7 @@ export class AllcalllogsupervisorComponent {
 
   onSelectChange(val: any) {
     this.supervisorSelected = val.value;
- 
+
     var data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -85,12 +105,15 @@ export class AllcalllogsupervisorComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
 
     }
 
     this.getCallLogSingleRow(data)
-    
+
   }
 
 
@@ -104,7 +127,27 @@ export class AllcalllogsupervisorComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
+
+    }
+    this.getCallLogSingleRow(data)
+  }
+  fromtime(val: any) {
+    console.log(val.value)
+    this.fromtimeSelected = val.value;
+    var data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
 
     }
     this.getCallLogSingleRow(data)
@@ -119,15 +162,36 @@ export class AllcalllogsupervisorComponent {
       'status': '',
       'supervisor_id': this.supervisorSelected,
       'agent_id': this.agentSelected,
-      'direction': ''
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
 
     }
 
     this.getCallLogSingleRow(data)
   }
+  
+  totime(val: any) {
+    this.totimeSelected = val.value;
+    var data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+
+    }
+    this.getCallLogSingleRow(data)
+  }
 
 
-  onSelectChangeStatus(val:any) {
+
+  onSelectChangeStatus(val: any) {
 
   }
 
@@ -143,7 +207,7 @@ export class AllcalllogsupervisorComponent {
   }
   getAllAgentbySuperviserList() {
     let data = {
-      'superviserId':this.supervisorSelected,
+      'superviserId': this.supervisorSelected,
       'user_type': 3
     }
     this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
@@ -160,6 +224,10 @@ export class AllcalllogsupervisorComponent {
       }
     });
   }
+
+ 
+
+
 
 
 
