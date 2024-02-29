@@ -149,6 +149,22 @@ export class HelperService {
   
     return this.http.post<any>(`${this.apiUrl}/getUser`, data);
   }
+  resetuserpassword(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/resetUserPassword`, data);
+  }
+   
+ 	
+deleteUser(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/deleteUser`, data);
+  }
+ 
+ 	
+  changeUserStatus(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/changeUserStatus`, data);
+  }
 
 }
 

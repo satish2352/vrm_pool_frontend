@@ -25,7 +25,7 @@ export class UpdateusersdataComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
-      // id: ['', Validators.required],
+
       mobile: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
 
@@ -46,15 +46,15 @@ export class UpdateusersdataComponent implements OnInit {
     });
 
   }
-  
+
   onSubmit() {
     if (this.editForm.controls['email'].dirty || this.editForm.controls['name'].dirty || this.editForm.controls['mobile'].dirty) {
       // Get the original user data
       const originalUserData = this.userdata;
-  
+
       // Create an object to store the updated values
       const updatedValues: any = {};
-  
+
       // Compare form values with the original data and add updated values to the object
       if (this.editForm.controls['name'].dirty) {
         updatedValues.name = this.editForm.value.name;
@@ -65,28 +65,33 @@ export class UpdateusersdataComponent implements OnInit {
       if (this.editForm.controls['mobile'].dirty) {
         updatedValues.mobile = this.editForm.value.mobile;
       }
-  
+
       // Check if any values were updated
       if (Object.keys(updatedValues).length > 0) {
         // Add the user id to the updated values
         updatedValues.id = this.id.id;
-  
+
         // Call the API to update user data with the updated values
         this.helperService.updateuser(updatedValues).subscribe({
+
           next: (response: any) => {
-            console.log('User updated successfully', response);
-            this.toastr.success('User updated successfully', 'Success');
-  
-            // Optionally, update the original user data with the new values
-            Object.assign(originalUserData, updatedValues);
+            if (response.result === true) {
+              console.log('Password changed successfully', response);
+              this.toastr.success('Password changed successfully', 'Success');
+            }
+            else {
+              this.toastr.error('Error updating user data', 'Error');
+            }
           },
           error: (error: any) => {
-            console.error('Error updating user', error);
-            this.toastr.error('Error updating user data', 'Error');
+            console.error('Error changing password', error);
+            this.toastr.error('Error changing password', 'Error');
+            // Handle error scenario here
           }
+
         });
       }
     }
   }
-  
+
 }
