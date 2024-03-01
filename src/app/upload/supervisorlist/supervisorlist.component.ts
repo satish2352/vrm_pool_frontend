@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-supervisorlist',
   templateUrl: './supervisorlist.component.html',
@@ -17,6 +17,7 @@ export class SupervisorlistComponent {
   constructor(
     private helperService: HelperService,
     public router: Router,
+    private toastr: ToastrService
  ) { }
 
   ngOnInit(): void {
@@ -35,12 +36,28 @@ export class SupervisorlistComponent {
     this.selectedFile = event.target.files[0];
   }
 
+  // onUpload(): void {
+  //   this.helperService.uploadFile(this.selectedFile)
+  //     .subscribe(response => this.downLoadFile(response, "application/ms-excel"));
+  // }
   onUpload(): void {
-    this.helperService.uploadFile(this.selectedFile)
-      .subscribe(response => this.downLoadFile(response, "application/ms-excel"));
+    this.helperService.uploadFile(this.selectedFile).subscribe({
+      next: (response: any) => {
+        if (response.result === true) {
+          this.toastr.success('File uploaded successfully!', 'Success');
+          this.downLoadFile(response, "application/ms-excel");
+          
+        } else {
+          this.toastr.error('File upload failed.', 'Error');
+        }
+      },
+      error: (error: any) => {
+        console.error('Error uploading file:', error);
+        this.toastr.error('Error uploading file. Please try again.', 'Error');
+      }
+    });
   }
-
-
+  
   
 
   onSelectChange(val:any) {

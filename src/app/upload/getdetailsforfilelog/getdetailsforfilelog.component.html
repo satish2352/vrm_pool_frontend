@@ -44,8 +44,7 @@
                                 <tr
                                     *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                     <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                    <td>{{ alluploadedusers.fname }} {{ alluploadedusers.mname }} {{
-                                        alluploadedusers.lname }}</td>
+                                    <td>{{ alluploadedusers.name }} </td>
                                     <td>{{ alluploadedusers.email }}</td>
                                     <td>{{ alluploadedusers.mobile }}</td>
                                     <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
