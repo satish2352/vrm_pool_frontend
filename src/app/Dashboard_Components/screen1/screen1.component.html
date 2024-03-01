@@ -16,17 +16,17 @@
         <div class="container-fluid">
 
             <div class="row">
-               
 
-            
 
-                <div class="clearfix hidden-md-up"></div>
+
+
+              
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Reports</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-text">Admins</span>
+                            <span class="info-box-number">{{dashboarddata.users.admins}}</span>
                         </div>
 
                     </div>
@@ -37,13 +37,110 @@
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Users</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">Supervisors</span>
+                            <span class="info-box-number">{{dashboarddata.users.supervisors}}</span>
                         </div>
 
                     </div>
 
                 </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Agents</span>
+                            <span class="info-box-number">{{dashboarddata.users.agents}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Completed Count</span>
+                            <span class="info-box-number">{{dashboarddata.reports.completed_count}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Missed Count</span>
+                            <span class="info-box-number">{{dashboarddata.reports.missed_count}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+             
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Incoming Count</span>
+                            <span class="info-box-number">{{dashboarddata.reports.incoming_count}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Outgoing Count</span>
+                            <span class="info-box-number">{{dashboarddata.reports.outgoing_count}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Total Duration</span>
+                            <span class="info-box-number">{{dashboarddata.reports.total_duration}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">average_duration</span>
+                            <span class="info-box-number">{{dashboarddata.reports.average_duration}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">total_calls</span>
+                            <span class="info-box-number">{{dashboarddata.reports.total_duration}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+               
+
+           
 
             </div>
 

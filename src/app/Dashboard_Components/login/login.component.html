@@ -1,3 +1,6 @@
+
+
+
 <div class="center-container">
   <div class="login-box">
     <div class="login-logo">
@@ -8,13 +11,18 @@
         <p class="login-box-msg">Sign in to start your session</p>
         <form [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="input-group mb-3">
-            <input formControlName="mobile" id="mobile" type="email" class="form-control" placeholder="mobile">
+            <input formControlName="mobile" id="mobile" type="text" class="form-control" placeholder="Mobile">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>
+          <div *ngIf="adminLoginForm?.get('mobile')?.invalid && (adminLoginForm?.get('mobile')?.dirty || adminLoginForm?.get('mobile')?.touched)" class="text-danger">
+            <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['required']">Mobile is required</p>
+            <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['pattern']">Invalid mobile number format</p>
+          </div>
+
           <div class="input-group mb-3">
             <input formControlName="password" id="password" type="password" class="form-control" placeholder="Password">
             <div class="input-group-append">
@@ -23,6 +31,10 @@
               </div>
             </div>
           </div>
+          <div *ngIf="adminLoginForm?.get('password')?.invalid && (adminLoginForm?.get('password')?.dirty || adminLoginForm?.get('password')?.touched)" class="text-danger">
+            <p *ngIf="adminLoginForm?.get('password')?.errors?.['required']">Password is required</p>
+          </div>
+
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
@@ -36,7 +48,6 @@
             </div>
           </div>
         </form>
-
       </div>
     </div>
   </div>

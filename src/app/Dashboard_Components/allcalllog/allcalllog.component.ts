@@ -22,6 +22,7 @@ export class AllcalllogComponent {
   agentList: any = [];
   ignoreFirstChange = true
   maxDate: string;
+  activeSupervisors!: any[];
 
   dropdownSettings = {
     singleSelection: false,
@@ -36,12 +37,13 @@ export class AllcalllogComponent {
 
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) {
-
+    
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
     this.maxDate = `${yyyy}-${mm}-${dd}`;
+
 
   }
 
@@ -50,15 +52,11 @@ export class AllcalllogComponent {
 
     this.getAllSupervisorList();
     this.data = {}
-
     this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
 
-
   }
-
-
 
   getAllAgentList() {
     this.helperService.getAllAgentUploadedList().subscribe(list => {
@@ -249,7 +247,11 @@ export class AllcalllogComponent {
   getAllSupervisorList() {
     this.helperService.getAllSupervisorList().subscribe(list => {
       if (list['result'] == true) {
-        this.supervisorList = list['data'];
+        console.log(list['data'])
+        var dataNew = list['data']
+        this.supervisorList = dataNew.filter((obj:any) => obj.is_active === "1");
+
+        
       }
     });
   }

@@ -1,8 +1,10 @@
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HelperService } from '../../helper.service';
 
 @Component({
@@ -25,8 +27,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminLoginForm = this.formBuilder.group({
-      mobile: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      mobile: ['', [Validators.required, Validators.pattern("^[0-9]{10}$")]], // Mobile number should be 10 digits
+      password: ['', Validators.required]
     });
   }
 
@@ -58,21 +60,23 @@ export class LoginComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Login error', error);
-        this.error = 'email or password is incorrect';
-        this.toastr.error('Email or password is incorrect', 'Error');
+        this.error = 'Mobile or password is incorrect';
+        this.toastr.error('Mobile or password is incorrect', 'Error');
       }
     });
   }
+
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }
+
   navigateToPage() {
     this.router.navigate(['/reset-password']);
   }
+
   resetpass() {
-    alert('Change Password')
+    alert('Change Password');
   }
 }
-

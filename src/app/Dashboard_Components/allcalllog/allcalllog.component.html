@@ -37,36 +37,43 @@
                                     <div class="form-group">
                                         <label>Select Supervisor</label>
                                         <select class="form-control" (change)="onSelectChangeSupervisor($event.target)">
-                                             <option value="" disabled selected>Choose Supervisor</option>
+                                            <option value="" disabled selected>Choose Supervisor</option>
                                             <option *ngFor="let userList of supervisorList" [value]="userList.id">
                                                 {{ userList.name }}
                                             </option>
                                         </select>
-
                                     </div>
+                                    <!-- <div class="form-group">
+                                        <label>Select Supervisor</label>
+                                        <select class="form-control" (change)="onSelectChangeSupervisor($event.target)">
+                                            <option value="" disabled selected>Choose Supervisor</option>
+                                            <option *ngFor="let userList of activeSupervisors" [value]="userList.id">
+                                                {{ userList.name }}
+                                            </option>
+                                        </select>
+                                    </div> -->
+
                                 </div>
 
-                           
-                                
+
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
-                                        <ng-multiselect-dropdown
-                                            [placeholder]="'Choose Agent'"
-                                            [data]="allagentbysupervisorList"
-                                            [(ngModel)]="selectedAgents"
-                                            [settings]="dropdownSettings"
-                                            (ngModelChange)="onSelectChangeAgent($event)">
+                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
+                                            [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
+                                            [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                 </div>
-                                
-                                
+
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" [max]="maxDate" class="form-control" (change)="fromdate($event.target)" />
+                                            <input type="date" [max]="maxDate" class="form-control"
+                                                (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
@@ -75,17 +82,19 @@
                                     <div class="form-group">
                                         <label>From Time</label>
                                         <div class="input-group" id="fromtime">
-                                            <input type="time" class="form-control" (change)="fromtime($event.target)" />
+                                            <input type="time" class="form-control"
+                                                (change)="fromtime($event.target)" />
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" [max]="maxDate" class="form-control" (change)="todate($event.target)" />
+                                            <input type="date" [max]="maxDate" class="form-control"
+                                                (change)="todate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
