@@ -71,15 +71,29 @@ export class AdminAlluserlistComponent {
     });
 
   }
+  // deleteUser(users: any) {
+  //   let data = { 'id': users }
+  //   this.helperService.deleteUser(data).subscribe(list => {
+  //     if (list['result'] == true) {
+  //       this.toastr.success('User Delete Successfully', 'Success');
+  //       this.getAllSupervisorList();
+  //     }
+  //   });
+  // }
   deleteUser(users: any) {
-    let data = { 'id': users }
-    this.helperService.deleteUser(data).subscribe(list => {
-      if (list['result'] == true) {
-        this.toastr.success('User Delete Successfully', 'Success');
-        this.getAllSupervisorList();
-      }
-    });
-  }
+    let data = { 'id': users };
+    // Show confirmation alert
+    if (confirm('Are you sure you want to delete this user?')) {
+        this.helperService.deleteUser(data).subscribe(list => {
+            if (list['result'] == true) {
+                this.toastr.success('User Delete Successfully', 'Success');
+                this.getAllSupervisorList();
+            }
+        });
+    } else {
+        // User canceled deletion, do nothing
+    }
+}
   changeUserStatus(id: any, event: any) {
     console.log(event.checked);
 

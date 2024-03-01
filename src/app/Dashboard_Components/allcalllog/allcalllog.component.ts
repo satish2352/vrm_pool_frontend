@@ -14,12 +14,14 @@ export class AllcalllogComponent {
   supervisorSelected: any;
   agentSelected: any;
   allagentbysupervisorList: any;
-
+  data: any = {}
   fromdateSelected: any;
   todateSelected: any;
   totimeSelected: any;
   fromtimeSelected: any;
   agentList: any = [];
+  ignoreFirstChange = true
+  maxDate: string;
 
   dropdownSettings = {
     singleSelection: false,
@@ -33,25 +35,23 @@ export class AllcalllogComponent {
   selectedAgents: any[] = []; // To store selected agents
 
   constructor(private helperService: HelperService,
-    private fileDownloadService: FileDownloadService) { }
+    private fileDownloadService: FileDownloadService) {
+
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
+
+  }
 
 
   ngOnInit(): void {
 
     this.getAllSupervisorList();
-    var data = {
-      'user_type': '',
-      'fromdate': '',
-      'todate': '',
-      'status': '',
-      'supervisor_id': '',
-      'agent_id': '',
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
+    this.data = {}
 
-    }
-    this.getCallLogSingleRow(data);
+    this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
 
@@ -71,141 +71,177 @@ export class AllcalllogComponent {
   onSelectChangeSupervisor(val: any) {
     this.supervisorSelected = val.value;
     this.getAllAgentbySuperviserList()
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
 
-    this.getCallLogSingleRow(data)
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
+    this.getCallLogSingleRow(this.data)
 
 
   }
 
   onSelectChangeAgent(val: any) {
 
+    if (this.ignoreFirstChange) {
+      this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
+      return; // Ignore the rest of the function during the first call
+    }
+
     const keyToExtract = 'id';
 
     // Extract values based on the key
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
 
-
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
 
-    this.getCallLogSingleRow(data)
+    if (this.agentSelected !== '') {
+      this.data.agent_id = this.agentSelected
+    }
+    this.getCallLogSingleRow(this.data)
   }
 
 
   onSelectChange(val: any) {
     this.supervisorSelected = val.value;
 
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
 
-    this.getCallLogSingleRow(data)
+    this.getCallLogSingleRow(this.data)
 
   }
 
 
   fromdate(val: any) {
     console.log(val.value)
+
     this.fromdateSelected = val.value;
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
-    this.getCallLogSingleRow(data)
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
+    this.getCallLogSingleRow(this.data)
   }
 
   fromtime(val: any) {
     console.log(val.value)
     this.fromtimeSelected = val.value;
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
-    this.getCallLogSingleRow(data)
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
+
+    this.getCallLogSingleRow(this.data)
   }
 
 
   todate(val: any) {
     this.todateSelected = val.value;
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
 
-    this.getCallLogSingleRow(data)
+    this.getCallLogSingleRow(this.data)
   }
 
 
   totime(val: any) {
     this.totimeSelected = val.value;
-    var data = {
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
     }
-    this.getCallLogSingleRow(data)
+
+    if (this.agentSelected! == '') {
+      this.data.agent_id = this.agentSelected
+    }
+
+    this.getCallLogSingleRow(this.data)
   }
 
 

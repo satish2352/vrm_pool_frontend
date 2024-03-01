@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                         <label>From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" class="form-control" (change)="fromdate($event.target)" />
+                                            <input type="date" [max]="maxDate" class="form-control" (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                     <div class="form-group">
                                         <label>To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" class="form-control" (change)="todate($event.target)" />
+                                            <input type="date" [max]="maxDate" class="form-control" (change)="todate($event.target)" />
                                         </div>
                                     </div>
                                 </div>

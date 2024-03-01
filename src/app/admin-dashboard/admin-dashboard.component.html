@@ -60,21 +60,21 @@
            
           <li class="nav-item">
             <a routerLink="all-call-log-admin" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa-solid fa-users"></i>
               <p>All Call log</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a routerLink="admin-all-user-list" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa-solid fa-users"></i>
                 <p>All Users</p>
             </a>
           </li>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fa-solid fa-cloud-arrow-up"></i>
               <p>
                 Upload/Uploaded
                 <span style="margin-left: 34px;"> Users View </span>
@@ -102,61 +102,33 @@
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Call Logs
-                <span style="margin-left: 34px;"> Users View </span>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a routerLink="supervisor-list" class="nav-link">
+                <a routerLink="all-sup" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Supervisor list</p>
+                  <p>Supervisor Reports list</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a routerLink="agent-list" class="nav-link">
+                <a routerLink="all-agent" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Agent List</p>
+                  <p>Agent Reports List</p>
                 </a>
               </li>
             </ul>
           </li>
 
+          <li class="nav-item">
+            <a routerLink="change-password" class="nav-link">
+              <i class="nav-icon fa-solid fa-key"></i>
+              <p>Change PassWord</p>
+            </a>
+          </li>
+
           <span *ngIf="user_type =='1'">
-
-            
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
-                <p>
-                  
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a routerLink="all-sup" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Supervisor Reports list</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a routerLink="all-agent" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agent Reports List</p>
-                  </a>
-
-
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item menu-open">
-              <a routerLink="change-password" class="nav-link " >
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Change PassWord</p>
-              </a>
-
-            </li>
           </span>
 
           <!-- Supervisor DASHBORAD -->
@@ -168,26 +140,21 @@
               </a>
               <a routerLink="supervisor/agent-list" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p> User List</p>
+                <p>User List</p>
               </a>
               <a routerLink="change-password" class="nav-link ">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fa-solid fa-key"></i>
                 <p>Change PassWord</p>
               </a>
             </li>
           </span>
 
-   
-
-
-          <li class="nav-item menu-open">
+          <li class="nav-item">
             <a (click)="logout()" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa-solid fa-lock"></i>
               <p>Log out </p>
             </a>
-
           </li>
-
 
         </ul>
       </nav>
