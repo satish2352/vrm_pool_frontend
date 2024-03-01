@@ -7,7 +7,7 @@ import { HelperService } from 'src/app/helper.service';
   styleUrls: ['./allagentlist.component.sass']
 })
 export class AllagentlistComponent {
-  pagesize: number = 10;
+  pagesize: number = 10; 
   currentpage:number =1;
   alllist: any = [];
   supervisorSelected:any;
@@ -17,13 +17,7 @@ export class AllagentlistComponent {
  ngOnInit(): void {
   this.getAllAgentbySuperviserList();
 }
-// getAllAgentList() {
-//   this.helperService.getAllExotelAgentList().subscribe(list => {
-//     if (list['result'] == true) {
-//       this.alllist = list['data'];
-//     }
-//   });
-// }
+
 
 getAllAgentbySuperviserList() {
   let data = {

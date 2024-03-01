@@ -50,7 +50,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+          <span *ngIf="user_type =='1'">
           <li class="nav-item">
             <a routerLink="screen1" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -128,7 +128,7 @@
             </a>
           </li>
 
-          <span *ngIf="user_type =='1'">
+          
           </span>
 
           <!-- Supervisor DASHBORAD -->
