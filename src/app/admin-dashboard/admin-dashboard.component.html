@@ -76,28 +76,47 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Upload/Uploaded Users View
+                Upload/Uploaded
+                <span style="margin-left: 34px;"> Users View </span>
                 <i class="right fas fa-angle-left"></i>
               </p>
-              <p></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a routerLink="supervisor-list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Supervisor list</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a routerLink="agent-list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
+                  <p>Agent List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Call Logs
+                <span style="margin-left: 34px;"> Users View </span>
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a routerLink="supervisor-list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Supervisor list</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a routerLink="agent-list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Agent List</p>
                 </a>
               </li>
             </ul>
@@ -105,49 +124,12 @@
 
           <span *ngIf="user_type =='1'">
 
+            
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a routerLink="supervisor-list" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Supervisor list</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a routerLink="agent-list" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Agent List</p>
-                  </a>
-
-
-                </li>
-                <!-- <li class="nav-item">
-                  <a routerLink="upload-all-users" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Upload File Logs</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a routerLink="upload-all-log" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Upload / All Upload Log </p>
-                  </a>
-                </li> -->
-
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
-                <p>
-                  Call Logs
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>

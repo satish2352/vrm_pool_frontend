@@ -40,7 +40,7 @@
                                             <th>Email ID</th>
                                             <th>Edit</th>
                                             <th>Enable/Disable</th>
-                                            <th>Change PassWord</th>
+                                            <!-- <th>Change PassWord</th> -->
                                             <th>Reset PassWord</th>
                                             <th>Delete User</th>
                                         </tr>
@@ -59,15 +59,15 @@
                                                     *ngIf="users.user_type == '3'"> NA</span></td>
                                             <td>
                                                 <label class="switch">
-                                                    <input type="checkbox" [checked]="users.is_active==1"   
+                                                    <input type="checkbox" [checked]="users.is_active==1"
                                                         (change)="changeUserStatus(users.id, $event.target)">
                                                     <span *ngIf="users.user_type == '2'" class="slider"></span><span
-                                                    *ngIf="users.user_type == '3'"> NA</span>
+                                                        *ngIf="users.user_type == '3'"> NA</span>
                                                 </label>
                                             </td>
-                                            <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
+                                            <!-- <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
                                                     (click)="userspasschange(users)">Change
-                                                    PassWord </button>
+                                                    PassWord </button></td> -->
                                             <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
                                                     (click)="userspassreset(users.mobile)">Reset
                                                     PassWord </button>
