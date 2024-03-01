@@ -81,13 +81,11 @@ export class AdminAlluserlistComponent {
     });
   }
   changeUserStatus(id: any, event: any) {
-    let statusValue: any;
-    if (event.value === 'on') {
-      statusValue = '1';
-    } else {  
-      statusValue = '0';
-    }
+    console.log(event.checked);
 
+    const statusValue = event.checked == true ? '1' : '0';
+
+    console.log('######################', statusValue);
     const data = {
       status: statusValue,
       id: id

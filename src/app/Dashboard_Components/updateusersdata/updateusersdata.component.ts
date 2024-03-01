@@ -76,8 +76,9 @@ export class UpdateusersdataComponent implements OnInit {
 
           next: (response: any) => {
             if (response.result === true) {
-              console.log('Password changed successfully', response);
               this.toastr.success('Password changed successfully', 'Success');
+              console.log('Password changed successfully', response);
+              
             }
             else {
               this.toastr.error('Error updating user data', 'Error');

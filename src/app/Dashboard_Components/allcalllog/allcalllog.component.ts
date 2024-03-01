@@ -55,6 +55,7 @@ export class AllcalllogComponent {
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
 
+
   }
 
 
