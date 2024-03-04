@@ -123,14 +123,14 @@
                                         <tr>
                                             <th>Sr.No</th>
                                             <th (click)="sortBy('item.user.name')"> Name </th>
-                                            <th>Mobile No</th>
-                                            <th>Completed Count</th>
-                                            <th>Missed Count</th>
-                                            <th>Incoming Count </th>
-                                            <th>Outgoing Count </th>
-                                            <th>Total Duration </th>
-                                            <th>Average Duration </th>
-                                            <th>Total Calls </th>
+                                            <th (click)="sortBy('item.user.mobile')">Mobile No</th>
+                                            <th (click)="sortBy('item.completed_count')">Completed Count</th>
+                                            <th (click)="sortBy('item.missed_count')">Missed Count</th>
+                                            <th (click)="sortBy('item.incoming_count')">Incoming Count </th>
+                                            <th (click)="sortBy('item.outgoing_count')">Outgoing Count </th>
+                                            <th (click)="sortBy('item.total_duration')">Total Duration </th>
+                                            <th (click)="sortBy('item.average_duration')">Average Duration </th>
+                                            <th (click)="sortBy('item.total_calls')">Total Calls </th>
                                         </tr>
                                     </thead>
                                     <tbody>
