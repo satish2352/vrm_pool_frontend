@@ -61,9 +61,9 @@
                                                 <label class="switch">
                                                     <input type="checkbox" [checked]="users.is_active==1"
                                                         (change)="changeUserStatus(users.id, $event.target)">
-                                                    <span *ngIf="users.user_type == '2'" class="slider"></span><span
-                                                        *ngIf="users.user_type == '3'"> NA</span>
+                                                    <span *ngIf="users.user_type == '2'" class="slider"></span>
                                                 </label>
+                                                <span *ngIf="users.user_type == '3'"> NA</span>
                                             </td>
                                             <!-- <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
                                                     (click)="userspasschange(users)">Change

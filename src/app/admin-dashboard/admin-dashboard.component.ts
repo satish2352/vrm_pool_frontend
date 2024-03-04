@@ -9,7 +9,7 @@ import { HelperService } from '../helper.service';
 })
 export class AdminDashboardComponent {
   user_type :any
-
+  loading: boolean = true;
   
   constructor(private router: Router,
     private helperService: HelperService) 
@@ -20,6 +20,9 @@ export class AdminDashboardComponent {
 
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false; // Set loading to false after the delay
+    }, 2000);
     
   }
   // gotoform(){
