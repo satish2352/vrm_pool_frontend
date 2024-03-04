@@ -71,7 +71,9 @@ import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata
     HttpClientModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+   
+    
     
     
    

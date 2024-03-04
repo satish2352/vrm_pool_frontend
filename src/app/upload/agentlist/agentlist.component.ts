@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',
@@ -19,7 +19,8 @@ export class AgentlistComponent {
 
   constructor(private helperService: HelperService,
     public router: Router,
-    private fileDownloadService: FileDownloadService) { }
+    private fileDownloadService: FileDownloadService,
+    private toastr: ToastrService) { }
 
 
   ngOnInit(): void {
@@ -65,20 +66,23 @@ export class AgentlistComponent {
     this.selectedFile = event.target.files[0];
   }
   onUpload(): void {
+    if (!this.selectedFile || !this.supervisorSelected) {
+      this.toastr.error('Please select a file and supervisor.');
+      return;
+    }
+
     const formData: FormData = new FormData();
     formData.append('file', this.selectedFile, this.selectedFile.name);
     formData.append('superviserId', this.supervisorSelected);
+
     this.helperService.uploadFileAgent(formData)
       .subscribe(response => {
-        var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
-        if (preview) {
-          preview.setAttribute("href", response);
-          preview.click();
-        } else {
-          console.error("Element with id 'hiddenLink' not found.");
-        }
-      }
-      );
+        // Show toast notification with API response
+        this.toastr.success('File uploaded successfully. Response: ' + response);
+      }, error => {
+        // Handle error cases
+        this.toastr.error('Upload failed. Please try again.');
+      });
   }
 
   downloadFileIdWise(data: any) {

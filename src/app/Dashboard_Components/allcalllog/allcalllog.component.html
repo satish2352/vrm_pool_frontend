@@ -38,15 +38,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <label>Select Supervisor</label>
-                                        <select class="form-control" (change)="onSelectChangeSupervisor($event.target)">
-                                            <option value="" disabled selected>Choose Supervisor</option>
-                                            <option *ngFor="let userList of activeSupervisors" [value]="userList.id">
-                                                {{ userList.name }}
-                                            </option>
-                                        </select>
-                                    </div> -->
+                                 
 
                                 </div>
 
@@ -102,7 +94,15 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Search</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                        </div>
+                                    </div>
+                                </div>
+                              
 
                             </div>
 
@@ -122,7 +122,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No</th>
-                                            <th>Name </th>
+                                            <th (click)="sortBy('item.user.name')"> Name </th>
                                             <th>Mobile No</th>
                                             <th>Completed Count</th>
                                             <th>Missed Count</th>
@@ -136,7 +136,7 @@
                                     <tbody>
 
                                         <tr
-                                            *ngFor="let item of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                            *ngFor="let item of filterList   | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                             <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                             <td>{{item.user.name}} </td>
                                             <td>{{item.user.mobile}}</td>

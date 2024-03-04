@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,89 +12,71 @@ import { HelperService } from 'src/app/helper.service';
   styleUrls: ['./updateusersdata.component.sass']
 })
 export class UpdateusersdataComponent implements OnInit {
-  userdata: any = []
-  editForm!: FormGroup
-  alllist: any;
-  id: any;
+  editForm!: FormGroup;
+  id: string | null = null;
 
-
-  constructor(private helperService: HelperService, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute,
+  constructor(
+    private helperService: HelperService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
     private toastr: ToastrService
+  ) {}
 
-  ) { }
   ngOnInit(): void {
-    this.id = this.route.snapshot.params;
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.initializeForm();
+    if (this.id) {
+      this.getUserData();
+    }
+  }
 
+  initializeForm(): void {
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
-
-      mobile: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       email: ['', [Validators.required, Validators.email]],
-
     });
-    this.getuserdata();
-  }
-  getuserdata() {
-    const data = {
-      'id': this.id.id
-    }
-    console.log('***********', data);
-
-    this.helperService.getsingleuser(data).subscribe((list: any) => {
-      if (list['result'] == true) {
-        this.userdata = list['data'];
-        console.log('******************', this.userdata);
-      }
-    });
-
   }
 
-  onSubmit() {
-    if (this.editForm.controls['email'].dirty || this.editForm.controls['name'].dirty || this.editForm.controls['mobile'].dirty) {
-      // Get the original user data
-      const originalUserData = this.userdata;
-
-      // Create an object to store the updated values
-      const updatedValues: any = {};
-
-      // Compare form values with the original data and add updated values to the object
-      if (this.editForm.controls['name'].dirty) {
-        updatedValues.name = this.editForm.value.name;
+  getUserData(): void {
+    this.helperService.getsingleuser({ id: this.id }).subscribe({
+      next: (response: any) => {
+        if (response.result) {
+          this.editForm.patchValue(response.data);
+        } else {
+          this.toastr.error(response.message || 'User data not found', 'Error');
+        }
+      },
+      error: (error: any) => {
+        this.toastr.error(this.parseErrorResponse(error), 'Error');
       }
-      if (this.editForm.controls['email'].dirty) {
-        updatedValues.email = this.editForm.value.email;
-      }
-      if (this.editForm.controls['mobile'].dirty) {
-        updatedValues.mobile = this.editForm.value.mobile;
-      }
+    });
+  }
 
-      // Check if any values were updated
-      if (Object.keys(updatedValues).length > 0) {
-        // Add the user id to the updated values
-        updatedValues.id = this.id.id;
-
-        // Call the API to update user data with the updated values
-        this.helperService.updateuser(updatedValues).subscribe({
-
-          next: (response: any) => {
-            if (response.result === true) {
-              this.toastr.success('Password changed successfully', 'Success');
-              console.log('Password changed successfully', response);
-              
-            }
-            else {
-              this.toastr.error('Error updating user data', 'Error');
-            }
-          },
-          error: (error: any) => {
-            console.error('Error changing password', error);
-            this.toastr.error('Error changing password', 'Error');
-            // Handle error scenario here
+  onSubmit(): void {
+    if (this.editForm.valid && this.id) {
+      this.helperService.updateuser({ ...this.editForm.value, id: this.id }).subscribe({
+        next: (response: any) => {
+          if (response.result) {
+            this.toastr.success(response.message || 'User updated successfully', 'Success');
+            this.router.navigate(['/admin-dashboard/','admin-all-user-list']); // Adjust the navigation path as needed
+          } else {
+            this.toastr.error(response.message || 'Error updating user data', 'Error');
           }
-
-        });
-      }
+        },
+        error: (error: any) => {
+          this.toastr.error(this.parseErrorResponse(error), 'Error');
+        }
+      });
     }
   }
 
+  // Helper function to parse and concatenate error messages from the response
+  private parseErrorResponse(error: any): string {
+    if (error && error.error && error.error.errors && Array.isArray(error.error.errors)) {
+      return error.error.errors.map((err: any) => `${err.msg}`).join(', ');
+    }
+    return error.error.message || 'An unexpected error occurred';
+  }
 }

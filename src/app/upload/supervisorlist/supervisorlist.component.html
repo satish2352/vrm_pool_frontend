@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <h1>All Supervisor</h1>
                 </div>
-              
+
             </div>
         </div>
     </section>
@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <a id="hiddenLink" target="_blank" style="display: none;"  download></a>
+                        <a id="hiddenLink" target="_blank" style="display: none;" download></a>
                         <div class="card">
 
                             <div class="card-body">
@@ -30,19 +30,19 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="exampleInputFile"
                                                         (change)="onFileSelected($event)">
-                                                    <label class="custom-file-label" for="exampleInputFile">Upload
+                                                    <label class="custom-file-label"
+                                                        for="exampleInputFile">{{selectedFile.name}}
                                                         file</label>
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <button class="input-group-text"
-                                                        (click)="onUpload()">Upload</button>
+                                                    <button class="btn btn-primary" (click)="onUpload()">Upload</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
 
-<!-- 
+                                    <!-- 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>File Wise Data</label>
@@ -77,13 +77,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr 
+                                    <tr
                                         *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                         <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                         <td>{{ alluploadedusers.fileId }}</td>
                                         <td>{{alluploadedusers.insertedCount}} </td>
                                         <td>{{alluploadedusers.failedCount}} </td>
-                                    
+
                                         <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true"
                                                 class="badge badge-success">
                                                 Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
@@ -92,12 +92,15 @@
                                         <!-- <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                 style="text-transform: capitalize;">{{
                                                 alluploadedusers.reason }}</span></td> -->
-                                                <td>{{ alluploadedusers.createdAt }}</td>
+                                        <td>{{ alluploadedusers.createdAt }}</td>
                                         <td>
-                                            
-                                            <button class="btn btn-primary" (click)="showDetails(alluploadedusers.fileId)">View</button>
+
+                                            <button class="btn btn-primary"
+                                                (click)="showDetails(alluploadedusers.fileId)">View</button>
                                         </td>
-                                        <td><button class="btn btn-primary" (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button></td>
+                                        <td><button class="btn btn-primary"
+                                                (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
+                                        </td>
 
 
                                     </tr>

@@ -52,7 +52,7 @@ const routes: Routes = [
     { path: 'update-users-data/:id', component: UpdateusersdataComponent },
     ]
   },
-  // { path: '**', component: LoginComponent }
+  // { path: '**', component: LoginComponent },
   {
     path: 'reset-password', component: ResetpasswordComponent,
   },

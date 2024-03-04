@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HelperService } from '../../helper.service';
 
-@Component({
+@Component({ 
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   adminLoginForm!: FormGroup;
   isLoggedIn: boolean = false;
+  showPassword: boolean = false;
 
   constructor(
     private authService: HelperService,
@@ -78,5 +79,8 @@ export class LoginComponent implements OnInit {
 
   resetpass() {
     alert('Change Password');
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

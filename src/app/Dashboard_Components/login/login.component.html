@@ -1,6 +1,3 @@
-
-
-
 <div class="center-container">
   <div class="login-box">
     <div class="login-logo">
@@ -18,23 +15,26 @@
               </div>
             </div>
           </div>
+          <!-- Mobile validation messages -->
           <div *ngIf="adminLoginForm?.get('mobile')?.invalid && (adminLoginForm?.get('mobile')?.dirty || adminLoginForm?.get('mobile')?.touched)" class="text-danger">
             <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['required']">Mobile is required</p>
             <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['pattern']">Invalid mobile number format</p>
           </div>
-
+        
           <div class="input-group mb-3">
-            <input formControlName="password" id="password" type="password" class="form-control" placeholder="Password">
+            <input formControlName="password" id="password" type="{{ showPassword ? 'text' : 'password' }}" class="form-control" placeholder="Password">
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <!-- Toggle icon based on showPassword value -->
+                <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
               </div>
             </div>
           </div>
+          <!-- Password validation messages -->
           <div *ngIf="adminLoginForm?.get('password')?.invalid && (adminLoginForm?.get('password')?.dirty || adminLoginForm?.get('password')?.touched)" class="text-danger">
             <p *ngIf="adminLoginForm?.get('password')?.errors?.['required']">Password is required</p>
           </div>
-
+        
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
@@ -48,6 +48,7 @@
             </div>
           </div>
         </form>
+        
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ export class AllcalllogComponent {
   pagesize: number = 10;
   currentpage: number = 1;
   alllist: any = [];
+  listalldata: any = [];
   supervisorList: any = [];
   supervisorSelected: any;
   agentSelected: any;
@@ -23,6 +24,10 @@ export class AllcalllogComponent {
   ignoreFirstChange = true
   maxDate: string;
   activeSupervisors!: any[];
+  filterList: any = [];
+  searchTerm: string = '';
+  sortKey: string = ''; // Track the current sort key
+  sortOrder: string = 'asc'; 
 
   dropdownSettings = {
     singleSelection: false,
@@ -37,7 +42,7 @@ export class AllcalllogComponent {
 
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) {
-    
+
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -55,6 +60,8 @@ export class AllcalllogComponent {
     this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
+    // this.filteredList = this.alllist;
+    // this.searchChanged('')
 
   }
 
@@ -249,9 +256,9 @@ export class AllcalllogComponent {
       if (list['result'] == true) {
         console.log(list['data'])
         var dataNew = list['data']
-        this.supervisorList = dataNew.filter((obj:any) => obj.is_active === "1");
+        this.supervisorList = dataNew.filter((obj: any) => obj.is_active === "1");
 
-        
+
       }
     });
   }
@@ -270,36 +277,60 @@ export class AllcalllogComponent {
   getCallLogSingleRow(data: any) {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
-        this.alllist = list['data'];
+        this.filterList = list['data'];
+
       }
     });
   }
 
+  searchChanged(searchValue: string) {
+    if (!searchValue) {
+      let data = {}
+      this.helperService.getCallLogSingleRow(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.filterList = list['data'];
 
-  //   onSelectedAgentsChange(val:any) {
-
-  //  console.log(val);
-
-
-
-  //   }
-
-
-
-
-  // onSelectAgents(item: any) {
-  //   console.log('Selected agents:', this.selectedAgents);
-  //   // Add your logic here
-  // }
-
-  onDeSelectAgents(item: any) {
-    console.log('Deselected agents:', this.selectedAgents);
-    // Add your logic here
+        }
+      });
+    } else {
+      this.listalldata = this.filterList
+      this.filterList = this.listalldata.filter((item: any) =>
+        item.user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.user.mobile.includes(searchValue) || item.completed_count.toString().includes(searchValue)
+        || item.missed_count.toString().includes(searchValue) ||
+        item.incoming_count.toString().includes(searchValue) ||
+        item.outgoing_count.toString().includes(searchValue) ||
+        item.total_duration.toString().includes(searchValue) ||
+        item.average_duration.toString().includes(searchValue) ||
+        item.total_calls.toString().includes(searchValue)
+        // You can add more conditions here to filter by other properties
+      );
+    }
+    this.sortOrder = 'asc';
   }
-
-
+  sortBy(key: string) {
+    // Toggle sort order if the same key is clicked again
+    if (this.sortKey === key) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortKey = key;
+      this.sortOrder = 'asc';
+    }
+  
+    // Sort filterList based on sortKey and sortOrder
+    this.filterList.sort((a:any, b:any) => {
+      const valueA = a[this.sortKey];
+      const valueB = b[this.sortKey];
+  
+      if (valueA < valueB) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      } else if (valueA > valueB) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  
 
 }
-
-
-
