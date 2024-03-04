@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (this.adminLoginForm.invalid) {
-      console.log('Form Invalid');
+      this.toastr.error('Enter Credentials','Error');
       return;
     }
 
