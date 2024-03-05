@@ -22,8 +22,10 @@ export class AllcalllogsupervisorComponent {
   fromdateSelected: any;
   todateSelected: any;
   agentList: any = [];
-
-
+  maxDate:any
+  listalldata:any
+  filterList:any
+  searchTerm: string = '';
   dropdownSettings = {
     singleSelection: false,
     idField: 'id',
@@ -39,6 +41,13 @@ export class AllcalllogsupervisorComponent {
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) {
     this.supervisorSelected = localStorage.getItem('user_id')
+    
+    
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    this.maxDate = `${yyyy}-${mm}-${dd}`;
   }
 
 
@@ -218,6 +227,7 @@ export class AllcalllogsupervisorComponent {
   }
 
   getCallLogSingleRow(data: any) {
+    
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.alllist = list['data'];
@@ -225,7 +235,31 @@ export class AllcalllogsupervisorComponent {
     });
   }
 
- 
+  searchChanged(searchValue: string) {
+    if (!searchValue) {
+      let data = {}
+      this.helperService.getCallLogSingleRow(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.filterList = list['data'];
+
+        }
+      });
+    } else {
+      this.listalldata = this.filterList
+      this.filterList = this.listalldata.filter((item: any) =>
+        item.user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.user.mobile.includes(searchValue) || item.completed_count.toString().includes(searchValue)
+        || item.missed_count.toString().includes(searchValue) ||
+        item.incoming_count.toString().includes(searchValue) ||
+        item.outgoing_count.toString().includes(searchValue) ||
+        item.total_duration.toString().includes(searchValue) ||
+        item.average_duration.toString().includes(searchValue) ||
+        item.total_calls.toString().includes(searchValue)
+        // You can add more conditions here to filter by other properties
+      );
+    }
+  
+  }
 
 
 

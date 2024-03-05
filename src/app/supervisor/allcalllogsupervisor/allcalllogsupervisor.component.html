@@ -30,7 +30,7 @@
                             <div class="row">
 
 
-
+<!-- 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
@@ -91,6 +91,65 @@
                                             <option value="Missed">Missed</option>
                                         </select>
                                     </div>
+                                </div> -->
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Agents</label>
+                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
+                                            [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
+                                            [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>From Date</label>
+                                        <div class="input-group" id="fromdate">
+                                            <input type="date" [max]="maxDate" class="form-control"
+                                                (change)="fromdate($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>From Time</label>
+                                        <div class="input-group" id="fromtime">
+                                            <input type="time" class="form-control"
+                                                (change)="fromtime($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>To Date</label>
+                                        <div class="input-group" id="todate">
+                                            <input type="date" [max]="maxDate" class="form-control"
+                                                (change)="todate($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>To Time</label>
+                                        <div class="input-group" id="totime">
+                                            <input type="time" class="form-control" (change)="totime($event.target)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Search</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -127,7 +186,7 @@
                                         <tr
                                             *ngFor="let item of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                             <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{item.user.mname}} {{item.user.lname}}</td>
+                                            <td>{{item.user.name}}</td>
                                             <td>{{item.user.mobile}}</td>
                                             <td>{{item.user.email}}</td>
                                             <td>{{item.completed_count}}</td>

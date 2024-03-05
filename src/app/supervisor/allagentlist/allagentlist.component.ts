@@ -21,9 +21,11 @@ export class AllagentlistComponent {
 
 getAllAgentbySuperviserList() {
   let data = {
-    'superviserId': this.supervisorSelected,
+    'superviserId': localStorage.getItem('user_id'),
     'user_type': 3
   }
+ 
+  
   this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
     if (list['result'] == true) {
       this.alllist = list['data'];

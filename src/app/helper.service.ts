@@ -89,7 +89,6 @@ export class HelperService {
  
   getAllAgentbySuperviserList(data:any): Observable<any> {
   
-    const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
 
