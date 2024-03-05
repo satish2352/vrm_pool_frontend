@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HelperService } from '../../helper.service';
 
-@Component({ 
+@Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   adminLoginForm!: FormGroup;
   isLoggedIn: boolean = false;
   showPassword: boolean = false;
+  formSubmitted = false;
 
   constructor(
     private authService: HelperService,
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (this.adminLoginForm.invalid) {
-      this.toastr.error('Enter Credentials','Error');
+      this.formSubmitted = true;
+      this.toastr.error('Enter Credentials', 'Error',{positionClass: 'toast-top-center'});
       return;
     }
 
@@ -50,12 +52,12 @@ export class LoginComponent implements OnInit {
           this.authService.saveToken(response.token, response.data.user_type, response.data.id);
           console.log("Token saved successfully");
           this.toastr.success('Login successfully', 'Success');
-       
+
           this.router.navigate(['/admin-dashboard']);
         } else {
           console.error('Token missing in response');
           this.error = 'Authentication failed. Please try again.';
-         
+
           this.toastr.error('Authentication failed. Please try again.', 'Error');
         }
       },

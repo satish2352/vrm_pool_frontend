@@ -36,10 +36,11 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                 <input type="file" class="custom-file-input" id="exampleInputFile"
                                                     (change)="onFileSelected($event)">
-                                                <label class="custom-file-label" for="exampleInputFile">{{selectedFile.name}}
-                                                    </label>
+                                                    <label class="custom-file-label"
+                                                    for="exampleInputFile"><span *ngIf="selectedFile" >{{selectedFile.name}}</span>
+                                                    file</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" (click)="onUpload()">Upload</button>
@@ -56,8 +57,8 @@
                             <thead>
                                 <tr>
                                     <th>Sr.No</th>
-                                    <th>Sr.No</th>
-                                    <th>Name</th>
+                                  
+                                    <th>File Id</th>
                                     <th>Inserted Count</th>
                                     <th>Failed Count</th>
                                     <th>Created At </th>
@@ -69,7 +70,6 @@
                                 <tr
                                     *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                     <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                    <td>{{ alluploadedusers.name }}</td>
                                     <td>{{ alluploadedusers.fileId }}</td>
                                     <td>{{ alluploadedusers.insertedCount }}</td>
                                     <td>{{ alluploadedusers.failedCount }}</td>

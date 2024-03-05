@@ -13,6 +13,11 @@ export class HelperService {
 
   constructor(private http: HttpClient) { }
 
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
   login(data: object) {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
@@ -103,7 +108,6 @@ export class HelperService {
     let data = {
       'user_type': 2
     }
-    const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
 

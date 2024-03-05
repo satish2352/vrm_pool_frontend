@@ -23,6 +23,7 @@ import { UsersChangePasswordComponent } from './Dashboard_Components/users-chang
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -32,24 +33,26 @@ const routes: Routes = [
 
   {
     path: 'admin-dashboard', component: AdminDashboardComponent,
-    children: [{ path: 'screen1', component: Screen1Component },
-    { path: 'from1', component: From1Component },
+    children: [
+      { path: 'screen1', component: Screen1Component , canActivate: [AuthGuard] },
+    { path: 'from1', component: From1Component , canActivate: [AuthGuard] },
     { path: '', redirectTo: 'screen1', pathMatch: 'full' },
-    { path: 'all-sup', component: AllSupervisorComponent },
-    { path: 'all-agent', component: AllAgentComponent },
-    { path: 'upload-all-users', component: UploadsupervisorComponent },
-    { path: 'all-call-log-admin', component: AllcalllogComponent },
-    { path: 'all-call-log-super', component: AllcalllogsupervisorComponent },
-    { path: 'supervisor-list', component: SupervisorlistComponent },
-    { path: 'agent-list', component: AgentlistComponent },
-    { path: 'upload-all-log', component: UploadalllogComponent },
-    { path: 'get-details/:id', component: GetdetailsforfilelogComponent },
+    { path: 'all-sup', component: AllSupervisorComponent , canActivate: [AuthGuard] },
+    { path: 'all-agent', component: AllAgentComponent , canActivate: [AuthGuard] },
+    { path: 'upload-all-users', component: UploadsupervisorComponent , canActivate: [AuthGuard] },
+    { path: 'all-call-log-admin', component: AllcalllogComponent , canActivate: [AuthGuard] },
+    { path: 'all-call-log-super', component: AllcalllogsupervisorComponent , canActivate: [AuthGuard] },
+    { path: 'supervisor-list', component: SupervisorlistComponent , canActivate: [AuthGuard] },
+    { path: 'agent-list', component: AgentlistComponent , canActivate: [AuthGuard] },
+    { path: 'upload-all-log', component: UploadalllogComponent , canActivate: [AuthGuard] },
+    { path: 'get-details/:id', component: GetdetailsforfilelogComponent , canActivate: [AuthGuard] },
 
-    { path: 'supervisor/agent-list', component: AllagentlistComponent },
-    { path: 'change-password', component: ChangePasswordComponent },
-    { path: 'admin-all-user-list', component: AdminAlluserlistComponent },
-    { path: 'users-change-password', component: UsersChangePasswordComponent },
-    { path: 'update-users-data/:id', component: UpdateusersdataComponent },
+    { path: 'supervisor/agent-list', component: AllagentlistComponent , canActivate: [AuthGuard] },
+    { path: 'change-password', component: ChangePasswordComponent , canActivate: [AuthGuard] },
+    { path: 'admin-all-user-list', component: AdminAlluserlistComponent , canActivate: [AuthGuard] },
+    { path: 'users-change-password', component: UsersChangePasswordComponent , canActivate: [AuthGuard] },
+    { path: 'update-users-data/:id', component: UpdateusersdataComponent , canActivate: [AuthGuard] },
+    
     ]
   },
   // { path: '**', component: LoginComponent },

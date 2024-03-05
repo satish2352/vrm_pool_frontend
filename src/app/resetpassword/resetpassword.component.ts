@@ -20,7 +20,7 @@ export class ResetpasswordComponent implements OnInit {
   timer: any; // Variable to hold the timer reference
   remainingTime: number = 60; // Time in seconds
   showPassword: boolean = false;
-
+  responseMessage: any;
   constructor(
     private formBuilder: FormBuilder, 
     private helperService: HelperService, 
@@ -40,21 +40,50 @@ export class ResetpasswordComponent implements OnInit {
     });
   }
 
+  // SendOtp() {
+  //   if (this.loginForm.invalid) {
+  //     this.toastr.error('Please enter a valid mobile number', 'Error');
+  //     return;
+  //   }
+
+  //   this.helperService.getOtpbymobile(this.loginForm.value).subscribe(list => {
+  //     if (list['result'] == true) {
+  //       this.response = list;
+  //       this.toastr.success('OTP Successfully Send On Register Mobile Number', 'Success');
+  //       this.otpSent = true; // Set otpSent to true to disable the button
+  //       this.startTimer(); // Start the timer
+  //     }
+  //   });
+  // }
   SendOtp() {
-    if (this.loginForm.invalid) {
-      this.toastr.error('Please enter a valid mobile number', 'Error');
+    if (this.loginForm.controls['mobile'].errors && this.loginForm.controls['mobile'].errors['required']) {
+      this.responseMessage = 'Please enter a mobile number before sending OTP';
       return;
     }
-
-    this.helperService.getOtpbymobile(this.loginForm.value).subscribe(list => {
-      if (list['result'] == true) {
-        this.response = list;
-        this.toastr.success('OTP Successfully Send On Register Mobile Number', 'Success');
-        this.otpSent = true; // Set otpSent to true to disable the button
-        this.startTimer(); // Start the timer
+  
+    if (this.loginForm.invalid) {
+      this.responseMessage = 'Please enter a valid mobile number';
+      return;
+    }
+  
+    this.helperService.getOtpbymobile(this.loginForm.value).subscribe(
+      list => {
+        if (list['result'] == true) {
+          this.response = list;
+          this.responseMessage = 'OTP Successfully Sent to Registered Mobile Number';
+          this.otpSent = true; // Set otpSent to true to disable the button
+          this.startTimer(); // Start the timer
+        } else {
+          this.responseMessage = 'Failed to send OTP. Please try again later.';
+        }
+      },
+      error => {
+        console.error('Error sending OTP:', error);
+        this.responseMessage = 'Enter Register Mobile Number.';
       }
-    });
+    );
   }
+
 
   startTimer() {
     this.timer = setInterval(() => {

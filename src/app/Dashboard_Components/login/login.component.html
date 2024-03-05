@@ -5,7 +5,7 @@
     </div>
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Log in to start your session</p>
         <form [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="input-group mb-3">
             <input formControlName="mobile" id="mobile" type="text" class="form-control " placeholder="Mobile">
@@ -19,7 +19,7 @@
           <div
             *ngIf="adminLoginForm?.get('mobile')?.invalid && (adminLoginForm?.get('mobile')?.dirty || adminLoginForm?.get('mobile')?.touched)"
             class="text-danger">
-            <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['required']">Mobile is required</p>
+            <!-- <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['required']">Mobile is required</p> -->
             <p *ngIf="adminLoginForm?.get('mobile')?.errors?.['pattern']">Invalid mobile number format</p>
           </div>
 
@@ -39,6 +39,10 @@
             *ngIf="adminLoginForm?.get('password')?.invalid && (adminLoginForm?.get('password')?.dirty || adminLoginForm?.get('password')?.touched)"
             class="text-danger">
             <p *ngIf="adminLoginForm?.get('password')?.errors?.['required']">Password is required</p>
+           
+          </div>
+          <div *ngIf="adminLoginForm.invalid && formSubmitted" class="text-danger">
+            Please enter your credentials to log in.
           </div>
 
           <div class="row">
@@ -50,7 +54,7 @@
               </div>
             </div>
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block">Log In</button>
             </div>
           </div>
         </form>

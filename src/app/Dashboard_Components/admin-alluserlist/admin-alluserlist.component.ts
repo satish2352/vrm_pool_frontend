@@ -20,7 +20,7 @@ export class AdminAlluserlistComponent {
 
     this.getAllSupervisorList();
   }
-
+ 
 
 
   getAllSupervisorList() {
@@ -30,6 +30,7 @@ export class AdminAlluserlistComponent {
       }
     });
   }
+  
   userspasschange(users: any) {
 
     console.log(users);
