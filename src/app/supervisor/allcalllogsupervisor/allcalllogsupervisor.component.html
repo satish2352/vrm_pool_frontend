@@ -13,7 +13,7 @@
 
         <section class="content">
             <div class="container-fluid">
-                <div class="card card-default">
+                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Select User</h3>
                         <div class="card-tools">
@@ -184,7 +184,7 @@
                                     <tbody>
 
                                         <tr
-                                            *ngFor="let item of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                            *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                             <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                             <td>{{item.user.name}}</td>
                                             <td>{{item.user.mobile}}</td>

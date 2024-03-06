@@ -12,7 +12,7 @@ export class AllcalllogsupervisorComponent {
 
   pagesize: number = 10;
   currentpage: number = 1;
-  alllist: any = [];
+ 
   supervisorList: any = [];
   supervisorSelected: any;
   agentSelected: any;
@@ -24,7 +24,7 @@ export class AllcalllogsupervisorComponent {
   agentList: any = [];
   maxDate:any
   listalldata:any
-  filterList:any
+  filterList:any=[];
   searchTerm: string = '';
   dropdownSettings = {
     singleSelection: false,
@@ -33,10 +33,10 @@ export class AllcalllogsupervisorComponent {
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
     allowSearchFilter: true
-  };
-
+  }; 
   selectedAgents: any[] = []; // To store selected agents
-
+  data: any = {}
+  ignoreFirstChange = true
 
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) {
@@ -59,7 +59,7 @@ export class AllcalllogsupervisorComponent {
       'fromdate': '',
       'todate': '',
       'status': '',
-      'supervisor_id': localStorage.getItem('id'),
+      'supervisor_id': localStorage.getItem('user_id'),
       'agent_id': '',
       'direction': '',
       'fromtime': this.fromtimeSelected,
@@ -69,6 +69,8 @@ export class AllcalllogsupervisorComponent {
     this.getCallLogSingleRow(data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
+    
+    
 
   }
 
@@ -84,23 +86,37 @@ export class AllcalllogsupervisorComponent {
 
 
 
+
   onSelectChangeAgent(val: any) {
-    this.agentSelected = val.value;
-    var data = {
+
+    if (this.ignoreFirstChange) {
+      this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
+      return; // Ignore the rest of the function during the first call
+    }
+
+    const keyToExtract = 'id';
+
+    // Extract values based on the key
+    this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+
+    this.data = {}
+    this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
+      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
-
     }
 
-    this.getCallLogSingleRow(data)
+    if (this.agentSelected !== '') {
+      this.data.agent_id = this.agentSelected
+    }
+    this.getCallLogSingleRow(this.data)
   }
 
 
@@ -230,7 +246,7 @@ export class AllcalllogsupervisorComponent {
     
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
-        this.alllist = list['data'];
+        this.filterList = list['data'];
       }
     });
   }
