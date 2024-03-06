@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from '../helper.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -25,13 +25,24 @@ export class AdminDashboardComponent {
     }, 2000);
     
   }
-  // gotoform(){
-  //   this.router.navigate(['/from1']);
+ 
+  // logout() {
+  //   this.helperService.logout()
+  //   this.router.navigate(['/login']);
   // }
-
   logout() {
-    this.helperService.logout()
-    this.router.navigate(['/login']);
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Are you sure you want to log out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, log out!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.helperService.logout();
+        this.router.navigate(['/login']);
+      }
+    });
   }
-  
 }

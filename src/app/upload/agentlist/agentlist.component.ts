@@ -3,6 +3,8 @@ import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',
@@ -78,10 +80,10 @@ export class AgentlistComponent {
     this.helperService.uploadFileAgent(formData)
       .subscribe(response => {
         // Show toast notification with API response
-        this.toastr.success('File uploaded successfully. Response: ' + response);
+        Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
       }, error => {
         // Handle error cases
-        this.toastr.error('Upload failed. Please try again.');
+        Swal.fire('Error', 'Error uploading file. Please try again.', 'error');
       });
   }
 

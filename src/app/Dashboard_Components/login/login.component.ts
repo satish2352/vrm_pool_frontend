@@ -69,11 +69,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.authService.logout();
-    this.isLoggedIn = false;
-    this.router.navigate(['/login']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.isLoggedIn = false;
+  //   this.router.navigate(['/login']);
+  // }
 
   navigateToPage() {
     this.router.navigate(['/reset-password']);

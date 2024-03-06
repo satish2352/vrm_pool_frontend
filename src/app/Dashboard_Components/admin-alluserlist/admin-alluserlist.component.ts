@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-alluserlist',
@@ -37,32 +38,65 @@ export class AdminAlluserlistComponent {
     this.router.navigate(['/admin-dashboard/', 'users-change-password', users]);
 
   }
+  // userspassreset(users: any) {
+  //   const data = {
+  //     'mobile': users
+  //   }
+  //   console.log(users);
+  //   this.helperService.resetuserpassword(data).subscribe(
+  //     {
+  //       next: (response: any) => {
+  //         if (response.result === true) {
+  //           console.log('Password changed successfully', response);
+  //           this.toastr.success('Password changed successfully', 'Success');
+  //         }
+  //         else {
+  //           this.toastr.error('Error updating user data', 'Error');
+  //         }
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Error changing password', error);
+  //         this.toastr.error('Error changing password', 'Error');
+  //         // Handle error scenario here
+  //       }
+  //     }
+  //   );
+
+
+  // }
+
   userspassreset(users: any) {
     const data = {
       'mobile': users
-    }
-    console.log(users);
-    this.helperService.resetuserpassword(data).subscribe(
-      {
-        next: (response: any) => {
-          if (response.result === true) {
-            console.log('Password changed successfully', response);
-            this.toastr.success('Password changed successfully', 'Success');
+    };
+  
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Are you sure you want to reset the password for this user?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, reset password!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.helperService.resetuserpassword(data).subscribe({
+          next: (response: any) => {
+            if (response.result === true) {
+              console.log('Password changed successfully', response);
+              this.toastr.success('Password changed successfully', 'Success');
+            } else {
+              this.toastr.error('Error updating user data', 'Error');
+            }
+          },
+          error: (error: any) => {
+            console.error('Error changing password', error);
+            this.toastr.error('Error changing password', 'Error');
           }
-          else {
-            this.toastr.error('Error updating user data', 'Error');
-          }
-        },
-        error: (error: any) => {
-          console.error('Error changing password', error);
-          this.toastr.error('Error changing password', 'Error');
-          // Handle error scenario here
-        }
+        });
       }
-    );
-
-
+    });
   }
+  
   listsepration(users: any) {
     let data = { 'user_type': users.value }
     this.helperService.getAllUsersList1(data).subscribe(list => {
@@ -72,15 +106,7 @@ export class AdminAlluserlistComponent {
     });
 
   }
-  // deleteUser(users: any) {
-  //   let data = { 'id': users }
-  //   this.helperService.deleteUser(data).subscribe(list => {
-  //     if (list['result'] == true) {
-  //       this.toastr.success('User Delete Successfully', 'Success');
-  //       this.getAllSupervisorList();
-  //     }
-  //   });
-  // }
+
   deleteUser(users: any) {
     let data = { 'id': users };
     // Show confirmation alert

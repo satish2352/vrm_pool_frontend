@@ -50,9 +50,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
 
                     <div class="card-body">
+                        <ng-container *ngIf="alllist && alllist.length > 0; else noData">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -90,6 +91,12 @@
                                 </tr>
                             </tbody>
                         </table>
+                           </ng-container>
+                            <!-- Show message if no data is available -->
+                            <ng-template #noData>
+                              <p>Data not available.</p>
+                            </ng-template>
+                        </div>   
                     </div>
                     <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                 </div>
