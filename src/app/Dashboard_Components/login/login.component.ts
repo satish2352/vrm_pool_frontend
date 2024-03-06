@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn: boolean = false;
   showPassword: boolean = false;
   formSubmitted = false;
-
+  loading: boolean = false;
   constructor(
     private authService: HelperService,
     private router: Router,

@@ -6,9 +6,10 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Log in to start your session</p>
+      
         <form [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="input-group mb-3">
-            <input formControlName="mobile" id="mobile" type="text" class="form-control " placeholder="Mobile">
+            <input formControlName="mobile" id="mobile" type="text" class="form-control " placeholder="Enter Mobile Number">
             <div class="input-group-append ">
               <div class="input-group-text ">
                 <span class="fas fa-mobile"></span>
@@ -25,7 +26,7 @@
 
           <div class="input-group mb-3">
             <input formControlName="password" id="password" type="{{ showPassword ? 'text' : 'password' }}"
-              class="form-control" placeholder="Password">
+              class="form-control" placeholder="Enter Password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <!-- Toggle icon based on showPassword value -->

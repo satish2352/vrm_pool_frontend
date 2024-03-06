@@ -31,8 +31,7 @@ import { UsersChangePasswordComponent } from './Dashboard_Components/users-chang
 import { ToastrModule } from 'ngx-toastr';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -71,7 +70,9 @@ import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata
     HttpClientModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+     
+    }),
    
     
     
