@@ -104,7 +104,10 @@ export class ChangePasswordComponent implements OnInit {
 
     const password = this.changePasswordForm.value.password;
     const confirmPassword = this.changePasswordForm.value.confirmPassword;
-
+    if (password.length < 8) {
+      this.toastr.error('Password must be at least 8 characters long', 'Error');
+      return;
+    }
     if (password !== confirmPassword) {
       this.toastr.error('Passwords do not match', 'Error');
       return;
