@@ -53,7 +53,7 @@
                     
 
                     <div class="card-body">
-                        <ng-container *ngIf="alllist && alllist.length > 0; else noData">
+                        <ng-container *ngIf="alllist1 && alllist1.length > 0; else noData">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -69,7 +69,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                    *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                     <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                     <td>{{ alluploadedusers.fileId }}</td>
                                     <td>{{ alluploadedusers.insertedCount }}</td>

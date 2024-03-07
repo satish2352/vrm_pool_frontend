@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allcalllogsupervisor',
@@ -39,7 +40,8 @@ export class AllcalllogsupervisorComponent {
   ignoreFirstChange = true
 
   constructor(private helperService: HelperService,
-    private fileDownloadService: FileDownloadService) {
+    private fileDownloadService: FileDownloadService,
+    public router: Router) {
     this.supervisorSelected = localStorage.getItem('user_id')
     
     
@@ -276,7 +278,9 @@ export class AllcalllogsupervisorComponent {
     }
   
   }
-
+  viewagentreposrts(id:any){
+    this.router.navigate(['/admin-dashboard/','agent-under-reports',id]);
+  }
 
 
 

@@ -44,16 +44,16 @@
 
 
 
-                                <!-- <div class="col-md-3">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
-                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
+                                        <ng-multiselect-dropdown  [placeholder]="'Choose Agent'" 
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
-                                </div> -->
-                                <div class="col-md-3">
+                                </div>
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
                                         <ng-multiselect-dropdown *ngIf="allagentbysupervisorList && allagentbysupervisorList.length > 0"
@@ -62,7 +62,7 @@
                                         </ng-multiselect-dropdown>
                                         <p *ngIf="!allagentbysupervisorList || allagentbysupervisorList.length === 0">No agent under this supervisor</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 
 
 
@@ -151,7 +151,7 @@
                                             <tr
                                                 *ngFor="let item of filterList   | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                 <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                <td>{{item.user.name}} </td>
+                                                <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{item.user.name}} </a></td>
                                                 <td>{{item.user.mobile}}</td>
                                                 <td>{{item.completed_count}}</td>
                                                 <td>{{item.missed_count}}</td>

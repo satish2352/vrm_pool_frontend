@@ -15,7 +15,7 @@ export class AgentlistComponent {
   selectedFile!: File;
   pagesize: number = 10;
   currentpage: number = 1;
-  alllist: any = [];
+  alllist1: any = [];
   supervisorList: any = [];
   supervisorSelected: any;
 
@@ -37,7 +37,7 @@ export class AgentlistComponent {
   getAllAgentList() {
     this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
-        this.alllist = list['data'];
+        this.alllist1 = list['data'];
       }
     });
   }
@@ -59,7 +59,7 @@ export class AgentlistComponent {
   getHistoryFileIdWise(data: any) {
     this.helperService.getHistoryFileIdWise(data).subscribe(list => {
       if (list['result'] == true) {
-        this.alllist = list['data'];
+        this.alllist1 = list['data'];
       }
     });
   }

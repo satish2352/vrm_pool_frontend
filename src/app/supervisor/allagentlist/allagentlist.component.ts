@@ -9,7 +9,7 @@ import { HelperService } from 'src/app/helper.service';
 export class AllagentlistComponent {
   pagesize: number = 10; 
   currentpage:number =1;
-  alllist: any = [];
+  allagentlist: any = [];
   supervisorSelected:any;
   constructor(
     private helperService: HelperService,
@@ -28,7 +28,7 @@ getAllAgentbySuperviserList() {
   
   this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
     if (list['result'] == true) {
-      this.alllist = list['data'];
+      this.allagentlist = list['data'];
     }
   });
 }

@@ -1,0 +1,74 @@
+<div class="content-wrapper mt-5">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Agent Under Reports</h1>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ng-container *ngIf="agentsunderreports && agentsunderreports.length > 0; else noData">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>Direction</th>
+                                            <th>Exotel_number</th>
+                                            <th>Mobile </th>
+                                            <th>From_name</th>
+                                            <th>To_number</th>
+                                            <th>To_name</th>
+                                            <th>Status</th>
+                                            <th>Start_time</th>
+                                            <th>End_time</th>
+                                            <th>Duration</th>
+                                            <th>Price</th>
+                                            <th>Disconnected_by</th>
+                                            <th>Recording_url</th>
+                                        </tr>
+
+
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let agent of agentsunderreports  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                            <td>{{ agent.direction }}</td>
+                                            <td>{{ agent.exotel_number }}</td>
+                                            <td>{{ agent.mobile }}</td>
+                                            <td>{{ agent.from_name }}</td>
+                                            <td>{{ agent.to_number }}</td>
+                                            <td>{{ agent.to_name }}</td>
+                                            <td>{{ agent.status }}</td>
+                                            <td>{{ agent.start_time }}</td>
+                                            <td>{{ agent.end_time }}</td>
+                                            <td>{{ agent.duration }}</td>
+                                            <td>{{ agent.price }}</td>
+                                             <td>{{ agent.disconnected_by }}</td>
+                                            <td>{{ agent.recording_url }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+                                <ng-template #noData>
+                                    <p>Data not available.</p>
+                                </ng-template>
+                        </div>
+                        <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

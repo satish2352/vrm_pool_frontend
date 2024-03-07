@@ -31,66 +31,67 @@
 
                             <div class="card-body">
                                 <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Supervisor/Agent</th>
-                                            <th>Name </th>
-                                            <th>Mobile No</th>
-                                            <th>Email ID</th>
-                                            <th>Edit</th>
-                                            <th>Enable/Disable</th>
-                                            <!-- <th>Change PassWord</th> -->
-                                            <th>Reset PassWord</th>
-                                            <th>Delete User</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td><span *ngIf="users.user_type == '2'"> Supervisor</span><span
-                                                    *ngIf="users.user_type == '3'"> Agent</span></td>
-                                            <td>{{ users.name }}</td>
-                                            <td>{{users.mobile}} </td>
-                                            <td>{{users.email}} </td>
-                                            <td><button class="btn btn-primary" *ngIf="users.user_type == '2'"
-                                                    (click)="updateusers(users.id)">Edit</button><span
-                                                    *ngIf="users.user_type == '3'"> NA</span></td>
-                                            <td>
-                                                <label class="switch">
-                                                    <input type="checkbox" [checked]="users.is_active==1"
-                                                        (change)="changeUserStatus(users.id, $event.target)">
-                                                    <span  class="slider"></span>
-                                                </label>
-                                                
-                                            </td>
-                                            <!-- <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
-                                                    (click)="userspasschange(users)">Change
-                                                    PassWord </button></td> -->
-                                            <td><button class="btn btn-primary  " *ngIf="users.user_type == '2'"
-                                                    (click)="userspassreset(users.mobile)">Reset
-                                                    PassWord </button>
-                                                <span  *ngIf="users.user_type == '3'"> NA</span>
-                                            </td>
-                                            <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
-                                                    (click)="deleteUser(users.id)">Delete
-                                                    User </button>
-                                                <span *ngIf="users.user_type == '3'"> NA</span>
-                                            </td>
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>Supervisor/Agent</th>
+                                                <th>Name </th>
+                                                <th>Mobile No</th>
+                                                <th>Email ID</th>
+                                                <th>Edit</th>
+                                                <th>Enable/Disable</th>
+                                                <!-- <th>Change PassWord</th> -->
+                                                <th>Reset PassWord</th>
+                                                <th>Delete User</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td><span *ngIf="users.user_type == '2'"> Supervisor</span><span
+                                                        *ngIf="users.user_type == '3'"> Agent</span></td>
+                                                <td>{{ users.name }}</td>
+                                                <td>{{users.mobile}} </td>
+                                                <td>{{users.email}} </td>
+                                                <td><button class="btn btn-primary" *ngIf="users.user_type == '2'"
+                                                        (click)="updateusers(users.id)">Edit</button><span
+                                                        *ngIf="users.user_type == '3'"> NA</span></td>
+                                                <td>
+                                                    <label class="switch">
+                                                        <input type="checkbox" [checked]="users.is_active==1"
+                                                            (change)="changeUserStatus(users.id, $event.target)">
+                                                        <span class="slider"></span>
+                                                    </label>
+
+                                                </td>
+
+                                                <td><button class="btn btn-primary  " *ngIf="users.user_type == '2'"
+                                                        (click)="userspassreset(users.mobile)">Reset
+                                                        PassWord </button>
+                                                    <span *ngIf="users.user_type == '3'"> NA</span>
+                                                </td>
+                                                <td><button class="btn btn-primary " *ngIf="users.user_type == '2'"
+                                                        (click)="deleteUser(users.id)">Delete
+                                                        User </button>
+                                                    <span *ngIf="users.user_type == '3'"> NA</span>
+                                                </td>
 
 
 
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </ng-container>
-                            <!-- Show message if no data is available -->
-                            <ng-template #noData>
-                              <p>Data not Available.</p>
-                            </ng-template>
+                                            </tr>
+                                        </tbody>
+
+
+
+                                    </table>
+                                </ng-container>
+                                <!-- Show message if no data is available -->
+                                <ng-template #noData>
+                                    <p>Data not Available.</p>
+                                </ng-template>
                             </div>
                             <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                         </div>

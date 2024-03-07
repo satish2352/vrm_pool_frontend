@@ -116,6 +116,7 @@ export class AdminAlluserlistComponent {
                 this.toastr.success('User Delete Successfully', 'Success');
                 this.getAllSupervisorList();
             }
+            this.getAllSupervisorList();
         });
     } else {
         // User canceled deletion, do nothing

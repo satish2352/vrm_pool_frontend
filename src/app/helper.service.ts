@@ -168,6 +168,10 @@ deleteUser(data:any): Observable<any> {
   
     return this.http.post<any>(`${this.apiUrl}/changeUserStatus`, data);
   }
+  getunderagentreports(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/getReports`, data);
+  }
+  
   getDashboardStats(): Observable<any> {
   
     return this.http.post<any>(`${this.apiUrl}/getDashboardStats`, null);

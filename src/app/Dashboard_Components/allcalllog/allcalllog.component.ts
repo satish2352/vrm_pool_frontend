@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-allcalllog',
   templateUrl: './allcalllog.component.html',
-  styleUrls: ['./allcalllog.component.sass']
+  styleUrls: ['./allcalllog.component.css']
 })
 export class AllcalllogComponent {
   pagesize: number = 10;
@@ -27,7 +28,7 @@ export class AllcalllogComponent {
   filterList: any = [];
   searchTerm: string = '';
   sortKey: string = ''; // Track the current sort key
-  sortOrder: string = 'asc'; 
+  sortOrder: string = 'asc';
 
   dropdownSettings = {
     singleSelection: false,
@@ -35,19 +36,23 @@ export class AllcalllogComponent {
     textField: 'name',
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
-    allowSearchFilter: true
+    allowSearchFilter: true,
+  
   };
 
   selectedAgents: any[] = []; // To store selected agents
 
   constructor(private helperService: HelperService,
-    private fileDownloadService: FileDownloadService) {
+    private fileDownloadService: FileDownloadService,
+    public router: Router,) {
 
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
     this.maxDate = `${yyyy}-${mm}-${dd}`;
+
+
 
 
   }
@@ -316,12 +321,12 @@ export class AllcalllogComponent {
       this.sortKey = key;
       this.sortOrder = 'asc';
     }
-  
+
     // Sort filterList based on sortKey and sortOrder
-    this.filterList.sort((a:any, b:any) => {
+    this.filterList.sort((a: any, b: any) => {
       const valueA = a[this.sortKey];
       const valueB = b[this.sortKey];
-  
+
       if (valueA < valueB) {
         return this.sortOrder === 'asc' ? -1 : 1;
       } else if (valueA > valueB) {
@@ -331,6 +336,8 @@ export class AllcalllogComponent {
       }
     });
   }
-  
+  viewagentreposrts(id: any) {
+    this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
+  }
 
 }

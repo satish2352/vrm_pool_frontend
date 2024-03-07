@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <ng-container *ngIf="alllist && alllist.length > 0; else noData">
+                            <ng-container *ngIf="allagentlist && allagentlist.length > 0; else noData">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -34,7 +34,7 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                        *ngFor="let agent of allagentlist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                         <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                         <td>{{ agent.name }} </td>
                                         <td>{{ agent.mobile }}</td>

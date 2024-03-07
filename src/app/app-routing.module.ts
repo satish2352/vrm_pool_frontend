@@ -24,6 +24,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 
 import { AuthGuard } from './auth.guard';
+import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-under-reports/one-agets-under-reports.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -52,6 +53,7 @@ const routes: Routes = [
     { path: 'admin-all-user-list', component: AdminAlluserlistComponent , canActivate: [AuthGuard] },
     { path: 'users-change-password', component: UsersChangePasswordComponent , canActivate: [AuthGuard] },
     { path: 'update-users-data/:id', component: UpdateusersdataComponent , canActivate: [AuthGuard] },
+    { path: 'agent-under-reports/:id', component: OneAgetsUnderReportsComponent , canActivate: [AuthGuard] },
     
     ]
   },
