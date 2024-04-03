@@ -64,7 +64,7 @@ export class UploadsupervisorComponent {
   }
   
   downloadFileIdWise(data: any) {
-    const fileUrl = "http://13.234.59.130:3000/api/downloadFile?fileId="+data;
+    const fileUrl = "http://3.111.214.34:3000/api/downloadFile?fileId="+data;
     var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
     if (preview) {
         preview.setAttribute("href", fileUrl);

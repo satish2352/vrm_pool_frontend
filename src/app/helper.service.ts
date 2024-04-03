@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HelperService {
-  private apiUrl = "http://13.234.59.130:3000/api"; 
+  private apiUrl = "http://3.111.214.34:3000/api"; 
   private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) { }
