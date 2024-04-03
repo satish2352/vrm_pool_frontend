@@ -135,15 +135,20 @@
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
-                                                <th (click)="sortBy('item.user.name')"> Name </th>
-                                                <th (click)="sortBy('item.user.mobile')">Mobile No</th>
-                                                <th (click)="sortBy('item.completed_count')">Completed Count</th>
-                                                <th (click)="sortBy('item.missed_count')">Missed Count</th>
-                                                <th (click)="sortBy('item.incoming_count')">Incoming Count </th>
-                                                <th (click)="sortBy('item.outgoing_count')">Outgoing Count </th>
-                                                <th (click)="sortBy('item.total_duration')">Total Duration </th>
-                                                <th (click)="sortBy('item.average_duration')">Average Duration </th>
-                                                <th (click)="sortBy('item.total_calls')">Total Calls </th>
+                                                <th (click)="sortBy('item.user.name')"> Agent Name </th>
+                                                <th (click)="sortBy('item.user.mobile')">Agent Email</th>
+                                                <th (click)="sortBy('item.completed_count')">Group Name</th>
+                                                <th (click)="sortBy('item.missed_count')">Incoming Calls</th>
+                                                <th (click)="sortBy('item.incoming_count')">Missed Calls </th>
+                                                <th (click)="sortBy('item.outgoing_count')">No Answer </th>
+                                                <th (click)="sortBy('item.total_duration')">Busy </th>
+                                                <th (click)="sortBy('item.average_duration')">Failed </th>
+                                                <th (click)="sortBy('item.total_calls')">Outgoing Calls </th>
+                                                <th (click)="sortBy('item.total_calls')">Total Call Duration InMinutes </th>
+                                                <th (click)="sortBy('item.total_calls')">Average Handling Time InMinutes </th>
+                                                <th (click)="sortBy('item.total_calls')">Device On Percent </th>
+                                                <th (click)="sortBy('item.total_calls')">Device On HumanReadable </th>
+                                                <th (click)="sortBy('item.total_calls')">Agent Phone Number </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -159,6 +164,11 @@
                                                 <td>{{item.outgoing_count}}</td>
                                                 <td>{{item.total_duration}}</td>
                                                 <td>{{item.average_duration}}</td>
+                                                <td>{{item.total_calls}}</td>
+                                                <td>{{item.total_calls}}</td>
+                                                <td>{{item.total_calls}}</td>
+                                                <td>{{item.total_calls}}</td>
+                                                <td>{{item.total_calls}}</td>
                                                 <td>{{item.total_calls}}</td>
                                             </tr>
                                         </tbody>
