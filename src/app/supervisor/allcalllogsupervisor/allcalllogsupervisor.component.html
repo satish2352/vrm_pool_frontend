@@ -13,7 +13,7 @@
 
         <section class="content">
             <div class="container-fluid">
-                 <div class="card card-default">
+                <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Select User</h3>
                         <div class="card-tools">
@@ -30,7 +30,7 @@
                             <div class="row">
 
 
-<!-- 
+                                <!-- 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
@@ -143,11 +143,22 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Select TimeFrame</label>
+                                        <select class="form-control" (change)="ontimeselect($event.target)">
+                                            <option value="" disabled selected>Choose TimeFrame</option>
+                                            <option value="30">30 Minutes</option>
+                                            <option value="60">60 Minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Search</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                            <input type="text" class="form-control" placeholder="Search..."
+                                                [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
                                         </div>
                                     </div>
                                 </div>
@@ -166,45 +177,56 @@
 
                             <div class="card-body">
                                 <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Name </th>
-                                            <th>Mobile No</th>
-                                            <th>Email_ID</th>
-                                            <th>Completed Count</th>
-                                            <th>Missed Count</th>
-                                            <th>Incoming Count </th>
-                                            <th>Outgoing Count </th>
-                                            <th>Total Duration </th>
-                                            <th>Average Duration </th>
-                                            <th>Total Calls </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th> Agent Name </th>
+                                                <th>Agent Email</th>
 
-                                        <tr
-                                            *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{item.user.name}}</a></td>
-                                            <td>{{item.user.mobile}}</td>
+                                                <th>Incoming Calls</th>
+                                                <th>Missed Calls </th>
+                                                <th>No Answer </th>
+                                                <th>Busy </th>
+                                                <th>Failed </th>
+                                                <th>Outgoing Calls </th>
+                                                <th>Total Call
+                                                    Duration InMinutes </th>
+                                                <th>Average
+                                                    Handling Time InMinutes </th>
+                                                <th>Device On Percent </th>
+                                                <th>Device On
+                                                    HumanReadable </th>
+                                                <th>Agent Phone Number </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr
+                                                *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td><a (click)="viewagentreposrts(item.user.id)"
+                                                    class="nav-link">{{item.user.name}} </a></td>
                                             <td>{{item.user.email}}</td>
-                                            <td>{{item.completed_count}}</td>
-                                            <td>{{item.missed_count}}</td>
-                                            <td>{{item.incoming_count}}</td>
-                                            <td>{{item.outgoing_count}}</td>
-                                            <td>{{item.total_duration}}</td>
-                                            <td>{{item.average_duration}}</td>
-                                            <td>{{item.total_calls}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </ng-container>
-                            <!-- Show message if no data is available -->
-                            <ng-template #noData>
-                              <p>Data not available.</p>
-                            </ng-template>
+                                            <td>{{item.IncomingCalls}}</td>
+                                            <td>{{item.MissedCalls}}</td>
+                                            <td>{{item.NoAnswer}}</td>
+                                            <td>{{item.Busy}}</td>
+                                            <td>{{item.Failed}}</td>
+                                            <td>{{item.OutgoingCalls}}</td>
+                                            <td>{{item.TotalCallDurationInMinutes}}</td>
+                                            <td>{{item.AverageHandlingTimeInMinutes}}</td>
+                                            <td>{{item.DeviceOnPercent}}</td>
+                                            <td>{{item.DeviceOnHumanReadable}}</td>
+                                            <td>{{item.user.mobile}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-container>
+                                <!-- Show message if no data is available -->
+                                <ng-template #noData>
+                                    <p>Data not available.</p>
+                                </ng-template>
                             </div>
                             <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                         </div>

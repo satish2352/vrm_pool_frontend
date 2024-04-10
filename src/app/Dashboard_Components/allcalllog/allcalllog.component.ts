@@ -41,7 +41,7 @@ export class AllcalllogComponent {
   };
 
   selectedAgents: any[] = []; // To store selected agents
-
+  timeselect:any;
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
     public router: Router,) {
@@ -98,6 +98,29 @@ export class AllcalllogComponent {
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
+    this.getCallLogSingleRow(this.data)
+
+
+  }
+  ontimeselect(val: any) {
+    this.timeselect = val.value;
+    this.getAllAgentbySuperviserList()
+    this.data = {}
+    this.data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': '',
+      // 'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+      'time': this.timeselect,
+
+    }
+
+   
     this.getCallLogSingleRow(this.data)
 
 
@@ -284,11 +307,13 @@ export class AllcalllogComponent {
       if (list['result'] == true) {
         this.filterList = list['data'];
 
+
       }
     });
   }
 
   searchChanged(searchValue: string) {
+    
     if (!searchValue) {
       let data = {}
       this.helperService.getCallLogSingleRow(data).subscribe(list => {
@@ -301,13 +326,17 @@ export class AllcalllogComponent {
       this.listalldata = this.filterList
       this.filterList = this.listalldata.filter((item: any) =>
         item.user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.user.mobile.includes(searchValue) || item.completed_count.toString().includes(searchValue)
-        || item.missed_count.toString().includes(searchValue) ||
-        item.incoming_count.toString().includes(searchValue) ||
-        item.outgoing_count.toString().includes(searchValue) ||
-        item.total_duration.toString().includes(searchValue) ||
-        item.average_duration.toString().includes(searchValue) ||
-        item.total_calls.toString().includes(searchValue)
+        item.user.email.includes(searchValue) || item.IncomingCalls.toString().includes(searchValue)
+        || item.MissedCalls.toString().includes(searchValue) ||
+        item.NoAnswer.toString().includes(searchValue) ||
+        item.Busy.toString().includes(searchValue) ||
+        item.Failed.toString().includes(searchValue) ||
+        item.OutgoingCalls.toString().includes(searchValue) ||
+        item.TotalCallDurationInMinutes.toString().includes(searchValue) ||
+        item.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
+        item.DeviceOnPercent.toString().includes(searchValue) ||
+        item.DeviceOnHumanReadable.toString().includes(searchValue) ||
+        item.user.mobile.toString().includes(searchValue) 
         // You can add more conditions here to filter by other properties
       );
     }

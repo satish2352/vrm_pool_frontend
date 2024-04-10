@@ -47,7 +47,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Agents</label>
-                                        <ng-multiselect-dropdown  [placeholder]="'Choose Agent'" 
+                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
                                         </ng-multiselect-dropdown>
@@ -63,7 +63,7 @@
                                         <p *ngIf="!allagentbysupervisorList || allagentbysupervisorList.length === 0">No agent under this supervisor</p>
                                     </div>
                                 </div> -->
-                                
+
 
 
                                 <div class="col-md-3">
@@ -105,7 +105,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Select TimeFrame</label>
+                                        <select class="form-control" (change)="ontimeselect($event.target)">
+                                            <option value="" disabled selected>Choose TimeFrame</option>
+                                            <option value="30">30 Minutes</option>
+                                            <option value="60">60 Minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Search</label>
                                         <div class="form-group">
@@ -135,20 +145,29 @@
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
-                                                <th (click)="sortBy('item.user.name')"> Agent Name </th>
-                                                <th (click)="sortBy('item.user.mobile')">Agent Email</th>
-                                                <th (click)="sortBy('item.completed_count')">Group Name</th>
-                                                <th (click)="sortBy('item.missed_count')">Incoming Calls</th>
-                                                <th (click)="sortBy('item.incoming_count')">Missed Calls </th>
-                                                <th (click)="sortBy('item.outgoing_count')">No Answer </th>
-                                                <th (click)="sortBy('item.total_duration')">Busy </th>
-                                                <th (click)="sortBy('item.average_duration')">Failed </th>
-                                                <th (click)="sortBy('item.total_calls')">Outgoing Calls </th>
-                                                <th (click)="sortBy('item.total_calls')">Total Call Duration InMinutes </th>
-                                                <th (click)="sortBy('item.total_calls')">Average Handling Time InMinutes </th>
-                                                <th (click)="sortBy('item.total_calls')">Device On Percent </th>
-                                                <th (click)="sortBy('item.total_calls')">Device On HumanReadable </th>
-                                                <th (click)="sortBy('item.total_calls')">Agent Phone Number </th>
+                                                <th (click)="sortBy('user.name')"> Agent Name
+                                                    <i class="fas fa-sort" *ngIf="sortKey !== 'user.name'"></i>
+                                                    <i class="fas fa-caret-up"
+                                                        *ngIf="sortKey === 'user.name' && sortOrder === 'asc'"></i>
+                                                    <i class="fas fa-caret-down"
+                                                        *ngIf="sortKey === 'user.name' && sortOrder === 'desc'"></i>
+                                                </th>
+                                                <th (click)="sortBy('item.user.email')">Agent Email</th>
+
+                                                <th (click)="sortBy('item.IncomingCalls')">Incoming Calls</th>
+                                                <th (click)="sortBy('item.MissedCalls')">Missed Calls </th>
+                                                <th (click)="sortBy('item.NoAnswer')">No Answer </th>
+                                                <th (click)="sortBy('item.Busy')">Busy </th>
+                                                <th (click)="sortBy('item.Failed')">Failed </th>
+                                                <th (click)="sortBy('item.OutgoingCalls')">Outgoing Calls </th>
+                                                <th (click)="sortBy('item.TotalCallDurationInMinutes')">Total Call
+                                                    Duration InMinutes </th>
+                                                <th (click)="sortBy('item.AverageHandlingTimeInMinutes')">Average
+                                                    Handling Time InMinutes </th>
+                                                <th (click)="sortBy('item.DeviceOnPercent')">Device On Percent </th>
+                                                <th (click)="sortBy('item.DeviceOnHumanReadable')">Device On
+                                                    HumanReadable </th>
+                                                <th (click)="sortBy('item.user.mobile')">Agent Phone Number </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -156,29 +175,31 @@
                                             <tr
                                                 *ngFor="let item of filterList   | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                 <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{item.user.name}} </a></td>
+                                                <td><a (click)="viewagentreposrts(item.user.id)"
+                                                        class="nav-link">{{item.user.name}} </a></td>
+                                                <td>{{item.user.email}}</td>
+                                                <td>{{item.IncomingCalls}}</td>
+                                                <td>{{item.MissedCalls}}</td>
+                                                <td>{{item.NoAnswer}}</td>
+                                                <td>{{item.Busy}}</td>
+                                                <td>{{item.Failed}}</td>
+                                                <td>{{item.OutgoingCalls}}</td>
+                                                <td>{{item.TotalCallDurationInMinutes}}</td>
+                                                <td>{{item.AverageHandlingTimeInMinutes}}</td>
+                                                <td>{{item.DeviceOnPercent}}</td>
+                                                <td>{{item.DeviceOnHumanReadable}}</td>
                                                 <td>{{item.user.mobile}}</td>
-                                                <td>{{item.completed_count}}</td>
-                                                <td>{{item.missed_count}}</td>
-                                                <td>{{item.incoming_count}}</td>
-                                                <td>{{item.outgoing_count}}</td>
-                                                <td>{{item.total_duration}}</td>
-                                                <td>{{item.average_duration}}</td>
-                                                <td>{{item.total_calls}}</td>
-                                                <td>{{item.total_calls}}</td>
-                                                <td>{{item.total_calls}}</td>
-                                                <td>{{item.total_calls}}</td>
-                                                <td>{{item.total_calls}}</td>
-                                                <td>{{item.total_calls}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </ng-container>
-                                <!-- Show message if no data is available -->
+
                                 <ng-template #noData>
                                     <p>Data not available.</p>
                                 </ng-template>
                             </div>
+
+
                             <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                         </div>
                     </div>

@@ -94,7 +94,7 @@ export class HelperService {
 
 
   getCallLogSingleRow(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/getReportsSingleRow`, data);
+    return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleRow`, data);
   }
 
   getAllAgentList(): Observable<any> {
@@ -169,7 +169,7 @@ deleteUser(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/changeUserStatus`, data);
   }
   getunderagentreports(data:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/getReports`, data);
+    return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
   
   getDashboardStats(): Observable<any> {

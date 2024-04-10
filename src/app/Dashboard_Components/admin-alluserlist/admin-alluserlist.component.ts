@@ -21,7 +21,7 @@ export class AdminAlluserlistComponent {
 
     this.getAllSupervisorList();
   }
- 
+
 
 
   getAllSupervisorList() {
@@ -31,7 +31,7 @@ export class AdminAlluserlistComponent {
       }
     });
   }
-  
+
   userspasschange(users: any) {
 
     console.log(users);
@@ -69,7 +69,7 @@ export class AdminAlluserlistComponent {
     const data = {
       'mobile': users
     };
-  
+
     Swal.fire({
       title: 'Confirmation',
       text: 'Are you sure you want to reset the password for this user?',
@@ -96,7 +96,7 @@ export class AdminAlluserlistComponent {
       }
     });
   }
-  
+
   listsepration(users: any) {
     let data = { 'user_type': users.value }
     this.helperService.getAllUsersList1(data).subscribe(list => {
@@ -107,21 +107,44 @@ export class AdminAlluserlistComponent {
 
   }
 
+  // deleteUser(users: any) {
+  //   let data = { 'id': users };
+    
+  //   Swal.fire({
+  //     title: 'Confirmation',
+  //     text: 'Are you sure you want to reset the password for this user?',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, reset password!',
+  //     cancelButtonText: 'Cancel'
+  //   })
+  //   .then((result) =>{
+  //   // Show confirmation alert
+  //   if (confirm('Are you sure you want to delete this user?')) {
+  //     this.helperService.deleteUser(data).subscribe(list => {
+  //       if (list['result'] == true) {
+  //         this.toastr.success('User Delete Successfully', 'Success');
+  //         this.getAllSupervisorList();
+  //       }
+  //       this.getAllSupervisorList();
+  //   });
+  //   }} )
+  // }
   deleteUser(users: any) {
     let data = { 'id': users };
     // Show confirmation alert
     if (confirm('Are you sure you want to delete this user?')) {
-        this.helperService.deleteUser(data).subscribe(list => {
-            if (list['result'] == true) {
-                this.toastr.success('User Delete Successfully', 'Success');
-                this.getAllSupervisorList();
-            }
-            this.getAllSupervisorList();
-        });
+      this.helperService.deleteUser(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.toastr.success('User Delete Successfully', 'Success');
+          this.getAllSupervisorList();
+        }
+        this.getAllSupervisorList();
+      });
     } else {
-        // User canceled deletion, do nothing
+      // User canceled deletion, do nothing
     }
-}
+  }
   changeUserStatus(id: any, event: any) {
     console.log(event.checked);
 
