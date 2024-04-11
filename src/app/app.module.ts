@@ -33,7 +33,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-under-reports/one-agets-under-reports.component';
-
+import { CommonModule } from '@angular/common';
 
 
 
@@ -61,7 +61,7 @@ import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-
     ResetpasswordComponent,
     UpdateusersdataComponent,
     OneAgetsUnderReportsComponent,
-   
+  
  
   ],
   imports: [

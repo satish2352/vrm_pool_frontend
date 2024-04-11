@@ -25,11 +25,10 @@ export class AllcalllogComponent {
   ignoreFirstChange = true
   maxDate: string;
   activeSupervisors!: any[];
-  filterList: any = [];
+  filterList: any = []= [];
   searchTerm: string = '';
   sortKey: string = ''; // Track the current sort key
   sortOrder: string = 'asc';
-
   dropdownSettings = {
     singleSelection: false,
     idField: 'id',
@@ -39,6 +38,12 @@ export class AllcalllogComponent {
     allowSearchFilter: true,
   
   };
+  sortedColumn: string = ''; // Track the currently sorted column
+  isAscending: boolean = true; // Track the sorting order (ascending or descending)
+
+  sortedItems: any[] = [];
+
+
 
   selectedAgents: any[] = []; // To store selected agents
   timeselect:any;
@@ -342,31 +347,50 @@ export class AllcalllogComponent {
     }
     this.sortOrder = 'asc';
   }
-  sortBy(key: string) {
-    // Toggle sort order if the same key is clicked again
-    if (this.sortKey === key) {
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortKey = key;
-      this.sortOrder = 'asc';
-    }
 
-    // Sort filterList based on sortKey and sortOrder
-    this.filterList.sort((a: any, b: any) => {
-      const valueA = a[this.sortKey];
-      const valueB = b[this.sortKey];
-
-      if (valueA < valueB) {
-        return this.sortOrder === 'asc' ? -1 : 1;
-      } else if (valueA > valueB) {
-        return this.sortOrder === 'asc' ? 1 : -1;
-      } else {
-        return 0;
-      }
-    });
+  key ='id';
+  reverse:boolean=false;
+  sortBy(key:any){
+this.key=key;
+this.reverse=!this.reverse;
   }
+
   viewagentreposrts(id: any) {
     this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
+  }
+
+
+  // sortColumn(columnName: string) {
+  //   alert("sadhsad")
+  //   this.filterList.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => {
+  //     if (a[columnName] < b[columnName]) {
+  //       return -1;
+  //     }
+  //     if (a[columnName] > b[columnName]) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   this.filterList = [...this.filterList]; // Create a new array instance
+  // }
+
+
+  sortColumn(columnName: string) {
+    if (this.filterList === columnName) {
+      // Same column clicked again, toggle sorting order
+      this.isAscending = !this.isAscending;
+    } else {
+      // Different column clicked, default to ascending order
+      this.filterList = columnName;
+      this.isAscending = true;
+    }
+
+    // Apply sorting based on current sorting state
+    this.sortedItems.sort((a, b) => {
+      const comparison = a[columnName] < b[columnName] ? -1 : a[columnName] > b[columnName] ? 1 : 0;
+      return this.isAscending ? comparison : -comparison; // Apply sorting order
+    });
   }
 
 }

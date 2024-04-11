@@ -145,35 +145,31 @@
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
-                                                <th (click)="sortBy('user.name')"> Agent Name
-                                                    <i class="fas fa-sort" *ngIf="sortKey !== 'user.name'"></i>
-                                                    <i class="fas fa-caret-up"
-                                                        *ngIf="sortKey === 'user.name' && sortOrder === 'asc'"></i>
-                                                    <i class="fas fa-caret-down"
-                                                        *ngIf="sortKey === 'user.name' && sortOrder === 'desc'"></i>
+                                                <th> Agent Name <i class="fa fa-sort"></i>
+                                                   
                                                 </th>
-                                                <th (click)="sortBy('item.user.email')">Agent Email</th>
+                                                <th  (click)="sortColumn('email')">Agent Email</th>
 
-                                                <th (click)="sortBy('item.IncomingCalls')">Incoming Calls</th>
-                                                <th (click)="sortBy('item.MissedCalls')">Missed Calls </th>
-                                                <th (click)="sortBy('item.NoAnswer')">No Answer </th>
-                                                <th (click)="sortBy('item.Busy')">Busy </th>
-                                                <th (click)="sortBy('item.Failed')">Failed </th>
-                                                <th (click)="sortBy('item.OutgoingCalls')">Outgoing Calls </th>
-                                                <th (click)="sortBy('item.TotalCallDurationInMinutes')">Total Call
+                                                <th >Incoming Calls</th>
+                                                <th>Missed Calls </th>
+                                                <th >No Answer </th>
+                                                <th>Busy </th>
+                                                <th >Failed </th>
+                                                <th >Outgoing Calls </th>
+                                                <th >Total Call
                                                     Duration InMinutes </th>
-                                                <th (click)="sortBy('item.AverageHandlingTimeInMinutes')">Average
+                                                <th >Average
                                                     Handling Time InMinutes </th>
-                                                <th (click)="sortBy('item.DeviceOnPercent')">Device On Percent </th>
-                                                <th (click)="sortBy('item.DeviceOnHumanReadable')">Device On
+                                                <th >Device On Percent </th>
+                                                <th >Device On
                                                     HumanReadable </th>
-                                                <th (click)="sortBy('item.user.mobile')">Agent Phone Number </th>
+                                                <th >Agent Phone Number </th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             <tr
-                                                *ngFor="let item of filterList   | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index ">
                                                 <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                                 <td><a (click)="viewagentreposrts(item.user.id)"
                                                         class="nav-link">{{item.user.name}} </a></td>
