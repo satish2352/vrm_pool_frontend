@@ -97,15 +97,12 @@ export class AllcalllogComponent {
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
-
     }
 
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
     this.getCallLogSingleRow(this.data)
-
-
   }
   ontimeselect(val: any) {
     this.timeselect = val.value;
@@ -122,13 +119,8 @@ export class AllcalllogComponent {
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
       'time': this.timeselect,
-
     }
-
-   
     this.getCallLogSingleRow(this.data)
-
-
   }
 
   onSelectChangeAgent(val: any) {
@@ -311,7 +303,7 @@ export class AllcalllogComponent {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-
+        this.filterList.sort((a:any, b:any) => b.id - a.id);
 
       }
     });
@@ -345,52 +337,52 @@ export class AllcalllogComponent {
         // You can add more conditions here to filter by other properties
       );
     }
-    this.sortOrder = 'asc';
+   
   }
 
-  key ='id';
-  reverse:boolean=false;
-  sortBy(key:any){
-this.key=key;
-this.reverse=!this.reverse;
-  }
 
   viewagentreposrts(id: any) {
     this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
   }
 
+  // key:any= 'id';
+  //  reverse:boolean = false; 
+  //  sortColumn(key:any) {
+  //    this.key = key;
+  //     this. reverse = ! this. reverse;
+  //  }
+  sortColumn: string = ''; 
+  sortDirection: string = 'asc'; // or 'desc'
 
-  // sortColumn(columnName: string) {
-  //   alert("sadhsad")
-  //   this.filterList.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => {
-  //     if (a[columnName] < b[columnName]) {
-  //       return -1;
-  //     }
-  //     if (a[columnName] > b[columnName]) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   });
-
-  //   this.filterList = [...this.filterList]; // Create a new array instance
-  // }
-
-
-  sortColumn(columnName: string) {
-    if (this.filterList === columnName) {
-      // Same column clicked again, toggle sorting order
-      this.isAscending = !this.isAscending;
+  // Function to handle sorting
+  sortTable(column: string) {
+    if (column === this.sortColumn) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
-      // Different column clicked, default to ascending order
-      this.filterList = columnName;
-      this.isAscending = true;
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
     }
 
-    // Apply sorting based on current sorting state
-    this.sortedItems.sort((a, b) => {
-      const comparison = a[columnName] < b[columnName] ? -1 : a[columnName] > b[columnName] ? 1 : 0;
-      return this.isAscending ? comparison : -comparison; // Apply sorting order
+    // Perform sorting based on the selected column and direction
+    this.filterList.sort((a: any, b: any) => {
+      const valA = a[column];
+      const valB = b[column];
+
+      if (valA < valB) {
+        return this.sortDirection === 'asc' ? -1 : 1;
+      } else if (valA > valB) {
+        return this.sortDirection === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
     });
+  }
+
+  getArrowClass(column: string): string {
+    if (column === this.sortColumn) {
+      return this.sortDirection === 'asc' ? 'fa-caret-up' : 'fa-caret-down';
+    }
+    return '';
   }
 
 }

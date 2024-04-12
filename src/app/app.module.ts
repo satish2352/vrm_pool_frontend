@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Dashboard_Components/login/login.component';
@@ -15,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JwtInterceptor} from './jwt.interceptor'
 import {ErrorInterceptor} from './errorinterceptor.interceptor';
-
 import { AgentlistComponent } from './upload/agentlist/agentlist.component';
 import { UploadalllogComponent } from './upload/uploadalllog/uploadalllog.component'
 import { SupervisorlistComponent } from './upload/supervisorlist/supervisorlist.component';
@@ -33,7 +31,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-under-reports/one-agets-under-reports.component';
-import { CommonModule } from '@angular/common';
+
+
+
 
 
 
@@ -71,14 +71,13 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+ 
     NgMultiSelectDropDownModule,
-    ToastrModule.forRoot({
-     
-    }),
+  
    
     
-    
-    
+    ToastrModule.forRoot({
+    }),
    
   ],
   providers: [
