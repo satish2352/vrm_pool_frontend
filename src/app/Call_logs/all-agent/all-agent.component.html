@@ -22,19 +22,23 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No</th>
-                                            <th>Direction</th>
-                                            <th>Exotel_number</th>
+                                            <th>Agent Name</th>
+                                            <th>Agent Email</th>
                                             <th>Mobile </th>
-                                            <th>From_name</th>
-                                            <th>To_number</th>
-                                            <th>To_name</th>
-                                            <th>Status</th>
-                                            <th>Start_time</th>
-                                            <th>End_time</th>
-                                            <th>Duration</th>
-                                            <th>Price</th>
-                                            <th>Disconnected_by</th>
-                                            <th>Recording_url</th>
+                                            <th>Group Name</th>
+                                            <th>Incoming Calls</th>
+                                            <th>Missed Calls</th>
+                                            <th>No Answer</th>
+                                            <th>Busy</th>
+                                            <th>Failed</th>
+                                            <th>Outgoing Calls</th>
+                                            <th>Total Call Duration In Minutes</th>
+                                            <th>Average Handling Time In Minutes</th>
+                                            <th>DeviceOnPercent</th>
+                                            <th>Device On Human Readable</th>
+                                            <th>Agent Phone Number</th>
+                                            <th>created At</th>
+                                            <th>updated At</th>
                                         </tr>
 
 
@@ -43,19 +47,23 @@
                                         <tr
                                             *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                             <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{ agent.direction }}</td>
-                                            <td>{{ agent.exotel_number }}</td>
-                                            <td>{{ agent.mobile }}</td>
-                                            <td>{{ agent.from_name }}</td>
-                                            <td>{{ agent.to_number }}</td>
-                                            <td>{{ agent.to_name }}</td>
-                                            <td>{{ agent.status }}</td>
-                                            <td>{{ agent.start_time }}</td>
-                                            <td>{{ agent.end_time }}</td>
-                                            <td>{{ agent.duration }}</td>
-                                            <td>{{ agent.price }}</td>
-                                            <td>{{ agent.disconnected_by }}</td>
-                                            <td>{{ agent.recording_url }}</td>
+                                            <td>{{ agent.AgentName }}</td>
+                                            <td>{{ agent.AgentEmail }}</td>
+                                            <td>{{ agent.AgentPhoneNumber }}</td>
+                                            <td>{{ agent.GroupName }}</td>
+                                            <td>{{ agent.IncomingCalls }}</td>
+                                            <td>{{ agent.MissedCalls }}</td>
+                                            <td>{{ agent.NoAnswer }}</td>
+                                            <td>{{ agent.Busy}}</td>
+                                            <td>{{ agent.Failed }}</td>
+                                            <td>{{ agent.OutgoingCalls }}</td>
+                                            <td>{{ agent.TotalCallDurationInMinutes }}</td>
+                                            <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
+                                            <td>{{ agent.DeviceOnPercent }}</td>
+                                            <td>{{ agent.DeviceOnHumanReadable }}</td>
+                                            <td>{{ agent.AgentPhoneNumber }}</td>
+                                            <td>{{ agent.createdAt }}</td>
+                                            <td>{{ agent.updatedAt }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -3,12 +3,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class HelperService {
-  private apiUrl = "http://3.111.214.34:3000/api"; 
+  private apiUrl = environment.BASE_URL; 
   private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) { }
@@ -73,7 +74,7 @@ export class HelperService {
       'user_type': 3
     }
     const formData: FormData = new FormData();
-    return this.http.post<any>(`${this.apiUrl}/getReports`, data);
+    return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
 
   getAllSupervisorList(): Observable<any> {

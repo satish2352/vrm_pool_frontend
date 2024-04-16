@@ -28,14 +28,11 @@ import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: 'login', component: LoginComponent,
-  },
+  { path: 'login', component: LoginComponent },
 
-  {
-    path: 'admin-dashboard', component: AdminDashboardComponent,
+  { path: 'admin-dashboard', component: AdminDashboardComponent,
     children: [
-      { path: 'screen1', component: Screen1Component , canActivate: [AuthGuard] },
+    { path: 'screen1', component: Screen1Component , canActivate: [AuthGuard] },
     { path: 'from1', component: From1Component , canActivate: [AuthGuard] },
     { path: '', redirectTo: 'screen1', pathMatch: 'full' },
     { path: 'all-sup', component: AllSupervisorComponent , canActivate: [AuthGuard] },
