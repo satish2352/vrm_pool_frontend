@@ -53,16 +53,7 @@
                                         </ng-multiselect-dropdown>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Agents</label>
-                                        <ng-multiselect-dropdown *ngIf="allagentbysupervisorList && allagentbysupervisorList.length > 0"
-                                            [placeholder]="'Choose Agent'" [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
-                                            [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
-                                        </ng-multiselect-dropdown>
-                                        <p *ngIf="!allagentbysupervisorList || allagentbysupervisorList.length === 0">No agent under this supervisor</p>
-                                    </div>
-                                </div> -->
+                         
 
 
 
@@ -114,7 +105,7 @@
                                             <option value="60">60 Minutes</option>
                                         </select>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Search</label>
@@ -133,75 +124,7 @@
                 </div>
             </div>
         </section>
-        <!-- <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-
-                            <div class="card-body">
-                                <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Sr.No</th>
-                                                <th> Agent Name <i class="fa fa-sort"></i>
-                                                   
-                                                </th>
-                                                <th (click)="sortTable('item.user.email')">Agent Email<i class="material-icons" style="padding-bottom:10px;"  [ngClass]="getArrowClass('item.user.email')">aaa</i></th>
-
-                                                <th >Incoming Calls</th>
-                                                <th>Missed Calls </th>
-                                                <th >No Answer </th>
-                                                <th>Busy </th>
-                                                <th >Failed </th>
-                                                <th >Outgoing Calls </th>
-                                                <th >Total Call
-                                                    Duration InMinutes </th>
-                                                <th >Average
-                                                    Handling Time InMinutes </th>
-                                                <th >Device On Percent </th>
-                                                <th >Device On
-                                                    HumanReadable </th>
-                                                <th >Agent Phone Number </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr
-                                                *ngFor="let item of filterList |  paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index ">
-                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                <td><a (click)="viewagentreposrts(item.user.id)"
-                                                        class="nav-link">{{item.user.name}} </a></td>
-                                                <td>{{item.user.email}}</td>
-                                                <td>{{item.IncomingCalls}}</td>
-                                                <td>{{item.MissedCalls}}</td>
-                                                <td>{{item.NoAnswer}}</td>
-                                                <td>{{item.Busy}}</td>
-                                                <td>{{item.Failed}}</td>
-                                                <td>{{item.OutgoingCalls}}</td>
-                                                <td>{{item.TotalCallDurationInMinutes}}</td>
-                                                <td>{{item.AverageHandlingTimeInMinutes}}</td>
-                                                <td>{{item.DeviceOnPercent}}</td>
-                                                <td>{{item.DeviceOnHumanReadable}}</td>
-                                                <td>{{item.user.mobile}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </ng-container>
-
-                                <ng-template #noData>
-                                    <p>Data not available.</p>
-                                </ng-template>
-                            </div>
-
-
-                            <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+        
         <section class="content">
             <div class="container-fluid">
               <div class="row">
@@ -213,8 +136,8 @@
                           <thead>
                             <tr>
                               <th>Sr.No</th>
-                              <th (click)="sortTable('item.user.name')">Agent Name <i class="fa" [ngClass]="getArrowClass('item.user.name')"></i></th>
-                              <th (click)="sortTable('item.user.email')">Agent Email <i class="fa" [ngClass]="getArrowClass('item.user.email')"></i></th>
+                              <th (click)="sortAgentEmail('name')">Agent Name <i class="fa" [ngClass]="getArrowClass('name')"></i></th>
+                              <th (click)="sortAgentEmail('email')">Agent Email <i class="fa " [ngClass]="getArrowClass('email')"></i></th>
                               <th>Incoming Calls</th>
                               <th>Missed Calls</th>
                               <th>No Answer</th>
@@ -225,7 +148,7 @@
                               <th>Average Handling Time In Minutes</th>
                               <th>Device On Percent</th>
                               <th>Device On Human Readable</th>
-                              <th>Agent Phone Number</th>
+                              <th (click)="sortAgentEmail('mobile')">Agent Phone Number</th>
                             </tr>
                           </thead>
                           <tbody>

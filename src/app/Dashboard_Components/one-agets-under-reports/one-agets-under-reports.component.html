@@ -6,11 +6,95 @@
                 <div class="col-sm-6">
                     <h1>Agent Under Reports</h1>
                 </div>
-
+ 
             </div>
         </div>
     </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Select User</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                           
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                    <div class="input-group" id="fromdate">
+                                        <input type="date" [max]="maxDate" class="form-control"
+                                            (change)="fromdate($event.target)" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>From Time</label>
+                                    <div class="input-group" id="fromtime">
+                                        <input type="time" class="form-control"
+                                            (change)="fromtime($event.target)" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    <div class="input-group" id="todate">
+                                        <input type="date" [max]="maxDate" class="form-control"
+                                            (change)="todate($event.target)" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>To Time</label>
+                                    <div class="input-group" id="totime">
+                                        <input type="time" class="form-control" (change)="totime($event.target)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Select TimeFrame</label>
+                                    <select class="form-control" (change)="ontimeselect($event.target)">
+                                        <option value="" disabled selected>Choose TimeFrame</option>
+                                        <option value="30">30 Minutes</option>
+                                        <option value="60">60 Minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Search</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">

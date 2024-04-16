@@ -36,11 +36,12 @@ export class AllcalllogComponent {
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
     allowSearchFilter: true,
-  
   };
   sortedColumn: string = ''; // Track the currently sorted column
   isAscending: boolean = true; // Track the sorting order (ascending or descending)
-
+  agentEmailSortOrder: string = 'asc';
+  
+  sortColumn:string='';
   sortedItems: any[] = [];
 
 
@@ -345,44 +346,34 @@ export class AllcalllogComponent {
     this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
   }
 
-  // key:any= 'id';
-  //  reverse:boolean = false; 
-  //  sortColumn(key:any) {
-  //    this.key = key;
-  //     this. reverse = ! this. reverse;
-  //  }
-  sortColumn: string = ''; 
-  sortDirection: string = 'asc'; // or 'desc'
 
-  // Function to handle sorting
-  sortTable(column: string) {
-    if (column === this.sortColumn) {
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = 'asc';
-    }
 
-    // Perform sorting based on the selected column and direction
+  sortAgentEmail(email: string) {
+    // Toggle sort order
+    this.agentEmailSortOrder = this.agentEmailSortOrder === 'asc' ? 'desc' : 'asc';
+    this.sortColumn ='email'
+    // Sort the data based on Agent Email column and the current sort order
     this.filterList.sort((a: any, b: any) => {
-      const valA = a[column];
-      const valB = b[column];
-
-      if (valA < valB) {
-        return this.sortDirection === 'asc' ? -1 : 1;
-      } else if (valA > valB) {
-        return this.sortDirection === 'asc' ? 1 : -1;
+      if (a.user[email] < b.user[email]) {
+        return this.agentEmailSortOrder === 'asc' ? -1 : 1;
+      } else if (a.user[email] > b.user[email]) {
+        return this.agentEmailSortOrder === 'asc' ? 1 : -1;
       } else {
         return 0;
       }
     });
   }
+  
 
   getArrowClass(column: string): string {
+    // alert(this.sortColumn)
     if (column === this.sortColumn) {
-      return this.sortDirection === 'asc' ? 'fa-caret-up' : 'fa-caret-down';
+      return this.agentEmailSortOrder === 'asc' ? 'fa-caret-up' : 'fa-caret-down';
     }
     return '';
   }
+
+
+  
 
 }
