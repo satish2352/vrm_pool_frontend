@@ -184,40 +184,40 @@ export class OneAgetsUnderReportsComponent {
     this.getagentlist(this.data)
   }
 
-  // searchChanged(searchValue: string) {
+  searchChanged(searchValue: string) {
 
-  //   if (!searchValue) {
-  //     let data = {}
-  //     this.helperService.getCallLogSingleRow(data).subscribe(list => {
-  //       if (list['result'] == true) {
-  //         this.filterList = list['data'];
+    if (!searchValue) {
+      let data = {}
+      this.helperService.getunderagentreports(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.agentsunderreports = list['data'];
 
-  //       }
-  //     });
-  //   } else {
-  //     this.listalldata = this.filterList
-  //     this.agentsunderreports = this.listalldata.filter((agent: any) =>
-  //       agent.AgentName.toLowerCase().includes(searchValue.toLowerCase()) ||
-  //       agent.AgentEmail.includes(searchValue) || agent.IncomingCalls.toString().includes(searchValue)
-  //       || agent.GroupName.toString().includes(searchValue) ||
-  //       agent.IncomingCalls.toString().includes(searchValue) ||
-  //       agent.MissedCalls.toString().includes(searchValue) ||
-  //       agent.NoAnswer.toString().includes(searchValue) ||
-  //       agent.Busy.toString().includes(searchValue) ||
-  //       agent.Failed.toString().includes(searchValue) ||
-  //       agent.OutgoingCalls.toString().includes(searchValue) ||
-  //       agent.TotalCallDurationInMinutes.toString().includes(searchValue) ||
-  //       agent.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
-  //       agent.DeviceOnPercent.toString().includes(searchValue) ||
-  //       agent.DeviceOnHumanReadable.toString().includes(searchValue) ||
-  //       agent.AgentPhoneNumber.toString().includes(searchValue) ||
-  //       agent.createdAt.toString().includes(searchValue) ||
-  //       agent.updatedAt.toString().includes(searchValue) ||
-  //       agent.user_id.toString().includes(searchValue)
-  //       // You can add more conditions here to filter by other properties
-  //     );
-  //   }
+        }
+      });
+    } else {
+      this.listalldata = this.agentsunderreports
+      this.agentsunderreports = this.listalldata.filter((agent: any) =>
+        agent.AgentName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        agent.AgentEmail.includes(searchValue) || agent.IncomingCalls.toString().includes(searchValue)
+        || agent.GroupName.toString().includes(searchValue) ||
+        agent.IncomingCalls.toString().includes(searchValue) ||
+        agent.MissedCalls.toString().includes(searchValue) ||
+        agent.NoAnswer.toString().includes(searchValue) ||
+        agent.Busy.toString().includes(searchValue) ||
+        agent.Failed.toString().includes(searchValue) ||
+        agent.OutgoingCalls.toString().includes(searchValue) ||
+        agent.TotalCallDurationInMinutes.toString().includes(searchValue) ||
+        agent.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
+        agent.DeviceOnPercent.toString().includes(searchValue) ||
+        agent.DeviceOnHumanReadable.toString().includes(searchValue) ||
+        agent.AgentPhoneNumber.toString().includes(searchValue) ||
+        agent.createdAt.toString().includes(searchValue) ||
+        agent.updatedAt.toString().includes(searchValue) ||
+        agent.user_id.toString().includes(searchValue)
+        // You can add more conditions here to filter by other properties
+      );
+    }
 
-  // }
+  }
 
 }
