@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <h1>Agent Under Reports</h1>
                 </div>
- 
+
             </div>
         </div>
     </section>
@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="card-body">
                         <div class="row">
-                           
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>From Date</label>
@@ -42,8 +42,7 @@
                                 <div class="form-group">
                                     <label>From Time</label>
                                     <div class="input-group" id="fromtime">
-                                        <input type="time" class="form-control"
-                                            (change)="fromtime($event.target)" />
+                                        <input type="time" class="form-control" (change)="fromtime($event.target)" />
                                     </div>
                                 </div>
                             </div>
@@ -142,21 +141,23 @@
                                             <td>{{ agent.OutgoingCalls }}</td>
                                             <td>{{ agent.TotalCallDurationInMinutes }}</td>
                                             <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
-                                             <td>{{ agent.DeviceOnPercent }}</td>
+                                            <td>{{ agent.DeviceOnPercent }}</td>
                                             <!-- <td>{{ agent.DeviceOnHumanReadable }}</td> -->
                                             <td>{{ agent.AgentPhoneNumber }}</td>
                                             <!-- <td>{{ agent.createdAt }}</td>
                                             <td>{{ agent.updatedAt }}</td> -->
-                                            <td>{{ agent.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td> <!-- Format createdAt field to Kolkata time -->
-                                            <td>{{ agent.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td> <!-- Format updatedAt field to Kolkata time -->
+                                            <td>{{ agent.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                                            <!-- Format createdAt field to Kolkata time -->
+                                            <td>{{ agent.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                                            <!-- Format updatedAt field to Kolkata time -->
                                             <!-- <td>{{ agent.user_id }}</td> -->
                                         </tr>
                                     </tbody>
                                 </table>
                             </ng-container>
-                                <ng-template #noData>
-                                    <p>Data not available.</p>
-                                </ng-template>
+                            <ng-template #noData>
+                                <p>Data not available.</p>
+                            </ng-template>
                         </div>
                         <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                     </div>

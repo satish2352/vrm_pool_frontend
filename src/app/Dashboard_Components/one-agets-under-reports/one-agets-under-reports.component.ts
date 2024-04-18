@@ -134,14 +134,12 @@ export class OneAgetsUnderReportsComponent {
       // 'supervisor_id': this.supervisorSelected,
       // 'agent_id': this.agentSelected,
       'direction': '',
-      'fromtime': this.fromtimeSelected,
+      'fromtime': this.fromtimeSelected, 
       'totime': this.totimeSelected,
       'id': this.agentid,
     }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-
+   
+    this.getagentlist(this.data);
   }
 
   todate(val: any) {
@@ -159,10 +157,7 @@ export class OneAgetsUnderReportsComponent {
       'totime': this.totimeSelected,
       'id': this.agentid,
     }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-
+    this.getagentlist(this.data);
 
   }
 
@@ -183,9 +178,7 @@ export class OneAgetsUnderReportsComponent {
       'id': this.agentid,
     }
 
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
+
 
     this.getagentlist(this.data)
   }
