@@ -72,6 +72,7 @@ export class OneAgetsUnderReportsComponent {
   getagentlist(data: any) {
     this.helperService.getunderagentreports(data).subscribe(list => {
       if (list['result'] == true) {
+        this.agentsunderreports = [];
         this.agentsunderreports = list['data'];
       }
     });
