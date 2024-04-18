@@ -4,7 +4,7 @@ import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',
@@ -18,7 +18,7 @@ export class AgentlistComponent {
   alllist1: any = [];
   supervisorList: any = [];
   supervisorSelected: any;
-
+  envvariable: any;
   constructor(private helperService: HelperService,
     public router: Router,
     private fileDownloadService: FileDownloadService,
@@ -30,6 +30,7 @@ export class AgentlistComponent {
     this.getAllSupervisorList();
     this.getHistoryFileIdWise({});
     this.getAllAgentList();
+    this.envvariable = environment.BASE_URL
   }
 
 
@@ -88,7 +89,7 @@ export class AgentlistComponent {
   }
 
   downloadFileIdWise(data: any) {
-    const fileUrl = "http://35.154.44.56:3000/api/downloadFile?fileId=" + data;
+    const fileUrl = `${this.envvariable}/downloadFile?fileId=${data}`;
     var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
     if (preview) {
       preview.setAttribute("href", fileUrl);

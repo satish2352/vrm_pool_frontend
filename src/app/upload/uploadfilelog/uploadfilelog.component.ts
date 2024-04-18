@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
-
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-uploadsupervisor',
   templateUrl: './uploadfilelog.component.html',
@@ -13,7 +13,7 @@ export class UploadsupervisorComponent {
   currentpage:number =1;
   alllist: any = [];
   alllistFileWise: any = [];
-
+  envvariable:any;
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService) { }
 
@@ -22,6 +22,7 @@ export class UploadsupervisorComponent {
  
     this.getAllSupervisorList();
     this.getHistoryFileIdWise({});
+    this.envvariable = environment.BASE_URL
   }
 
   onSelectChange(val:any) {
@@ -64,7 +65,7 @@ export class UploadsupervisorComponent {
   }
   
   downloadFileIdWise(data: any) {
-    const fileUrl = "http://35.154.44.56:3000/api/downloadFile?fileId="+data;
+    const fileUrl = `${this.envvariable}/downloadFile?fileId=${data}` ;
     var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
     if (preview) {
         preview.setAttribute("href", fileUrl);

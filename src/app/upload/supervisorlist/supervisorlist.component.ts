@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-supervisorlist',
   templateUrl: './supervisorlist.component.html',
@@ -13,6 +14,7 @@ export class SupervisorlistComponent implements OnInit {
   pagesize: number = 10;
   currentpage:number =1;
   alllist : any []= [];
+  envvariable:any;
   // alllistFileWise: any = [];
   supervisorlist: any = [];
 
@@ -25,6 +27,7 @@ export class SupervisorlistComponent implements OnInit {
 
   ngOnInit() {
     this.getAllSupervisorList2();
+    this.envvariable = environment.BASE_URL
   }
 
   getAllSupervisorList2() {
@@ -82,7 +85,7 @@ export class SupervisorlistComponent implements OnInit {
   }
 
   downloadFileIdWise(data: any) {
-        const fileUrl = "http://35.154.44.56:3000/api/downloadFile?fileId="+data;
+    const fileUrl = `${this.envvariable}/downloadFile?fileId=${data}` ;
         var preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
         if (preview) {
             preview.setAttribute("href", fileUrl);
