@@ -82,7 +82,7 @@
                                     <td><span *ngIf="alluploadedusers.is_inserted==false"
                                             style="text-transform: capitalize;">{{
                                             alluploadedusers.reason }}</span></td> -->
-                                            <td>{{ alluploadedusers.createdAt }}</td>
+                                            <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                                             <td>
                                                 <button class="btn btn-primary"
                                                     (click)="showDetails(alluploadedusers.fileId)">View</button>
