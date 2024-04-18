@@ -118,11 +118,11 @@
                                             <th>TotalCallDurationInMinutes</th>
                                             <th>AverageHandlingTimeInMinutes</th>
                                             <th>DeviceOnPercent</th>
-                                            <th>DeviceOnHumanReadable</th>
+                                            <!-- <th>DeviceOnHumanReadable</th> -->
                                             <th>AgentPhoneNumber</th>
                                             <th>createdAt</th>
                                             <th>updatedAt</th>
-                                            <th>user_id</th>
+                                            <!-- <th>user_id</th> -->
                                         </tr>
 
 
@@ -143,11 +143,13 @@
                                             <td>{{ agent.TotalCallDurationInMinutes }}</td>
                                             <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
                                              <td>{{ agent.DeviceOnPercent }}</td>
-                                            <td>{{ agent.DeviceOnHumanReadable }}</td>
+                                            <!-- <td>{{ agent.DeviceOnHumanReadable }}</td> -->
                                             <td>{{ agent.AgentPhoneNumber }}</td>
-                                            <td>{{ agent.createdAt }}</td>
-                                            <td>{{ agent.updatedAt }}</td>
-                                            <td>{{ agent.user_id }}</td>
+                                            <!-- <td>{{ agent.createdAt }}</td>
+                                            <td>{{ agent.updatedAt }}</td> -->
+                                            <td>{{ agent.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td> <!-- Format createdAt field to Kolkata time -->
+                                            <td>{{ agent.updatedAt | date: 'yyyy-MM-dd HH:mm:ss' }}</td> <!-- Format updatedAt field to Kolkata time -->
+                                            <!-- <td>{{ agent.user_id }}</td> -->
                                         </tr>
                                     </tbody>
                                 </table>
