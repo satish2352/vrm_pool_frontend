@@ -170,6 +170,7 @@
                             </tr>
                           </tbody>
                         </table>
+                        <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
                       </ng-container>
                       <ng-template #noData>
                         <p>Data not available.</p>
@@ -181,7 +182,7 @@
             </div>
           </section>
           
-          <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
+          
           
     </div>
 </div>
