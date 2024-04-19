@@ -42,7 +42,7 @@
                                         <td>{{ file?.fileId }}</td>
                                         <td>{{ file?.insertedCount }}</td>
                                         <td>{{ file?.failedCount }}</td>
-                                        <td>{{ file?.createdAt }}</td>
+                                        <td>{{ file?.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
                                         <td><button (click)="downloadFileIdWise(file.fileId)">download</button></td>
                                     </tr>
                                 </tbody>

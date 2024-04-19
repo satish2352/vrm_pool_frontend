@@ -86,7 +86,7 @@
                                             <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                     style="text-transform: capitalize;">{{
                                                     alluploadedusers.reason }}</span></td> -->
-                                            <td>{{ alluploadedusers.createdAt }}</td>
+                                            <td>{{ alluploadedusers.createdAt |  date: 'yyyy-MM-dd h:mm:ss a' }}</td>
                                             <td><button (click)="downloadFileIdWise(alluploadedusers.fileId)">download</button></td>
                                             <!-- |date:'dd/MM/yyyy'}}</td> -->
                                         </tr>
