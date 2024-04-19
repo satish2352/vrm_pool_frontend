@@ -163,7 +163,6 @@ deleteUser(data:any): Observable<any> {
   
     return this.http.post<any>(`${this.apiUrl}/deleteUser`, data);
   }
- 
  	
   changeUserStatus(data:any): Observable<any> {
   
@@ -173,9 +172,15 @@ deleteUser(data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
   
-  getDashboardStats(): Observable<any> {
+  getDashboardStatss(): Observable<any> {
   
     return this.http.post<any>(`${this.apiUrl}/getDashboardStats`, null);
+  }
+  getDashboardStatsagents(id:any): Observable<any> {
+  let data = {
+    'id': id
+  }
+    return this.http.post<any>(`${this.apiUrl}/getDashboardStats`, data);
   }
 
 }

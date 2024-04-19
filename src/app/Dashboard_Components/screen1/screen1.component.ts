@@ -9,26 +9,48 @@ import { HelperService } from 'src/app/helper.service';
 })
 export class Screen1Component {
   dashboarddata: any = []
+   user_type :any=localStorage.getItem('user_type');
   constructor(
     private helperService: HelperService,
     public router: Router,
   ) { }
   ngOnInit(): void {
     this.getDashboardStats();
+ 
   }
 
 
+
+  // getDashboardStats() {
+
+  //   this.helperService.getDashboardStats().subscribe(list => {
+  //     if (list['result'] == true) {
+  //       this.dashboarddata = list['data'];
+  //       console.log(this.dashboarddata);
+  //     }
+  //   });
+  // }
 
   getDashboardStats() {
-    this.helperService.getDashboardStats().subscribe(list => {
-      if (list['result'] == true) {
-        this.dashboarddata = list['data'];
-        console.log(this.dashboarddata);
-      }
-    });
+    if (this.user_type == 2) {
+      const userId = localStorage.getItem('user_id') 
+      this.helperService.getDashboardStatsagents(userId).subscribe(list => {
+        if (list['result'] == true) {
+          this.dashboarddata = list['data'];
+          console.log(this.dashboarddata);
+        }
+      });
+    } else {
+      this.helperService.getDashboardStatss().subscribe(list => {
+        if (list['result'] == true) {
+          this.dashboarddata = list['data'];
+          console.log(this.dashboarddata);
+        }
+      });
+    }
   }
+  
   viewreposts() {
-   
     this.router.navigate(['/admin-dashboard', 'supervisor-list']);
   }
   viewagentreposts() {
