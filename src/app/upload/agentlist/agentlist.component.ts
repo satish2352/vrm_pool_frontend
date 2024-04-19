@@ -4,7 +4,7 @@ import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',

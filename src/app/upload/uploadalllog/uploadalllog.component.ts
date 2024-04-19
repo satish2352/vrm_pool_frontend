@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-uploadalllog',
   templateUrl: './uploadalllog.component.html',

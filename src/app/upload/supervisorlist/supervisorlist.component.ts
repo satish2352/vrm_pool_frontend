@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-supervisorlist',
   templateUrl: './supervisorlist.component.html',
