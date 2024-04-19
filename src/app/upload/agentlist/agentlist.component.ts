@@ -81,9 +81,11 @@ export class AgentlistComponent {
     this.helperService.uploadFileAgent(formData)
       .subscribe(response => {
         // Show toast notification with API response
+        this.getAllAgentList();
         Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
       }, error => {
         // Handle error cases
+        this.getAllAgentList();
         Swal.fire('Error', 'Error uploading file. Please try again.', 'error');
       });
   }

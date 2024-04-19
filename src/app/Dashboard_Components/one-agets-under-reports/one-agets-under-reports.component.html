@@ -100,66 +100,69 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <ng-container *ngIf="agentsunderreports && agentsunderreports.length > 0; else noData">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr No</th>
-                                            <th>AgentName</th>
-                                            <th>AgentEmail</th>
-                                            <th>GroupName </th>
-                                            <th>IncomingCalls</th>
-                                            <th>MissedCalls</th>
-                                            <th>NoAnswer</th>
-                                            <th>Busy</th>
-                                            <th>Failed</th>
-                                            <th>OutgoingCalls</th>
-                                            <th>TotalCallDurationInMinutes</th>
-                                            <th>AverageHandlingTimeInMinutes</th>
-                                            <th>DeviceOnPercent</th>
-                                            <!-- <th>DeviceOnHumanReadable</th> -->
-                                            <th>AgentPhoneNumber</th>
-                                            <th>createdAt</th>
-                                            <th>updatedAt</th>
-                                            <!-- <th>user_id</th> -->
-                                        </tr>
+                            <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
+                                <ng-container *ngIf="agentsunderreports && agentsunderreports.length > 0; else noData">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No</th>
+                                                <th>AgentName</th>
+                                                <th>AgentEmail</th>
+                                                <th>GroupName </th>
+                                                <th>IncomingCalls</th>
+                                                <th>MissedCalls</th>
+                                                <th>NoAnswer</th>
+                                                <th>Busy</th>
+                                                <th>Failed</th>
+                                                <th>OutgoingCalls</th>
+                                                <th>TotalCallDurationInMinutes</th>
+                                                <th>AverageHandlingTimeInMinutes</th>
+                                                <th>DeviceOnPercent</th>
+                                                <!-- <th>DeviceOnHumanReadable</th> -->
+                                                <th>AgentPhoneNumber</th>
+                                                <th>createdAt</th>
+                                                <th>updatedAt</th>
+                                                <!-- <th>user_id</th> -->
+                                            </tr>
 
 
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            *ngFor="let agent of agentsunderreports  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{ agent.AgentName }}</td>
-                                            <td>{{ agent.AgentEmail }}</td>
-                                            <td>{{ agent.GroupName }}</td>
-                                            <td>{{ agent.IncomingCalls }}</td>
-                                            <td>{{ agent.MissedCalls }}</td>
-                                            <td>{{ agent.NoAnswer }}</td>
-                                            <td>{{ agent.Busy }}</td>
-                                            <td>{{ agent.Failed }}</td>
-                                            <td>{{ agent.OutgoingCalls }}</td>
-                                            <td>{{ agent.TotalCallDurationInMinutes }}</td>
-                                            <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
-                                            <td>{{ agent.DeviceOnPercent }}</td>
-                                            <!-- <td>{{ agent.DeviceOnHumanReadable }}</td> -->
-                                            <td>{{ agent.AgentPhoneNumber }}</td>
-                                            <!-- <td>{{ agent.createdAt }}</td>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let agent of agentsunderreports  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td>{{ agent.AgentName }}</td>
+                                                <td>{{ agent.AgentEmail }}</td>
+                                                <td>{{ agent.GroupName }}</td>
+                                                <td>{{ agent.IncomingCalls }}</td>
+                                                <td>{{ agent.MissedCalls }}</td>
+                                                <td>{{ agent.NoAnswer }}</td>
+                                                <td>{{ agent.Busy }}</td>
+                                                <td>{{ agent.Failed }}</td>
+                                                <td>{{ agent.OutgoingCalls }}</td>
+                                                <td>{{ agent.TotalCallDurationInMinutes }}</td>
+                                                <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
+                                                <td>{{ agent.DeviceOnPercent }}</td>
+                                                <!-- <td>{{ agent.DeviceOnHumanReadable }}</td> -->
+                                                <td>{{ agent.AgentPhoneNumber }}</td>
+                                                <!-- <td>{{ agent.createdAt }}</td>
                                             <td>{{ agent.updatedAt }}</td> -->
-                                            <td>{{ agent.createdAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
-                                            <!-- Format createdAt field to Kolkata time -->
-                                            <td>{{ agent.updatedAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
-                                            <!-- Format updatedAt field to Kolkata time -->
-                                            <!-- <td>{{ agent.user_id }}</td> -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                                                <td>{{ agent.createdAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
+                                                <!-- Format createdAt field to Kolkata time -->
+                                                <td>{{ agent.updatedAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
+                                                <!-- Format updatedAt field to Kolkata time -->
+                                                <!-- <td>{{ agent.user_id }}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
 
-                            </ng-container>
-                            <ng-template #noData> 
-                                <p>Data not available.</p>
-                            </ng-template>
+                                </ng-container>
+
+                                <ng-template #noData>
+                                    <p>Data not available.</p>
+                                </ng-template>
+                            </div>
                         </div>
                     </div>
                 </div>

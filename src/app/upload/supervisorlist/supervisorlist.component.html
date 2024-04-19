@@ -23,15 +23,15 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-6"> 
+                                    <div class="col-md-6">
                                         <label>Upload Supervisor</label>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="exampleInputFile"
                                                         (change)="onFileSelected($event)">
-                                                    <label class="custom-file-label"
-                                                        for="exampleInputFile"><span *ngIf="selectedFile" >{{selectedFile.name}}</span>
+                                                    <label class="custom-file-label" for="exampleInputFile"><span
+                                                            *ngIf="selectedFile">{{selectedFile.name}}</span>
                                                         file</label>
                                                 </div>
                                                 <div class="input-group-append">
@@ -64,44 +64,49 @@
 
                         <div class="card-body">
                             <!-- Check if supervisorlist has data -->
-                            <ng-container *ngIf="supervisorlist && supervisorlist.length > 0; else noData">
-                              <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                  <tr>
-                                    <th>Sr.No</th>
-                                    <th>File_ID</th>
-                                    <th>Inserted Count</th>
-                                    <th>Failed Count</th>
-                                    <th>Created At</th>
-                                    <th>View</th>
-                                    <th>Download</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
-                                    <td>{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
-                                    <td>{{ alluploadedusers.fileId }}</td>
-                                    <td>{{ alluploadedusers.insertedCount }}</td>
-                                    <td>{{ alluploadedusers.failedCount }}</td>
-                                    <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
-                                    <td>
-                                      <button class="btn btn-primary" (click)="showDetails(alluploadedusers.fileId)">View</button>
-                                    </td>
-                                    <td>
-                                      <button class="btn btn-primary" (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
-                            </ng-container>
-                            <!-- Show message if no data is available -->
-                            <ng-template #noData>
-                              <p>Data not available.</p>
-                            </ng-template>
-                          </div>
-                          
-                       
+                            <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
+                                <ng-container *ngIf="supervisorlist && supervisorlist.length > 0; else noData">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>File_ID</th>
+                                                <th>Inserted Count</th>
+                                                <th>Failed Count</th>
+                                                <th>Created At</th>
+                                                <th>View</th>
+                                                <th>Download</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
+                                                <td>{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
+                                                <td>{{ alluploadedusers.fileId }}</td>
+                                                <td>{{ alluploadedusers.insertedCount }}</td>
+                                                <td>{{ alluploadedusers.failedCount }}</td>
+                                                <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
+                                                <td>
+                                                    <button class="btn btn-primary"
+                                                        (click)="showDetails(alluploadedusers.fileId)">View</button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary"
+                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                                </ng-container>
+                                <!-- Show message if no data is available -->
+                                <ng-template #noData>
+                                    <p>Data not available.</p>
+                                </ng-template>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

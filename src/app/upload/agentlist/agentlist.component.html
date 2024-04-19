@@ -53,57 +53,59 @@
 
 
                         <div class="card-body">
-                            <ng-container *ngIf="alllist1 && alllist1.length > 0; else noData">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No</th>
+                            <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
+                                <ng-container *ngIf="alllist1 && alllist1.length > 0; else noData">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
 
-                                            <th>File Id</th>
-                                            <th>Inserted Count</th>
-                                            <th>Failed Count</th>
-                                            <th>Created At </th>
-                                            <th>View </th>
-                                            <th>Download </th>
+                                                <th>File Id</th>
+                                                <th>Inserted Count</th>
+                                                <th>Failed Count</th>
+                                                <th>Created At </th>
+                                                <th>View </th>
+                                                <th>Download </th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{ alluploadedusers.fileId }}</td>
-                                            <td>{{ alluploadedusers.insertedCount }}</td>
-                                            <td>{{ alluploadedusers.failedCount }}</td>
-                                            <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td>{{ alluploadedusers.fileId }}</td>
+                                                <td>{{ alluploadedusers.insertedCount }}</td>
+                                                <td>{{ alluploadedusers.failedCount }}</td>
+                                                <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
                                             Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
                                             class="badge badge-danger">
                                             Failed </span></td>
                                     <td><span *ngIf="alluploadedusers.is_inserted==false"
                                             style="text-transform: capitalize;">{{
                                             alluploadedusers.reason }}</span></td> -->
-                                            <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
-                                            <td>
-                                                <button class="btn btn-primary"
-                                                    (click)="showDetails(alluploadedusers.fileId)">View</button>
-                                            </td>
-                                            <td><button class="btn btn-primary"
-                                                    (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
-                                               
-                                            </td>
-                                            <!-- |date:'dd/MM/yyyy'}}</td> -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
-                            </ng-container>
-                            <!-- Show message if no data is available -->
-                            <ng-template #noData>
-                                <p>Data not available.</p>
-                            </ng-template>
+                                                <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
+                                                <td>
+                                                    <button class="btn btn-primary"
+                                                        (click)="showDetails(alluploadedusers.fileId)">View</button>
+                                                </td>
+                                                <td><button class="btn btn-primary"
+                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
+
+                                                </td>
+                                                <!-- |date:'dd/MM/yyyy'}}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                                </ng-container>
+                                <!-- Show message if no data is available -->
+                                <ng-template #noData>
+                                    <p>Data not available.</p>
+                                </ng-template>
+                            </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

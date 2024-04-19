@@ -17,60 +17,62 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <ng-container *ngIf="alllist && alllist.length > 0; else noData">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr No</th>
-                                            <th>Agent Name</th>
-                                            <th>Agent Email</th>
-                                            <th>Mobile </th>
-                                            <th>Group Name</th>
-                                            <th>Incoming Calls</th>
-                                            <th>Missed Calls</th>
-                                            <th>No Answer</th>
-                                            <th>Busy</th>
-                                            <th>Failed</th>
-                                            <th>Outgoing Calls</th>
-                                            <th>Total Call Duration In Minutes</th>
-                                            <th>Average Handling Time In Minutes</th>
-                                            <th>DeviceOnPercent</th>
-                                            <th>Device On Human Readable</th>
-                                            <th>Agent Phone Number</th>
-                                            <th>created At</th>
-                                            <th>updated At</th>
-                                        </tr>
+                            <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
+                                <ng-container *ngIf="alllist && alllist.length > 0; else noData">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No</th>
+                                                <th>Agent Name</th>
+                                                <th>Agent Email</th>
+                                                <th>Mobile </th>
+                                                <th>Group Name</th>
+                                                <th>Incoming Calls</th>
+                                                <th>Missed Calls</th>
+                                                <th>No Answer</th>
+                                                <th>Busy</th>
+                                                <th>Failed</th>
+                                                <th>Outgoing Calls</th>
+                                                <th>Total Call Duration In Minutes</th>
+                                                <th>Average Handling Time In Minutes</th>
+                                                <th>DeviceOnPercent</th>
+                                                <th>Device On Human Readable</th>
+                                                <th>Agent Phone Number</th>
+                                                <th>created At</th>
+                                                <th>updated At</th>
+                                            </tr>
 
 
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{ agent.AgentName }}</td>
-                                            <td>{{ agent.AgentEmail }}</td>
-                                            <td>{{ agent.AgentPhoneNumber }}</td>
-                                            <td>{{ agent.GroupName }}</td>
-                                            <td>{{ agent.IncomingCalls }}</td>
-                                            <td>{{ agent.MissedCalls }}</td>
-                                            <td>{{ agent.NoAnswer }}</td>
-                                            <td>{{ agent.Busy}}</td>
-                                            <td>{{ agent.Failed }}</td>
-                                            <td>{{ agent.OutgoingCalls }}</td>
-                                            <td>{{ agent.TotalCallDurationInMinutes }}</td>
-                                            <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
-                                            <td>{{ agent.DeviceOnPercent }}</td>
-                                            <td>{{ agent.DeviceOnHumanReadable }}</td>
-                                            <td>{{ agent.AgentPhoneNumber }}</td>
-                                            <td>{{ agent.createdAt }}</td>
-                                            <td>{{ agent.updatedAt }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </ng-container>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let agent of alllist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td>{{ agent.AgentName }}</td>
+                                                <td>{{ agent.AgentEmail }}</td>
+                                                <td>{{ agent.AgentPhoneNumber }}</td>
+                                                <td>{{ agent.GroupName }}</td>
+                                                <td>{{ agent.IncomingCalls }}</td>
+                                                <td>{{ agent.MissedCalls }}</td>
+                                                <td>{{ agent.NoAnswer }}</td>
+                                                <td>{{ agent.Busy}}</td>
+                                                <td>{{ agent.Failed }}</td>
+                                                <td>{{ agent.OutgoingCalls }}</td>
+                                                <td>{{ agent.TotalCallDurationInMinutes }}</td>
+                                                <td>{{ agent.AverageHandlingTimeInMinutes }}</td>
+                                                <td>{{ agent.DeviceOnPercent }}</td>
+                                                <td>{{ agent.DeviceOnHumanReadable }}</td>
+                                                <td>{{ agent.AgentPhoneNumber }}</td>
+                                                <td>{{ agent.createdAt }}</td>
+                                                <td>{{ agent.updatedAt }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-container>
                                 <ng-template #noData>
                                     <p>Data not available.</p>
                                 </ng-template>
+                            </div>
                         </div>
                         <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                     </div>

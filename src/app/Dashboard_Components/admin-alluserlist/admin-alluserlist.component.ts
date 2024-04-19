@@ -137,9 +137,15 @@ export class AdminAlluserlistComponent {
       this.helperService.deleteUser(data).subscribe(list => {
         if (list['result'] == true) {
           this.toastr.success('User Delete Successfully', 'Success');
-          this.getAllSupervisorList();
+          // this.getAllSupervisorList();
+          let data = { 'user_type': '2' }
+          this.helperService.getAllUsersList1(data).subscribe(list => {
+            if (list['result'] == true) {
+              this.supervisorsList1 = list['data'];
+            }
+          });
         }
-        this.getAllSupervisorList();
+        // this.getAllSupervisorList();
       });
     } else {
       // User canceled deletion, do nothing

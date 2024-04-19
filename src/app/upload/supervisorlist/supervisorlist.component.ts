@@ -65,10 +65,12 @@ export class SupervisorlistComponent implements OnInit {
       next: (response: any) => {
         if (response.result === true) {
           // Use SweetAlert2 for success message
-          Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
           this.getAllSupervisorList2();
+          Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
+          
         } else {
           // Use SweetAlert2 for error message
+          this.getAllSupervisorList2();
           Swal.fire('Error', response.message, 'error');
         }
       },

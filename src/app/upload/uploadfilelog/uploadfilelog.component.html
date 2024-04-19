@@ -60,25 +60,26 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>File ID</th>
-                                            <th>Inserted Count</th>
-                                            <th>Failed Count</th>
-                                            <th>Created At </th>
-                                            <th>Download</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                            <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                            <td>{{ alluploadedusers.fileId }} </td>
-                                            <td>{{ alluploadedusers.insertedCount }}</td>
-                                            <td>{{ alluploadedusers.failedCount }}</td>
-                                            <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true"
+                                <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>File ID</th>
+                                                <th>Inserted Count</th>
+                                                <th>Failed Count</th>
+                                                <th>Created At </th>
+                                                <th>Download</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let alluploadedusers of alllist | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
+                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td>{{ alluploadedusers.fileId }} </td>
+                                                <td>{{ alluploadedusers.insertedCount }}</td>
+                                                <td>{{ alluploadedusers.failedCount }}</td>
+                                                <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true"
                                                     class="badge badge-success">
                                                     Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
                                                     class="badge badge-danger">
@@ -86,12 +87,15 @@
                                             <td><span *ngIf="alluploadedusers.is_inserted==false"
                                                     style="text-transform: capitalize;">{{
                                                     alluploadedusers.reason }}</span></td> -->
-                                            <td>{{ alluploadedusers.createdAt |  date: 'yyyy-MM-dd h:mm:ss a' }}</td>
-                                            <td><button (click)="downloadFileIdWise(alluploadedusers.fileId)">download</button></td>
-                                            <!-- |date:'dd/MM/yyyy'}}</td> -->
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
+                                                <td><button
+                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">download</button>
+                                                </td>
+                                                <!-- |date:'dd/MM/yyyy'}}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
                         </div>

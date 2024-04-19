@@ -1,0 +1,27 @@
+/* CSS class for custom scrollbar */
+.custom-scrollbar {
+    overflow-x: auto !important; /* Enable horizontal scrolling */
+    max-width: 100% !important; /* Adjust as needed */
+  }
+  
+  /* Style for the scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px !important; /* Set the width of the scrollbar */
+  }
+  
+  /* Track styles */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1 !important; /* Color of the scrollbar track */
+  }
+  
+  /* Handle styles */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #888 !important; /* Color of the scrollbar handle */
+    border-radius: 4px !important; /* Rounded corners */
+  }
+  
+  /* Handle on hover */
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555 !important; /* Darker color when hovered */
+  }
+  
