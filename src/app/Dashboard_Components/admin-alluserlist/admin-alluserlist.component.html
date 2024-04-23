@@ -86,9 +86,9 @@
                                                         <td class="text-dark">{{ users.name }}</td>
                                                         <td class="text-dark">{{users.mobile}} </td>
                                                         <td class="text-dark">{{users.email}} </td>
-                                                        <td class="text-dark"><button class="btn btn-primary"
+                                                        <td class="text-dark"><a class="text-primary"
                                                                 *ngIf="users.user_type == '2'"
-                                                                (click)="updateusers(users.id)">Edit</button><span
+                                                                (click)="updateusers(users.id)">Edit</a><span
                                                                 *ngIf="users.user_type == '3'"> NA</span></td>
                                                         <td class="text-dark">
                                                             <label class="switch">
