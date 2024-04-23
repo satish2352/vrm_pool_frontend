@@ -100,4 +100,9 @@ export class SupervisorlistComponent implements OnInit {
   showDetails(data: any) {
     this.router.navigate(['/admin-dashboard/','get-details',data]);
   }
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+   
+    this.getAllSupervisorList2();
+  }
 }

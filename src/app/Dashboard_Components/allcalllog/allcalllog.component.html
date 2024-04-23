@@ -46,7 +46,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Agents</label>
+                                        <label>Relationship Manager</label>
                                         <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label>From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" [max]="maxDate" class="form-control"
+                                            <input type="date" [max]="maxDatef" [min]="minDatef" class="form-control"
                                                 (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
@@ -82,11 +82,12 @@
                                     <div class="form-group">
                                         <label>To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" [max]="maxDate" class="form-control"
+                                            <input type="date" [min]="minDatet" [max]="maxDatet" class="form-control"
                                                 (change)="todate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
+                            
 
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -102,7 +103,7 @@
                                         <select class="form-control" (change)="ontimeselect($event.target)">
                                             <option value="" disabled selected>Choose TimeFrame</option>
                                             <option value="30">30 Minutes</option>
-                                            <option value="60">60 Minutes</option>
+                                            <!-- <option value="60">60 Minutes</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -126,11 +127,27 @@
         </section>
 
         <section class="content">
+
             <div class="container-fluid">
+               
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            
                             <div class="card-body">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Show Records</label>
+                                        <select class="form-control" (change)="pagerecords($event.target)">
+                                            <option value="" disabled selected>Choose No of Records</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="30">50</option>
+                                            <option value="30">100</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
                                         <table id="example2" class="table table-bordered table-hover">
@@ -143,13 +160,14 @@
                                                             [ngClass]="getArrowClass('email')"></i></th>
                                                     <th>Incoming Calls</th>
                                                     <th>Missed Calls</th>
+                                                    <th>Received Calls</th>
                                                     <th>No Answer</th>
                                                     <th>Busy</th>
                                                     <th>Failed</th>
                                                     <th>Outgoing Calls</th>
-                                                    <th>Total Call Duration In Minutes</th>
+                                                    <th>On Call Time</th>
                                                     <th>Average Handling Time In Minutes</th>
-                                                    <th>Device On Percent</th>
+                                                    <!-- <th>Device On Percent</th> -->
                                                     <!-- <th>Device On Human Readable</th> -->
                                                     <th (click)="sortAgentEmail('mobile')">Agent Phone Number</th>
                                                 </tr>
@@ -158,18 +176,21 @@
                                                 <tr
                                                     *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
                                                     <td>{{ (currentpage - 1) * pagesize + i + 1 }}</td>
-                                                    <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{
-                                                            item.user.name }}</a></td>
+                                                    <td>{{item.user.name }}</td>
+                                                    <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{
+                                                            item.user.name }}</a></td> -->
                                                     <td>{{ item.user.email }}</td>
                                                     <td>{{ item.IncomingCalls }}</td>
                                                     <td>{{ item.MissedCalls }}</td>
+                                                    <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
+                                                        item.MissedCalls) }}</td>
                                                     <td>{{ item.NoAnswer }}</td>
                                                     <td>{{ item.Busy }}</td>
                                                     <td>{{ item.Failed }}</td>
                                                     <td>{{ item.OutgoingCalls }}</td>
                                                     <td>{{ item.TotalCallDurationInMinutes }}</td>
                                                     <td>{{ item.AverageHandlingTimeInMinutes }}</td>
-                                                    <td>{{ item.DeviceOnPercent }}</td>
+                                                    <!-- <td>{{ item.DeviceOnPercent }}</td> -->
                                                     <!-- <td>{{ item.DeviceOnHumanReadable }}</td> -->
                                                     <td>{{ item.user.mobile }}</td>
                                                 </tr>

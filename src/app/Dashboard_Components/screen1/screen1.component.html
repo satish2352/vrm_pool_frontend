@@ -32,7 +32,7 @@
                     </div>
                 </div>  -->
 
-                
+<!--                 
                 <div class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
@@ -41,7 +41,7 @@
                             <span class="info-box-number">{{ dashboarddata.users.admins }}</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'" (click)="viewreposts()">
                     <div class="info-box mb-3">
@@ -58,7 +58,7 @@
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Agents</span>
+                            <span class="info-box-text">Relationship Manager</span>
                             <span class="info-box-number">{{dashboarddata.users.agents}}</span>
                         </div>
 
@@ -83,6 +83,17 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Missed Calls</span>
                             <span class="info-box-number">{{dashboarddata.reports.MissedCalls}}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Received Calls</span>
+                            <span class="info-box-number">{{calculateAbsoluteDifference(dashboarddata.reports.IncomingCalls,dashboarddata.reports.MissedCalls)}}</span>
                         </div>
 
                     </div>
@@ -136,7 +147,7 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                <!-- <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-phone-volume"></i></span>
                         <div class="info-box-content">
@@ -168,7 +179,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
 
 

@@ -21,7 +21,11 @@ export class AdminAlluserlistComponent {
 
     this.getAllSupervisorList();
   }
-
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+   
+    this.getAllSupervisorList();
+  }
 
 
   getAllSupervisorList() {

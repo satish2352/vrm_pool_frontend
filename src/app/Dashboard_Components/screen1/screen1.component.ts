@@ -20,6 +20,9 @@ export class Screen1Component {
   }
 
 
+  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
+    return Math.abs(incomingCalls - missedCalls);
+  }
 
   // getDashboardStats() {
 
@@ -55,7 +58,7 @@ export class Screen1Component {
   }
   viewagentreposts() {
     
-    this.router.navigate(['/admin-dashboard', 'all-agent']);
+    this.router.navigate(['/admin-dashboard', 'agent-list']);
   }
   viewrepostsdetails() {
     

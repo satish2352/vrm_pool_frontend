@@ -63,6 +63,19 @@
                         </div>
 
                         <div class="card-body">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Show Records</label>
+                                    <select class="form-control" (change)="pagerecords($event.target)">
+                                        <option value="" disabled selected>Choose No of Records</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="30">50</option>
+                                        <option value="30">100</option>
+                                    </select>
+                                </div>
+                            </div>
                             <!-- Check if supervisorlist has data -->
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="supervisorlist && supervisorlist.length > 0; else noData">

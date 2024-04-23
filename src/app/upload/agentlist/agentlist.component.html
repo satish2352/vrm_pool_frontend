@@ -53,6 +53,20 @@
 
 
                         <div class="card-body">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Show Records</label>
+                                    <select class="form-control" (change)="pagerecords($event.target)">
+                                        <option value="" disabled selected>Choose No of Records</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="30">50</option>
+                                        <option value="30">100</option>
+            
+                                    </select>
+                                </div>
+                            </div>
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="alllist1 && alllist1.length > 0; else noData">
                                     <table id="example2" class="table table-bordered table-hover">

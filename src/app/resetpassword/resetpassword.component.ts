@@ -70,7 +70,7 @@ export class ResetpasswordComponent implements OnInit {
       list => {
         if (list['result'] == true) {
           this.response = list;
-          this.responseMessage = 'OTP Successfully Sent to Registered Email ';
+          this.responseMessage = 'Temporary Password sent to registered Email ';
           this.otpSent = true; // Set otpSent to true to disable the button
           this.startTimer(); // Start the timer
         } else {

@@ -36,7 +36,8 @@ export class AllcalllogsupervisorComponent {
     allowSearchFilter: true
   }; 
   selectedAgents: any[] = []; // To store selected agents
-  data: any = {}
+  data: any = {};
+  minDate:any
   ignoreFirstChange = true
   timeselect:any;
   constructor(private helperService: HelperService,
@@ -50,6 +51,13 @@ export class AllcalllogsupervisorComponent {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
     this.maxDate = `${yyyy}-${mm}-${dd}`;
+    // Calculate 6 months ago from today
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(today.getMonth() - 6);
+    const minDd = String(sixMonthsAgo.getDate()).padStart(2, '0');
+    const minMm = String(sixMonthsAgo.getMonth() + 1).padStart(2, '0');
+    const minYyyy = sixMonthsAgo.getFullYear();
+    this.minDate = `${minYyyy}-${minMm}-${minDd}`;
   }
 
 
@@ -71,12 +79,8 @@ export class AllcalllogsupervisorComponent {
     this.getCallLogSingleRow(data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
-    
-    
 
   }
-
-
 
   getAllAgentList() {
     this.helperService.getAllAgentUploadedList().subscribe(list => {
@@ -85,7 +89,9 @@ export class AllcalllogsupervisorComponent {
       }
     });
   }
-
+  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
+    return Math.abs(incomingCalls - missedCalls);
+  }
   ontimeselect(val: any) {
     this.timeselect = val.value;
     this.getAllAgentbySuperviserList()
@@ -109,7 +115,11 @@ export class AllcalllogsupervisorComponent {
 
 
   }
-
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+   
+    this.getCallLogSingleRow(this.data)
+  }
 
   onSelectChangeAgent(val: any) {
 

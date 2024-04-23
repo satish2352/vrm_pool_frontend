@@ -23,9 +23,11 @@ export class AllcalllogComponent {
   fromtimeSelected: any;
   agentList: any = [];
   ignoreFirstChange = true
-  maxDate: string;
+  maxDatef: string;
+  maxDatet!: string;
+  minDatef!: string;
   activeSupervisors!: any[];
-  filterList: any = []= [];
+  filterList: any = [] = [];
   searchTerm: string = '';
   sortKey: string = ''; // Track the current sort key
   sortOrder: string = 'asc';
@@ -40,30 +42,44 @@ export class AllcalllogComponent {
   sortedColumn: string = ''; // Track the currently sorted column
   isAscending: boolean = true; // Track the sorting order (ascending or descending)
   agentEmailSortOrder: string = 'asc';
-  
-  sortColumn:string='';
+  minDatet:any;
+  sortColumn: string = '';
   sortedItems: any[] = [];
 
 
 
   selectedAgents: any[] = []; // To store selected agents
-  timeselect:any;
+  timeselect: any;
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
     public router: Router,) {
-
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
-    this.maxDate = `${yyyy}-${mm}-${dd}`;
-
-
-
-
+    this.maxDatef = `${yyyy}-${mm}-${dd}`;
+    // Calculate 6 months ago from today
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(today.getMonth() - 6);
+    const minDd = String(sixMonthsAgo.getDate()).padStart(2, '0');
+    const minMm = String(sixMonthsAgo.getMonth() + 1).padStart(2, '0');
+    const minYyyy = sixMonthsAgo.getFullYear();
+    this.minDatef = `${minYyyy}-${minMm}-${minDd}`;
   }
 
-
+  private updateToDateRestriction() {
+    if (this.fromdateSelected) {
+      const fromDate = new Date(this.fromdateSelected);
+      const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+      
+      const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
+      const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
+      const maxYyyy = thirtyDaysFromFromDate.getFullYear();
+      this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
+      this.minDatet = this.minDatef;
+     
+    }
+  }
   ngOnInit(): void {
 
     this.getAllSupervisorList();
@@ -74,6 +90,10 @@ export class AllcalllogComponent {
     // this.filteredList = this.alllist;
     // this.searchChanged('')
 
+  }
+
+  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
+    return Math.abs(incomingCalls - missedCalls);
   }
 
   getAllAgentList() {
@@ -121,6 +141,11 @@ export class AllcalllogComponent {
       'totime': this.totimeSelected,
       'time': this.timeselect,
     }
+    this.getCallLogSingleRow(this.data)
+  }
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+
     this.getCallLogSingleRow(this.data)
   }
 
@@ -198,12 +223,16 @@ export class AllcalllogComponent {
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
-    }
+    } 
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
+    this.updateToDateRestriction();
     this.getCallLogSingleRow(this.data)
+
   }
+
+
 
   fromtime(val: any) {
     console.log(val.value)
@@ -244,12 +273,10 @@ export class AllcalllogComponent {
       'totime': this.totimeSelected,
 
     }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-
     this.getCallLogSingleRow(this.data)
   }
+
+
 
 
   totime(val: any) {
@@ -304,14 +331,14 @@ export class AllcalllogComponent {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-        this.filterList.sort((a:any, b:any) => b.id - a.id);
+        this.filterList.sort((a: any, b: any) => b.id - a.id);
 
       }
     });
   }
 
   searchChanged(searchValue: string) {
-    
+
     if (!searchValue) {
       let data = {}
       this.helperService.getCallLogSingleRow(data).subscribe(list => {
@@ -334,11 +361,11 @@ export class AllcalllogComponent {
         item.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
         item.DeviceOnPercent.toString().includes(searchValue) ||
         item.DeviceOnHumanReadable.toString().includes(searchValue) ||
-        item.user.mobile.toString().includes(searchValue) 
+        item.user.mobile.toString().includes(searchValue)
         // You can add more conditions here to filter by other properties
       );
     }
-   
+
   }
 
 
@@ -351,7 +378,7 @@ export class AllcalllogComponent {
   sortAgentEmail(email: string) {
     // Toggle sort order
     this.agentEmailSortOrder = this.agentEmailSortOrder === 'asc' ? 'desc' : 'asc';
-    this.sortColumn ='email'
+    this.sortColumn = 'email'
     // Sort the data based on Agent Email column and the current sort order
     this.filterList.sort((a: any, b: any) => {
       if (a.user[email] < b.user[email]) {
@@ -363,7 +390,7 @@ export class AllcalllogComponent {
       }
     });
   }
-  
+
 
   getArrowClass(column: string): string {
     // alert(this.sortColumn)
@@ -374,6 +401,6 @@ export class AllcalllogComponent {
   }
 
 
-  
+
 
 }
