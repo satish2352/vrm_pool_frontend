@@ -60,3 +60,12 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* .table-hover tbody tr:hover > th,td {
+  background-color: rgb(215, 215, 215)
+ 
+} */
+.table-hover  tbody  tr:hover td {
+  background: rgb(232, 232, 235)
+ 
+  
+}

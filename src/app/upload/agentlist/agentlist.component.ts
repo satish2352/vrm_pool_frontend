@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-agentlist',
   templateUrl: './agentlist.component.html',
-  styleUrls: ['./agentlist.component.scss']
+  styleUrls: ['./agentlist.component.css']
 })
 export class AgentlistComponent {
 

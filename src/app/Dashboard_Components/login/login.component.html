@@ -1,15 +1,15 @@
-<div class="center-container">
+<div class="center-container bg-gradient-light">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>Vrm</b>Pool</a>
+      <a href="../../index2.html" class="text-secondary"><b>Vrm</b>Pool</a>
     </div>
-    <div class="card">
-      <div class="card-body login-card-body">
+    <div class="card bg-white">
+      <div class="card-body login-card-body bg-white">
         <p class="login-box-msg">Log in to start your session</p>
       
         <form [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="input-group mb-3">
-            <input formControlName="mobile" id="mobile" type="text" class="form-control " placeholder="Enter Mobile Number">
+            <input formControlName="mobile" id="mobile" type="text" class="form-control text-secondary bg-white" placeholder="Enter Mobile Number" >
             <div class="input-group-append ">
               <div class="input-group-text ">
                 <span class="fas fa-mobile"></span>
@@ -26,7 +26,7 @@
 
           <div class="input-group mb-3">
             <input formControlName="password" id="password" type="{{ showPassword ? 'text' : 'password' }}"
-              class="form-control" placeholder="Enter Password">
+              class="form-control text-secondary bg-white" placeholder="Enter Password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <!-- Toggle icon based on showPassword value -->

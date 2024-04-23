@@ -1,10 +1,10 @@
-<div class="wrapper">
-    <div class="content-wrapper">
+<div class="wrappe ">
+    <div class="content-wrapper bg-gradient-light">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All call </h1>
+                        <h1 class="text-secondary">All call </h1>
                     </div>
 
                 </div>
@@ -13,7 +13,7 @@
 
         <section class="content">
             <div class="container-fluid">
-                <div class="card card-default">
+                <div class="card card-default bg-white">
                     <div class="card-header">
                         <h3 class="card-title">Select User</h3>
                         <div class="card-tools">
@@ -108,7 +108,7 @@
                                     <div class="form-group">
                                         <label>From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" [max]="maxDate" [min]="minDate"  class="form-control"
+                                            <input type="date" [max]="maxDate" [min]="minDate"  class="form-control text-secondary bg-white"
                                                 (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label>From Time</label>
                                         <div class="input-group" id="fromtime">
-                                            <input type="time" class="form-control"
+                                            <input type="time" class="form-control text-secondary bg-white"
                                                 (change)="fromtime($event.target)" />
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                     <div class="form-group">
                                         <label>To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" [max]="maxDate" class="form-control"
+                                            <input type="date" [max]="maxDate" class="form-control text-secondary bg-white"
                                                 (change)="todate($event.target)" />
                                         </div>
                                     </div>
@@ -139,14 +139,14 @@
                                     <div class="form-group">
                                         <label>To Time</label>
                                         <div class="input-group" id="totime">
-                                            <input type="time" class="form-control" (change)="totime($event.target)" />
+                                            <input type="time" class="form-control text-secondary bg-white" (change)="totime($event.target)" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Select TimeFrame</label>
-                                        <select class="form-control" (change)="ontimeselect($event.target)">
+                                        <select class="form-control text-secondary bg-white" (change)="ontimeselect($event.target)">
                                             <option value="" disabled selected>Choose TimeFrame</option>
                                             <option value="30">30 Minutes</option>
                                             <!-- <option value="60">60 Minutes</option> -->
@@ -157,7 +157,7 @@
                                     <div class="form-group">
                                         <label>Search</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search..."
+                                            <input type="text" class="form-control text-secondary bg-white" placeholder="Search..."
                                                 [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card bg-white">
 
                             <div class="card-body">
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
@@ -216,7 +216,7 @@
                                             </thead>
                                             <tbody>
 
-                                                <tr
+                                                <tr class="text-secondary"
                                                     *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                     <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                                     <td><a (click)="viewagentreposrts(item.user.id)"

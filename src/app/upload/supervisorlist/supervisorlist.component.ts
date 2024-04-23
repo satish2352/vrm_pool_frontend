@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-supervisorlist',
   templateUrl: './supervisorlist.component.html',
-  styleUrls: ['./supervisorlist.component.sass']
+  styleUrls: ['./supervisorlist.component.css']
 })
 export class SupervisorlistComponent implements OnInit {
   selectedFile!: File;
