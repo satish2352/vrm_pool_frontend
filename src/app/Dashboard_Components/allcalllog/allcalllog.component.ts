@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./allcalllog.component.css']
 })
 export class AllcalllogComponent {
+  timeselect: string = "";
   pagesize: number = 10;
   currentpage: number = 1;
   alllist: any = [];
@@ -49,7 +50,7 @@ export class AllcalllogComponent {
 
 
   selectedAgents: any[] = []; // To store selected agents
-  timeselect: any;
+  // timeselect: any;
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
     public router: Router,) {
@@ -89,8 +90,11 @@ export class AllcalllogComponent {
     this.getAllAgentbySuperviserList()
     // this.filteredList = this.alllist;
     // this.searchChanged('')
+   
+    
+    
 
-  }
+  } 
 
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
     return Math.abs(incomingCalls - missedCalls);
@@ -125,9 +129,28 @@ export class AllcalllogComponent {
     }
     this.getCallLogSingleRow(this.data)
   }
+  // ontimeselect(val: any) {
+  //   this.timeselect = val.value;
+  //   this.getAllAgentbySuperviserList()
+  //   this.data = {}
+  //   this.data = {
+  //     'user_type': '',
+  //     'fromdate': this.fromdateSelected,
+  //     'todate': this.todateSelected,
+  //     'status': '',
+  //     'supervisor_id': '',
+  //     'agent_id': this.agentSelected,
+  //     'direction': '',
+  //     'fromtime': this.fromtimeSelected,
+  //     'totime': this.totimeSelected,
+  //     'time': this.timeselect,
+  //   }
+  //   this.getCallLogSingleRow(this.data)
+  // }
+
+
   ontimeselect(val: any) {
     this.timeselect = val.value;
-    this.getAllAgentbySuperviserList()
     this.data = {}
     this.data = {
       'user_type': '',
@@ -135,14 +158,66 @@ export class AllcalllogComponent {
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': '',
-      // 'agent_id': this.agentSelected,
+      'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
       'time': this.timeselect,
     }
-    this.getCallLogSingleRow(this.data)
+    this.getAllAgentbytimeframe(this.data)
   }
+
+  getAllAgentbytimeframe(data:any){
+   
+    this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
+      if (list['result'] == true) {
+        this.filterList = list['data'];
+      }
+    });
+  }
+//   ontimeselect(val: any) {
+//     this.timeselect = val.value;
+
+//     // Check if both fromtime and totime are selected
+//     alert(this.fromtimeSelected);
+//     if (typeof this.fromtimeSelected  === 'undefined' && typeof this.totimeSelected  === 'undefined') {
+       
+//       this.timeselect = "";
+//       alert('Please select both From Time and To Time.');
+//         // Call getCallLogSingleRow with the constructed data
+//         // this.getCallLogSingleRow(this.data);
+//     } else {
+//         // Either fromtime or totime is missing, show an alert
+       
+
+
+//          // Both fromtime and totime are selected, proceed with getting data
+//          this.getAllAgentbySuperviserList();
+
+//          // Construct the data object
+//          this.data = {
+//              'user_type': '',
+//              'fromdate': this.fromdateSelected,
+//              'todate': this.todateSelected,
+//              'status': '',
+//              'supervisor_id': '',
+//              // 'agent_id': this.agentSelected,
+//              'direction': '',
+//              'fromtime': this.fromtimeSelected,
+//              'totime': this.totimeSelected,
+//              'time': this.timeselect,
+//          };
+ 
+        
+        
+        
+        
+//     }
+// }
+
+
+
+ 
   pagerecords(val: any) {
     this.pagesize = val.value;
 
@@ -211,7 +286,7 @@ export class AllcalllogComponent {
     console.log(val.value)
 
     this.fromdateSelected = val.value;
-    this.data = {}
+    this.data = {} 
     this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -326,6 +401,7 @@ export class AllcalllogComponent {
       }
     });
   }
+
 
   getCallLogSingleRow(data: any) {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {

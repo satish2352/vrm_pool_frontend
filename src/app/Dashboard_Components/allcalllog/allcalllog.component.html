@@ -107,13 +107,14 @@
                                     <div class="form-group">
                                         <label class="text-secondary">Select TimeFrame</label>
                                         <select class="form-control bg-white  text-secondary"
-                                            (change)="ontimeselect($event.target)">
-                                            <option value="" disabled selected class="text-secondary">Choose TimeFrame
+                                            (change)="ontimeselect($event.target)" [ngModel]="timeselect">
+                                            <option  [ngValue]="''" selected class="text-secondary">Choose Time Frame
                                             </option>
                                             <option value="30" class="text-secondary">30 Minutes</option>
                                         </select>
                                     </div>
                                 </div>
+                               
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="text-secondary">Search</label>
@@ -184,8 +185,9 @@
                                                 <tr class="bg-white" 
                                                     *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
                                                     <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}</td>
-                                                    <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
-                                                            item.user.name }}</a></td>
+                                                    <td>{{item.user.name }}</td>
+                                                    <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
+                                                            item.user.name }}</a></td> -->
                                                     <h5><td id="Table_data">{{ item.user.email }}</td></h5>
                                                     <td id="Table_data">{{ item.IncomingCalls }}</td>
                                                     <td id="Table_data"> {{ item.MissedCalls }}</td>
@@ -197,7 +199,7 @@
                                                     <td id="Table_data">{{ item.OutgoingCalls }}</td>
                                                     <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
                                                     <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td>
-                                                    <td id="Table_data">{{ item.DeviceOnPercent }}</td>
+                                                    <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
                                                     <!-- <td>{{ item.DeviceOnHumanReadable }}</td> -->
                                                     <td id="Table_data">{{ item.user.mobile }}</td>
                                                 </tr>

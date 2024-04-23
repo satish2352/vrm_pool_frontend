@@ -92,6 +92,10 @@ export class HelperService {
   
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
+  getAllAgentbytimeframe(data:any): Observable<any> {
+  
+    return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleTimeSlotWise`, data);
+  }
 
 
   getCallLogSingleRow(data:any): Observable<any> {
