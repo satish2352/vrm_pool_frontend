@@ -54,11 +54,11 @@ export class Screen1Component {
   }
   
   viewreposts() {
-    this.router.navigate(['/admin-dashboard', 'supervisor-list']);
+    this.router.navigate(['/admin-dashboard', 'admin-all-user-list']);
   }
   viewagentreposts() {
     
-    this.router.navigate(['/admin-dashboard', 'agent-list']);
+    this.router.navigate(['/admin-dashboard', 'admin-all-user-list']);
   }
   viewrepostsdetails() {
     

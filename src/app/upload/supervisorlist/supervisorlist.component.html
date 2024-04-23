@@ -16,34 +16,34 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card  ">
-                        <a id="hiddenLink" target="_blank" style="display: none;" download ></a>
-                        <div class="card bg-white">
+                        <a id="hiddenLink" target="_blank" style="display: none;" download></a>
 
-                            <div class="card-body">
 
-                                <div class="row">
+                        <div class="card-body">
 
-                                    <div class="col-md-6">
-                                        <label>Upload Supervisor</label>
-                                        <div class="form-group ">
-                                            <div class="input-group ">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-inputs " id="exampleInputFile" 
-                                                        (change)="onFileSelected($event)" class="">
-                                                    <label class="custom-file-label bg-white " for="exampleInputFile">
-                                                        <span *ngIf="selectedFile">{{selectedFile.name}} </span>
-                                                        file </label>    
-                                                </div>
-                                                <!-- <button class="btn btn-primary bg-dark text-white" >Browse</button> -->
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" (click)="onUpload()">Upload</button>
-                                                </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label>Upload Supervisor</label>
+                                    <div class="form-group ">
+                                        <div class="input-group ">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-inputs " id="exampleInputFile"
+                                                    (change)="onFileSelected($event)" class="">
+                                                <label class="custom-file-label bg-white " for="exampleInputFile">
+                                                    <span *ngIf="selectedFile">{{selectedFile.name}} </span>
+                                                    file </label>
+                                            </div>
+                                            <!-- <button class="btn btn-primary bg-dark text-white" >Browse</button> -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" (click)="onUpload()">Upload</button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
 
-                                    <!-- 
+                                <!-- 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>File Wise Data</label>
@@ -57,11 +57,11 @@
                                         </div>
                                     </div> -->
 
-                                </div>
                             </div>
-
-
                         </div>
+
+
+
 
                         <div class="card-body bg-white">
                             <div class="col-md-3">
@@ -93,13 +93,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="text-secondary" 
+                                            <tr class="text-secondary"
                                                 *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
                                                 <td class=" text-dark">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
                                                 <td class=" text-dark">{{ alluploadedusers.fileId }}</td>
                                                 <td class=" text-dark">{{ alluploadedusers.insertedCount }}</td>
                                                 <td class=" text-dark">{{ alluploadedusers.failedCount }}</td>
-                                                <td class=" text-dark">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
+                                                <td class=" text-dark">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd
+                                                    h:mm:ss a'}}</td>
                                                 <td>
                                                     <a class="text-primary"
                                                         (click)="showDetails(alluploadedusers.fileId)">View</a>
