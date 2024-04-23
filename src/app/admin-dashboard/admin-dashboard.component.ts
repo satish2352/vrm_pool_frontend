@@ -35,8 +35,12 @@ export class AdminDashboardComponent {
       title: 'Confirmation',
       text: 'Are you sure you want to log out?',
       icon: 'warning',
-      showCancelButton: true,
+     
+      showCancelButton: true, 
+      
       confirmButtonText: 'Yes, log out!',
+      confirmButtonColor: "red",
+      
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {

@@ -86,7 +86,8 @@ export class AgentlistComponent {
       }, error => {
         // Handle error cases
         this.getAllAgentList();
-        Swal.fire('Error', 'Error uploading file. Please try again.', 'error');
+        console.log(error)
+        Swal.fire('Error',`${error['error'].message}`, 'error');
       });
   }
 

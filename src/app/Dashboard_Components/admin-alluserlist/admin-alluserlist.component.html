@@ -4,7 +4,7 @@
             <div class="container-fluid ">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class=" text-secondary">All Users List</h1>
+                        <h1 class=" text-secondary">Users</h1>
                     </div>
 
                 </div>
@@ -59,7 +59,7 @@
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
 
                                     <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData" class="bg-light text-dark">
-                                        <table id="example2" class="table table-bordered table-hover bg-white text-secondary ">
+                                        <table id="example2" class="table table-bordered table-hover bg-dark text-secondary ">
                                             <thead>
                                                 <tr>
                                                     <th >Sr.No</th>
@@ -80,17 +80,17 @@
                                                     *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                     <ng-container *ngIf="users.is_deleted == 0" class="bg-light text-secondary">
                                                         
-                                                        <th class="text-secondary">{{i+1+(pagesize*(currentpage-1))}}</th>
-                                                        <td class=" text-secondary"><span *ngIf="users.user_type == '2'"> Supervisor</span><span
+                                                        <th class="text-secondary text-dark">{{i+1+(pagesize*(currentpage-1))}}</th>
+                                                        <td class=" text-secondary text-dark"><span *ngIf="users.user_type == '2'"> Supervisor</span><span
                                                                 *ngIf="users.user_type == '3'"> Agent</span></td>
-                                                        <td class="text-secondary">{{ users.name }}</td>
-                                                        <td class="text-secondary">{{users.mobile}} </td>
-                                                        <td class="text-secondary">{{users.email}} </td>
-                                                        <td class="text-secondary"><button class="btn btn-primary"
+                                                        <td class="text-dark">{{ users.name }}</td>
+                                                        <td class="text-dark">{{users.mobile}} </td>
+                                                        <td class="text-dark">{{users.email}} </td>
+                                                        <td class="text-dark"><button class="btn btn-primary"
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="updateusers(users.id)">Edit</button><span
                                                                 *ngIf="users.user_type == '3'"> NA</span></td>
-                                                        <td class="text-secondary">
+                                                        <td class="text-dark">
                                                             <label class="switch">
                                                                 <input type="checkbox" [checked]="users.is_active==1"
                                                                     (change)="changeUserStatus(users.id, $event.target)">
@@ -99,16 +99,16 @@
 
                                                         </td>
 
-                                                        <td class="text-secondary"> <button class="btn btn-primary  "
+                                                        <td class="text-dark"> <a class="text-primary  "
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="userspassreset(users.mobile)">Reset
-                                                                PassWord </button>
+                                                                PassWord </a>
                                                             <span *ngIf="users.user_type == '3'"> NA</span>
                                                         </td>
-                                                        <td class="text-secondary"><button class="btn btn-primary "
+                                                        <td class="text-dark"><a class="text-primary "
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="deleteUser(users.id)">Delete
-                                                                User </button>
+                                                                User </a>
                                                             <span *ngIf="users.user_type == '3'"> NA</span>
                                                         </td>
                                                     </ng-container>

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6 text-secondary">
-                    <h1>All Supervisor</h1>
+                    <h1>Supervisor</h1>
                 </div>
 
             </div>
@@ -28,12 +28,13 @@
                                         <div class="form-group ">
                                             <div class="input-group ">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-inputs" id="exampleInputFile" 
+                                                    <input type="file" class="custom-file-inputs " id="exampleInputFile" 
                                                         (change)="onFileSelected($event)" class="">
-                                                    <label class="custom-file-label bg-white text-dark" for="exampleInputFile"><span
-                                                            *ngIf="selectedFile">{{selectedFile.name}}</span>
-                                                        file</label>
+                                                    <label class="custom-file-label bg-white " for="exampleInputFile">
+                                                        <span *ngIf="selectedFile">{{selectedFile.name}} </span>
+                                                        file </label>    
                                                 </div>
+                                                <!-- <button class="btn btn-primary bg-dark text-white" >Browse</button> -->
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary" (click)="onUpload()">Upload</button>
                                                 </div>
@@ -82,30 +83,30 @@
                                     <table id="example2" class="table table-bordered table-hover  ">
                                         <thead>
                                             <tr>
-                                                <th>Sr.No</th>
-                                                <th>File_ID</th>
-                                                <th>Inserted Count</th>
-                                                <th>Failed Count</th>
-                                                <th>Created At</th>
-                                                <th>View</th>
-                                                <th>Download</th>
+                                                <th class="bg-dark">Sr.No</th>
+                                                <th class="bg-dark">File_ID</th>
+                                                <th class="bg-dark">Inserted Count</th>
+                                                <th class="bg-dark">Failed Count</th>
+                                                <th class="bg-dark">Created At</th>
+                                                <th class="bg-dark">View</th>
+                                                <th class="bg-dark">Download</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-secondary" 
                                                 *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
-                                                <td class="bg-white">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
-                                                <td>{{ alluploadedusers.fileId }}</td>
-                                                <td>{{ alluploadedusers.insertedCount }}</td>
-                                                <td>{{ alluploadedusers.failedCount }}</td>
-                                                <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
+                                                <td class=" text-dark">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
+                                                <td class=" text-dark">{{ alluploadedusers.fileId }}</td>
+                                                <td class=" text-dark">{{ alluploadedusers.insertedCount }}</td>
+                                                <td class=" text-dark">{{ alluploadedusers.failedCount }}</td>
+                                                <td class=" text-dark">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
                                                 <td>
-                                                    <button class="btn btn-primary"
-                                                        (click)="showDetails(alluploadedusers.fileId)">View</button>
+                                                    <a class="text-primary"
+                                                        (click)="showDetails(alluploadedusers.fileId)">View</a>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-primary"
-                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
+                                                    <a class="text-primary"
+                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</a>
                                                 </td>
                                             </tr>
                                         </tbody>
