@@ -15,7 +15,8 @@
   <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a routerLink="screen1" class="brand-link">
-      <img src="assets/img/VRM2.png" alt="VrmPool" class="brand-image img-rectangle elevation-6" style="opacity: .8">
+      <!-- <img src="./green.png" > -->
+      <img src="../../assets/img/green.png" alt="VRM Pool logo" width="160px" style="padding-left: 20px;">
       <!-- <span class="brand-text font-weight-light">VrmPool</span> -->
     </a>
 
@@ -31,10 +32,10 @@
 
           <span *ngIf="user_type =='1'">
 
-            <li class="nav-item" style="padding: 10px;">
+            <li class="nav-item" >
               <a routerLink="screen1" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p style="padding-left: 10px;">VRM Dashboard</p>
+                <p style="padding-left: 10px;">VRM Pool Monitoring Dashboard</p>
               </a>
             </li>
             <li class="nav-item">
@@ -177,7 +178,7 @@
           <li class="nav-item ">
             <a (click)="logout()" class="nav-link">
               <i class="nav-icon fa-solid fa-lock"></i>
-              <p style="padding-left: 10px;">Log out</p>
+              <p style="padding-left: 10px; ">Log out</p>
             </a>
           </li>
 

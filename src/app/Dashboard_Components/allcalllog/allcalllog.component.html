@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6  ">
-                        <h1 class="text-secondary">All call Log</h1>
+                        <h1 class="text-secondary">Call Details</h1>
                     </div>
 
                 </div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Select TimeFrame</label>
+                                        <label class="text-secondary">Select Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)">
                                             <option value="" disabled selected class="text-secondary">Choose TimeFrame
@@ -158,26 +158,26 @@
                                 </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                        <table id="example2" class="table table-bordered table-hover bg-white "  >
+                                        <table id="example2" class="table table-bordered table-hover bg-dark text-white"  >
                                             <thead>
                                                 <tr class="text-secondary">
-                                                    <th class="bg-denger">Sr.No</th>
-                                                    <th (click)="sortAgentEmail('name')">Agent Name <i class="fa"
+                                                    <th class="text-white">Sr.No</th>
+                                                    <th (click)="sortAgentEmail('name')" class="text-white">Agent Name <i class="fa"
                                                             [ngClass]="getArrowClass('name')"></i></th>
-                                                    <th (click)="sortAgentEmail('email')">Agent Email <i class="fa "
+                                                    <th (click)="sortAgentEmail('email')" class="text-white">Agent Email <i class="fa "
                                                             [ngClass]="getArrowClass('email')"></i></th>
-                                                    <th>Incoming Calls</th>
-                                                    <th>Missed Calls</th>
-                                                    <th>Received Calls</th>
-                                                    <th>No Answer</th>
-                                                    <th>Busy</th>
-                                                    <th>Failed</th>
-                                                    <th>Outgoing Calls</th>
-                                                    <th>On Call Time</th>
-                                                    <th>Average Handling Time In Minutes</th>
+                                                    <th class="text-white">Incoming Calls</th>
+                                                    <th class="text-white">Missed Calls</th>
+                                                    <th class="text-white">Received Calls</th>
+                                                    <th class="text-white">No Answer</th>
+                                                    <th class="text-white">Busy</th>
+                                                    <th class="text-white">Failed</th>
+                                                    <th class="text-white">Outgoing Calls</th>
+                                                    <th class="text-white">On Call Time</th>
+                                                    <th class="text-white">Average Handling Time In Minutes</th>
                                                     <!-- <th>Device On Percent</th> -->
                                                     <!-- <th>Device On Human Readable</th> -->
-                                                    <th (click)="sortAgentEmail('mobile')">Agent Phone Number</th>
+                                                    <th (click)="sortAgentEmail('mobile')" class="text-white">Agent Phone Number</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-dark">
@@ -186,7 +186,7 @@
                                                     <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}</td>
                                                     <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td>
-                                                    <h5><td id="Table_data">{{ item.user.email }}</td></h5>
+                                                    <td id="Table_data">{{ item.user.email }}</td>
                                                     <td id="Table_data">{{ item.IncomingCalls }}</td>
                                                     <td id="Table_data"> {{ item.MissedCalls }}</td>
                                                     <td>{{ calculateAbsoluteDifference(item.IncomingCalls,

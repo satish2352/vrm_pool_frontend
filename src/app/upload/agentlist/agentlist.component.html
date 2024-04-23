@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-secondary">All Agent</h1>
+                    <h1 class="text-secondary">Relatioship Manager</h1>
                 </div>
 
             </div>
@@ -69,27 +69,27 @@
                             </div>
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="alllist1 && alllist1.length > 0; else noData">
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="example2" class="table table-bordered table-hover ">
                                         <thead>
                                             <tr>
-                                                <th>Sr.No</th>
+                                                <th class="bg-dark">Sr.No</th>
 
-                                                <th>File Id</th>
-                                                <th>Inserted Count</th>
-                                                <th>Failed Count</th>
-                                                <th>Created At </th>
-                                                <th>View </th>
-                                                <th>Download </th>
+                                                <th class="bg-dark">File Id</th>
+                                                <th  class="bg-dark">Inserted Count</th>
+                                                <th  class="bg-dark">Failed Count</th>
+                                                <th  class="bg-dark">Created At </th>
+                                                <th  class="bg-dark">View </th>
+                                                <th  class="bg-dark">Download </th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-secondary"
                                                 *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                <td>{{ alluploadedusers.fileId }}</td>
-                                                <td>{{ alluploadedusers.insertedCount }}</td>
-                                                <td>{{ alluploadedusers.failedCount }}</td>
+                                                <td class=" c">{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                <td class="text-dark">{{ alluploadedusers.fileId }}</td>
+                                                <td class="text-dark">{{ alluploadedusers.insertedCount }}</td>
+                                                <td class="text-dark">{{ alluploadedusers.failedCount }}</td>
                                                 <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
                                             Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
                                             class="badge badge-danger">
@@ -99,11 +99,11 @@
                                             alluploadedusers.reason }}</span></td> -->
                                                 <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
                                                 <td>
-                                                    <button class="btn btn-primary"
-                                                        (click)="showDetails(alluploadedusers.fileId)">View</button>
+                                                    <a class="text-primary"
+                                                        (click)="showDetails(alluploadedusers.fileId)">View</a>
                                                 </td>
-                                                <td><button class="btn btn-primary"
-                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</button>
+                                                <td><a class="text-primary"
+                                                        (click)="downloadFileIdWise(alluploadedusers.fileId)">Download</a>
 
                                                 </td>
                                                 <!-- |date:'dd/MM/yyyy'}}</td> -->
