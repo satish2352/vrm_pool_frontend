@@ -1,21 +1,21 @@
 <div class="wrapper">
-    <div class="content-wrapper">
+    <div class="content-wrapper bg-gradient-light text-dark">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>All call Log</h1>
+                    <div class="col-sm-6  ">
+                        <h1 class="text-secondary">All call Log</h1>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card card-default">
+        <section class="content ">
+            <div class="container-fluid bg-white text-dark">
+                <div class="card card-default bg-white text-dark ">
                     <div class="card-header">
-                        <h3 class="card-title">Select User</h3>
+                        <h3 class="card-title text-secondary ">Select User</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -30,10 +30,13 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Select Supervisor</label>
-                                        <select class="form-control" (change)="onSelectChangeSupervisor($event.target)">
-                                            <option value="" disabled selected>Choose Supervisor</option>
-                                            <option *ngFor="let userList of supervisorList" [value]="userList.id">
+                                        <label class="text-secondary ">Select Supervisor</label>
+                                        <select class="form-control bg-white text-secondary"
+                                            (change)="onSelectChangeSupervisor($event.target)">
+                                            <option value="" disabled selected class="text-secondary">Choose Supervisor
+                                            </option>
+                                            <option *ngFor="let userList of supervisorList" [value]="userList.id"
+                                                class="text-secondary">
                                                 {{ userList.name }}
                                             </option>
                                         </select>
@@ -46,8 +49,8 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Agents</label>
-                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'"
+                                        <label class="text-secondary">Agents</label>
+                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'" class="text-secondary"
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
                                         </ng-multiselect-dropdown>
@@ -59,9 +62,10 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>From Date</label>
+                                        <label class="text-secondary">From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date" [max]="maxDate" class="form-control"
+                                            <input type="date" [max]="maxDate"
+                                                class="form-control bg-white text-secondary"
                                                 (change)="fromdate($event.target)" />
                                         </div>
                                     </div>
@@ -69,9 +73,9 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>From Time</label>
+                                        <label class="text-secondary">From Time</label>
                                         <div class="input-group" id="fromtime">
-                                            <input type="time" class="form-control"
+                                            <input type="time" class="form-control bg-white text-secondary"
                                                 (change)="fromtime($event.target)" />
                                         </div>
                                     </div>
@@ -80,9 +84,10 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>To Date</label>
+                                        <label class="text-secondary">To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" [max]="maxDate" class="form-control"
+                                            <input type="date" [max]="maxDate"
+                                                class="form-control bg-white text-secondary"
                                                 (change)="todate($event.target)" />
                                         </div>
                                     </div>
@@ -90,28 +95,32 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>To Time</label>
+                                        <label class="text-secondary">To Time</label>
                                         <div class="input-group" id="totime">
-                                            <input type="time" class="form-control" (change)="totime($event.target)" />
+                                            <input type="time" class="form-control bg-white text-secondary"
+                                                (change)="totime($event.target)" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Select TimeFrame</label>
-                                        <select class="form-control" (change)="ontimeselect($event.target)">
-                                            <option value="" disabled selected>Choose TimeFrame</option>
-                                            <option value="30">30 Minutes</option>
-                                            <option value="60">60 Minutes</option>
+                                        <label class="text-secondary">Select TimeFrame</label>
+                                        <select class="form-control bg-white  text-secondary"
+                                            (change)="ontimeselect($event.target)">
+                                            <option value="" disabled selected class="text-secondary">Choose TimeFrame
+                                            </option>
+                                            <option value="30" class="text-secondary">30 Minutes</option>
+                                            <option value="60" class="text-secondary">60 Minutes</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Search</label>
+                                        <label class="text-secondary">Search</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search..."
-                                                [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                            <input type="text" class="form-control bg-white text-secondary"
+                                                placeholder="Search..." [(ngModel)]="searchTerm"
+                                                (ngModelChange)="searchChanged($event)">
                                         </div>
                                     </div>
                                 </div>
@@ -130,13 +139,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body bg-white">
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                        <table id="example2" class="table table-bordered table-hover">
+                                        <table id="example2" class="table table-bordered table-hover bg-white "  >
                                             <thead>
-                                                <tr>
-                                                    <th>Sr.No</th>
+                                                <tr class="text-secondary">
+                                                    <th class="bg-denger">Sr.No</th>
                                                     <th (click)="sortAgentEmail('name')">Agent Name <i class="fa"
                                                             [ngClass]="getArrowClass('name')"></i></th>
                                                     <th (click)="sortAgentEmail('email')">Agent Email <i class="fa "
@@ -154,32 +163,34 @@
                                                     <th (click)="sortAgentEmail('mobile')">Agent Phone Number</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr
+                                            <tbody class="text-dark">
+                                                <tr class="bg-white" 
                                                     *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
-                                                    <td>{{ (currentpage - 1) * pagesize + i + 1 }}</td>
-                                                    <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{
+                                                    <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}</td>
+                                                    <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td>
-                                                    <td>{{ item.user.email }}</td>
-                                                    <td>{{ item.IncomingCalls }}</td>
-                                                    <td>{{ item.MissedCalls }}</td>
-                                                    <td>{{ item.NoAnswer }}</td>
-                                                    <td>{{ item.Busy }}</td>
-                                                    <td>{{ item.Failed }}</td>
-                                                    <td>{{ item.OutgoingCalls }}</td>
-                                                    <td>{{ item.TotalCallDurationInMinutes }}</td>
-                                                    <td>{{ item.AverageHandlingTimeInMinutes }}</td>
-                                                    <td>{{ item.DeviceOnPercent }}</td>
+                                                    <h5><td id="Table_data">{{ item.user.email }}</td></h5>
+                                                    <td id="Table_data">{{ item.IncomingCalls }}</td>
+                                                    <td id="Table_data"> {{ item.MissedCalls }}</td>
+                                                    <td id="Table_data">{{ item.NoAnswer }}</td>
+                                                    <td id="Table_data">{{ item.Busy }}</td>
+                                                    <td id="Table_data">{{ item.Failed }}</td>
+                                                    <td id="Table_data">{{ item.OutgoingCalls }}</td>
+                                                    <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
+                                                    <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td>
+                                                    <td id="Table_data">{{ item.DeviceOnPercent }}</td>
                                                     <!-- <td>{{ item.DeviceOnHumanReadable }}</td> -->
-                                                    <td>{{ item.user.mobile }}</td>
+                                                    <td id="Table_data">{{ item.user.mobile }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
                                     </ng-container>
-                                    <ng-template #noData>
-                                        <p>Data not available.</p>
-                                    </ng-template>
+                                    <div class="bg-white text-dark">
+                                        <ng-template #noData class="bg-white">
+                                            <p class="text-dark bg-white ">Data not available.</p>
+                                        </ng-template>
+                                    </div>
                                 </div>
 
                             </div>

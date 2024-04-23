@@ -1,9 +1,9 @@
-<div class="content-wrapper mt-5">
+<div class="content-wrapper mt-5  bg-gradient-light text-dark">
 
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-6 text-secondary">
                     <h1>All Supervisor</h1>
                 </div>
 
@@ -12,12 +12,12 @@
     </section>
 
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid ">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <a id="hiddenLink" target="_blank" style="display: none;" download></a>
-                        <div class="card">
+                    <div class="card  ">
+                        <a id="hiddenLink" target="_blank" style="display: none;" download ></a>
+                        <div class="card bg-white">
 
                             <div class="card-body">
 
@@ -25,12 +25,12 @@
 
                                     <div class="col-md-6">
                                         <label>Upload Supervisor</label>
-                                        <div class="form-group">
-                                            <div class="input-group">
+                                        <div class="form-group ">
+                                            <div class="input-group ">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                        (change)="onFileSelected($event)">
-                                                    <label class="custom-file-label" for="exampleInputFile"><span
+                                                    <input type="file" class="custom-file-inputs" id="exampleInputFile" 
+                                                        (change)="onFileSelected($event)" class="">
+                                                    <label class="custom-file-label bg-white text-dark" for="exampleInputFile"><span
                                                             *ngIf="selectedFile">{{selectedFile.name}}</span>
                                                         file</label>
                                                 </div>
@@ -62,11 +62,11 @@
 
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body bg-white">
                             <!-- Check if supervisorlist has data -->
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="supervisorlist && supervisorlist.length > 0; else noData">
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="example2" class="table table-bordered table-hover  ">
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
@@ -79,9 +79,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr
+                                            <tr class="text-secondary" 
                                                 *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
-                                                <td>{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
+                                                <td class="bg-white">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
                                                 <td>{{ alluploadedusers.fileId }}</td>
                                                 <td>{{ alluploadedusers.insertedCount }}</td>
                                                 <td>{{ alluploadedusers.failedCount }}</td>
@@ -105,8 +105,6 @@
                                 </ng-template>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

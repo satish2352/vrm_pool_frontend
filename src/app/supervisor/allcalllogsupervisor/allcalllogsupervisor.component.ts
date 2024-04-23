@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-allcalllogsupervisor',
   templateUrl: './allcalllogsupervisor.component.html',
-  styleUrls: ['./allcalllogsupervisor.component.sass']
+  styleUrls: ['./allcalllogsupervisor.component.css']
 })
 export class AllcalllogsupervisorComponent {
 

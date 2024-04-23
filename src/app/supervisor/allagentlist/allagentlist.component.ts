@@ -4,7 +4,7 @@ import { HelperService } from 'src/app/helper.service';
 @Component({
   selector: 'app-allagentlist',
   templateUrl: './allagentlist.component.html',
-  styleUrls: ['./allagentlist.component.sass']
+  styleUrls: ['./allagentlist.component.css']
 })
 export class AllagentlistComponent {
   pagesize: number = 10; 

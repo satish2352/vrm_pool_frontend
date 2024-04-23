@@ -1,10 +1,10 @@
-<div class="wrapper">
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
+<div class="wrapper ">
+    <div class="content-wrapper mt-5  bg-gradient-light text-dark">
+        <section class="content-header bg-whte text-dark">
+            <div class="container-fluid ">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All Users List</h1>
+                        <h1 class=" text-secondary">All Users List</h1>
                     </div>
 
                 </div>
@@ -16,12 +16,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card bg-white">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Select User Type</label>
-                                    <select class="form-control" (change)="listsepration($event.target)">
-                                        <option value="" disabled selected>Choose User Type</option>
+                                    <select class="form-control bg-white text-secondary" (change)="listsepration($event.target)" >
+                                        <option value="" disabled selected class="bg-white text-secondary">Choose User Type</option>
                                         <option value="2"> Supervisors</option>
                                         <option value="3"> Agents</option>
                                     </select>
@@ -32,37 +32,39 @@
                             <div class="card-body">
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
 
-                                    <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData">
-                                        <table id="example2" class="table table-bordered table-hover">
+                                    <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData" class="bg-light text-dark">
+                                        <table id="example2" class="table table-bordered table-hover bg-white text-secondary ">
                                             <thead>
                                                 <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Supervisor/Agent</th>
-                                                    <th>Name </th>
-                                                    <th>Mobile No</th>
-                                                    <th>Email ID</th>
-                                                    <th>Edit</th>
-                                                    <th>Enable/Disable</th>
+                                                    <th >Sr.No</th>
+                                                    <th >Supervisor/Agent</th>
+                                                    <th >Name </th>
+                                                    <th >Mobile No</th>
+                                                    <th >Email ID</th>
+                                                    <th >Edit</th>
+                                                    <th >Enable/Disable</th>
                                                     <!-- <th>Change PassWord</th> -->
-                                                    <th>Reset PassWord</th>
-                                                    <th>Delete User</th>
+                                                    <th >Reset PassWord</th>
+                                                    <th >Delete User</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr
+                                            <tbody >
+                                                
+                                                <tr class="bg-white"
                                                     *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                    <ng-container *ngIf="users.is_deleted == 0">
-                                                        <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                        <td><span *ngIf="users.user_type == '2'"> Supervisor</span><span
+                                                    <ng-container *ngIf="users.is_deleted == 0" class="bg-light text-secondary">
+                                                        
+                                                        <th class="text-secondary">{{i+1+(pagesize*(currentpage-1))}}</th>
+                                                        <td class=" text-secondary"><span *ngIf="users.user_type == '2'"> Supervisor</span><span
                                                                 *ngIf="users.user_type == '3'"> Agent</span></td>
-                                                        <td>{{ users.name }}</td>
-                                                        <td>{{users.mobile}} </td>
-                                                        <td>{{users.email}} </td>
-                                                        <td><button class="btn btn-primary"
+                                                        <td class="text-secondary">{{ users.name }}</td>
+                                                        <td class="text-secondary">{{users.mobile}} </td>
+                                                        <td class="text-secondary">{{users.email}} </td>
+                                                        <td class="text-secondary"><button class="btn btn-primary"
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="updateusers(users.id)">Edit</button><span
                                                                 *ngIf="users.user_type == '3'"> NA</span></td>
-                                                        <td>
+                                                        <td class="text-secondary">
                                                             <label class="switch">
                                                                 <input type="checkbox" [checked]="users.is_active==1"
                                                                     (change)="changeUserStatus(users.id, $event.target)">
@@ -71,13 +73,13 @@
 
                                                         </td>
 
-                                                        <td><button class="btn btn-primary  "
+                                                        <td class="text-secondary"> <button class="btn btn-primary  "
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="userspassreset(users.mobile)">Reset
                                                                 PassWord </button>
                                                             <span *ngIf="users.user_type == '3'"> NA</span>
                                                         </td>
-                                                        <td><button class="btn btn-primary "
+                                                        <td class="text-secondary"><button class="btn btn-primary "
                                                                 *ngIf="users.user_type == '2'"
                                                                 (click)="deleteUser(users.id)">Delete
                                                                 User </button>

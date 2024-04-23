@@ -1,10 +1,10 @@
-<div class="content-wrapper mt-5">
+<div class="content-wrapper mt-5 bg-gradient-light">
 
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Agent List</h1>
+                    <h1 class="text-secondary">Agent List</h1>
                 </div>
 
             </div>
@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card bg-white">
                         <div class="card-body">
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="allagentlist && allagentlist.length > 0; else noData">
@@ -34,7 +34,7 @@
 
                                         </thead>
                                         <tbody>
-                                            <tr
+                                            <tr class="text-secondary"
                                                 *ngFor="let agent of allagentlist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                 <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                                 <td>{{ agent.name }} </td>
