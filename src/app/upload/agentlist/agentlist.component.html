@@ -1,5 +1,7 @@
 <div class="content-wrapper mt-5 bg-gradient-light" >
-
+    <div *ngIf="loading" class="loader-overlay">
+        <div class="loader"></div>
+      </div>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

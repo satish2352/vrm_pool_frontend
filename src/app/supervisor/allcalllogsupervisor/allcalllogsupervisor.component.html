@@ -1,10 +1,13 @@
 <div class="wrappe ">
-    <div class="content-wrapper bg-gradient-light">
+    <div *ngIf="loading" class="loader-overlay">
+        <div class="loader"></div>
+      </div>
+    <div class="content-wrapper bg-gradient-light text-dark">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="text-secondary">All call </h1>
+                        <h1 class="text-secondary"> Call Details</h1>
                     </div>
 
                 </div>
@@ -145,11 +148,12 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Select TimeFrame</label>
-                                        <select class="form-control text-secondary bg-white" (change)="ontimeselect($event.target)">
-                                            <option value="" disabled selected>Choose TimeFrame</option>
-                                            <option value="30">30 Minutes</option>
-                                            <!-- <option value="60">60 Minutes</option> -->
+                                        <label class="text-secondary">Select Time Frame</label>
+                                        <select class="form-control bg-white  text-secondary"
+                                            (change)="ontimeselect($event.target)" [ngModel]="timeselect">
+                                            <option  [ngValue]="''" selected  class="text-secondary">Choose Time Frame
+                                            </option>
+                                            <option value="30" class="text-secondary">30 Minutes</option>
                                         </select>
                                     </div>
                                 </div>

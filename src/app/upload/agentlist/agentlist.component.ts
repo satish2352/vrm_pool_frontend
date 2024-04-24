@@ -19,6 +19,9 @@ export class AgentlistComponent {
   supervisorList: any = [];
   supervisorSelected: any;
   envvariable: any;
+  loading: boolean = false; // Add loading variable
+
+
   constructor(private helperService: HelperService,
     public router: Router,
     private fileDownloadService: FileDownloadService,
@@ -36,10 +39,15 @@ export class AgentlistComponent {
 
 
   getAllAgentList() {
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
         this.alllist1 = list['data'];
-      }
+      } this.loading = false; // Hide loader after data is fetched
+    },
+    (error) => {
+      console.error('Error fetching agent list:', error);
+      this.loading = false; // Hide loader if an error occurs
     });
   }
 

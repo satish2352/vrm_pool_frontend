@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
     if (this.adminLoginForm.invalid) {
       this.formSubmitted = true;
-      this.toastr.error('Enter Credentials', 'Error',{positionClass: 'toast-top-center'});
+      this.toastr.error('Enter Credentials', 'Error', { positionClass: 'toast-top-center' });
       return;
     }
 
@@ -51,23 +51,30 @@ export class LoginComponent implements OnInit {
           console.log('Login successful', response);
           this.authService.saveToken(response.token, response.data.user_type, response.data.id);
           console.log("Token saved successfully");
-          this.toastr.success('Login successfully', 'Success');
-
+          this.toastr.success(response.message, 'Success');
           this.router.navigate(['/admin-dashboard']);
         } else {
           console.error('Token missing in response');
           this.error = 'Authentication failed. Please try again.';
-
-          this.toastr.error('Authentication failed. Please try again.', 'Error');
+          this.toastr.error(response.message || 'Authentication failed. Please try again.', 'Error');
         }
       },
-      error: (error: any) => {
-        console.error('Login error', error);
-        this.error = 'Mobile or password is incorrect';
-        this.toastr.error('Mobile or password is incorrect', 'Error');
+      error: (error) => {
+        console.log('Login error', error);
+        if (error && error.error && error.error.result === false) {
+          console.log('Invalid credentials');
+          this.error = 'Mobile or password is incorrect';
+          this.toastr.error(error.error.message, 'Error');
+        } else {
+          console.error('Unexpected error occurred during login', error);
+          this.error = 'An unexpected error occurred. Please try again later.';
+          this.toastr.error('An unexpected error occurred', 'Error');
+        }
       }
-    });
+    })
+
   }
+
 
   // logout() {
   //   this.authService.logout();

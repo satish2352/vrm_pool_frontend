@@ -39,7 +39,12 @@ export class AllcalllogsupervisorComponent {
   data: any = {};
   minDate:any
   ignoreFirstChange = true
-  timeselect:any;
+  timeselect:string="";
+  loading: boolean = false; // Add loading variable
+
+
+
+
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
     public router: Router) {
@@ -83,10 +88,17 @@ export class AllcalllogsupervisorComponent {
   }
 
   getAllAgentList() {
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
         this.agentList = list['data'];
       }
+      this.loading = false; // Hide loader after data is fetched
+    }
+    ,
+    (error) => {
+      console.error('Error fetching agent list:', error);
+      this.loading = false; // Hide loader if an error occurs
     });
   }
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
@@ -115,8 +127,6 @@ export class AllcalllogsupervisorComponent {
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-  
-    
     const currentDate = new Date().toISOString().slice(0, 10);
     this.fromdateSelected = currentDate;
     this.todateSelected = currentDate;
@@ -152,7 +162,6 @@ export class AllcalllogsupervisorComponent {
 
   }
   onSelectChangeAgent(val: any) {
-
     if (this.ignoreFirstChange) {
       this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
       return; // Ignore the rest of the function during the first call

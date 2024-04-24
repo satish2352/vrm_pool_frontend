@@ -1,4 +1,7 @@
 <div class="wrapper">
+    <div *ngIf="loading" class="loader-overlay">
+        <div class="loader"></div>
+      </div>
     <div class="content-wrapper bg-gradient-light text-dark">
         <section class="content-header">
             <div class="container-fluid">
@@ -98,7 +101,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Select Time Frame</label>
+                                         <label class="text-secondary">Select Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)" [ngModel]="timeselect">
                                             <option  [ngValue]="''" selected class="text-secondary">Choose Time Frame

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class AdminAlluserlistComponent {
   pagesize: number = 10;
   currentpage: number = 1;
-
+  loading: boolean = false; // Add loading variable
   supervisorsList1: any = [];
 
   constructor(private helperService: HelperService, private router: Router, private toastr: ToastrService
@@ -29,10 +29,16 @@ export class AdminAlluserlistComponent {
 
 
   getAllSupervisorList() {
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllUsersList().subscribe(list => {
       if (list['result'] == true) {
         this.supervisorsList1 = list['data'];
       }
+      this.loading = false; // Hide loader after data is fetched
+    },
+    (error) => {
+      console.error('Error fetching agent list:', error);
+      this.loading = false; // Hide loader if an error occurs
     });
   }
 

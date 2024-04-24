@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-allcalllog',
   templateUrl: './allcalllog.component.html',
@@ -43,10 +44,10 @@ export class AllcalllogComponent {
   sortedColumn: string = ''; // Track the currently sorted column
   isAscending: boolean = true; // Track the sorting order (ascending or descending)
   agentEmailSortOrder: string = 'asc';
-  minDatet:any;
+  minDatet: any;
   sortColumn: string = '';
   sortedItems: any[] = [];
-
+  loading: boolean = false; // Add loading variable
 
 
   selectedAgents: any[] = []; // To store selected agents
@@ -72,13 +73,13 @@ export class AllcalllogComponent {
     if (this.fromdateSelected) {
       const fromDate = new Date(this.fromdateSelected);
       const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
-      
+
       const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
       const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
       const maxYyyy = thirtyDaysFromFromDate.getFullYear();
       this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
       this.minDatet = this.minDatef;
-     
+
     }
   }
   ngOnInit(): void {
@@ -90,24 +91,30 @@ export class AllcalllogComponent {
     this.getAllAgentbySuperviserList()
     // this.filteredList = this.alllist;
     // this.searchChanged('')
-    this.agentSelected =this.allagentbysupervisorList.id
+    this.agentSelected = this.allagentbysupervisorList.id
 
-   
-    
-    
 
-  } 
+
+
+
+  }
 
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
     return Math.abs(incomingCalls - missedCalls);
   }
 
   getAllAgentList() {
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
         this.agentList = list['data'];
       }
-    });
+      this.loading = false; // Hide loader after data is fetched
+    },
+      (error) => {
+        console.error('Error fetching agent list:', error);
+        this.loading = false; // Hide loader if an error occurs
+      });
   }
 
   onSelectChangeSupervisor(val: any) {
@@ -153,78 +160,88 @@ export class AllcalllogComponent {
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-  
-    
-    const currentDate = new Date().toISOString().slice(0, 10);
-    this.fromdateSelected = currentDate;
-    this.todateSelected = currentDate;
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': '',
-      'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-      'time': this.timeselect,
+
+    if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+      
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please select both From Time and To Time.',
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+      this.timeselect = "";
+    } else {
+      const currentDate = new Date().toISOString().slice(0, 10);
+      this.fromdateSelected = currentDate;
+      this.todateSelected = currentDate;
+      this.data = {
+        'user_type': '',
+        'fromdate': this.fromdateSelected,
+        'todate': this.todateSelected,
+        'status': '',
+        'supervisor_id': '',
+        'agent_id': this.agentSelected,
+        'direction': '',
+        'fromtime': this.fromtimeSelected,
+        'totime': this.totimeSelected,
+        'time': this.timeselect,
+      };
+      this.getAllAgentbytimeframe(this.data);
     }
-    this.getAllAgentbytimeframe(this.data)
   }
 
-  getAllAgentbytimeframe(data:any){
-   
+  getAllAgentbytimeframe(data: any) {
+
     this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
       }
     });
   }
-//   ontimeselect(val: any) {
-//     this.timeselect = val.value;
+  //   ontimeselect(val: any) {
+  //     this.timeselect = val.value;
 
-//     // Check if both fromtime and totime are selected
-//     alert(this.fromtimeSelected);
-//     if (typeof this.fromtimeSelected  === 'undefined' && typeof this.totimeSelected  === 'undefined') {
-       
-//       this.timeselect = "";
-//       alert('Please select both From Time and To Time.');
-//         // Call getCallLogSingleRow with the constructed data
-//         // this.getCallLogSingleRow(this.data);
-//     } else {
-//         // Either fromtime or totime is missing, show an alert
-       
+  //     // Check if both fromtime and totime are selected
+  //     alert(this.fromtimeSelected);
+  //     if (typeof this.fromtimeSelected  === 'undefined' && typeof this.totimeSelected  === 'undefined') {
 
-
-//          // Both fromtime and totime are selected, proceed with getting data
-//          this.getAllAgentbySuperviserList();
-
-//          // Construct the data object
-//          this.data = {
-//              'user_type': '',
-//              'fromdate': this.fromdateSelected,
-//              'todate': this.todateSelected,
-//              'status': '',
-//              'supervisor_id': '',
-//              // 'agent_id': this.agentSelected,
-//              'direction': '',
-//              'fromtime': this.fromtimeSelected,
-//              'totime': this.totimeSelected,
-//              'time': this.timeselect,
-//          };
- 
-        
-        
-        
-        
-//     }
-// }
- 
+  //       this.timeselect = "";
+  //       alert('Please select both From Time and To Time.');
+  //         // Call getCallLogSingleRow with the constructed data
+  //         // this.getCallLogSingleRow(this.data);
+  //     } else {
+  //         // Either fromtime or totime is missing, show an alert
 
 
- 
+
+  //          // Both fromtime and totime are selected, proceed with getting data
+  //          this.getAllAgentbySuperviserList();
+
+  //          // Construct the data object
+  //          this.data = {
+  //              'user_type': '',
+  //              'fromdate': this.fromdateSelected,
+  //              'todate': this.todateSelected,
+  //              'status': '',
+  //              'supervisor_id': '',
+  //              // 'agent_id': this.agentSelected,
+  //              'direction': '',
+  //              'fromtime': this.fromtimeSelected,
+  //              'totime': this.totimeSelected,
+  //              'time': this.timeselect,
+  //          };
+
+
+
+
+
+  //     }
+  // }
+
+
+
+
   pagerecords(val: any) {
     this.pagesize = val.value;
 
@@ -295,7 +312,7 @@ export class AllcalllogComponent {
     console.log(val.value)
 
     this.fromdateSelected = val.value;
-    this.data = {} 
+    this.data = {}
     this.data = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
@@ -307,7 +324,7 @@ export class AllcalllogComponent {
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
 
-    } 
+    }
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }

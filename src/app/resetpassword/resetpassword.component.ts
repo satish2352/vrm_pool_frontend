@@ -57,7 +57,7 @@ export class ResetpasswordComponent implements OnInit {
   // }
   SendOtp() {
     if (this.loginForm.controls['mobile'].errors && this.loginForm.controls['mobile'].errors['required']) {
-      this.responseMessage = 'Please enter a mobile number before sending OTP';
+      this.responseMessage = 'Please enter a mobile number before sending Temporary Password';
       return;
     }
   
@@ -74,14 +74,19 @@ export class ResetpasswordComponent implements OnInit {
           this.otpSent = true; // Set otpSent to true to disable the button
           this.startTimer(); // Start the timer
         } else {
-          this.responseMessage = 'Failed to send OTP. Please try again later.';
+          this.responseMessage = 'Failed to Temporary Password. Please try again later.';
         }
       },
-      error => {
+      (error) => {
         console.error('Error sending OTP:', error);
-        this.responseMessage = 'Enter Register Mobile Number.';
-      }
-    );
+    
+        // Check if the error object contains a specific error message
+        if (error && error.error && error.error.result === false && error.error.message) {
+          this.responseMessage = error.error.message;
+        } else {
+          this.responseMessage = 'Error sending OTP. Please try again later.';
+        }
+      })
   }
 
 
@@ -117,15 +122,26 @@ export class ResetpasswordComponent implements OnInit {
       'mobile': this.loginForm.value.mobile
     }
 
-    this.helperService.resetpassword(data).subscribe(list => {
-      if (list['result'] === true) {
-        this.toastr.success('Password Successfully Changed', 'Success');
-        this.router.navigate(['/login']);
-      } else {
-        this.toastr.error('Invalid OTP', 'Error');
-      }
-    });
+    this.helperService.resetpassword(data).subscribe(
+      (response: any) => {
+        if (response && response.result === true) {
+          this.toastr.success(response.message || 'Password Successfully Changed', 'Success');
+          this.router.navigate(['/login']);
+        } else {
+          this.toastr.error(response.message || 'Invalid OTP', 'Error');
+        }
+      },
+      (error) => {
+
+        // Check if the error response contains 'result' as false and display the message
+        if (error.error && error.error.result === false && error.error.message) {
+          this.toastr.error(error.error.errors.msg, 'Error');
+        } else {
+          this.toastr.error('Failed to reset password. Please try again later.', 'Error');
+        }
+      })
   }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

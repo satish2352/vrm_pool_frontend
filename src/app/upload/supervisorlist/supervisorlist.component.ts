@@ -17,6 +17,7 @@ export class SupervisorlistComponent implements OnInit {
   envvariable:any;
   // alllistFileWise: any = [];
   supervisorlist: any = [];
+  loading: boolean = false; // Add loading variable
 
 
   constructor(
@@ -31,11 +32,16 @@ export class SupervisorlistComponent implements OnInit {
   }
 
   getAllSupervisorList2() {
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllSupervisorUploadedList().subscribe(list => {
       if (list['result'] == true) {
         this.supervisorlist = list['data'];
-      }
+      }this.loading = false; // Hide loader after data is fetched
       
+    },
+    (error) => {
+      console.error('Error fetching agent list:', error);
+      this.loading = false; // Hide loader if an error occurs
     });
   }
 
