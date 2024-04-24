@@ -53,15 +53,4 @@ export class Screen1Component {
     }
   }
   
-  viewreposts() {
-    this.router.navigate(['/admin-dashboard', 'admin-all-user-list']);
-  }
-  viewagentreposts() {
-    
-    this.router.navigate(['/admin-dashboard', 'admin-all-user-list']);
-  }
-  viewrepostsdetails() {
-    
-    this.router.navigate(['/admin-dashboard', 'all-call-log-admin']);
-  }
 }

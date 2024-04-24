@@ -1,15 +1,15 @@
 
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpParams  } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class HelperService {
-  private apiUrl = environment.BASE_URL; 
+  private apiUrl = environment.BASE_URL;
   private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) { }
@@ -23,7 +23,7 @@ export class HelperService {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
-  saveToken(token: string,user_type: string,user_id: string) {
+  saveToken(token: string, user_type: string, user_id: string) {
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem('user_type', user_type);
     localStorage.setItem('user_id', user_id);
@@ -33,7 +33,7 @@ export class HelperService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  getAllFileIdWiseLog(data:any): Observable<any> {
+  getAllFileIdWiseLog(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
 
@@ -44,9 +44,9 @@ export class HelperService {
   //   return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   // }
   logout() {
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem('user_type');
-    localStorage.removeItem('user_id');
+ 
+    return this.http.post<any>(`${this.apiUrl}/logout`, this.tokenKey);
+
   }
   uploadFile(file: File): Observable<any> {
     const formData: FormData = new FormData();
@@ -57,7 +57,7 @@ export class HelperService {
   }
 
   uploadFileAgent(data: any): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/uploadAgents`, data, {
+    return this.http.post<any>(`${this.apiUrl}/uploadAgents`, data, {
     });
   }
 
@@ -87,18 +87,18 @@ export class HelperService {
   getAllUsersList(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, null);
   }
- 
-  getAllAgentbySuperviserList(data:any): Observable<any> {
-  
+
+  getAllAgentbySuperviserList(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
-  getAllAgentbytimeframe(data:any): Observable<any> {
-  
+  getAllAgentbytimeframe(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleTimeSlotWise`, data);
   }
 
 
-  getCallLogSingleRow(data:any): Observable<any> {
+  getCallLogSingleRow(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleRow`, data);
   }
 
@@ -115,7 +115,7 @@ export class HelperService {
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
 
-  
+
   getAllAgentUploadedList(): Observable<any> {
     let data = {
       'user_type': 3
@@ -123,71 +123,70 @@ export class HelperService {
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
 
-  getHistoryFileIdWise (data:any): Observable<any> {
-    
+  getHistoryFileIdWise(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
-  downloadbyFileIdWise (data:any,type:any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/downloadFile?fileId=`+data+`&type=`+type);
+  downloadbyFileIdWise(data: any, type: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/downloadFile?fileId=` + data + `&type=` + type);
   }
 
-  changepassword (data:any): Observable<any> {
-    
+  changepassword(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/changePassword`, data);
   }
-  getAllUsersList1(data:any): Observable<any> {
-   
+  getAllUsersList1(data: any): Observable<any> {
+
     // const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
-  getOtpbymobile(data:any): Observable<any> {
-  
+  getOtpbymobile(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/sendOTP`, data);
   }
-  resetpassword(data:any): Observable<any> {
-  
+  resetpassword(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/resetPassword`, data);
   }
-  updateuser(data:any): Observable<any> {
-  
+  updateuser(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/updateUser`, data);
   }
-  
-  getsingleuser(data:any): Observable<any> {
-  
+
+  getsingleuser(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/getUser`, data);
   }
-  resetuserpassword(data:any): Observable<any> {
-  
+  resetuserpassword(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/resetUserPassword`, data);
   }
-   
- 	
-deleteUser(data:any): Observable<any> {
-  
+
+
+  deleteUser(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/deleteUser`, data);
   }
- 	
-  changeUserStatus(data:any): Observable<any> {
-  
+
+  changeUserStatus(data: any): Observable<any> {
+
     return this.http.post<any>(`${this.apiUrl}/changeUserStatus`, data);
   }
-  getunderagentreports(data:any): Observable<any> {
+  getunderagentreports(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
-  
+
   getDashboardStatss(): Observable<any> {
-  
+
     return this.http.post<any>(`${this.apiUrl}/getDashboardStats`, null);
   }
-  getDashboardStatsagents(id:any): Observable<any> {
-  let data = {
-    'id': id
-  }
+  getDashboardStatsagents(id: any): Observable<any> {
+    let data = {
+      'id': id
+    }
     return this.http.post<any>(`${this.apiUrl}/getDashboardStats`, data);
   }
 
 }
 
 
- 

@@ -8,14 +8,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
-  user_type :any
+  user_type: any
+  token: any
   loading: boolean = true;
-  
+
   constructor(private router: Router,
-    private helperService: HelperService) 
-    
-    {
+    private helperService: HelperService) {
     this.user_type = localStorage.getItem('user_type')
+    this.token = localStorage.getItem('auth-token')
+
+
   }
 
 
@@ -23,9 +25,9 @@ export class AdminDashboardComponent {
     setTimeout(() => {
       this.loading = false; // Set loading to false after the delay
     }, 2000);
-    
+
   }
- 
+
   // logout() {
   //   this.helperService.logout()
   //   this.router.navigate(['/login']);
@@ -35,18 +37,29 @@ export class AdminDashboardComponent {
       title: 'Confirmation',
       text: 'Are you sure you want to log out?',
       icon: 'warning',
-     
-      showCancelButton: true, 
-      
+
+      showCancelButton: true,
+
       confirmButtonText: 'Yes, log out!',
       confirmButtonColor: "red",
-      
+
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.helperService.logout();
-        this.router.navigate(['/login']);
+     
+        this.helperService.logout().subscribe(list => {
+          if (list['result'] == true) {
+            console.log("@@@@@@@@@@@@@@@@@@@@@@@@",list);
+            
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user_type');
+            localStorage.removeItem('user_id');
+            this.router.navigate(['/login']);
+          }
+        });
       }
     });
   }
 }
+
+

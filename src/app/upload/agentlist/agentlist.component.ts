@@ -89,7 +89,7 @@ export class AgentlistComponent {
         console.log(error)
         Swal.fire('Error',`${error['error'].message}`, 'error');
       });
-  }
+  } 
 
   downloadFileIdWise(data: any) {
     const fileUrl = `${this.envvariable}/downloadFile?fileId=${data}`;

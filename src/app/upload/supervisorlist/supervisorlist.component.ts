@@ -73,11 +73,11 @@ export class SupervisorlistComponent implements OnInit {
           this.getAllSupervisorList2();
           Swal.fire('Error', response.message, 'error');
         }
-      },
+      }, 
       error: (error: any) => {
         console.error('Error uploading file:', error);
         // Use SweetAlert2 for error message
-        Swal.fire('Error', 'Error uploading file. Please try again.', 'error');
+        Swal.fire('Error',`${error['error'].message}`, 'error');
       }
     });
   }

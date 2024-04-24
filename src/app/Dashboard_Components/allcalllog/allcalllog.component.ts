@@ -90,6 +90,8 @@ export class AllcalllogComponent {
     this.getAllAgentbySuperviserList()
     // this.filteredList = this.alllist;
     // this.searchChanged('')
+    this.agentSelected =this.allagentbysupervisorList.id
+
    
     
     
@@ -151,6 +153,11 @@ export class AllcalllogComponent {
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
+  
+    
+    const currentDate = new Date().toISOString().slice(0, 10);
+    this.fromdateSelected = currentDate;
+    this.todateSelected = currentDate;
     this.data = {}
     this.data = {
       'user_type': '',
@@ -214,7 +221,7 @@ export class AllcalllogComponent {
         
 //     }
 // }
-
+ 
 
 
  
@@ -222,6 +229,8 @@ export class AllcalllogComponent {
     this.pagesize = val.value;
 
     this.getCallLogSingleRow(this.data)
+    this.getAllAgentbytimeframe(this.data)
+
   }
 
   onSelectChangeAgent(val: any) {

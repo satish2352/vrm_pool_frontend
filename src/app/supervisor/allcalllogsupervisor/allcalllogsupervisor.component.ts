@@ -92,9 +92,34 @@ export class AllcalllogsupervisorComponent {
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
     return Math.abs(incomingCalls - missedCalls);
   }
+  // ontimeselect(val: any) {
+  //   this.timeselect = val.value;
+  //   this.getAllAgentbySuperviserList()
+  //   this.data = {}
+  //   this.data = {
+  //     'user_type': '',
+  //     'fromdate': this.fromdateSelected,
+  //     'todate': this.todateSelected,
+  //     'status': '',
+  //     'supervisor_id': '',
+  //     // 'agent_id': this.agentSelected,
+  //     'direction': '',
+  //     'fromtime': this.fromtimeSelected,
+  //     'totime': this.totimeSelected,
+  //     'time': this.timeselect,
+
+  //   }
+  //   this.getCallLogSingleRow(this.data)
+  // }
+
+
   ontimeselect(val: any) {
     this.timeselect = val.value;
-    this.getAllAgentbySuperviserList()
+  
+    
+    const currentDate = new Date().toISOString().slice(0, 10);
+    this.fromdateSelected = currentDate;
+    this.todateSelected = currentDate;
     this.data = {}
     this.data = {
       'user_type': '',
@@ -102,25 +127,30 @@ export class AllcalllogsupervisorComponent {
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': '',
-      // 'agent_id': this.agentSelected,
+      'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
       'time': this.timeselect,
-
     }
-
-   
-    this.getCallLogSingleRow(this.data)
-
-
+    this.getAllAgentbytimeframe(this.data)
   }
-  pagerecords(val: any) {
+
+  getAllAgentbytimeframe(data:any){
+   
+    this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
+      if (list['result'] == true) {
+        this.filterList = list['data'];
+      }
+    });
+  }
+ pagerecords(val: any) {
     this.pagesize = val.value;
-   
-    this.getCallLogSingleRow(this.data)
-  }
 
+    this.getCallLogSingleRow(this.data)
+    this.getAllAgentbytimeframe(this.data)
+
+  }
   onSelectChangeAgent(val: any) {
 
     if (this.ignoreFirstChange) {
@@ -251,7 +281,7 @@ export class AllcalllogsupervisorComponent {
 
 
   onSelectChangeStatus(val: any) {
-
+ 
   }
 
 

@@ -216,7 +216,7 @@
                                             </thead>
                                             <tbody>
 
-                                                <tr class="text-secondary"
+                                                 <tr class="text-secondary"
                                                     *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                     <td>{{i+1+(pagesize*(currentpage-1))}}</td>
                                                     <td>{{item.user.name}} </td>

@@ -129,4 +129,8 @@ export class ResetpasswordComponent implements OnInit {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+  navigateToPage() {
+    this.router.navigate(['/login']);
+  }
+
 }

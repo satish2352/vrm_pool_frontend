@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class AdminAlluserlistComponent {
   pagesize: number = 10;
   currentpage: number = 1;
-  supervisorsList: any = [];
+
   supervisorsList1: any = [];
 
   constructor(private helperService: HelperService, private router: Router, private toastr: ToastrService
@@ -134,27 +134,87 @@ export class AdminAlluserlistComponent {
   //   });
   //   }} )
   // }
+  // deleteUser(users: any) {
+  //   let data = { 'id': users };
+  //   // Show confirmation alert
+  //   if (confirm('Are you sure you want to delete this user?')) {
+  //     this.helperService.deleteUser(data).subscribe(list => {
+  //       if (list['result'] == true) {
+  //         this.toastr.success('User Delete Successfully', 'Success');
+  //         // this.getAllSupervisorList();
+  //         let data = { 'user_type': '2' }
+  //         this.helperService.getAllUsersList1(data).subscribe(list => {
+  //           if (list['result'] == true) {
+  //             this.supervisorsList1 = list['data'];
+  //           }
+  //         });
+  //       }
+  //       // this.getAllSupervisorList();
+  //     });
+  //   } else {
+  //     // User canceled deletion, do nothing
+  //   }
+  // }
+
+
   deleteUser(users: any) {
     let data = { 'id': users };
-    // Show confirmation alert
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.helperService.deleteUser(data).subscribe(list => {
-        if (list['result'] == true) {
-          this.toastr.success('User Delete Successfully', 'Success');
-          // this.getAllSupervisorList();
-          let data = { 'user_type': '2' }
-          this.helperService.getAllUsersList1(data).subscribe(list => {
-            if (list['result'] == true) {
-              this.supervisorsList1 = list['data'];
+
+    // Show SweetAlert confirmation dialog
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this user?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed deletion
+        this.helperService.deleteUser(data).subscribe(
+          response => {
+            if (response['result'] === true) {
+              this.toastr.success('User Deleted Successfully', 'Success');
+              // this.getAllSupervisorList(); // Fetch updated user list after deletion
+              let data = { 'user_type': '2' }
+              this.helperService.getAllUsersList1(data).subscribe(list => {
+                if (list['result'] == true) {
+                  this.supervisorsList1 = list['data'];
+                }
+              });
+            } else {
+              // Display API error message if available
+              if (response['result']=== false) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Failed to delete user',
+                  text: response['message']
+                });
+              } else {
+                // Generic error message if no specific message received
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Failed to delete user',
+                  text:  "User cant be deleted because relationship managers are mapped to this user"
+                });
+              }
             }
-          });
-        }
-        // this.getAllSupervisorList();
-      });
-    } else {
-      // User canceled deletion, do nothing
-    }
+          },
+          error => {
+            // Handle HTTP error (e.g., network error)
+            console.error('Delete User API Error:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Failed to delete user',
+              text:  "User cant be deleted because relationship managers are mapped to this user"
+            });
+          }
+        );
+      }
+    });
   }
+
+
   changeUserStatus(id: any, event: any) {
     console.log(event.checked);
 

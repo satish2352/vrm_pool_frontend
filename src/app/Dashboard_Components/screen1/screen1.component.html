@@ -4,8 +4,8 @@
     <div class="p-3 mb-2 bg-gradient-light text-dark" >
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0" style="color: black">VRM POOL MONITORING DASHBORAD</h1>
+                <div class="col-sm-12">
+                    <h1 class="text-secondary" >VRM POOL MONITORING DASHBORAD</h1>
                 </div>
 
             </div>
@@ -34,93 +34,93 @@
                     </div>
                 </div> -->
 
-                <div class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'" (click)="viewreposts()">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'" [routerLink]="['/admin-dashboard', 'admin-all-user-list']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+                        <span class="info-box-icon bg-light elevation-1"><i class="fas fa-users"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Supervisors</span>
                             <span class="info-box-number">{{dashboarddata.users.supervisors}}</span>
                         </div>
 
                     </div>
-
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewagentreposts()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'admin-all-user-list']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-user"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-user"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Relationship Manager</span>
                             <span class="info-box-number">{{dashboarddata.users.agents}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-brands fa-signal-messenger"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-brands fa-signal-messenger"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Incoming Calls</span>
                             <span class="info-box-number">{{dashboarddata.reports.IncomingCalls}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-phone-volume"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-phone-volume"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Missed Calls</span>
                             <span class="info-box-number">{{dashboarddata.reports.MissedCalls}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                </a>
+              
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
+                    <div class="info-box mb-3 bg-white border-dark">
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fas fa-shopping-cart"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Received Calls</span>
+                            <span class="info-box-text">Total Received Calls</span>
                             <span class="info-box-number">{{calculateAbsoluteDifference(dashboarddata.reports.IncomingCalls,dashboarddata.reports.MissedCalls)}}</span>
                         </div>
 
                     </div>
 
-                </div>
+                </a>
 
 
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-comment-slash"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-comment-slash"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">No Answer</span>
                             <span class="info-box-number">{{dashboarddata.reports.NoAnswer}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-cart-shopping"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-cart-shopping"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Busy Count</span>
                             <span class="info-box-number">{{dashboarddata.reports.Busy}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-circle-exclamation"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-circle-exclamation"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Failed Count</span>
                             <span class="info-box-number">{{dashboarddata.reports.Failed}}</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                     <div class="info-box mb-3  bg-white border-dark">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fa-solid fa-phone-volume"></i></span>
+                        <span class="info-box-icon bg-light  elevation-1"><i class="fa-solid fa-phone-volume"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Outgoing Calls</span>
                             <span class="info-box-number">{{dashboarddata.reports.OutgoingCalls}}</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 <!-- <div class="col-12 col-sm-6 col-md-3" (click)="viewrepostsdetails()">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-phone-volume"></i></span>
