@@ -159,11 +159,11 @@ export class AllcalllogsupervisorComponent {
   }
 
   getAllAgentbytimeframe(data:any){
-   
+    this.loading = true; // Show loader when fetching data
     this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-      }
+      }this.loading = false; // Hide loader after data is fetched
     });
   }
  pagerecords(val: any) {
