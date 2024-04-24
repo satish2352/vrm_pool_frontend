@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-allcalllogsupervisor',
   templateUrl: './allcalllogsupervisor.component.html',
@@ -127,23 +127,35 @@ export class AllcalllogsupervisorComponent {
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-    const currentDate = new Date().toISOString().slice(0, 10);
-    this.fromdateSelected = currentDate;
-    this.todateSelected = currentDate;
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': '',
-      'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-      'time': this.timeselect,
+
+    if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+      
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please select both From Time and To Time.',
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+      this.timeselect = "";
+    } else {
+      const currentDate = new Date().toISOString().slice(0, 10);
+      this.fromdateSelected = currentDate;
+      this.todateSelected = currentDate;
+      this.data = {
+        'user_type': '',
+        'fromdate': this.fromdateSelected,
+        'todate': this.todateSelected,
+        'status': '',
+        'supervisor_id': '',
+        'agent_id': this.agentSelected,
+        'direction': '',
+        'fromtime': this.fromtimeSelected,
+        'totime': this.totimeSelected,
+        'time': this.timeselect,
+      };
+      this.getAllAgentbytimeframe(this.data);
     }
-    this.getAllAgentbytimeframe(this.data)
   }
 
   getAllAgentbytimeframe(data:any){
