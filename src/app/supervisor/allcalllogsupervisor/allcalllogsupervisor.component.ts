@@ -41,9 +41,14 @@ export class AllcalllogsupervisorComponent {
   ignoreFirstChange = true
   timeselect:string="";
   loading: boolean = false; // Add loading variable
-
-
-
+  sortedColumn: string = ''; // Track the currently sorted column
+  isAscending: boolean = true; // Track the sorting order (ascending or descending)
+  agentEmailSortOrder: string = 'asc';
+  minDatet: any;
+  sortColumn: string = '';
+  maxDatef!: string;
+  maxDatet!: string;
+  minDatef!: string;
 
   constructor(private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
@@ -64,27 +69,34 @@ export class AllcalllogsupervisorComponent {
     const minYyyy = sixMonthsAgo.getFullYear();
     this.minDate = `${minYyyy}-${minMm}-${minDd}`;
   }
+  private updateToDateRestriction() {
+    if (this.fromdateSelected) {
+      const fromDate = new Date(this.fromdateSelected);
+      const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
 
+      const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
+      const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
+      const maxYyyy = thirtyDaysFromFromDate.getFullYear();
+      this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
+      this.minDatet = this.minDatef;
+
+    }
+  }
 
   ngOnInit(): void {
 
     this.getAllSupervisorList();
-    var data = {
-      'user_type': '',
-      'fromdate': '',
-      'todate': '',
-      'status': '',
-      'supervisor_id': localStorage.getItem('user_id'),
-      'agent_id': '',
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-    }
-    this.getCallLogSingleRow(data);
+    this.data = {}
+    this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
+    // this.filteredList = this.alllist;
+    // this.searchChanged('')
+    this.agentSelected = this.allagentbysupervisorList.id
 
+  }
+  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
+    return Math.abs(incomingCalls - missedCalls);
   }
 
   getAllAgentList() {
@@ -94,251 +106,88 @@ export class AllcalllogsupervisorComponent {
         this.agentList = list['data'];
       }
       this.loading = false; // Hide loader after data is fetched
-    }
-    ,
-    (error) => {
-      console.error('Error fetching agent list:', error);
-      this.loading = false; // Hide loader if an error occurs
-    });
+    },
+      (error) => {
+        console.error('Error fetching agent list:', error);
+        this.loading = false; // Hide loader if an error occurs
+      });
   }
-  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
-    return Math.abs(incomingCalls - missedCalls);
+
+  onSelectChangeSupervisor(val: any) {
+    this.supervisorSelected = val.value;
   }
-  // ontimeselect(val: any) {
-  //   this.timeselect = val.value;
-  //   this.getAllAgentbySuperviserList()
-  //   this.data = {}
-  //   this.data = {
-  //     'user_type': '',
-  //     'fromdate': this.fromdateSelected,
-  //     'todate': this.todateSelected,
-  //     'status': '',
-  //     'supervisor_id': '',
-  //     // 'agent_id': this.agentSelected,
-  //     'direction': '',
-  //     'fromtime': this.fromtimeSelected,
-  //     'totime': this.totimeSelected,
-  //     'time': this.timeselect,
-
-  //   }
-  //   this.getCallLogSingleRow(this.data)
-  // }
-
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-
-    if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
-      
-      Swal.fire({
-        icon: 'warning',
-        title: 'Please select both From Time and To Time.',
-        timer: 4000, // Close the alert after 4 seconds
-        timerProgressBar: true,
-        showConfirmButton: false
-      });
-      this.timeselect = "";
-    } else {
-      const currentDate = new Date().toISOString().slice(0, 10);
-      this.fromdateSelected = currentDate;
-      this.todateSelected = currentDate;
-      this.data = {
-        'user_type': '',
-        'fromdate': this.fromdateSelected,
-        'todate': this.todateSelected,
-        'status': '',
-        'supervisor_id': '',
-        'agent_id': this.agentSelected,
-        'direction': '',
-        'fromtime': this.fromtimeSelected,
-        'totime': this.totimeSelected,
-        'time': this.timeselect,
-      };
-      this.getAllAgentbytimeframe(this.data);
-    }
   }
 
-  getAllAgentbytimeframe(data:any){
-    this.loading = true; // Show loader when fetching data
-    this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
-      if (list['result'] == true) {
-        this.filterList = list['data'];
-      }this.loading = false; // Hide loader after data is fetched
-    });
-  }
- pagerecords(val: any) {
-    this.pagesize = val.value;
 
-    this.getCallLogSingleRow(this.data)
-    this.getAllAgentbytimeframe(this.data)
-
-  }
   onSelectChangeAgent(val: any) {
     if (this.ignoreFirstChange) {
       this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
       return; // Ignore the rest of the function during the first call
     }
-  
+
     const keyToExtract = 'id';
-  
-    // Extract values based on the key
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-  
-    // Prepare data object
-    let data: any = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected, // Commented out since agent_id set separately
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    };
-  
-    // Set agent_id in data if agentSelected is not empty
-    if (this.agentSelected.length > 0) {
-      data.agent_id = this.agentSelected;
-    }
-  
-    // Call appropriate function based on conditions
-    if (this.timeselect.length > 0) {
-      // Call getAllAgentbytimeframe if timeselect has elements
-      this.getAllAgentbytimeframe(data);
-    } else {
-      // Call getCallLogSingleRow if timeselect is empty
-      this.getCallLogSingleRow(data);
-    }
+
   }
 
-  onSelectChange(val: any) {
-    this.supervisorSelected = val.value;
 
-    var data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
+  getAllAgentbytimeframe(data: any) {
 
+    this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
+      if (list['result'] == true) {
+        this.filterList = list['data'];
+      }
+    });
+  }
 
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+
+    // this.getCallLogSingleRow(this.data)
+    // this.getAllAgentbytimeframe(this.data)
+
+    if (this.timeselect && this.timeselect.length > 0) {
+        this.getAllAgentbytimeframe(this.data);
+    } else {
+      this.getCallLogSingleRow(this.data);
     }
-
-    this.getCallLogSingleRow(data)
 
   }
 
 
   fromdate(val: any) {
-    console.log(val.value)
     this.fromdateSelected = val.value;
-    var data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-
-    }
-    this.getCallLogSingleRow(data)
+    this.updateToDateRestriction();
   }
+
+
   fromtime(val: any) {
     this.fromtimeSelected = val.value;
-  
-    // Create a new data object with updated values
-    let data: any = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    };
-  
-    // Set agent_id in data if agentSelected is not empty
-    if (this.agentSelected && this.agentSelected.length > 0) {
-      data.agent_id = this.agentSelected;
-    }
-  
-    // Call appropriate function based on conditions
-    if (this.timeselect.length > 0) {
-      // Call getAllAgentbytimeframe if timeselect has elements
-      this.getAllAgentbytimeframe(data);
-    } else {
-      // Call getCallLogSingleRow if timeselect is empty
-      this.getCallLogSingleRow(data);
-    }
+
   }
+
 
   todate(val: any) {
     this.todateSelected = val.value;
-    var data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-
-    }
-
-    this.getCallLogSingleRow(data)
   }
-  
+
   totime(val: any) {
     this.totimeSelected = val.value;
-   
-    let data:any = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-    }
-
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-    // Call appropriate function based on conditions
-    if (this.timeselect.length > 0) {
-      // Call getAllAgentbytimeframe if timeselect has elements
-      this.getAllAgentbytimeframe(data);
-    } else {
-      // Call getCallLogSingleRow if timeselect is empty
-      this.getCallLogSingleRow(data);
-    }
-
   }
-
-
 
 
 
   getAllSupervisorList() {
     this.helperService.getAllSupervisorList().subscribe(list => {
       if (list['result'] == true) {
-        this.supervisorList = list['data'];
+        console.log(list['data'])
+        var dataNew = list['data']
+        this.supervisorList = dataNew.filter((obj: any) => obj.is_active === "1");
+
+
       }
     });
   }
@@ -354,17 +203,19 @@ export class AllcalllogsupervisorComponent {
     });
   }
 
+
   getCallLogSingleRow(data: any) {
-    
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
+        // this.filterList.sort((a: any, b: any) => b.id - a.id);
+
       }
     });
   }
 
   searchChanged(searchValue: string) {
-    
+
     if (!searchValue) {
       let data = {}
       this.helperService.getCallLogSingleRow(data).subscribe(list => {
@@ -387,21 +238,85 @@ export class AllcalllogsupervisorComponent {
         item.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
         item.DeviceOnPercent.toString().includes(searchValue) ||
         item.DeviceOnHumanReadable.toString().includes(searchValue) ||
-        item.user.mobile.toString().includes(searchValue) 
+        item.user.mobile.toString().includes(searchValue)
         // You can add more conditions here to filter by other properties
       );
     }
-   
-  }
-  viewagentreposrts(id:any){
-    this.router.navigate(['/admin-dashboard/','agent-under-reports',id]);
+
   }
 
 
+  viewagentreposrts(id: any) {
+    this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
+  }
 
 
 
+  sortAgentEmail(email: string) {
+    // Toggle sort order
+    this.agentEmailSortOrder = this.agentEmailSortOrder === 'asc' ? 'desc' : 'asc';
+    this.sortColumn = 'email'
+    // Sort the data based on Agent Email column and the current sort order
+    this.filterList.sort((a: any, b: any) => {
+      if (a.user[email] < b.user[email]) {
+        return this.agentEmailSortOrder === 'asc' ? -1 : 1;
+      } else if (a.user[email] > b.user[email]) {
+        return this.agentEmailSortOrder === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+
+  getArrowClass(column: string): string {
+    // alert(this.sortColumn)
+    if (column === this.sortColumn) {
+      return this.agentEmailSortOrder === 'asc' ? 'fa-caret-up' : 'fa-caret-down';
+    }
+    return '';
+  }
+
+
+  getSearch() {
+// alert("ok");
+    const currentDate = new Date().toISOString().slice(0, 10);
+    this.fromdateSelected = currentDate;
+    this.todateSelected = currentDate;
+    this.data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      // 'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+      'time': this.timeselect,
+    };
+
+    if (this.agentSelected && this.agentSelected.length > 0) {
+      this.data.agent_id = this.agentSelected;
+    }
+
+    if (this.timeselect && this.timeselect.length > 0) {
+      if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please select both From Time and To Time.',
+          timer: 4000, // Close the alert after 4 seconds
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+        this.timeselect = "";
+      } else {
+        this.getAllAgentbytimeframe(this.data);
+      }
+    } else {
+      this.getCallLogSingleRow(this.data);
+    }
+
+  }
 }
-
-
-

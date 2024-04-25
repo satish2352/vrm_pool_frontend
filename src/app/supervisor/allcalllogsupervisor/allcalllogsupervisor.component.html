@@ -148,21 +148,33 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Select Time Frame</label>
+                                        <label class="text-secondary">Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)" [ngModel]="timeselect">
-                                            <option  [ngValue]="''" selected  class="text-secondary">Choose Time Frame
+                                            <option value="" selected class="text-secondary">Choose Time Frame
                                             </option>
-                                            <option value="30" class="text-secondary">30 Minutes</option>
+                                            <option value="60" class="text-secondary">60 Minutes</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
+                                    <label>&nbsp;</label>
                                     <div class="form-group">
-                                        <label>Search</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <button class="input-group-text" (click)="getSearch()">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="text-secondary">Search</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control text-secondary bg-white" placeholder="Search..."
-                                                [(ngModel)]="searchTerm" (ngModelChange)="searchChanged($event)">
+                                            <input type="text" class="form-control bg-white text-secondary"
+                                                placeholder="Search..." [(ngModel)]="searchTerm"
+                                                (ngModelChange)="searchChanged($event)">
                                         </div>
                                     </div>
                                 </div>
@@ -174,11 +186,11 @@
             </div>
         </section>
         <section class="content">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Show Records</label>
                     <select class="form-control" (change)="pagerecords($event.target)">
-                        <option value="" disabled selected>Choose No of Records</option>
+                        <option value="" disabled selected> Records</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -195,51 +207,66 @@
                             <div class="card-body">
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                        <table id="example2" class="table table-bordered table-hover">
+                                        <table id="example2" class="table table-bordered table-hover bg-dark text-white">
                                             <thead>
-                                                <tr>
-                                                    <th>Sr.No</th>
-                                                    <th> Relationship Manager Name </th>
-                                                    <th>Relationship Manager Email</th>
+                                                <tr class="text-secondary text-white">
+                                                    <th class="text-white">Sr.No</th>
+                                                    <th (click)="sortAgentEmail('name')" class="text-white">RM Name <i
+                                                            class="fa" [ngClass]="getArrowClass('name')"></i></th>
+                                                    <th (click)="sortAgentEmail('email')" class="text-white">RM Email <i
+                                                            class="fa " [ngClass]="getArrowClass('email')"></i></th>
+                                                    <th (click)="sortAgentEmail('mobile')" class="text-white">RM Mobile
+                                                        Number</th>
+                                                    <th>Available Time</th>
+                                                    <th>Non Available Time</th>
+                                                    <th>On Call Time</th>
+                                                    <th>Received Calls</th>
+                                                    <th>Missed Calls</th>
+                                                    <th>Outgoing Calls</th>
                                                     <th *ngIf="filterList[0].slot">Time Slot</th>
+                                                    <!-- <th >Incoming Calls</th> -->
 
-                                                    <th>Incoming Calls</th>
-                                                    <th>Missed Calls </th>
-                                                    <th>Received Calls </th>
-                                                    <th>No Answer </th>
-                                                    <th>Busy </th>
-                                                    <th>Failed </th>
-                                                    <th>Outgoing Calls </th>
-                                                    <th>On Call Time </th>
-                                                    <th>Average
-                                                        Handling Time InMinutes </th>
-                                                    <!-- <th>Device On Percent </th> -->
-                                                    <!-- <th>Device On
-                                                    HumanReadable </th> -->
-                                                    <th>Relationship Manager Phone Number </th>
+
+                                                    <!-- <th >No Answer</th> -->
+                                                    <!-- <th >Busy</th>  -->
+                                                    <!-- <th >Failed</th> -->
+
+
+                                                    <!-- <th>Average Handling Time In Minutes</th> -->
+                                                    <!-- <th>Device On Percent</th> -->
+
+
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="text-dark">
+                                                <tr class="bg-white" id="Table_data"
+                                                    *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
+                                                    <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}
+                                                    </td>
+                                                    <td>{{item.user.name }}</td>
+                                                    <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
+                                                            item.user.name }}</a></td> -->
+                                                    <td id="Table_data">{{ item.user.email }}</td>
+                                                    <td id="Table_data">{{ item.user.mobile }}</td>
+                                                    <td>{{ item.DeviceOnHumanReadable }}</td>
+                                                    <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td>
+                                                    <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
+                                                    <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
+                                                        item.MissedCalls) }}</td>
+                                                    <td id="Table_data"> {{ item.MissedCalls }}</td>
+                                                    <td id="Table_data">{{ item.OutgoingCalls }}</td>
 
-                                                 <tr class="text-secondary"
-                                                    *ngFor="let item of filterList  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                    <td>{{i+1+(pagesize*(currentpage-1))}}</td>
-                                                    <td>{{item.user.name}} </td>
-                                                    <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{item.user.name}} </a></td> -->
-                                                    <td>{{item.user.email}}</td>
-                                                    <td id="Table_data" *ngIf="item.slot">{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</td>
-                                                    <td>{{item.IncomingCalls}}</td>
-                                                    <td>{{item.MissedCalls}}</td>
-                                                    <td>{{ calculateAbsoluteDifference(item.IncomingCalls, item.MissedCalls) }}</td>
-                                                    <td>{{item.NoAnswer}}</td>
-                                                    <td>{{item.Busy}}</td>
-                                                    <td>{{item.Failed}}</td>
-                                                    <td>{{item.OutgoingCalls}}</td>
-                                                    <td>{{item.TotalCallDurationInMinutes}}</td>
-                                                    <td>{{item.AverageHandlingTimeInMinutes}}</td>
-                                                    <!-- <td>{{item.DeviceOnPercent}}</td> -->
-                                                    <!-- <td>{{item.DeviceOnHumanReadable}}</td> -->
-                                                    <td>{{item.user.mobile}}</td>
+                                                    <td id="Table_data" *ngIf="item.slot">{{
+                                                        item.DeviceOnPercent.start_time | customTime }}-{{
+                                                        item.DeviceOnPercent.end_time | customTime }}</td>
+                                                    <!-- <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.IncomingCalls }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.NoAnswer }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Busy }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Failed }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
+
+
                                                 </tr>
                                             </tbody>
                                         </table>

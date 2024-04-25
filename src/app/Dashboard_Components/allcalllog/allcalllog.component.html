@@ -1,7 +1,7 @@
 <div class="wrapper">
     <div *ngIf="loading" class="loader-overlay">
         <div class="loader"></div>
-      </div>
+    </div>
     <div class="content-wrapper bg-gradient-light text-dark">
         <section class="content-header">
             <div class="container-fluid">
@@ -18,15 +18,15 @@
             <div class="container-fluid bg-white text-dark">
                 <div class="card card-default bg-white text-dark ">
                     <div class="card-header">
-                        <h3 class="card-title text-secondary ">Select User</h3>
-                        
+                        <h3 class="card-title text-secondary ">User</h3>
+
                     </div>
                     <div class="col-md-12">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary ">Select Supervisor</label>
+                                        <label class="text-secondary ">Supervisor</label>
                                         <select class="form-control bg-white text-secondary"
                                             (change)="onSelectChangeSupervisor($event.target)">
                                             <option value="" disabled selected class="text-secondary">Choose Supervisor
@@ -46,7 +46,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="text-secondary">Relationship Manager</label>
-                                        <ng-multiselect-dropdown [placeholder]="'Choose Agent'" class="text-secondary"
+                                        <ng-multiselect-dropdown [placeholder]="'Choose RM'" class="text-secondary"
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
                                         </ng-multiselect-dropdown>
@@ -60,7 +60,7 @@
                                     <div class="form-group">
                                         <label class="text-secondary">From Date</label>
                                         <div class="input-group" id="fromdate">
-                                            <input type="date"  type="date" [max]="maxDatef" [min]="minDatef"
+                                            <input type="date" type="date" [max]="maxDatef" [min]="minDatef"
                                                 class="form-control bg-white text-secondary"
                                                 (change)="fromdate($event.target)" />
                                         </div>
@@ -82,13 +82,13 @@
                                     <div class="form-group">
                                         <label class="text-secondary">To Date</label>
                                         <div class="input-group" id="todate">
-                                            <input type="date" [min]="minDatet" [max]="maxDatet" 
+                                            <input type="date" [min]="minDatet" [max]="maxDatet"
                                                 class="form-control bg-white text-secondary"
                                                 (change)="todate($event.target)" />
                                         </div>
                                     </div>
                                 </div>
-                            
+
 
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -101,16 +101,27 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                         <label class="text-secondary">Select Time Frame</label>
+                                        <label class="text-secondary">Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)" [ngModel]="timeselect">
-                                            <option  [ngValue]="''" selected class="text-secondary">Choose Time Frame
+                                            <option value="" selected class="text-secondary">Choose Time Frame
                                             </option>
-                                            <option value="30" class="text-secondary">30 Minutes</option>
+                                            <option value="60" class="text-secondary">60 Minutes</option>
                                         </select>
                                     </div>
                                 </div>
-                               
+
+                                <div class="col-md-3">
+                                    <label>&nbsp;</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <button class="input-group-text" (click)="getSearch()">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="text-secondary">Search</label>
@@ -134,17 +145,17 @@
         <section class="content">
 
             <div class="container-fluid">
-               
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            
+
                             <div class="card-body  bg-white">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Show Records</label>
                                         <select class="form-control" (change)="pagerecords($event.target)">
-                                            <option value="" disabled selected>Choose No of Records</option>
+                                            <option value="" disabled selected>Records</option>
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
@@ -155,53 +166,67 @@
                                 </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
-                                        <table id="example2" class="table table-bordered table-hover bg-dark text-white"  >
+                                        <table id="example2"
+                                            class="table table-bordered table-hover bg-dark text-white">
                                             <thead>
-                                                <tr class="text-secondary text-white"  >
+                                                <tr class="text-secondary text-white">
                                                     <th class="text-white">Sr.No</th>
-                                                    <th (click)="sortAgentEmail('name')" class="text-white">Agent Name <i class="fa"
-                                                            [ngClass]="getArrowClass('name')"></i></th>
-                                                    <th (click)="sortAgentEmail('email')" class="text-white">Agent Email <i class="fa "
-                                                            [ngClass]="getArrowClass('email')"></i></th>
-                                                    <th  *ngIf="filterList[0].slot">Time Slot</th>
-                                                    <th >Incoming Calls</th>
-                                                    <th >Missed Calls</th>
-                                                    <th >Received Calls</th>
-                                                    <th >No Answer</th>
-                                                    <th >Busy</th>
-                                                    <th >Failed</th>
-                                                    <th >Outgoing Calls</th>
-                                                    <th >On Call Time</th>
-                                                    <th >Average Handling Time In Minutes</th>
-                                                    <!-- <th>Device On Percent</th> -->
+                                                    <th (click)="sortAgentEmail('name')" class="text-white">RM Name <i
+                                                            class="fa" [ngClass]="getArrowClass('name')"></i></th>
+                                                    <th (click)="sortAgentEmail('email')" class="text-white">RM Email <i
+                                                            class="fa " [ngClass]="getArrowClass('email')"></i></th>
+                                                    <th (click)="sortAgentEmail('mobile')" class="text-white">RM Mobile
+                                                        Number</th>
                                                     <th>Available Time</th>
                                                     <th>Non Available Time</th>
-                                                    <th (click)="sortAgentEmail('mobile')" class="text-white">Agent Phone Number</th>
+                                                    <th>On Call Time</th>
+                                                    <th>Received Calls</th>
+                                                    <th>Missed Calls</th>
+                                                    <th>Outgoing Calls</th>
+                                                    <th *ngIf="filterList[0].slot">Time Slot</th>
+                                                    <!-- <th >Incoming Calls</th> -->
+
+
+                                                    <!-- <th >No Answer</th> -->
+                                                    <!-- <th >Busy</th>  -->
+                                                    <!-- <th >Failed</th> -->
+
+
+                                                    <!-- <th>Average Handling Time In Minutes</th> -->
+                                                    <!-- <th>Device On Percent</th> -->
+
+
                                                 </tr>
                                             </thead>
                                             <tbody class="text-dark">
                                                 <tr class="bg-white" id="Table_data"
                                                     *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
-                                                    <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}</td>
+                                                    <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}
+                                                    </td>
                                                     <td>{{item.user.name }}</td>
                                                     <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
-                                                    <td id="Table_data" *ngIf="item.slot">{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</td>
-                                                    <td id="Table_data">{{ item.IncomingCalls }}</td>
-                                                    <td id="Table_data"> {{ item.MissedCalls }}</td>
+                                                    <td id="Table_data">{{ item.user.mobile }}</td>
+                                                    <td>{{ item.DeviceOnHumanReadable }}</td>
+                                                    <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td>
+                                                    <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
                                                     <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
                                                         item.MissedCalls) }}</td>
-                                                    <td id="Table_data">{{ item.NoAnswer }}</td>
-                                                    <td id="Table_data">{{ item.Busy }}</td>
-                                                    <td id="Table_data">{{ item.Failed }}</td>
+                                                    <td id="Table_data"> {{ item.MissedCalls }}</td>
                                                     <td id="Table_data">{{ item.OutgoingCalls }}</td>
-                                                    <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
-                                                     <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td>
+
+                                                    <td id="Table_data" *ngIf="item.slot">{{
+                                                        item.DeviceOnPercent.start_time | customTime }}-{{
+                                                        item.DeviceOnPercent.end_time | customTime }}</td>
+                                                    <!-- <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.IncomingCalls }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.NoAnswer }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Busy }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Failed }}</td> -->
                                                     <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
-                                                    <td>{{ item.DeviceOnHumanReadable  }}</td>
-                                                    <td>{{ item.DeviceOnHumanReadable | secondsDifference  }}</td>
-                                                    <td id="Table_data">{{ item.user.mobile }}</td>
+
+
                                                 </tr>
                                             </tbody>
                                         </table>

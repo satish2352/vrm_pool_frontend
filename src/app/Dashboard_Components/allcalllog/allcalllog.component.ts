@@ -102,7 +102,7 @@ export class AllcalllogComponent {
     // this.filteredList = this.alllist;
     // this.searchChanged('')
     this.agentSelected = this.allagentbysupervisorList.id
-  
+
 
 
 
@@ -129,170 +129,23 @@ export class AllcalllogComponent {
 
   onSelectChangeSupervisor(val: any) {
     this.supervisorSelected = val.value;
-    this.getAllAgentbySuperviserList()
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    }
-
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-    this.getCallLogSingleRow(this.data)
   }
-  // ontimeselect(val: any) {
-  //   this.timeselect = val.value;
-  //   this.getAllAgentbySuperviserList()
-  //   this.data = {}
-  //   this.data = {
-  //     'user_type': '',
-  //     'fromdate': this.fromdateSelected,
-  //     'todate': this.todateSelected,
-  //     'status': '',
-  //     'supervisor_id': '',
-  //     'agent_id': this.agentSelected,
-  //     'direction': '',
-  //     'fromtime': this.fromtimeSelected,
-  //     'totime': this.totimeSelected,
-  //     'time': this.timeselect,
-  //   }
-  //   this.getCallLogSingleRow(this.data)
-  // }
-
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-   
-    if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
-      
-      Swal.fire({
-        icon: 'warning',
-        title: 'Please select both From Time and To Time.',
-        timer: 4000, // Close the alert after 4 seconds
-        timerProgressBar: true,
-        showConfirmButton: false
-      });
-      this.timeselect = "";
-    } else {
-      const currentDate = new Date().toISOString().slice(0, 10);
-      this.fromdateSelected = currentDate;
-      this.todateSelected = currentDate;
-      this.data = {
-        'user_type': '',
-        'fromdate': this.fromdateSelected,
-        'todate': this.todateSelected,
-        'status': '',
-        'supervisor_id': '',
-        'agent_id': this.agentSelected,
-        'direction': '',
-        'fromtime': this.fromtimeSelected,
-        'totime': this.totimeSelected,
-        'time': this.timeselect,
-      };
-      this.getAllAgentbytimeframe(this.data);
+  }
+
+
+  onSelectChangeAgent(val: any) {
+    if (this.ignoreFirstChange) {
+      this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
+      return; // Ignore the rest of the function during the first call
     }
+
+    const keyToExtract = 'id';
+    this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+
   }
-
-//   onSelectChangeAgent(val: any) {
-
-//     if (this.ignoreFirstChange) {
-//       this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
-//       return; // Ignore the rest of the function during the first call
-//     }
-
-//     const keyToExtract = 'id';
-
-//  // Extract values based on the key
-//  this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-
-//  this.data = {}
-//  this.data = {
-//    'user_type': '',
-//    'fromdate': this.fromdateSelected,
-//    'todate': this.todateSelected,
-//    'status': '',
-//    'supervisor_id': this.supervisorSelected,
-//    // 'agent_id': this.agentSelected,
-//    'direction': '',
-//    'fromtime': this.fromtimeSelected,
-//    'totime': this.totimeSelected,
-
-//  }
-
-//  if (this.agentSelected !== '') {
-//    this.data.agent_id = this.agentSelected
-//  }
-//  this.getCallLogSingleRow(this.data)
-
-
-//   if ( this.timeselect.length) {
-//     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-//     this.data = {}
-//     this.data = {
-//       'user_type': '',
-//       'fromdate': this.fromdateSelected,
-//       'todate': this.todateSelected,
-//       'status': '',
-//       'supervisor_id': this.supervisorSelected,
-//       // 'agent_id': this.agentSelected,
-//       'direction': '',
-//       'fromtime': this.fromtimeSelected,
-//       'totime': this.totimeSelected,
-//     }
-//    this. getAllAgentbytimeframe(this.data)
-// }
-//    else{
-//     this.getCallLogSingleRow(this.data)
-//    }
-
-   
-//   }
-onSelectChangeAgent(val: any) {
-  if (this.ignoreFirstChange) {
-    this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
-    return; // Ignore the rest of the function during the first call
-  }
-
-  const keyToExtract = 'id';
-
-  // Extract values based on the key
-  this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-
-  // Prepare data object
-  let data: any = {
-    'user_type': '',
-    'fromdate': this.fromdateSelected,
-    'todate': this.todateSelected,
-    'status': '',
-    'supervisor_id': this.supervisorSelected,
-    // 'agent_id': this.agentSelected, // Commented out since agent_id set separately
-    'direction': '',
-    'fromtime': this.fromtimeSelected,
-    'totime': this.totimeSelected,
-  };
-
-  // Set agent_id in data if agentSelected is not empty
-  if (this.agentSelected.length > 0) {
-    data.agent_id = this.agentSelected;
-  }
-
-  // Call appropriate function based on conditions
-  if (this.timeselect.length > 0) {
-    // Call getAllAgentbytimeframe if timeselect has elements
-    this.getAllAgentbytimeframe(data);
-  } else {
-    // Call getCallLogSingleRow if timeselect is empty
-    this.getCallLogSingleRow(data);
-  }
-}
 
 
   getAllAgentbytimeframe(data: any) {
@@ -303,164 +156,40 @@ onSelectChangeAgent(val: any) {
       }
     });
   }
- 
+
   pagerecords(val: any) {
     this.pagesize = val.value;
 
-    this.getCallLogSingleRow(this.data)
-    this.getAllAgentbytimeframe(this.data)
+    // this.getCallLogSingleRow(this.data)
+    // this.getAllAgentbytimeframe(this.data)
+
+    if (this.timeselect && this.timeselect.length > 0) {
+        this.getAllAgentbytimeframe(this.data);
+    } else {
+      this.getCallLogSingleRow(this.data);
+    }
+
   }
 
-  onSelectChange(val: any) {
-    this.supervisorSelected = val.value;
-
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-    this.getCallLogSingleRow(this.data)
-  }
 
   fromdate(val: any) {
-    console.log(val.value)
     this.fromdateSelected = val.value;
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
     this.updateToDateRestriction();
-    this.getCallLogSingleRow(this.data)
   }
 
 
-
-  // fromtime(val: any) {
-    
-  //   this.fromtimeSelected = val.value;
-  //   let data :any= {}
-  //   data = {
-  //     'user_type': '',
-  //     'fromdate': this.fromdateSelected,
-  //     'todate': this.todateSelected,
-  //     'status': '',
-  //     'supervisor_id': this.supervisorSelected,
-  //     // 'agent_id': this.agentSelected,
-  //     'direction': '',
-  //     'fromtime': this.fromtimeSelected,
-  //     'totime': this.totimeSelected,
-
-  //   }
-  //   if (this.agentSelected! == '') {
-  //     this.data.agent_id = this.agentSelected
-  //   }
-  //     // Call appropriate function based on conditions
-  // if (this.timeselect.length > 0) {
-  //   // Call getAllAgentbytimeframe if timeselect has elements
-  //   this.getAllAgentbytimeframe(data);
-  // } else {
-
-  //   this.getCallLogSingleRow(this.data)
-  // }
-  // }
   fromtime(val: any) {
     this.fromtimeSelected = val.value;
-  
-    // Create a new data object with updated values
-    let data: any = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-    };
-  
-    // Set agent_id in data if agentSelected is not empty
-    if (this.agentSelected && this.agentSelected.length > 0) {
-      data.agent_id = this.agentSelected;
-    }
-  
-    // Call appropriate function based on conditions
-    if (this.timeselect.length > 0) {
-      // Call getAllAgentbytimeframe if timeselect has elements
-      this.getAllAgentbytimeframe(data);
-    } else {
-      // Call getCallLogSingleRow if timeselect is empty
-      this.getCallLogSingleRow(data);
-    }
+
   }
-  
+
 
   todate(val: any) {
     this.todateSelected = val.value;
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-    }
-    this.getCallLogSingleRow(this.data)
   }
 
   totime(val: any) {
     this.totimeSelected = val.value;
-   
-    let data:any = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-    }
-
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
-    }
-    // Call appropriate function based on conditions
-    if (this.timeselect.length > 0) {
-      // Call getAllAgentbytimeframe if timeselect has elements
-      this.getAllAgentbytimeframe(data);
-    } else {
-      // Call getCallLogSingleRow if timeselect is empty
-      this.getCallLogSingleRow(data);
-    }
-
   }
 
 
@@ -493,7 +222,7 @@ onSelectChangeAgent(val: any) {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-        this.filterList.sort((a: any, b: any) => b.id - a.id);
+        // this.filterList.sort((a: any, b: any) => b.id - a.id);
 
       }
     });
@@ -563,6 +292,45 @@ onSelectChangeAgent(val: any) {
   }
 
 
+  getSearch() {
+// alert("ok");
+    const currentDate = new Date().toISOString().slice(0, 10);
+    this.fromdateSelected = currentDate;
+    this.todateSelected = currentDate;
+    this.data = {
+      'user_type': '',
+      'fromdate': this.fromdateSelected,
+      'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      // 'agent_id': this.agentSelected,
+      'direction': '',
+      'fromtime': this.fromtimeSelected,
+      'totime': this.totimeSelected,
+      'time': this.timeselect,
+    };
 
+    if (this.agentSelected && this.agentSelected.length > 0) {
+      this.data.agent_id = this.agentSelected;
+    }
 
+    if (this.timeselect && this.timeselect.length > 0) {
+      if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please select both From Time and To Time.',
+          timer: 4000, // Close the alert after 4 seconds
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
+        this.timeselect = "";
+      } else {
+        this.getAllAgentbytimeframe(this.data);
+      }
+    } else {
+      this.getCallLogSingleRow(this.data);
+    }
+
+  }
 }
