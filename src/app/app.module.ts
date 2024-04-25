@@ -31,6 +31,10 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata/updateusersdata.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-under-reports/one-agets-under-reports.component';
+import { CustomTimePipe } from './pipes/custom-time.pipe';
+import { DurationToMinutesSecondsPipe } from './pipes/duration-to-minutes-seconds.pipe';
+import { SecondsDifferencePipe } from './pipes/seconds-difference.pipe';
+
 
 
 
@@ -61,8 +65,11 @@ import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-
     ResetpasswordComponent,
     UpdateusersdataComponent,
     OneAgetsUnderReportsComponent,
-  
- 
+    CustomTimePipe,
+    DurationToMinutesSecondsPipe,
+    SecondsDifferencePipe,
+   
+    
   ],
   imports: [
     BrowserModule,

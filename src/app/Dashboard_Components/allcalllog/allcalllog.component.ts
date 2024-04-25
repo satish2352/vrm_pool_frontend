@@ -3,11 +3,15 @@ import { FileDownloadService } from 'src/app/FileDownloadService'
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Pipe, PipeTransform } from '@angular/core';
+
 @Component({
   selector: 'app-allcalllog',
   templateUrl: './allcalllog.component.html',
   styleUrls: ['./allcalllog.component.css']
 })
+
+
 export class AllcalllogComponent {
   timeselect: string = "";
   pagesize: number = 10;
@@ -50,6 +54,11 @@ export class AllcalllogComponent {
   loading: boolean = false; // Add loading variable
 
 
+
+
+
+
+
   selectedAgents: any[] = []; // To store selected agents
   // timeselect: any;
   constructor(private helperService: HelperService,
@@ -67,6 +76,7 @@ export class AllcalllogComponent {
     const minMm = String(sixMonthsAgo.getMonth() + 1).padStart(2, '0');
     const minYyyy = sixMonthsAgo.getFullYear();
     this.minDatef = `${minYyyy}-${minMm}-${minDd}`;
+
   }
 
   private updateToDateRestriction() {
@@ -92,7 +102,7 @@ export class AllcalllogComponent {
     // this.filteredList = this.alllist;
     // this.searchChanged('')
     this.agentSelected = this.allagentbysupervisorList.id
-
+  
 
 
 
@@ -160,7 +170,7 @@ export class AllcalllogComponent {
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
-
+   
     if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
       
       Swal.fire({
@@ -191,6 +201,100 @@ export class AllcalllogComponent {
     }
   }
 
+//   onSelectChangeAgent(val: any) {
+
+//     if (this.ignoreFirstChange) {
+//       this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
+//       return; // Ignore the rest of the function during the first call
+//     }
+
+//     const keyToExtract = 'id';
+
+//  // Extract values based on the key
+//  this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+
+//  this.data = {}
+//  this.data = {
+//    'user_type': '',
+//    'fromdate': this.fromdateSelected,
+//    'todate': this.todateSelected,
+//    'status': '',
+//    'supervisor_id': this.supervisorSelected,
+//    // 'agent_id': this.agentSelected,
+//    'direction': '',
+//    'fromtime': this.fromtimeSelected,
+//    'totime': this.totimeSelected,
+
+//  }
+
+//  if (this.agentSelected !== '') {
+//    this.data.agent_id = this.agentSelected
+//  }
+//  this.getCallLogSingleRow(this.data)
+
+
+//   if ( this.timeselect.length) {
+//     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+//     this.data = {}
+//     this.data = {
+//       'user_type': '',
+//       'fromdate': this.fromdateSelected,
+//       'todate': this.todateSelected,
+//       'status': '',
+//       'supervisor_id': this.supervisorSelected,
+//       // 'agent_id': this.agentSelected,
+//       'direction': '',
+//       'fromtime': this.fromtimeSelected,
+//       'totime': this.totimeSelected,
+//     }
+//    this. getAllAgentbytimeframe(this.data)
+// }
+//    else{
+//     this.getCallLogSingleRow(this.data)
+//    }
+
+   
+//   }
+onSelectChangeAgent(val: any) {
+  if (this.ignoreFirstChange) {
+    this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
+    return; // Ignore the rest of the function during the first call
+  }
+
+  const keyToExtract = 'id';
+
+  // Extract values based on the key
+  this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
+
+  // Prepare data object
+  let data: any = {
+    'user_type': '',
+    'fromdate': this.fromdateSelected,
+    'todate': this.todateSelected,
+    'status': '',
+    'supervisor_id': this.supervisorSelected,
+    // 'agent_id': this.agentSelected, // Commented out since agent_id set separately
+    'direction': '',
+    'fromtime': this.fromtimeSelected,
+    'totime': this.totimeSelected,
+  };
+
+  // Set agent_id in data if agentSelected is not empty
+  if (this.agentSelected.length > 0) {
+    data.agent_id = this.agentSelected;
+  }
+
+  // Call appropriate function based on conditions
+  if (this.timeselect.length > 0) {
+    // Call getAllAgentbytimeframe if timeselect has elements
+    this.getAllAgentbytimeframe(data);
+  } else {
+    // Call getCallLogSingleRow if timeselect is empty
+    this.getCallLogSingleRow(data);
+  }
+}
+
+
   getAllAgentbytimeframe(data: any) {
 
     this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
@@ -199,89 +303,13 @@ export class AllcalllogComponent {
       }
     });
   }
-  //   ontimeselect(val: any) {
-  //     this.timeselect = val.value;
-
-  //     // Check if both fromtime and totime are selected
-  //     alert(this.fromtimeSelected);
-  //     if (typeof this.fromtimeSelected  === 'undefined' && typeof this.totimeSelected  === 'undefined') {
-
-  //       this.timeselect = "";
-  //       alert('Please select both From Time and To Time.');
-  //         // Call getCallLogSingleRow with the constructed data
-  //         // this.getCallLogSingleRow(this.data);
-  //     } else {
-  //         // Either fromtime or totime is missing, show an alert
-
-
-
-  //          // Both fromtime and totime are selected, proceed with getting data
-  //          this.getAllAgentbySuperviserList();
-
-  //          // Construct the data object
-  //          this.data = {
-  //              'user_type': '',
-  //              'fromdate': this.fromdateSelected,
-  //              'todate': this.todateSelected,
-  //              'status': '',
-  //              'supervisor_id': '',
-  //              // 'agent_id': this.agentSelected,
-  //              'direction': '',
-  //              'fromtime': this.fromtimeSelected,
-  //              'totime': this.totimeSelected,
-  //              'time': this.timeselect,
-  //          };
-
-
-
-
-
-  //     }
-  // }
-
-
-
-
+ 
   pagerecords(val: any) {
     this.pagesize = val.value;
 
     this.getCallLogSingleRow(this.data)
     this.getAllAgentbytimeframe(this.data)
-
   }
-
-  onSelectChangeAgent(val: any) {
-
-    if (this.ignoreFirstChange) {
-      this.ignoreFirstChange = false; // Reset the flag after first automatic trigger
-      return; // Ignore the rest of the function during the first call
-    }
-
-    const keyToExtract = 'id';
-
-    // Extract values based on the key
-    this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-
-    this.data = {}
-    this.data = {
-      'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
-      'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
-
-    }
-
-    if (this.agentSelected !== '') {
-      this.data.agent_id = this.agentSelected
-    }
-    this.getCallLogSingleRow(this.data)
-  }
-
 
   onSelectChange(val: any) {
     this.supervisorSelected = val.value;
@@ -297,20 +325,15 @@ export class AllcalllogComponent {
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
-
     }
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
-
     this.getCallLogSingleRow(this.data)
-
   }
-
 
   fromdate(val: any) {
     console.log(val.value)
-
     this.fromdateSelected = val.value;
     this.data = {}
     this.data = {
@@ -323,41 +346,74 @@ export class AllcalllogComponent {
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
-
     }
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
     this.updateToDateRestriction();
     this.getCallLogSingleRow(this.data)
-
   }
 
 
 
+  // fromtime(val: any) {
+    
+  //   this.fromtimeSelected = val.value;
+  //   let data :any= {}
+  //   data = {
+  //     'user_type': '',
+  //     'fromdate': this.fromdateSelected,
+  //     'todate': this.todateSelected,
+  //     'status': '',
+  //     'supervisor_id': this.supervisorSelected,
+  //     // 'agent_id': this.agentSelected,
+  //     'direction': '',
+  //     'fromtime': this.fromtimeSelected,
+  //     'totime': this.totimeSelected,
+
+  //   }
+  //   if (this.agentSelected! == '') {
+  //     this.data.agent_id = this.agentSelected
+  //   }
+  //     // Call appropriate function based on conditions
+  // if (this.timeselect.length > 0) {
+  //   // Call getAllAgentbytimeframe if timeselect has elements
+  //   this.getAllAgentbytimeframe(data);
+  // } else {
+
+  //   this.getCallLogSingleRow(this.data)
+  // }
+  // }
   fromtime(val: any) {
-    console.log(val.value)
     this.fromtimeSelected = val.value;
-    this.data = {}
-    this.data = {
+  
+    // Create a new data object with updated values
+    let data: any = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
       'direction': '',
       'fromtime': this.fromtimeSelected,
       'totime': this.totimeSelected,
-
+    };
+  
+    // Set agent_id in data if agentSelected is not empty
+    if (this.agentSelected && this.agentSelected.length > 0) {
+      data.agent_id = this.agentSelected;
     }
-    if (this.agentSelected! == '') {
-      this.data.agent_id = this.agentSelected
+  
+    // Call appropriate function based on conditions
+    if (this.timeselect.length > 0) {
+      // Call getAllAgentbytimeframe if timeselect has elements
+      this.getAllAgentbytimeframe(data);
+    } else {
+      // Call getCallLogSingleRow if timeselect is empty
+      this.getCallLogSingleRow(data);
     }
-
-    this.getCallLogSingleRow(this.data)
   }
-
+  
 
   todate(val: any) {
     this.todateSelected = val.value;
@@ -377,13 +433,10 @@ export class AllcalllogComponent {
     this.getCallLogSingleRow(this.data)
   }
 
-
-
-
   totime(val: any) {
     this.totimeSelected = val.value;
-    this.data = {}
-    this.data = {
+   
+    let data:any = {
       'user_type': '',
       'fromdate': this.fromdateSelected,
       'todate': this.todateSelected,
@@ -399,8 +452,15 @@ export class AllcalllogComponent {
     if (this.agentSelected! == '') {
       this.data.agent_id = this.agentSelected
     }
+    // Call appropriate function based on conditions
+    if (this.timeselect.length > 0) {
+      // Call getAllAgentbytimeframe if timeselect has elements
+      this.getAllAgentbytimeframe(data);
+    } else {
+      // Call getCallLogSingleRow if timeselect is empty
+      this.getCallLogSingleRow(data);
+    }
 
-    this.getCallLogSingleRow(this.data)
   }
 
 

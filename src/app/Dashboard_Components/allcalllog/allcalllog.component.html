@@ -157,34 +157,37 @@
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
                                         <table id="example2" class="table table-bordered table-hover bg-dark text-white"  >
                                             <thead>
-                                                <tr class="text-secondary">
+                                                <tr class="text-secondary text-white"  >
                                                     <th class="text-white">Sr.No</th>
                                                     <th (click)="sortAgentEmail('name')" class="text-white">Agent Name <i class="fa"
                                                             [ngClass]="getArrowClass('name')"></i></th>
                                                     <th (click)="sortAgentEmail('email')" class="text-white">Agent Email <i class="fa "
                                                             [ngClass]="getArrowClass('email')"></i></th>
-                                                    <th class="text-white">Incoming Calls</th>
-                                                    <th class="text-white">Missed Calls</th>
-                                                    <th class="text-white">Received Calls</th>
-                                                    <th class="text-white">No Answer</th>
-                                                    <th class="text-white">Busy</th>
-                                                    <th class="text-white">Failed</th>
-                                                    <th class="text-white">Outgoing Calls</th>
-                                                    <th class="text-white">On Call Time</th>
-                                                    <th class="text-white">Average Handling Time In Minutes</th>
+                                                    <th  *ngIf="filterList && filterList.slot">Time Slot</th>
+                                                    <th >Incoming Calls</th>
+                                                    <th >Missed Calls</th>
+                                                    <th >Received Calls</th>
+                                                    <th >No Answer</th>
+                                                    <th >Busy</th>
+                                                    <th >Failed</th>
+                                                    <th >Outgoing Calls</th>
+                                                    <th >On Call Time</th>
+                                                    <th >Average Handling Time In Minutes</th>
                                                     <!-- <th>Device On Percent</th> -->
-                                                    <!-- <th>Device On Human Readable</th> -->
+                                                    <th>Available Time</th>
+                                                    <th>Non Available Time</th>
                                                     <th (click)="sortAgentEmail('mobile')" class="text-white">Agent Phone Number</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-dark">
-                                                <tr class="bg-white" 
+                                                <tr class="bg-white" id="Table_data"
                                                     *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
                                                     <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}</td>
                                                     <td>{{item.user.name }}</td>
                                                     <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
+                                                    <td id="Table_data" *ngIf="item.slot">{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</td>
                                                     <td id="Table_data">{{ item.IncomingCalls }}</td>
                                                     <td id="Table_data"> {{ item.MissedCalls }}</td>
                                                     <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
@@ -196,7 +199,8 @@
                                                     <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
                                                      <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td>
                                                     <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
-                                                    <!-- <td>{{ item.DeviceOnHumanReadable }}</td> -->
+                                                    <td>{{ item.DeviceOnHumanReadable | durationToMinutesSeconds }}</td>
+                                                    <td>{{ item.DeviceOnHumanReadable | secondsDifference  }}</td>
                                                     <td id="Table_data">{{ item.user.mobile }}</td>
                                                 </tr>
                                             </tbody>
