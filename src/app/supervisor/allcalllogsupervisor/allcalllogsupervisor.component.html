@@ -201,6 +201,7 @@
                                                     <th>Sr.No</th>
                                                     <th> Relationship Manager Name </th>
                                                     <th>Relationship Manager Email</th>
+                                                    <th *ngIf="filterList[0].slot">Time Slot</th>
 
                                                     <th>Incoming Calls</th>
                                                     <th>Missed Calls </th>
@@ -226,6 +227,7 @@
                                                     <td>{{item.user.name}} </td>
                                                     <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link">{{item.user.name}} </a></td> -->
                                                     <td>{{item.user.email}}</td>
+                                                    <td id="Table_data" *ngIf="item.slot">{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</td>
                                                     <td>{{item.IncomingCalls}}</td>
                                                     <td>{{item.MissedCalls}}</td>
                                                     <td>{{ calculateAbsoluteDifference(item.IncomingCalls, item.MissedCalls) }}</td>

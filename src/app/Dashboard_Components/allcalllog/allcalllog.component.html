@@ -187,7 +187,7 @@
                                                     <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
-                                                    <td id="Table_data" *ngIf="item.slot"><span >{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</span></td>
+                                                    <td id="Table_data" *ngIf="item.slot">{{ item.DeviceOnHumanReadable.start_time | customTime }}-{{ item.DeviceOnHumanReadable.end_time | customTime }}</td>
                                                     <td id="Table_data">{{ item.IncomingCalls }}</td>
                                                     <td id="Table_data"> {{ item.MissedCalls }}</td>
                                                     <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
