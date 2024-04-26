@@ -279,20 +279,48 @@ export class AllcalllogsupervisorComponent {
 
 
   getSearch() {
-// alert("ok");
-    const currentDate = new Date().toISOString().slice(0, 10);
-    this.fromdateSelected = currentDate;
-    this.todateSelected = currentDate;
+    var finalToTime = '23:59';
+    if(this.totimeSelected) {
+      finalToTime= this.totimeSelected
+    }
+
+    var finalFromTime = '00:00';
+    if(this.fromtimeSelected) {
+      finalFromTime= this.fromtimeSelected
+    }
+
+    var today = new Date(this.fromdateSelected);
+    // Get the year, month, and day
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+    var day = ('0' + today.getDate()).slice(-2);
+    var formattedDate = year + '-' + month + '-' + day;
+    var finalDate = formattedDate + 'T' + finalFromTime; // Include 'T' for ISO 8601 format
+    var localDateTime = new Date(finalDate);
+    var fromtimeFormatedSingleRow = localDateTime.toISOString();
+
+   
+
+    var today_to = new Date(this.todateSelected);
+    // Get the year, month, and day
+    var year_to = today_to.getFullYear();
+    var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+    var day_to = ('0' + today_to.getDate()).slice(-2);
+    var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+    var finalDate_to = formattedDate_to + 'T' + finalToTime; // Include 'T' for ISO 8601 format
+    var localDateTime_to = new Date(finalDate_to);
+    var totimeFormatedSingleRow = localDateTime_to.toISOString();
+
+
     this.data = {
       'user_type': '',
-      'fromdate': this.fromdateSelected,
-      'todate': this.todateSelected,
+      // 'fromdate': this.fromdateSelected,
+      // 'todate': this.todateSelected,
       'status': '',
       'supervisor_id': this.supervisorSelected,
-      // 'agent_id': this.agentSelected,
       'direction': '',
-      'fromtime': this.fromtimeSelected,
-      'totime': this.totimeSelected,
+      'fromtime': fromtimeFormatedSingleRow,
+      'totime': totimeFormatedSingleRow,
       'time': this.timeselect,
     };
 
@@ -301,6 +329,7 @@ export class AllcalllogsupervisorComponent {
     }
 
     if (this.timeselect && this.timeselect.length > 0) {
+      
       if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
 
         Swal.fire({
@@ -312,6 +341,33 @@ export class AllcalllogsupervisorComponent {
         });
         this.timeselect = "";
       } else {
+
+        var today = new Date();
+        // Get the year, month, and day
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+        var day = ('0' + today.getDate()).slice(-2);
+        var formattedDate = year + '-' + month + '-' + day;
+        var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
+        var localDateTime = new Date(finalDate);
+        var fromtimeFormated = localDateTime.toISOString();
+
+
+        var today_to = new Date();
+        // Get the year, month, and day
+        var year_to = today_to.getFullYear();
+        var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+        var day_to = ('0' + today_to.getDate()).slice(-2);
+        var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+        var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
+        var localDateTime_to = new Date(finalDate_to);
+        var totimeFormated = localDateTime_to.toISOString();
+
+
+     
+
+        this.data.fromtime = fromtimeFormated;
+        this.data.totime = totimeFormated;
         this.getAllAgentbytimeframe(this.data);
       }
     } else {
