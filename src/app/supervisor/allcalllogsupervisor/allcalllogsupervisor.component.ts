@@ -279,10 +279,7 @@ export class AllcalllogsupervisorComponent {
 
 
   getSearch() {
-    var finalToTime = '23:59';
-    if(this.totimeSelected) {
-      finalToTime= this.totimeSelected
-    }
+    
 
     var finaltoDate = new Date()
     if(this.todateSelected) {
@@ -294,7 +291,11 @@ export class AllcalllogsupervisorComponent {
       finalFromDate= this.fromdateSelected
     }
 
-    
+
+    var finalToTime = '23:59';
+    if(this.totimeSelected) {
+      finalToTime= this.totimeSelected
+    }
 
     var finalFromTime = '00:00';
     if(this.fromtimeSelected) {
