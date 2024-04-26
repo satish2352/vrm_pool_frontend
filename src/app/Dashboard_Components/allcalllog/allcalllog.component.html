@@ -71,8 +71,12 @@
                                     <div class="form-group">
                                         <label class="text-secondary">From Time</label>
                                         <div class="input-group" id="fromtime">
-                                            <input type="time" class="form-control bg-white text-secondary"
-                                                (change)="fromtime($event.target)" />
+                                            <!-- <input type="time" class="form-control bg-white text-secondary"
+                                                (change)="fromtime($event.target)" /> -->
+
+                                                <input type="text"  class="form-control bg-white text-secondary"
+                                                (change)="fromtime($event.target)" formControlName="timeInput" placeholder="HH:MM" required>
+
                                         </div>
                                     </div>
                                 </div>
@@ -94,8 +98,10 @@
                                     <div class="form-group">
                                         <label class="text-secondary">To Time</label>
                                         <div class="input-group" id="totime">
-                                            <input type="time" class="form-control bg-white text-secondary"
-                                                (change)="totime($event.target)" />
+                                            <!-- <input type="time" class="form-control bg-white text-secondary"
+                                                (change)="totime($event.target)" /> -->
+                                                <input type="text"  class="form-control bg-white text-secondary"
+                                                (change)="fromtime($event.target)" formControlName="timeInput" placeholder="HH:MM" required>
                                         </div>
                                     </div>
                                 </div>

@@ -298,12 +298,24 @@ export class AllcalllogComponent {
       finalToTime= this.totimeSelected
     }
 
+    var finaltoDate = new Date()
+    if(this.todateSelected) {
+      finaltoDate= this.todateSelected
+    }
+
+    var finalFromDate = new Date()
+    if(this.fromdateSelected) {
+      finalFromDate= this.fromdateSelected
+    }
+
+    
+
     var finalFromTime = '00:00';
     if(this.fromtimeSelected) {
       finalFromTime= this.fromtimeSelected
     }
 
-    var today = new Date(this.fromdateSelected);
+    var today = new Date(finalFromDate);
     // Get the year, month, and day
     var year = today.getFullYear();
     var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -315,7 +327,7 @@ export class AllcalllogComponent {
 
    
 
-    var today_to = new Date(this.todateSelected);
+    var today_to = new Date(finaltoDate);
     // Get the year, month, and day
     var year_to = today_to.getFullYear();
     var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -326,67 +338,69 @@ export class AllcalllogComponent {
     var totimeFormatedSingleRow = localDateTime_to.toISOString();
 
 
-    this.data = {
-      'user_type': '',
-      // 'fromdate': this.fromdateSelected,
-      // 'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'direction': '',
-      'fromtime': fromtimeFormatedSingleRow,
-      'totime': totimeFormatedSingleRow,
-      'time': this.timeselect,
-    };
-
-    if (this.agentSelected && this.agentSelected.length > 0) {
-      this.data.agent_id = this.agentSelected;
-    }
-
-    if (this.timeselect && this.timeselect.length > 0) {
+    if (fromtimeFormatedSingleRow > totimeFormatedSingleRow) {
+      alert("To time can't be less than from time");
       
-      if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
-
-        Swal.fire({
-          icon: 'warning',
-          title: 'Please select both From Time and To Time.',
-          timer: 4000, // Close the alert after 4 seconds
-          timerProgressBar: true,
-          showConfirmButton: false
-        });
-        this.timeselect = "";
-      } else {
-
-        var today = new Date();
-        // Get the year, month, and day
-        var year = today.getFullYear();
-        var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
-        var day = ('0' + today.getDate()).slice(-2);
-        var formattedDate = year + '-' + month + '-' + day;
-        var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
-        var localDateTime = new Date(finalDate);
-        var fromtimeFormated = localDateTime.toISOString();
-
-
-        var today_to = new Date();
-        // Get the year, month, and day
-        var year_to = today_to.getFullYear();
-        var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
-        var day_to = ('0' + today_to.getDate()).slice(-2);
-        var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
-        var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
-        var localDateTime_to = new Date(finalDate_to);
-        var totimeFormated = localDateTime_to.toISOString();
-
-
-     
-
-        this.data.fromtime = fromtimeFormated;
-        this.data.totime = totimeFormated;
-        this.getAllAgentbytimeframe(this.data);
-      }
     } else {
-      this.getCallLogSingleRow(this.data);
-    }
 
+      this.data = {
+        'user_type': '',
+        // 'fromdate': this.fromdateSelected,
+        // 'todate': this.todateSelected,
+        'status': '',
+        'supervisor_id': this.supervisorSelected,
+        'direction': '',
+        'fromtime': fromtimeFormatedSingleRow,
+        'totime': totimeFormatedSingleRow,
+        'time': this.timeselect,
+      };
+
+      if (this.agentSelected && this.agentSelected.length > 0) {
+        this.data.agent_id = this.agentSelected;
+      }
+
+      if (this.timeselect && this.timeselect.length > 0) {
+        
+        if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'Please select both From Time and To Time.',
+            timer: 4000, // Close the alert after 4 seconds
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
+          this.timeselect = "";
+        } else {
+
+          var today = new Date();
+          // Get the year, month, and day
+          var year = today.getFullYear();
+          var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+          var day = ('0' + today.getDate()).slice(-2);
+          var formattedDate = year + '-' + month + '-' + day;
+          var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
+          var localDateTime = new Date(finalDate);
+          var fromtimeFormated = localDateTime.toISOString();
+
+
+          var today_to = new Date();
+          // Get the year, month, and day
+          var year_to = today_to.getFullYear();
+          var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+          var day_to = ('0' + today_to.getDate()).slice(-2);
+          var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+          var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
+          var localDateTime_to = new Date(finalDate_to);
+          var totimeFormated = localDateTime_to.toISOString();
+
+          this.data.fromtime = fromtimeFormated;
+          this.data.totime = totimeFormated;
+          this.getAllAgentbytimeframe(this.data);
+        }
+      } else {
+        this.getCallLogSingleRow(this.data);
+      }
+    }
   }
 }
