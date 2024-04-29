@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row text-dark">
 
 
                                 <!-- 
@@ -119,9 +119,9 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">From Time</label>
+                                        <label >From Time</label>
                                         <div class="input-group" id="fromtime">
-                                            <input type="time" class="form-control bg-white text-secondary"
+                                            <input type="time" class="form-control text-secondary bg-white"
                                                 (change)="fromtime($event.target)" />
 
                                                 <!-- <input type="text"  class="form-control bg-white text-secondary"
@@ -144,7 +144,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">To Time</label>
+                                        <label >To Time</label>
                                         <div class="input-group" id="totime">
                                             <input type="time" class="form-control bg-white text-secondary"
                                                 (change)="totime($event.target)" />
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Time Frame</label>
+                                        <label >Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)" [ngModel]="timeselect">
                                             <option value="" selected class="text-secondary">Choose Time Frame
@@ -177,7 +177,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Search</label>
+                                        <label >Search</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-white text-secondary"
                                                 placeholder="Search..." [(ngModel)]="searchTerm"
@@ -216,13 +216,13 @@
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
                                         <table id="example2" class="table table-bordered table-hover bg-dark text-white">
                                             <thead>
-                                                <tr class="text-secondary text-white">
-                                                    <th class="text-white">Sr.No</th>
-                                                    <th (click)="sortAgentEmail('name')" class="text-white">RM Name <i
+                                                <tr class="text-white">
+                                                    <th >Sr.No</th>
+                                                    <th (click)="sortAgentEmail('name')" >RM Name <i
                                                             class="fa" [ngClass]="getArrowClass('name')"></i></th>
-                                                    <th (click)="sortAgentEmail('email')" class="text-white">RM Email <i
+                                                    <th (click)="sortAgentEmail('email')" >RM Email <i
                                                             class="fa " [ngClass]="getArrowClass('email')"></i></th>
-                                                    <th (click)="sortAgentEmail('mobile')" class="text-white">RM Mobile
+                                                    <th (click)="sortAgentEmail('mobile')" >RM Mobile
                                                         Number</th>
                                                     <th>Available Time</th>
                                                     <th>Non Available Time</th>

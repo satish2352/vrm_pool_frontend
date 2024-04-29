@@ -88,12 +88,13 @@
                                                     <ng-container *ngIf="users.is_deleted == 0"
                                                         class="bg-light text-secondary">
 
-                                                        
+
                                                         <th class="text-secondary text-dark">{{ i + 1 + (pagesize *
                                                             (currentpage - 1)) }}</th>
                                                         <td class=" text-secondary text-dark"><span
                                                                 *ngIf="users.user_type == '2'"> Supervisor</span><span
-                                                                *ngIf="users.user_type == '3'"> Relationship Manager</span></td>
+                                                                *ngIf="users.user_type == '3'"> Relationship
+                                                                Manager</span></td>
                                                         <td class="text-dark">{{ users.name }}</td>
                                                         <td class="text-dark">{{users.mobile}} </td>
                                                         <td class="text-dark">{{users.email}} </td>

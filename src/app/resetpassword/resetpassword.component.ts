@@ -104,7 +104,7 @@ export class ResetpasswordComponent implements OnInit {
 
   resetpass() {
     if (this.resetpasswordfrom.invalid) {
-      this.toastr.error('Please fill in all fields', 'Error');
+      this.toastr.error('Please fill all fields', 'Error');
       return;
     }
 

@@ -23,10 +23,10 @@
                     </div>
                     <div class="col-md-12">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row text-dark">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary ">Supervisor</label>
+                                        <label >Supervisor</label>
                                         <select class="form-control bg-white text-secondary"
                                             (change)="onSelectChangeSupervisor($event.target)">
                                             <option value="" disabled selected class="text-secondary">Choose Supervisor
@@ -45,7 +45,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Relationship Manager</label>
+                                        <label >Relationship Manager</label>
                                         <ng-multiselect-dropdown [placeholder]="'Choose RM'" class="text-secondary"
                                             [data]="allagentbysupervisorList" [(ngModel)]="selectedAgents"
                                             [settings]="dropdownSettings" (ngModelChange)="onSelectChangeAgent($event)">
@@ -58,7 +58,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">From Date</label>
+                                        <label >From Date</label>
                                         <div class="input-group" id="fromdate">
                                             <input type="date" type="date" [max]="maxDatef" [min]="minDatef"
                                                 class="form-control bg-white text-secondary"
@@ -69,7 +69,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">From Time</label>
+                                        <label >From Time</label>
                                         <div class="input-group" id="fromtime">
                                             <input type="time" class="form-control bg-white text-secondary"
                                                 (change)="fromtime($event.target)" />
@@ -84,7 +84,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">To Date</label>
+                                        <label >To Date</label>
                                         <div class="input-group" id="todate">
                                             <input type="date" [min]="minDatet" [max]="maxDatet"
                                                 class="form-control bg-white text-secondary"
@@ -96,7 +96,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">To Time</label>
+                                        <label >To Time</label>
                                         <div class="input-group" id="totime">
                                             <input type="time" class="form-control bg-white text-secondary"
                                                 (change)="totime($event.target)" />
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Time Frame</label>
+                                        <label >Time Frame</label>
                                         <select class="form-control bg-white  text-secondary"
                                             (change)="ontimeselect($event.target)" [ngModel]="timeselect">
                                             <option value="" selected class="text-secondary">Choose Time Frame
@@ -130,7 +130,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="text-secondary">Search</label>
+                                        <label >Search</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-white text-secondary"
                                                 placeholder="Search..." [(ngModel)]="searchTerm"
