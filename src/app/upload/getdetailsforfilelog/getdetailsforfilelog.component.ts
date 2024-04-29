@@ -35,16 +35,24 @@ export class GetdetailsforfilelogComponent implements OnInit {
 
   }
   ngOnInit(): void {
+   this.reportsdata();
+
+  }
+
+  reportsdata(){
     this.editdata = this.route.snapshot.params['id'];
     if (this.editdata) {
       var obj = { 'fileId': this.editdata };
       this.helperService.getAllFileIdWiseLog(obj).subscribe(list => {
         this.alllist = list['data'];
       });
-
     }
   }
-
+  pagerecords(val: any) {
+    this.pagesize = val.value;
+    console.log("page records called", this.pagesize);
+    this.reportsdata()
+  }
 }
 
 
