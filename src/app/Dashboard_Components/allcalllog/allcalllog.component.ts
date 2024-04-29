@@ -83,15 +83,38 @@ export class AllcalllogComponent {
     if (this.fromdateSelected) {
       const fromDate = new Date(this.fromdateSelected);
       const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
-
       const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
       const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
       const maxYyyy = thirtyDaysFromFromDate.getFullYear();
       this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
       this.minDatet = this.minDatef;
-
     }
   }
+
+//   private updateToDateRestriction() {
+//     if (this.fromdateSelected) {
+//         const fromDate = new Date(this.fromdateSelected);
+//         const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+        
+//         const today = new Date();
+//         const maxDate = new Date(today.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+//         const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
+//         const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
+//         const maxYyyy = thirtyDaysFromFromDate.getFullYear();
+//         this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
+
+//         const maxDdToday = String(maxDate.getDate()).padStart(2, '0');
+//         const maxMmToday = String(maxDate.getMonth() + 1).padStart(2, '0');
+//         const maxYyyyToday = maxDate.getFullYear();
+//         const maxDateToday = `${maxYyyyToday}-${maxMmToday}-${maxDdToday}`;
+//         this.maxDatet = (maxDate.getTime() < thirtyDaysFromFromDate.getTime()) ? maxDateToday : this.maxDatet;
+//     }
+// }
+
+
+
+
   ngOnInit(): void {
 
     this.getAllSupervisorList();
@@ -340,7 +363,16 @@ export class AllcalllogComponent {
 
 
     if (fromtimeFormatedSingleRow > totimeFormatedSingleRow) {
-      alert("To time can't be less than from time");
+      // alert("To time can't be less than from time");
+      Swal.fire({
+        icon: 'warning',
+        title: "To Time and Date can't be less than from Time and Date ",
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+    
+   
       
     } else {
 
@@ -404,4 +436,17 @@ export class AllcalllogComponent {
       }
     }
   }
+
+  // clearSelections() {
+  //   this.supervisorSelected = null;
+  //   this.agentSelected = [];
+  //   this.fromdateSelected = null;
+  //   this.todateSelected = null;
+  //   this.fromtimeSelected = null;
+  //   this.totimeSelected = null;
+  //   this.timeselect = '';
+  //   this.data = {};
+  //   this.getCallLogSingleRow(this.data);
+  // }
+ 
 }

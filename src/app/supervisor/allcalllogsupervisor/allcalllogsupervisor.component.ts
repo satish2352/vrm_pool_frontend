@@ -326,8 +326,15 @@ export class AllcalllogsupervisorComponent {
 
 
     if (fromtimeFormatedSingleRow > totimeFormatedSingleRow) {
-      alert("To time can't be less than from time");
-      
+      // alert("To time can't be less than from time");
+      Swal.fire({
+        icon: 'warning',
+        title: "To Time and Date can't be less than from Time and Date ",
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+   
     } else {
 
       this.data = {
@@ -390,4 +397,5 @@ export class AllcalllogsupervisorComponent {
       }
     }
   }
+  
 }
