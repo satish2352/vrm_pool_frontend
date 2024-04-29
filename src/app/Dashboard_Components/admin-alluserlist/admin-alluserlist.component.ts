@@ -235,7 +235,7 @@ export class AdminAlluserlistComponent {
 
     this.helperService.changeUserStatus(data).subscribe(list => {
       if (list['result'] == true) {
-        this.toastr.success('User Status Updated Successfully', 'Success');
+        this.toastr.success(list.message, 'Success');
       }
     });
 

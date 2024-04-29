@@ -1,13 +1,13 @@
 <div class="wrapper ">
     <div *ngIf="loading" class="loader-overlay">
         <div class="loader"></div>
-      </div>
+    </div>
     <div class="content-wrapper mt-5  bg-gradient-light text-dark">
         <section class="content-header bg-whte text-dark">
             <div class="container-fluid ">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class=" text-secondary">Users</h1>
+                        <h1 class=" text-secondary">Usersssssssssss</h1>
                     </div>
 
                 </div>
@@ -23,8 +23,10 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>User Type</label>
-                                    <select class="form-control bg-white text-secondary" (change)="listsepration($event.target)" >
-                                        <option value="" disabled selected class="bg-white text-secondary">Choose User Type</option>
+                                    <select class="form-control bg-white text-secondary"
+                                        (change)="listsepration($event.target)">
+                                        <option value="" disabled selected class="bg-white text-secondary">Choose User
+                                            Type</option>
                                         <option value="2"> Supervisors</option>
                                         <option value="3"> Relationship Manager</option>
                                     </select>
@@ -34,7 +36,7 @@
 
                             <div class="card-body">
                                 <div class="row">
-                                <!-- <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label>User Type</label>
                                         <select class="form-control" (change)="listsepration($event.target)">
@@ -45,47 +47,53 @@
     
                                     </div>
                                 </div> -->
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Show Records</label>
-                                        <select class="form-control" (change)="pagerecords($event.target)">
-                                            <option value="" disabled selected>Choose No of Records</option>
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Show Records</label>
+                                            <select class="form-control" (change)="pagerecords($event.target)">
+                                                <option value="" disabled selected>Choose No of Records</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
 
-                                    <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData" class="bg-light text-dark">
-                                        <table id="example2" class="table table-bordered table-hover bg-dark text-secondary ">
+                                    <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData"
+                                        class="bg-light text-dark">
+                                        <table id="example2"
+                                            class="table table-bordered table-hover bg-dark text-secondary ">
                                             <thead>
                                                 <tr>
-                                                    <th >Sr.No</th>
-                                                    <th >Supervisor/RM</th>
-                                                    <th >Name </th>
-                                                    <th >Mobile No</th>
-                                                    <th >Email ID</th>
-                                                    <th >Edit</th>
-                                                    <th >Enable/Disable</th>
+                                                    <th>Sr.No</th>
+                                                    <th>Supervisor/RM</th>
+                                                    <th>Name </th>
+                                                    <th>Mobile No</th>
+                                                    <th>Email ID</th>
+                                                    <th>Edit</th>
+                                                    <th>Enable/Disable</th>
                                                     <!-- <th>Change PassWord</th> -->
-                                                    <th >Reset PassWord</th>
-                                                    <th >Delete User</th>
+                                                    <th>Reset PassWord</th>
+                                                    <th>Delete User</th>
                                                 </tr>
                                             </thead>
-                                            <tbody >
-                                                
+                                            <tbody>
+
                                                 <tr class="bg-white"
                                                     *ngFor="let users of supervisorsList1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                    <ng-container *ngIf="users.is_deleted == 0" class="bg-light text-secondary">
+                                                    <ng-container *ngIf="users.is_deleted == 0"
+                                                        class="bg-light text-secondary">
+
                                                         
-                                                        <th class="text-secondary text-dark">{{i+1+(pagesize*(currentpage-1))}}</th>
-                                                        <td class=" text-secondary text-dark"><span *ngIf="users.user_type == '2'"> Supervisor</span><span
-                                                                *ngIf="users.user_type == '3'"> Agent</span></td>
+                                                        <th class="text-secondary text-dark">{{ i + 1 + (pagesize *
+                                                            (currentpage - 1)) }}</th>
+                                                        <td class=" text-secondary text-dark"><span
+                                                                *ngIf="users.user_type == '2'"> Supervisor</span><span
+                                                                *ngIf="users.user_type == '3'"> Relationship Manager</span></td>
                                                         <td class="text-dark">{{ users.name }}</td>
                                                         <td class="text-dark">{{users.mobile}} </td>
                                                         <td class="text-dark">{{users.email}} </td>
