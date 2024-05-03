@@ -214,7 +214,7 @@ export class AllcalllogsupervisorComponent {
     });
   }
 
-  searchChanged(searchValue: string) {
+  searchChanged(searchValue: any) {
 
     if (!searchValue) {
       let data = {}
@@ -279,7 +279,10 @@ export class AllcalllogsupervisorComponent {
 
 
   getSearch() {
-    
+    if (!this.fromdateSelected || !this.todateSelected ) {
+     
+      return; // Exit the function if any required field is missing
+  }
 
     var finaltoDate = new Date()
     if(this.todateSelected) {
@@ -397,5 +400,6 @@ export class AllcalllogsupervisorComponent {
       }
     }
   }
-  
+
+
 }

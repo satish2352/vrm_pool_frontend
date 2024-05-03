@@ -128,18 +128,28 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label >Search</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control bg-white text-secondary"
                                                 placeholder="Search..." [(ngModel)]="searchTerm"
-                                                (ngModelChange)="searchChanged($event)">
+                                                (ngModelChange)="searchChanged($event)"
+                                                (keyup)="searchChanged($event)">
                                         </div>
                                       
                                     </div>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="searchInput">Search</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control bg-white text-secondary" id="searchInput"
+                                                placeholder="Search..." [(ngModel)]="searchTerm" 
+                                                (keyup)="searchChanged(searchTerm)">
+                                        </div>
+                                    </div>
                                 </div>
-
 
                             </div>
 

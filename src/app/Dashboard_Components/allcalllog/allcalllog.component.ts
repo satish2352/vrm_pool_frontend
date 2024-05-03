@@ -182,10 +182,6 @@ export class AllcalllogComponent {
 
   pagerecords(val: any) {
     this.pagesize = val.value;
-
-    // this.getCallLogSingleRow(this.data)
-    // this.getAllAgentbytimeframe(this.data)
-
     if (this.timeselect && this.timeselect.length > 0) {
         this.getAllAgentbytimeframe(this.data);
     } else {
@@ -245,14 +241,13 @@ export class AllcalllogComponent {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-        // this.filterList.sort((a: any, b: any) => b.id - a.id);
 
       }
     });
   }
 
-  searchChanged(searchValue: string) {
-
+  searchChanged(searchValue: any) {
+console.log(searchValue);
     if (!searchValue) {
       let data = {}
       this.helperService.getCallLogSingleRow(data).subscribe(list => {
@@ -262,22 +257,37 @@ export class AllcalllogComponent {
         }
       });
     } else {
-      this.listalldata = this.filterList
-      this.filterList = this.listalldata.filter((item: any) =>
-        item.user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.user.email.includes(searchValue) || item.IncomingCalls.toString().includes(searchValue)
-        || item.MissedCalls.toString().includes(searchValue) ||
-        item.NoAnswer.toString().includes(searchValue) ||
-        item.Busy.toString().includes(searchValue) ||
-        item.Failed.toString().includes(searchValue) ||
-        item.OutgoingCalls.toString().includes(searchValue) ||
-        item.TotalCallDurationInMinutes.toString().includes(searchValue) ||
-        item.AverageHandlingTimeInMinutes.toString().includes(searchValue) ||
-        item.DeviceOnPercent.toString().includes(searchValue) ||
-        item.DeviceOnHumanReadable.toString().includes(searchValue) ||
-        item.user.mobile.toString().includes(searchValue)
-        // You can add more conditions here to filter by other properties
-      );
+      let data = {}
+      this.helperService.getCallLogSingleRow(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.filterList = list['data'];
+
+          let filterListNew:any
+          filterListNew = this.filterList
+          filterListNew = filterListNew.filter((item: any) =>
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.name) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.email) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.IncomingCalls.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.MissedCalls.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.NoAnswer.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.Busy.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.Failed.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.OutgoingCalls.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.TotalCallDurationInMinutes.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.AverageHandlingTimeInMinutes.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.DeviceOnPercent.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.DeviceOnHumanReadable.toString()) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.mobile.toString())
+              // You can add more conditions here to filter by other properties
+          );
+          this.filterList =filterListNew
+
+
+        }
+      });
+
+   
+
     }
 
   }
@@ -316,7 +326,10 @@ export class AllcalllogComponent {
 
 
   getSearch() {
-    
+    if (!this.fromdateSelected || !this.todateSelected ) {
+     
+      return; // Exit the function if any required field is missing
+  }
 
     var finaltoDate = new Date()
     if(this.todateSelected) {
@@ -437,16 +450,18 @@ export class AllcalllogComponent {
     }
   }
 
-  // clearSelections() {
-  //   this.supervisorSelected = null;
-  //   this.agentSelected = [];
-  //   this.fromdateSelected = null;
-  //   this.todateSelected = null;
-  //   this.fromtimeSelected = null;
-  //   this.totimeSelected = null;
-  //   this.timeselect = '';
-  //   this.data = {};
-  //   this.getCallLogSingleRow(this.data);
-  // }
+
+
+  clearSelections() {
+    this.supervisorSelected = null;
+    this.agentSelected = [];
+    this.fromdateSelected = null;
+    this.todateSelected = null;
+    this.fromtimeSelected = null;
+    this.totimeSelected = null;
+    this.timeselect = '';
+    this.data = {};
+    this.getCallLogSingleRow(this.data);
+  }
  
 }
