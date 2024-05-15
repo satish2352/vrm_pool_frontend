@@ -20,7 +20,8 @@ function getBaseUrl() {
   const baseUrls:any = {
     // '35.154.44.56': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
     // '35.154.44.56': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
-    'https://stargatestaging-poolmonitor.exotel.com:3000/login': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
+    'https://stargatestaging-poolmonitor.exotel.com':'https://stargatestaging-poolmonitor.exotel.com:3000/api',
+    // 'https://stargatestaging-poolmonitor.exotel.com:3000/login': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
     '3.111.214.34': 'http://3.111.214.34:3000/api' //SMG
     
   };
