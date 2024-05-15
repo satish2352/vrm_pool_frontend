@@ -14,7 +14,7 @@ function getBaseUrl() {
   };
 
   // Default base URL if server IP does not match any defined mappings
-  const defaultBaseUrl = 'https://stargatestaging-poolmonitor.exotel.com:3000/';
+  const defaultBaseUrl = 'https://stargatestaging-poolmonitor.exotel.com:3000';
 
   // Return the corresponding base URL based on the server's IP
   return baseUrls[serverIp] || defaultBaseUrl;
