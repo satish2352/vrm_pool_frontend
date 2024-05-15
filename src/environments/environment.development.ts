@@ -21,7 +21,7 @@ function getBaseUrl() {
     // '35.154.44.56': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
     'https://stargatestaging-poolmonitor.exotel.com/login': 'https://stargatestaging-poolmonitor.exotel.com:3000/api', //VRM UAT
     '3.111.214.34': 'http://3.111.214.34:3000/api' //SMG
-    // Add more IP to URL mappings as needed  
+    
   };
 
   // Default base URL if server IP does not match any defined mappings
