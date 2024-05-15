@@ -98,7 +98,8 @@ export class HelperService {
   }
 
 
-  getCallLogSingleRow(data: any): Observable<any> {
+  getCallLogSingleRow(data:any): Observable<any> {
+ 
     return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleRow`, data);
   }
 

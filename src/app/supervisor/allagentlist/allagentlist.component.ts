@@ -13,7 +13,7 @@ export class AllagentlistComponent {
   supervisorSelected:any;
   loading: boolean = false; // Add loading variable
   constructor(
-    private helperService: HelperService,
+    private helperService: HelperService, 
  ) { }
  ngOnInit(): void {
   this.getAllAgentbySuperviserList();

@@ -44,8 +44,7 @@ const routes: Routes = [
     { path: 'agent-list', component: AgentlistComponent , canActivate: [AuthGuard] },
     { path: 'upload-all-log', component: UploadalllogComponent , canActivate: [AuthGuard] },
     { path: 'get-details/:id', component: GetdetailsforfilelogComponent , canActivate: [AuthGuard] },
-
-    { path: 'supervisor/agent-list', component: AllagentlistComponent , canActivate: [AuthGuard] },
+    { path: 'supervisor-agent-list', component: AllagentlistComponent , canActivate: [AuthGuard] },
     { path: 'change-password', component: ChangePasswordComponent , canActivate: [AuthGuard] },
     { path: 'admin-all-user-list', component: AdminAlluserlistComponent , canActivate: [AuthGuard] },
     { path: 'users-change-password', component: UsersChangePasswordComponent , canActivate: [AuthGuard] },

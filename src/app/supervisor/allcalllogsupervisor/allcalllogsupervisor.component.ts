@@ -54,7 +54,7 @@ export class AllcalllogsupervisorComponent {
     private fileDownloadService: FileDownloadService,
     public router: Router) {
     this.supervisorSelected = localStorage.getItem('user_id')
-    
+  
     
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -68,6 +68,7 @@ export class AllcalllogsupervisorComponent {
     const minMm = String(sixMonthsAgo.getMonth() + 1).padStart(2, '0');
     const minYyyy = sixMonthsAgo.getFullYear();
     this.minDate = `${minYyyy}-${minMm}-${minDd}`;
+    
   }
   private updateToDateRestriction() {
     if (this.fromdateSelected) {
@@ -86,14 +87,17 @@ export class AllcalllogsupervisorComponent {
   ngOnInit(): void {
 
     this.getAllSupervisorList();
-    this.data = {}
+    this.data = {
+      'superviserId':this.supervisorSelected,
+      
+    }
     this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
     this.getAllAgentbySuperviserList()
     // this.filteredList = this.alllist;
     // this.searchChanged('')
     this.agentSelected = this.allagentbysupervisorList.id
-
+  
   }
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
     return Math.abs(incomingCalls - missedCalls);
@@ -204,14 +208,15 @@ export class AllcalllogsupervisorComponent {
   }
 
 
-  getCallLogSingleRow(data: any) {
+  getCallLogSingleRow(data:any) {
+ 
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
-        // this.filterList.sort((a: any, b: any) => b.id - a.id);
+    
 
       }
-    });
+    }); 
   }
 
   searchChanged(searchValue: any) {
