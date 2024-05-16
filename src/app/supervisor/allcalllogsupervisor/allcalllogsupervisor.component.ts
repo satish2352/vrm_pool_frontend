@@ -88,7 +88,7 @@ export class AllcalllogsupervisorComponent {
 
     this.getAllSupervisorList();
     this.data = {
-      'superviserId':this.supervisorSelected,
+      'supervisor_id':this.supervisorSelected,
       
     }
     this.getCallLogSingleRow(this.data);
