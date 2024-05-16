@@ -116,7 +116,7 @@ export class AllcalllogComponent {
 
 
   ngOnInit(): void {
-
+ 
     this.getAllSupervisorList();
     this.data = {}
     this.getCallLogSingleRow(this.data);
@@ -152,6 +152,7 @@ export class AllcalllogComponent {
 
   onSelectChangeSupervisor(val: any) {
     this.supervisorSelected = val.value;
+    this.getAllAgentbySuperviserList() 
   }
 
   ontimeselect(val: any) {

@@ -90,8 +90,12 @@ export class HelperService {
 
   getAllAgentbySuperviserList(data: any): Observable<any> {
 
-    return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
+    return this.http.post<any>(`${this.apiUrl}/getActiveUserList`, data);
   }
+  // getAllAgentbySuperviserList(data: any): Observable<any> {
+
+  //   return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
+  // }
   getAllAgentbytimeframe(data: any): Observable<any> {
 
     return this.http.post<any>(`${this.apiUrl}/getAgentReportsSingleTimeSlotWise`, data);

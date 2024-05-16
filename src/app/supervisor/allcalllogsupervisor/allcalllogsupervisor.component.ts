@@ -87,6 +87,8 @@ export class AllcalllogsupervisorComponent {
   ngOnInit(): void {
 
     this.getAllSupervisorList();
+    // this.data = {
+    // }
     this.data = {
       'supervisor_id':this.supervisorSelected,
       
