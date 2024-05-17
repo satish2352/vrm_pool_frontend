@@ -23,7 +23,7 @@ export class AdminAlluserlistComponent {
   }
   pagerecords(val: any) {
     this.pagesize = val.value;
-   
+
     // this.getAllSupervisorList();
   }
 
@@ -36,10 +36,10 @@ export class AdminAlluserlistComponent {
       }
       this.loading = false; // Hide loader after data is fetched
     },
-    (error) => {
-      console.error('Error fetching agent list:', error);
-      this.loading = false; // Hide loader if an error occurs
-    });
+      (error) => {
+        console.error('Error fetching agent list:', error);
+        this.loading = false; // Hide loader if an error occurs
+      });
   }
 
   userspasschange(users: any) {
@@ -119,7 +119,7 @@ export class AdminAlluserlistComponent {
 
   // deleteUser(users: any) {
   //   let data = { 'id': users };
-    
+
   //   Swal.fire({
   //     title: 'Confirmation',
   //     text: 'Are you sure you want to reset the password for this user?',
@@ -190,7 +190,7 @@ export class AdminAlluserlistComponent {
               });
             } else {
               // Display API error message if available
-              if (response['result']=== false) {
+              if (response['result'] === false) {
                 Swal.fire({
                   icon: 'error',
                   title: 'Failed to delete user',
@@ -201,7 +201,7 @@ export class AdminAlluserlistComponent {
                 Swal.fire({
                   icon: 'error',
                   title: 'Failed to delete user',
-                  text:  "User cant be deleted because relationship managers are mapped to this user"
+                  text: "User cant be deleted because relationship managers are mapped to this user"
                 });
               }
             }
@@ -212,7 +212,7 @@ export class AdminAlluserlistComponent {
             Swal.fire({
               icon: 'error',
               title: 'Failed to delete user',
-              text:  "User cant be deleted because relationship managers are mapped to this user"
+              text: "User cant be deleted because relationship managers are mapped to this user"
             });
           }
         );
@@ -220,6 +220,29 @@ export class AdminAlluserlistComponent {
     });
   }
 
+
+  // changeUserStatus(id: any, event: any) {
+  //   console.log(event.checked);
+
+  //   const statusValue = event.checked == true ? '1' : '0';
+
+  //   console.log('######################', statusValue);
+  //   const data = {
+  //     status: statusValue,
+  //     id: id
+  //   };
+
+
+  //   this.helperService.changeUserStatus(data).subscribe(list => {
+
+  //    if (list['result'] == true) {
+  //     alert("hjsdhjsahdh")
+  //       this.toastr.success(list.message, 'Success');
+  //     }
+
+  //   });
+
+  // }
 
   changeUserStatus(id: any, event: any) {
     console.log(event.checked);
@@ -232,15 +255,27 @@ export class AdminAlluserlistComponent {
       id: id
     };
 
+    try {
+      this.helperService.changeUserStatus(data).subscribe(list => {
+        if (list['result'] == true) {
 
-    this.helperService.changeUserStatus(data).subscribe(list => {
-      if (list['result'] == true) {
-        this.toastr.success(list.message, 'Success');
-      }
-    });
+          this.toastr.success(list.message, 'Success');
+        }
+      }, error => {
+        console.error(error.message, error);
 
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to Status Update',
+          text: error.error['message']
+        });
+        this.getAllSupervisorList()
+      });
+    } catch (error) {
+      console.error('Error occurred:', error);
+      this.toastr.error('An error occurred while changing user status.', 'Error');
+    }
   }
-
 
   updateusers(mobile: any) {
     console.log(mobile);
