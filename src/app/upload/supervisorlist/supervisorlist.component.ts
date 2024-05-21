@@ -67,11 +67,18 @@ export class SupervisorlistComponent implements OnInit {
   //   });
   // }
   onUpload(): void {
+    if (!this.selectedFile) {
+      this.toastr.error('Please select a file.');
+      return;
+    }
     this.helperService.uploadFile(this.selectedFile).subscribe({
+      
       next: (response: any) => {
+        this.loading=true
         if (response.result === true) {
           // Use SweetAlert2 for success message
           this.getAllSupervisorList2();
+          this.loading=false
           Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
           
         } else {

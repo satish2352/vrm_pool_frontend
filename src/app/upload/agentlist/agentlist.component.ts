@@ -77,6 +77,7 @@ export class AgentlistComponent {
     this.selectedFile = event.target.files[0];
   }
   onUpload(): void {
+    
     if (!this.selectedFile || !this.supervisorSelected) {
       this.toastr.error('Please select a file and supervisor.');
       return;
@@ -85,11 +86,12 @@ export class AgentlistComponent {
     const formData: FormData = new FormData();
     formData.append('file', this.selectedFile, this.selectedFile.name);
     formData.append('superviserId', this.supervisorSelected);
-
+    this.loading=true
     this.helperService.uploadFileAgent(formData)
       .subscribe(response => {
         // Show toast notification with API response
         this.getAllAgentList();
+        this.loading=false
         Swal.fire('Success', `Inserted :${response.inserted}<br>Not Inserted : ${response.notInserted}`, 'success');
       }, error => {
         // Handle error cases
