@@ -118,4 +118,15 @@ export class SupervisorlistComponent implements OnInit {
    
     this.getAllSupervisorList2();
   }
+  downloadSampleFile() {
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', '/assets/samplefiles/superviserList .xlsx');
+    anchor.setAttribute('download', 'superviserList .xlsx');
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
+  
 }

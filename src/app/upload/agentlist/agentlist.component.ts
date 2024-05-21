@@ -120,6 +120,16 @@ export class AgentlistComponent {
    
     this.getAllSupervisorList();
   }
+  downloadSampleFile() {
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', '/assets/samplefiles/dummyAgents.xlsx');
+    anchor.setAttribute('download', 'dummyAgents.xlsx');
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
 }
 
 
