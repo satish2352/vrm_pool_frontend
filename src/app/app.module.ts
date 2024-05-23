@@ -34,6 +34,7 @@ import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-
 import { CustomTimePipe } from './pipes/custom-time.pipe';
 import { DurationToMinutesSecondsPipe } from './pipes/duration-to-minutes-seconds.pipe';
 import { SecondsDifferencePipe } from './pipes/seconds-difference.pipe';
+import { FailedcalllogComponent } from './Dashboard_Components/failedcalllog/failedcalllog.component';
 
 
 
@@ -68,6 +69,7 @@ import { SecondsDifferencePipe } from './pipes/seconds-difference.pipe';
     CustomTimePipe,
     DurationToMinutesSecondsPipe,
     SecondsDifferencePipe,
+    FailedcalllogComponent,
    
     
   ],

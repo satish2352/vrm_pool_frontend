@@ -25,6 +25,7 @@ import { UpdateusersdataComponent } from './Dashboard_Components/updateusersdata
 
 import { AuthGuard } from './auth.guard';
 import { OneAgetsUnderReportsComponent } from './Dashboard_Components/one-agets-under-reports/one-agets-under-reports.component';
+import { FailedcalllogComponent } from './Dashboard_Components/failedcalllog/failedcalllog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -42,6 +43,7 @@ const routes: Routes = [
     { path: 'all-call-log-super', component: AllcalllogsupervisorComponent , canActivate: [AuthGuard] },
     { path: 'supervisor-list', component: SupervisorlistComponent , canActivate: [AuthGuard] },
     { path: 'agent-list', component: AgentlistComponent , canActivate: [AuthGuard] },
+    { path: 'failed-call-log', component: FailedcalllogComponent , canActivate: [AuthGuard] },
     { path: 'upload-all-log', component: UploadalllogComponent , canActivate: [AuthGuard] },
     { path: 'get-details/:id', component: GetdetailsforfilelogComponent , canActivate: [AuthGuard] },
     { path: 'supervisor-agent-list', component: AllagentlistComponent , canActivate: [AuthGuard] },

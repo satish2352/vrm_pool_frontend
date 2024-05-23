@@ -464,5 +464,8 @@ console.log(searchValue);
     this.data = {};
     this.getCallLogSingleRow(this.data);
   }
+  failedcalllog() {
+    this.router.navigate(['/admin-dashboard/', 'failed-call-log']);
+  }
  
 }
