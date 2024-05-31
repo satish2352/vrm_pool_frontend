@@ -62,6 +62,8 @@ export class FailedcalllogComponent {
   //     console.error("Element with id 'hiddenLink' not found.");
   //   }
   // }
+
+  
   downloadFileIdWise(data: any) {
     console.log(data);
     console.log(this.envvariable);

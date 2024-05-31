@@ -91,8 +91,11 @@ export class HelperService {
     const formData: FormData = new FormData();
     return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
-  getAllUsersList(): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/getUserlist`, null);
+  // getAllUsersList(): Observable<any> {
+  //   return this.http.post<any>(`${this.apiUrl}/getUserlist`, null);
+  // }
+  getAllUsersList(data:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
   }
 
   getAllAgentbySuperviserList(data: any): Observable<any> {
@@ -126,7 +129,7 @@ export class HelperService {
     }
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
-
+ 
 
   getAllAgentUploadedList(): Observable<any> {
     let data = {
