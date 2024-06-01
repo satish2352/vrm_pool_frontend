@@ -137,9 +137,9 @@ export class HelperService {
     }
     return this.http.post<any>(`${this.apiUrl}/getUserInsertDetails`, data);
   }
-  getAllfailedList(): Observable<any> {
+  getAllfailedList(data:any): Observable<any> {
    
-    return this.http.post<any>(`${this.apiUrl}/getAgentNotInsertCallDetails`, null);
+    return this.http.post<any>(`${this.apiUrl}/getAgentNotInsertCallDetails`, data);
   }
 
   getHistoryFileIdWise(data: any): Observable<any> {

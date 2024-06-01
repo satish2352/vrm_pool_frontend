@@ -1,3 +1,6 @@
+
+
+
 <div class="wrapper">
     <div *ngIf="loading" class="loader-overlay">
         <div class="loader"></div>
@@ -123,22 +126,23 @@
                                         <div class="input-group">
                                             <div class="input-group-append">
                                                 <button class="input-group-text" (click)="getSearch()">Search</button>
-                                            </div>&nbsp;&nbsp;&nbsp;   
+                                            </div>&nbsp;&nbsp;&nbsp;
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" (click)="failedcalllog()">Failed Call Log</button>
+                                                <button class="btn btn-primary" (click)="failedcalllog()">Failed Call
+                                                    Log</button>
                                             </div>
                                         </div>
-                                      
-                                            
-                                        
+
+
+
                                     </div>
-                                    
-                                      
-                                  
+
+
+
                                 </div>
 
-                               
-                               
+
+
 
                                 <!-- <div class="col-md-3">
                                     <div class="form-group">
@@ -184,12 +188,13 @@
                                     <div class="form-group">
                                         <label>Show Records</label>
                                         <select class="form-control" (change)="pagerecords($event.target)">
-                                            <option value="" disabled selected>Records</option>
+                                            <option value="" disabled selected>Choose No of Records</option>
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
+                                            <option value="200">200</option>
                                         </select>
                                     </div>
                                 </div>
@@ -229,9 +234,9 @@
                                             </thead>
                                             <tbody class="text-dark">
                                                 <tr class="bg-white" id="Table_data"
-                                                    *ngFor="let item of filterList | paginate: { itemsPerPage: pagesize, currentPage: currentpage } as paginatedItems; let i = index">
-                                                    <td class="text-body">{{ (currentpage - 1) * pagesize + i + 1 }}
-                                                    </td>
+                                                    *ngFor="let item of filterList ;let i = index ">
+                                                    <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}
+                                                    </th>
                                                     <td>{{item.user.name }}</td>
                                                     <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
                                                             item.user.name }}</a></td> -->
@@ -259,7 +264,20 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
+                                        <!-- <pagination-controls (pageChange)="currentpage = $event"></pagination-controls> -->
+                                        <div class="pagination-controls">
+                                            <button [disabled]="currentPage <= 1"
+                                                (click)="onPageChange(currentPage - 1)">Previous</button>
+                                            <ng-container *ngFor="let page of getPagination(); let i = index">
+                                                <button *ngIf="page !== '...'" [class.active]="page === currentPage"
+                                                    (click)="onPageChange(page)">
+                                                    {{ page }}
+                                                </button>
+                                                <span *ngIf="page === '...'">...</span>
+                                            </ng-container>
+                                            <button [disabled]="currentPage >= totalPages"
+                                                (click)="onPageChange(currentPage + 1)">Next</button>
+                                        </div>
                                     </ng-container>
                                     <div class="bg-white text-dark">
                                         <ng-template #noData class="bg-white">

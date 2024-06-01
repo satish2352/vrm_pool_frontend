@@ -49,8 +49,9 @@
                                         </thead>
                                         <tbody>
                                             <tr class="text-secondary"
-                                                *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                <td class=" c">{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                *ngFor="let alluploadedusers of alllist1; let i = index">
+                                                <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1))
+                                                }}</th>
                                                 <td class="text-dark">{{ alluploadedusers.fileUrl }}</td>
                                                 <td>{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td>
                                                 <td><a class="text-primary"
@@ -60,7 +61,19 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                                    <div class="pagination-controls">
+                                        <button [disabled]="currentPage <= 1"
+                                            (click)="onPageChange(currentPage - 1)">Previous</button>
+                                        <ng-container *ngFor="let page of getPagination(); let i = index">
+                                            <button *ngIf="page !== '...'" [class.active]="page === currentPage"
+                                                (click)="onPageChange(page)">
+                                                {{ page }}
+                                            </button>
+                                            <span *ngIf="page === '...'">...</span>
+                                        </ng-container>
+                                        <button [disabled]="currentPage >= totalPages"
+                                            (click)="onPageChange(currentPage + 1)">Next</button>
+                                    </div>
                                 </ng-container>
                                 <!-- Show message if no data is available -->
                                 <ng-template #noData>

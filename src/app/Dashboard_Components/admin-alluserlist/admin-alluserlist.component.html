@@ -64,10 +64,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="bg-white" *ngFor="let users of supervisorsList1; let i = index ">
+                                                <tr class="bg-white"
+                                                    *ngFor="let users of supervisorsList1; let i = index ">
                                                     <ng-container *ngIf="users.is_deleted == 0">
                                                         <!-- <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}</th> -->
-                                                        <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}</th>
+                                                        <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1))
+                                                            }}</th>
 
                                                         <td class="text-dark">
                                                             <span *ngIf="users.user_type == '2'">Supervisor</span>
@@ -121,15 +123,18 @@
                                     (click)="onPageChange(currentPage + 1)">Next</button>
                             </div> -->
                             <div class="pagination-controls">
-                                <button [disabled]="currentPage <= 1" (click)="onPageChange(currentPage - 1)">Previous</button>
+                                <button [disabled]="currentPage <= 1"
+                                    (click)="onPageChange(currentPage - 1)">Previous</button>
                                 <ng-container *ngFor="let page of getPagination(); let i = index">
-                                  <button *ngIf="page !== '...'" [class.active]="page === currentPage" (click)="onPageChange(page)">
-                                    {{ page }}
-                                  </button>
-                                  <span *ngIf="page === '...'">...</span>
+                                    <button *ngIf="page !== '...'" [class.active]="page === currentPage"
+                                        (click)="onPageChange(page)">
+                                        {{ page }}
+                                    </button>
+                                    <span *ngIf="page === '...'">...</span>
                                 </ng-container>
-                                <button [disabled]="currentPage >= totalPages" (click)="onPageChange(currentPage + 1)">Next</button>
-                              </div>
+                                <button [disabled]="currentPage >= totalPages"
+                                    (click)="onPageChange(currentPage + 1)">Next</button>
+                            </div>
                         </div>
                     </div>
                 </div>
