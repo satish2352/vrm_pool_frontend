@@ -348,7 +348,7 @@ export class AdminAlluserlistComponent implements OnInit {
     
     let data = {
       'user_type':this.dropusertype,
-      'page': this.currentPage,
+      'page': this.currentPage, 
       'pageSize': this.pageSize
 
     };

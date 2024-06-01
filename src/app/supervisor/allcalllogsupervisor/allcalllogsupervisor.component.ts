@@ -11,9 +11,13 @@ import Swal from 'sweetalert2';
 })
 export class AllcalllogsupervisorComponent {
 
-  pagesize: number = 10;
-  currentpage: number = 1;
- 
+  pageSize: number = 200;
+  currentPage: number = 1;
+  totalItems!: number;
+  totalPages!: number;
+  dropusertype: string = '';
+  totimeFormatedSingleRow: any = '';
+  fromtimeFormatedSingleRow: any = '';
   supervisorList: any = [];
   supervisorSelected: any;
   agentSelected: any;
@@ -91,6 +95,8 @@ export class AllcalllogsupervisorComponent {
     // }
     this.data = {
       'supervisor_id':this.supervisorSelected,
+      'page': this.currentPage,
+      'pageSize': this.pageSize
       
     }
     this.getCallLogSingleRow(this.data);
@@ -110,6 +116,7 @@ export class AllcalllogsupervisorComponent {
     this.helperService.getAllAgentUploadedList().subscribe(list => {
       if (list['result'] == true) {
         this.agentList = list['data'];
+     ;
       }
       this.loading = false; // Hide loader after data is fetched
     },
@@ -145,18 +152,39 @@ export class AllcalllogsupervisorComponent {
     this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
+     
+        this.totalItems = list.totalItems;
+        this.totalPages = list.totalPages;
+        this.currentPage = list.currentPage;
+        console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
       }
     });
   }
 
   pagerecords(val: any) {
-    this.pagesize = val.value;
+    this.pageSize = val.value ? val.value : 200;
+    console.log("pageSize", this.pageSize);
 
-    // this.getCallLogSingleRow(this.data)
-    // this.getAllAgentbytimeframe(this.data)
-
+    this.currentPage = 1; // Reset to first page
+    this.data = {
+      'user_type': '',
+      // 'fromdate': this.fromdateSelected,
+      // 'todate': this.todateSelected,
+      'status': '',
+      'supervisor_id': this.supervisorSelected,
+      'direction': '',
+      'fromtime': this.fromtimeFormatedSingleRow,
+      'totime': this.totimeFormatedSingleRow,
+      'time': this.timeselect,
+      'page': this.currentPage,
+      'pageSize': this.pageSize
+    };
+   
+    if (this.agentSelected && this.agentSelected.length > 0) {
+      this.data.agent_id = this.agentSelected;
+    }
     if (this.timeselect && this.timeselect.length > 0) {
-        this.getAllAgentbytimeframe(this.data);
+      this.getAllAgentbytimeframe(this.data);
     } else {
       this.getCallLogSingleRow(this.data);
     }
@@ -201,7 +229,7 @@ export class AllcalllogsupervisorComponent {
     let data = {
       'superviserId': this.supervisorSelected,
       'user_type': 3
-    }
+    } 
     this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
       if (list['result'] == true) {
         this.allagentbysupervisorList = list['data'];
@@ -215,6 +243,11 @@ export class AllcalllogsupervisorComponent {
     this.helperService.getCallLogSingleRow(data).subscribe(list => {
       if (list['result'] == true) {
         this.filterList = list['data'];
+      
+        this.totalItems = list.totalItems;
+        this.totalPages = list.totalPages;
+        this.currentPage = list.currentPage;
+        console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
     
 
       }
@@ -285,31 +318,32 @@ export class AllcalllogsupervisorComponent {
   }
 
 
+ 
   getSearch() {
-    if (!this.fromdateSelected || !this.todateSelected ) {
-     
+    if (!this.fromdateSelected || !this.todateSelected) {
+
       return; // Exit the function if any required field is missing
-  }
+    }
 
     var finaltoDate = new Date()
-    if(this.todateSelected) {
-      finaltoDate= this.todateSelected
+    if (this.todateSelected) {
+      finaltoDate = this.todateSelected
     }
 
     var finalFromDate = new Date()
-    if(this.fromdateSelected) {
-      finalFromDate= this.fromdateSelected
+    if (this.fromdateSelected) {
+      finalFromDate = this.fromdateSelected
     }
 
 
     var finalToTime = '23:59';
-    if(this.totimeSelected) {
-      finalToTime= this.totimeSelected
+    if (this.totimeSelected) {
+      finalToTime = this.totimeSelected
     }
 
     var finalFromTime = '00:00';
-    if(this.fromtimeSelected) {
-      finalFromTime= this.fromtimeSelected
+    if (this.fromtimeSelected) {
+      finalFromTime = this.fromtimeSelected
     }
 
     var today = new Date(finalFromDate);
@@ -320,9 +354,9 @@ export class AllcalllogsupervisorComponent {
     var formattedDate = year + '-' + month + '-' + day;
     var finalDate = formattedDate + 'T' + finalFromTime; // Include 'T' for ISO 8601 format
     var localDateTime = new Date(finalDate);
-    var fromtimeFormatedSingleRow = localDateTime.toISOString();
+    var fromtimeFormatedSingleRowLocal = localDateTime.toISOString();
 
-   
+
 
     var today_to = new Date(finaltoDate);
     // Get the year, month, and day
@@ -332,10 +366,10 @@ export class AllcalllogsupervisorComponent {
     var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
     var finalDate_to = formattedDate_to + 'T' + finalToTime; // Include 'T' for ISO 8601 format
     var localDateTime_to = new Date(finalDate_to);
-    var totimeFormatedSingleRow = localDateTime_to.toISOString();
+    var totimeFormatedSingleRowLocal = localDateTime_to.toISOString();
 
 
-    if (fromtimeFormatedSingleRow > totimeFormatedSingleRow) {
+    if (fromtimeFormatedSingleRowLocal > totimeFormatedSingleRowLocal) {
       // alert("To time can't be less than from time");
       Swal.fire({
         icon: 'warning',
@@ -344,9 +378,12 @@ export class AllcalllogsupervisorComponent {
         timerProgressBar: true,
         showConfirmButton: false
       });
-   
-    } else {
 
+
+
+    } else {
+      this.fromtimeFormatedSingleRow = fromtimeFormatedSingleRowLocal;
+      this.totimeFormatedSingleRow = totimeFormatedSingleRowLocal;
       this.data = {
         'user_type': '',
         // 'fromdate': this.fromdateSelected,
@@ -354,17 +391,23 @@ export class AllcalllogsupervisorComponent {
         'status': '',
         'supervisor_id': this.supervisorSelected,
         'direction': '',
-        'fromtime': fromtimeFormatedSingleRow,
-        'totime': totimeFormatedSingleRow,
+        'fromtime': this.fromtimeFormatedSingleRow,
+        'totime': this.totimeFormatedSingleRow,
         'time': this.timeselect,
+
+        'page': this.currentPage,
+        'pageSize': this.pageSize
       };
+
+
+
 
       if (this.agentSelected && this.agentSelected.length > 0) {
         this.data.agent_id = this.agentSelected;
       }
 
       if (this.timeselect && this.timeselect.length > 0) {
-        
+
         if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
 
           Swal.fire({
@@ -407,6 +450,56 @@ export class AllcalllogsupervisorComponent {
       }
     }
   }
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.data = {
+        'user_type': '',
+        // 'fromdate': this.fromdateSelected,
+        // 'todate': this.todateSelected,
+        'status': '',
+        'supervisor_id': this.supervisorSelected,
+        'direction': '',
+        'fromtime': this.fromtimeFormatedSingleRow,
+        'totime': this.totimeFormatedSingleRow,
+        'time': this.timeselect,
 
+        'page': this.currentPage,
+        'pageSize': this.pageSize
+      };
+     
+      if (this.agentSelected && this.agentSelected.length > 0) {
+        this.data.agent_id = this.agentSelected;
+      }
+      this.getCallLogSingleRow(this.data);
+    }
+  }
+  getPagination() {
+    const delta = 7; // Number of pages to display before and after the current page
+    const range = [];
+    const rangeWithDots: any = [];
+    let l: any;
 
+    range.push(1);
+    for (let i = this.currentPage - delta; i <= this.currentPage + delta; i++) {
+      if (i < this.totalPages && i > 1) {
+        range.push(i);
+      }
+    }
+    range.push(this.totalPages);
+
+    range.forEach((i) => {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push('...');
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
+    });
+
+    return rangeWithDots;
+  }
 }

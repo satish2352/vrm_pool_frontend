@@ -12,7 +12,7 @@
             </div>
         </div>
     </section>
-
+ 
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -28,6 +28,7 @@
                                     <option value="30">30</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
+                                    <option value="200">200</option>
         
                                 </select>
                             </div>
@@ -51,8 +52,9 @@
                                         </thead>
                                         <tbody class="text-dark">
                                             <tr class="bg-white"
-                                                *ngFor="let agent of allagentlist  | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
-                                                <td>{{i+1+(pagesize*(currentpage-1))}}</td>
+                                                *ngFor="let agent of allagentlist ; let i = index">
+                                                <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1))
+                                                }}</th>
                                                 <td>{{ agent.name }} </td>
                                                 <td>{{ agent.mobile }}</td>
                                                 <td>{{ agent.email }}</td>
@@ -62,7 +64,20 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <pagination-controls (pageChange)="currentpage=$event"></pagination-controls>
+                                    <!-- <pagination-controls (pageChange)="currentpage=$event"></pagination-controls> -->
+                                    <div class="pagination-controls">
+                                        <button [disabled]="currentPage <= 1"
+                                            (click)="onPageChange(currentPage - 1)">Previous</button>
+                                        <ng-container *ngFor="let page of getPagination(); let i = index">
+                                            <button *ngIf="page !== '...'" [class.active]="page === currentPage"
+                                                (click)="onPageChange(page)">
+                                                {{ page }}
+                                            </button>
+                                            <span *ngIf="page === '...'">...</span>
+                                        </ng-container>
+                                        <button [disabled]="currentPage >= totalPages"
+                                            (click)="onPageChange(currentPage + 1)">Next</button>
+                                    </div>
                                 </ng-container>
                                 <!-- Show message if no data is available -->
                                 <ng-template #noData>

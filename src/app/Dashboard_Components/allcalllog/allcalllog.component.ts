@@ -736,8 +736,7 @@ export class AllcalllogComponent {
     let data = {
       'superviserId': this.supervisorSelected,
       'user_type': 3,
-    
-    }
+    } 
    
     this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
       if (list['result'] == true) {
