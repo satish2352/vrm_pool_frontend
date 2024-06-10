@@ -77,13 +77,7 @@ export class HelperService {
     return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
 
-  // getAllSupervisorList(): Observable<any> {
-  //   let data = {
-  //     'user_type': 2
-  //   }
-  //   const formData: FormData = new FormData();
-  //   return this.http.post<any>(`${this.apiUrl}/getActiveUserList`, data);
-  // }
+
   getAllSupervisorList(): Observable<any> {
     let data = {
       'user_type': 2
@@ -102,6 +96,14 @@ export class HelperService {
 
     return this.http.post<any>(`${this.apiUrl}/getActiveUserList`, data);
   }
+
+  getActiveUserListWithoutPagination(data: any): Observable<any> {
+
+    return this.http.post<any>(`${this.apiUrl}/getActiveUserListWithoutPagination`, data);
+  }
+
+
+
   // getAllAgentbySuperviserList(data: any): Observable<any> {
 
   //   return this.http.post<any>(`${this.apiUrl}/getUserlist`, data);
