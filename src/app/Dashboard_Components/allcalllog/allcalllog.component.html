@@ -122,11 +122,16 @@
 
                                 <div class="col-md-3">
                                     <label>&nbsp;</label>
-                                    <div class="form-group">
-                                        <div class="input-group">
+                                    <div class="form-group d-sm-grid d-lg-flex d-md-flex">
+                                        <div class="mt-sm-2 mt-lg-0">
                                             <div class="input-group-append">
                                                 <button class="input-group-text" (click)="getSearch()">Search</button>
                                             </div>&nbsp;&nbsp;&nbsp;
+                                           
+                                        </div>
+
+                                        <div class="mx-lg-3 mx-sm-0 mt-sm-2 mt-lg-0">
+                                            
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" (click)="failedcalllog()">Failed Call
                                                     Log</button>
@@ -211,13 +216,14 @@
                                                             class="fa " [ngClass]="getArrowClass('email')"></i></th>
                                                     <th (click)="sortAgentEmail('mobile')" class="text-white">RM Mobile
                                                         Number</th>
-                                                    <th>Available Time</th>
-                                                    <th>Non Available Time</th>
-                                                    <th>On Call Time</th>
-                                                    <th>Received Calls</th>
-                                                    <th>Missed Calls</th>
-                                                    <th>Outgoing Calls</th>
-                                                    <th *ngIf="filterList[0].slot">Time Slot</th>
+                                                    <th class="textcenter">Available Time</th>
+                                                    <th class="textcenter">Non Available Time</th>
+                                                    <th class="textcenter">On Call Time</th>
+                                                    <th class="textcenter">Received Calls</th>
+                                                    <th class="textcenter">Missed Calls</th>
+                                                    <th class="textcenter">Outgoing Calls</th>
+                                                    <th *ngIf="filterList[0].slot" class="textcenter">Time Slot</th>
+                                                    <th class="textcenter">Created Date</th>
                                                     <!-- <th >Incoming Calls</th> -->
 
 
@@ -242,15 +248,18 @@
                                                             item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
                                                     <td id="Table_data">{{ item.user.mobile }}</td>
-                                                    <td>{{ item.DeviceOnHumanReadable }}</td>
-                                                    <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td>
-                                                    <td id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
-                                                    <td>{{ calculateAbsoluteDifference(item.IncomingCalls,
+                                                    <td class="textcenter">{{ item.DeviceOnHumanReadable }}</td>
+                                                    <!-- Non Available Time -->
+                                                    <!-- <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td> -->
+                                                    
+                                                    <td class="textcenter">{{ (((item.TotalRowsCount*60)*60)  - item.DeviceOnHumanReadableInSeconds ) }}</td>
+                                                    <td class="textcenter" id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
+                                                    <td class="textcenter">{{ calculateAbsoluteDifference(item.IncomingCalls,
                                                         item.MissedCalls) }}</td>
-                                                    <td id="Table_data"> {{ item.MissedCalls }}</td>
-                                                    <td id="Table_data">{{ item.OutgoingCalls }}</td>
+                                                    <td class="textcenter" id="Table_data"> {{ item.MissedCalls }}</td>
+                                                    <td class="textcenter" id="Table_data">{{ item.OutgoingCalls }}</td>
 
-                                                    <td id="Table_data" *ngIf="item.slot">{{
+                                                    <td class="textcenter" id="Table_data" *ngIf="item.slot">{{
                                                         item.DeviceOnPercent.start_time | customTime }}-{{
                                                         item.DeviceOnPercent.end_time | customTime }}</td>
                                                     <!-- <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td> -->
@@ -259,6 +268,7 @@
                                                     <!-- <td id="Table_data">{{ item.Busy }}</td> -->
                                                     <!-- <td id="Table_data">{{ item.Failed }}</td> -->
                                                     <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
+                                                     <td class="textcenter"  id="Table_data"><span *ngIf="item.updatedAt">{{ item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a'}}</span> </td>
 
 
                                                 </tr>

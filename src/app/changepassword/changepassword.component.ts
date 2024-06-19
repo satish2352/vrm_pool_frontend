@@ -23,6 +23,8 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePasswordForm = this.formBuilder.group({
+      
+      old_password: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     });
@@ -34,6 +36,7 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
+    const old_password = this.changePasswordForm.value.old_password;
     const password = this.changePasswordForm.value.password;
     const confirmPassword = this.changePasswordForm.value.confirmPassword;
     if (password.length < 8) {
@@ -47,6 +50,7 @@ export class ChangePasswordComponent implements OnInit {
 
     const userid = localStorage.getItem('user_id');
     const data = {
+      old_password:old_password,
       password: password,
       confirm_password: confirmPassword,
       id: userid
@@ -58,10 +62,11 @@ export class ChangePasswordComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error: (error: any) => {
+        console.log(error.status);
         if (error.status === 400) {
           this.toastr.error(error.error.message, 'Error');
-        } else {
-          this.toastr.error('An error occurred. Please try again later.', 'Error');
+        } else { 
+          this.toastr.error('An error occurred. Please try again.', 'Error');
         }
       }
     });

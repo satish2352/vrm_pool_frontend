@@ -144,16 +144,26 @@ export class AllcalllogComponent {
 
   getAllAgentbytimeframe(data: any) {
 
-    this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
-      if (list['result'] == true) {
-        this.filterList = list['data'];
-        this.totalItems = list.totalItems;
-        this.totalPages = list.totalPages;
-        this.currentPage = list.currentPage;
-        console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
+    if(this.fromdateSelected !== this.todateSelected) {
+      Swal.fire({
+        icon: 'warning',
+        title: "From Date and To Date Should be Same  ",
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+    } else {
+      this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
+        if (list['result'] == true) {
+          this.filterList = list['data'];
+          this.totalItems = list.totalItems;
+          this.totalPages = list.totalPages;
+          this.currentPage = list.currentPage;
+          console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
 
-      }
-    });
+        }
+      });
+    }
   }
 
   getAllAgentList() {
@@ -371,10 +381,10 @@ export class AllcalllogComponent {
 
 
   getSearch() {
-    if (!this.fromdateSelected || !this.todateSelected) {
+    // if (!this.fromdateSelected || !this.todateSelected) {
 
-      return; // Exit the function if any required field is missing
-    }
+    //   return; // Exit the function if any required field is missing
+    // }
 
     var finaltoDate = new Date()
     if (this.todateSelected) {
@@ -449,6 +459,14 @@ export class AllcalllogComponent {
         'page': this.currentPage,
         'pageSize': this.pageSize
       };
+
+
+      if (!this.fromdateSelected && !this.todateSelected) {
+
+        this.data.fromtime = '';
+        this.data.totime = '';
+       
+    }
 
 
 
