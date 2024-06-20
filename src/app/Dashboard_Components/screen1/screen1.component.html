@@ -93,7 +93,7 @@
                     </a>
                 </div>
 
-                <a class="col-12 col-sm-6 col-md-3">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                         <div class="info-box mb-3  bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
@@ -106,7 +106,20 @@
                     </a>
                 </a>
 
-                <div class="col-12 col-sm-6 col-md-3">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
+                        <div class="info-box mb-3  bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="digital-icon-home fa-solid digital-icon-home fa-phone-volume"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Missed Calls</span>
+                                <span class="info-box-number">{{dashboarddata.reports.MissedCalls}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </a>
+
+                <div class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'" >
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                         <div class="info-box mb-3 bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
@@ -121,8 +134,23 @@
                     </a>
                 </div>
 
+                <div class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
+                        <div class="info-box mb-3 bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="digital-icon-home fas fa-shopping-cart"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Received Calls</span>
+                                <span
+                                    class="info-box-number">{{calculateAbsoluteDifference(dashboarddata.reports.IncomingCalls,dashboarddata.reports.MissedCalls)}}</span>
+                            </div>
 
-                <a class="col-12 col-sm-6 col-md-3">
+                        </div>
+                    </a>
+                </div>
+
+
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                         <div class="info-box mb-3  bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
@@ -134,7 +162,7 @@
                         </div>
                     </a>
                 </a>
-                <a class="col-12 col-sm-6 col-md-3">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                         <div class="info-box mb-3  bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
@@ -146,7 +174,7 @@
                         </div>
                     </a>
                 </a>
-                <a class="col-12 col-sm-6 col-md-3">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
                         <div class="info-box mb-3  bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
@@ -158,8 +186,59 @@
                         </div>
                     </a>
                 </a>
-                <a class="col-12 col-sm-6 col-md-3">
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type !== '2'">
                     <a [routerLink]="['/admin-dashboard', 'all-call-log-admin']">
+                        <div class="info-box mb-3  bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="fa-solid digital-icon-home fa-phone-volume"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Outgoing Calls</span>
+                                <span class="info-box-number">{{dashboarddata.reports.OutgoingCalls}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </a>
+
+                <!-- supervisor  -->
+
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
+                        <div class="info-box mb-3  bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="fa-solid digital-icon-home fa-comment-slash"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">No Answer</span>
+                                <span class="info-box-number">{{dashboarddata.reports.NoAnswer}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
+                        <div class="info-box mb-3  bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="fa-solid digital-icon-home fa-cart-shopping"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Busy Count</span>
+                                <span class="info-box-number">{{dashboarddata.reports.Busy}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
+                        <div class="info-box mb-3  bg-white border-dark">
+                            <span class="info-box-icon bg-light  elevation-1"><i
+                                    class="fa-solid digital-icon-home fa-circle-exclamation"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Failed Count</span>
+                                <span class="info-box-number">{{dashboarddata.reports.Failed}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </a>
+                <a class="col-12 col-sm-6 col-md-3" *ngIf="user_type == '2'">
+                    <a [routerLink]="['/admin-dashboard', 'all-call-log-super']">
                         <div class="info-box mb-3  bg-white border-dark">
                             <span class="info-box-icon bg-light  elevation-1"><i
                                     class="fa-solid digital-icon-home fa-phone-volume"></i></span>
