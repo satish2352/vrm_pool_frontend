@@ -192,8 +192,8 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Show Records</label>
-                                        <select class="form-control" (change)="pagerecords($event.target)">
-                                            <option value="" disabled selected>Choose No of Records</option>
+                                        <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                            <option value="" disabled selected>No</option>
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
@@ -232,8 +232,8 @@
                                                     <!-- <th >Failed</th> -->
 
 
-                                                    <!-- <th>Average Handling Time In Minutes</th> -->
-                                                    <!-- <th>Device On Percent</th> -->
+                                                    <!-- <th class="textcenter">Average Handling Time In Minutes</th> -->
+                                                    <!-- <th class="textcenter">Device On Percent</th> -->
 
 
                                                 </tr>
@@ -248,11 +248,11 @@
                                                             item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
                                                     <td id="Table_data">{{ item.user.mobile }}</td>
-                                                    <td class="textcenter">{{ item.DeviceOnHumanReadable }}</td>
+                                                    <td class="textcenter">{{ secondsToDhmsForAvailableTimer(item.DeviceOnHumanReadable) }}</td>
                                                     <!-- Non Available Time -->
                                                     <!-- <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td> -->
                                                     
-                                                    <td class="textcenter">{{ (((item.TotalRowsCount*60)*60)  - item.DeviceOnHumanReadableInSeconds ) }}</td>
+                                                    <td class="textcenter">{{ secondsToDhms((((item.TotalRowsCount*60)*60)  - item.DeviceOnHumanReadableInSeconds )) }}</td>
                                                     <td class="textcenter" id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
                                                     <td class="textcenter">{{ calculateAbsoluteDifference(item.IncomingCalls,
                                                         item.MissedCalls) }}</td>

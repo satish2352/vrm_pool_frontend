@@ -85,3 +85,40 @@
 .pagination-controls span {
   margin: 0 5px;
 }
+
+
+.textcenter {
+  text-align: center;
+  align-content: center;}
+/* General 3D Effect for Font Awesome Icons */
+.digital-icon {
+  display: inline-block;
+  font-size: 20px; /* Adjust size as needed */
+  color: #67b9fd;
+  /* text-shadow: 1px 1px 0 #6b62ee, 2px 2px 0 #2f5bec, 3px 3px 0 #163ab1; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 50%;
+  padding: 9px;
+}
+
+.digital-icon:hover:focus:active {
+  color: #ffffff !important; /* Adjust hover color as needed */
+}
+
+
+
+.digital-icon-home {
+  display: inline-block;
+  font-size: 20px; /* Adjust size as needed */
+  color: #67b9fd;
+  /* text-shadow: 1px 1px 0 #6b62ee, 2px 2px 0 #2f5bec, 3px 3px 0 #163ab1; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  padding: 15px;
+}
+
+.digital-icon-home:hover:focus:active {
+  color: #ffffff !important; /* Adjust hover color as needed */
+}
+

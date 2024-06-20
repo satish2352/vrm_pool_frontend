@@ -1,3 +1,46 @@
 .new3 {
     border-top: 1px dotted white;
   }
+
+
+   /* Added By SA */
+/* Default display settings */
+.desktop-logo {
+  display: block;
+}
+
+.mobile-logo {
+  display: none;
+}
+
+.collapsed-logo {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: block;
+  }
+
+  .collapsed-logo {
+    display: none;
+  }
+}
+
+/* Adjust visibility when sidebar is collapsed */
+body.sidebar-collapse .desktop-logo {
+  display: none;
+}
+
+body.sidebar-collapse .mobile-logo {
+  display: none;
+}
+
+body.sidebar-collapse .collapsed-logo {
+  display: block;
+}
+

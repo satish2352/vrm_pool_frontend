@@ -34,7 +34,8 @@
                                 </div>
                                 <a id="hiddenLink" target="_blank" style="display: none;" download></a>
                                 <div class="col-md-6">
-                                    <label>Upload RM</label>
+                                    <label>Upload RM </label> ( <a class="text-primary"
+                                    (click)="downloadSampleFile()">Sample File download</a> )
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="custom-file">
@@ -44,11 +45,13 @@
                                                         *ngIf="selectedFile">{{selectedFile.name}}</span>
                                                     file</label>
                                             </div>
-                                            <div class="input-group-append">
+                                            <div class="input-group-append px-2">
                                                 <button class="btn btn-primary" (click)="onUpload()">Upload</button>
                                             </div>
                                             <div class="input-group-append col-md-6">
-                                                <button class="btn btn-primary" (click)="downloadSampleFile()">Sample File download</button>
+                                                <!-- <button class="btn btn-primary" (click)="downloadSampleFile()">Sample File download</button> -->
+                                                <!-- <a class="text-primary"
+                                                (click)="downloadSampleFile()">Sample File download</a> -->
                                             </div>
                                         </div>
                                     </div>
@@ -61,8 +64,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Show Records</label>
-                                    <select class="form-control" (change)="pagerecords($event.target)">
-                                        <option value="" disabled selected>Choose No of Records</option>
+                                    <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                        <option value="" disabled selected>No</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
@@ -77,14 +80,14 @@
                                     <table id="example2" class="table table-bordered table-hover ">
                                         <thead>
                                             <tr class="bg-dark">
-                                                <th>Sr.No</th>
+                                                <th class="textcenter">Sr.No</th>
 
-                                                <th>File Id</th>
-                                                <th>Inserted Count</th>
-                                                <th>Failed Count</th>
-                                                <th>Created At </th>
-                                                <th>View </th>
-                                                <th>Download </th>
+                                                <th class="textcenter">File Id</th>
+                                                <th class="textcenter">Inserted Count</th>
+                                                <th class="textcenter">Failed Count</th>
+                                                <th class="textcenter">Created At </th>
+                                                <th class="textcenter">View </th>
+                                                <th class="textcenter">Download </th>
 
                                             </tr>
                                         </thead>
@@ -93,8 +96,8 @@
                                                 *ngFor="let alluploadedusers of alllist1 | paginate :{itemsPerPage:pagesize,currentPage:currentpage} let i=index">
                                                 <td class=" c">{{i+1+(pagesize*(currentpage-1))}}</td>
                                                 <td class="text-dark">{{ alluploadedusers.fileId }}</td>
-                                                <td class="text-dark">{{ alluploadedusers.insertedCount }}</td>
-                                                <td class="text-dark">{{ alluploadedusers.failedCount }}</td>
+                                                <td class="text-dark textcenter">{{ alluploadedusers.insertedCount }}</td>
+                                                <td class="text-dark textcenter">{{ alluploadedusers.failedCount }}</td>
                                                 <!-- <td> <span *ngIf="alluploadedusers.is_inserted==true" class="badge badge-success">
                                             Success </span> <span *ngIf="alluploadedusers.is_inserted==false"
                                             class="badge badge-danger">

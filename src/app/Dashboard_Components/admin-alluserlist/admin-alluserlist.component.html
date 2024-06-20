@@ -34,8 +34,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Show Records</label>
-                                            <select class="form-control" (change)="pagerecords($event.target)">
-                                                <option value="200" disabled selected>Choose No of Records</option>
+                                            <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                                <option value="200" disabled selected>No</option>
                                                 <option value="10">10</option>
                                                 <option value="20">20</option>
                                                 <option value="30">30</option>
@@ -52,15 +52,15 @@
                                             class="table table-bordered table-hover bg-dark text-secondary">
                                             <thead>
                                                 <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Supervisor/RM</th>
-                                                    <th>Name</th>
-                                                    <th>Mobile No</th>
-                                                    <th>Email ID</th>
-                                                    <th>Edit</th>
-                                                    <th>Enable/Disable</th>
-                                                    <th>Reset Password</th>
-                                                    <th>Delete User</th>
+                                                    <th class="textcenter">Sr.No</th>
+                                                    <th class="textcenter">Supervisor/RM</th>
+                                                    <th class="textcenter">Name</th>
+                                                    <th class="textcenter">Mobile No</th>
+                                                    <th class="textcenter">Email ID</th>
+                                                    <th class="textcenter">Edit</th>
+                                                    <th class="textcenter">Enable/Disable</th>
+                                                    <th class="textcenter">Reset Password</th>
+                                                    <th class="textcenter">Delete User</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -68,36 +68,36 @@
                                                     *ngFor="let users of supervisorsList1; let i = index ">
                                                     <ng-container *ngIf="users.is_deleted == 0">
                                                         <!-- <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}</th> -->
-                                                        <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1))
+                                                        <th class="text-dark textcenter">{{ i + 1 + (pageSize * (currentPage - 1))
                                                             }}</th>
  
-                                                        <td class="text-dark">
+                                                        <td class="text-dark textcenter">
                                                             <span *ngIf="users.user_type == '2'">Supervisor</span>
                                                             <span *ngIf="users.user_type == '3'">Relationship
                                                                 Manager</span>
                                                         </td>
                                                         <td class="text-dark">{{ users.name }}</td>
-                                                        <td class="text-dark">{{ users.mobile }}</td>
+                                                        <td class="text-dark textcenter">{{ users.mobile }}</td>
                                                         <td class="text-dark">{{ users.email }}</td>
-                                                        <td class="text-dark">
+                                                        <td class="text-dark textcenter">
                                                             <a class="text-primary" *ngIf="users.user_type == '2'"
                                                                 (click)="updateusers(users.id)">Edit</a>
                                                             <span *ngIf="users.user_type == '3'">NA</span>
                                                         </td>
-                                                        <td class="text-dark">
+                                                        <td class="text-dark textcenter">
                                                             <label class="switch">
                                                                 <input type="checkbox" [checked]="users.is_active == 1"
                                                                     (change)="changeUserStatus(users.id, $event.target)">
                                                                 <span class="slider"></span>
                                                             </label>
                                                         </td>
-                                                        <td class="text-dark">
+                                                        <td class="text-dark textcenter">
                                                             <a class="text-primary" *ngIf="users.user_type == '2'"
                                                                 (click)="userspassreset(users.mobile)">Reset
                                                                 Password</a>
                                                             <span *ngIf="users.user_type == '3'">NA</span>
                                                         </td>
-                                                        <td class="text-dark">
+                                                        <td class="text-dark textcenter">
                                                             <a class="text-primary" *ngIf="users.user_type == '2'"
                                                                 (click)="deleteUser(users.id)">Delete User</a>
                                                             <span *ngIf="users.user_type == '3'">NA</span>

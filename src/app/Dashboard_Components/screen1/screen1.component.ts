@@ -8,12 +8,15 @@ import { HelperService } from 'src/app/helper.service';
   styleUrls: ['./screen1.component.sass']
 })
 export class Screen1Component {
+  user_type: any;
   dashboarddata: any = []
-   user_type :any=localStorage.getItem('user_type');
   constructor(
     private helperService: HelperService,
     public router: Router,
-  ) { }
+    
+  ) { 
+    this.user_type = localStorage.getItem('user_type');
+  }
   ngOnInit(): void {
     this.getDashboardStats();
  

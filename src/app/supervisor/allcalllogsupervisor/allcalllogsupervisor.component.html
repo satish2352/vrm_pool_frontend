@@ -196,8 +196,8 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Show Records</label>
-                    <select class="form-control" (change)="pagerecords($event.target)">
-                        <option value="" disabled selected>Choose No of Records</option>
+                    <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                        <option value="" disabled selected>No</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -225,12 +225,12 @@
                                                             class="fa " [ngClass]="getArrowClass('email')"></i></th>
                                                     <th (click)="sortAgentEmail('mobile')" >RM Mobile
                                                         Number</th>
-                                                    <th>Available Time</th>
-                                                    <th>Non Available Time</th>
-                                                    <th>On Call Time</th>
-                                                    <th>Received Calls</th>
-                                                    <th>Missed Calls</th>
-                                                    <th>Outgoing Calls</th>
+                                                    <th class="textcenter">Available Time</th>
+                                                    <th class="textcenter">Non Available Time</th>
+                                                    <th class="textcenter">On Call Time</th>
+                                                    <th class="textcenter">Received Calls</th>
+                                                    <th class="textcenter">Missed Calls</th>
+                                                    <th class="textcenter">Outgoing Calls</th>
                                                     <th *ngIf="filterList[0].slot">Time Slot</th>
                                                     <!-- <th >Incoming Calls</th> -->
 
@@ -240,8 +240,8 @@
                                                     <!-- <th >Failed</th> -->
 
 
-                                                    <!-- <th>Average Handling Time In Minutes</th> -->
-                                                    <!-- <th>Device On Percent</th> -->
+                                                    <!-- <th class="textcenter">Average Handling Time In Minutes</th> -->
+                                                    <!-- <th class="textcenter">Device On Percent</th> -->
 
 
                                                 </tr>

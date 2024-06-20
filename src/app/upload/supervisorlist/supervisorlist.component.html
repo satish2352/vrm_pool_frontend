@@ -26,7 +26,8 @@
                             <div class="row">
 
                                 <div class="col-md-8">
-                                    <label>Upload Supervisor</label>
+                                    <label>Upload Supervisor </label> (<a class="text-primary"
+                                    (click)="downloadSampleFile()">Sample File download</a>)
                                     <div class="form-group ">
                                         <div class="input-group ">
                                             <div class="custom-file">
@@ -37,11 +38,13 @@
                                                     file </label>
                                             </div>
                                             <!-- <button class="btn btn-primary bg-dark text-white" >Browse</button> -->
-                                            <div class="input-group-append">
+                                            <div class="input-group-append px-2">
                                                 <button class="btn btn-primary" (click)="onUpload()">Upload</button>
                                             </div>
                                             <div class="input-group-append col-md-6">
-                                                <button class="btn btn-primary" (click)="downloadSampleFile()">Sample File download</button>
+                                                <!-- <button class="btn btn-primary" (click)="downloadSampleFile()">Sample File download</button> -->
+                                                <!-- <a class="text-primary"
+                                                (click)="downloadSampleFile()">Sample File download</a> -->
                                             </div>
                                         </div>
                                         
@@ -76,8 +79,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Show Records</label>
-                                    <select class="form-control" (change)="pagerecords($event.target)">
-                                        <option value="" disabled selected>Choose No of Records</option>
+                                    <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                        <option value="" disabled selected>No</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
@@ -92,23 +95,23 @@
                                     <table id="example2" class="table table-bordered table-hover  ">
                                         <thead>
                                             <tr>
-                                                <th class="bg-dark">Sr.No</th>
-                                                <th class="bg-dark">File_ID</th>
-                                                <th class="bg-dark">Inserted Count</th>
-                                                <th class="bg-dark">Failed Count</th>
-                                                <th class="bg-dark">Created At</th>
-                                                <th class="bg-dark">View</th>
-                                                <th class="bg-dark">Download</th>
+                                                <th class="bg-dark textcenter">Sr.No</th>
+                                                <th class="bg-dark textcenter">File ID</th>
+                                                <th class="bg-dark textcenter">Inserted Count</th>
+                                                <th class="bg-dark textcenter">Failed Count</th>
+                                                <th class="bg-dark textcenter">Created At</th>
+                                                <th class="bg-dark textcenter">View</th>
+                                                <th class="bg-dark textcenter">Download</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-secondary"
                                                 *ngFor="let alluploadedusers of supervisorlist | paginate:{ itemsPerPage: pagesize, currentPage: currentpage } let i=index">
-                                                <td class=" text-dark">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
-                                                <td class=" text-dark">{{ alluploadedusers.fileId }}</td>
-                                                <td class=" text-dark">{{ alluploadedusers.insertedCount }}</td>
-                                                <td class=" text-dark">{{ alluploadedusers.failedCount }}</td>
-                                                <td class=" text-dark">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd
+                                                <td class=" text-dark textcenter">{{ i + 1 + (pagesize * (currentpage - 1)) }}</td>
+                                                <td class=" text-dark textcenter">{{ alluploadedusers.fileId }}</td>
+                                                <td class=" text-dark textcenter">{{ alluploadedusers.insertedCount }}</td>
+                                                <td class=" text-dark textcenter">{{ alluploadedusers.failedCount }}</td>
+                                                <td class=" text-dark textcenter">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd
                                                     h:mm:ss a' }}</td>
                                                 <td>
                                                     <a class="text-primary"

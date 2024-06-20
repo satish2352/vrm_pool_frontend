@@ -21,8 +21,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Show Records</label>
-                                <select class="form-control" (change)="pagerecords($event.target)">
-                                    <option value="" disabled selected>Choose No of Records</option>
+                                <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;"> 
+                                    <option value="" disabled selected>No</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">30</option>
@@ -39,10 +39,10 @@
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                             <tr class="bg-dark">
-                                                <th>Sr.No</th>
-                                                <th>Name </th>
-                                                <th>Mobile No</th>
-                                                <th>Email_ID</th>
+                                                <th class="textcenter">Sr.No</th>
+                                                <th class="textcenter">Name </th>
+                                                <th class="textcenter">Mobile No</th>
+                                                <th class="textcenter">Email_ID</th>
 
  
 

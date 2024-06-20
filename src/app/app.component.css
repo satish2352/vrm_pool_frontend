@@ -24,4 +24,32 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* Darker color when hovered */
   }
+
+
+
+  /* Added By SA */
+
+  /* CSS to hide/show logos based on screen size */
+.desktop-logo {
+  display: block;
+  width: 150px !important;
+  padding-inline: 20px;
+}
+
+.mobile-logo {
+  display: none;
+  width: 150px !important;
+  padding-inline: 20px;
+}
+
+@media (max-width: 768px) {
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: block;
+  }
+}
+
   
