@@ -222,13 +222,21 @@
                                                     <th class="textcenter">Received Calls</th>
                                                     <th class="textcenter">Missed Calls</th>
                                                     <th class="textcenter">Outgoing Calls</th>
-                                                    <!-- <th *ngIf="filterList[0].slot" class="textcenter">Time Slot</th> -->
+                                                    <th *ngIf="filterList[0].slot" class="textcenter">Time Slot</th>
                                                     <th class="textcenter">Created Date</th>
-                                                  
+                                                    <!-- <th >Incoming Calls</th> -->
+
+
+                                                    <!-- <th >No Answer</th> -->
+                                                    <!-- <th >Busy</th>  -->
+                                                    <!-- <th >Failed</th> -->
+
+
+                                                    <!-- <th class="textcenter">Average Handling Time In Minutes</th> -->
+                                                    <!-- <th class="textcenter">Device On Percent</th> -->
 
 
                                                 </tr>
-                                           
                                             </thead>
                                             <tbody class="text-dark">
                                                 <tr class="bg-white" id="Table_data"
@@ -236,28 +244,37 @@
                                                     <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}
                                                     </th>
                                                     <td>{{item.user.name }}</td>
-                                                    
+                                                    <!-- <td><a (click)="viewagentreposrts(item.user.id)" class="nav-link text-body">{{
+                                                            item.user.name }}</a></td> -->
                                                     <td id="Table_data">{{ item.user.email }}</td>
                                                     <td id="Table_data">{{ item.user.mobile }}</td>
-                                                    <td class="textcenter">{{ item.avilable_time }}</td>
-                                                  
-                                                    <td class="textcenter">{{ item.non_avilable_time }}</td>
-                                                    <td class="textcenter" id="Table_data">{{ item.on_call_timer }}</td>
+                                                    <td class="textcenter">{{ secondsToDhmsForAvailableTimer(item.DeviceOnHumanReadable) }}</td>
+                                                    <!-- Non Available Time -->
+                                                    <!-- <td>{{ item.DeviceOnHumanReadable | secondsDifference }}</td> -->
+                                                    
+                                                    <td class="textcenter">{{ secondsToDhms((((item.TotalRowsCount*60)*60)  - item.DeviceOnHumanReadableInSeconds )) }}</td>
+                                                    <td class="textcenter" id="Table_data">{{ item.TotalCallDurationInMinutes }}</td>
+                                                    <td class="textcenter">{{ calculateAbsoluteDifference(item.IncomingCalls,
+                                                        item.MissedCalls) }}</td>
+                                                    <td class="textcenter" id="Table_data"> {{ item.MissedCalls }}</td>
+                                                    <td class="textcenter" id="Table_data">{{ item.OutgoingCalls }}</td>
 
-                                                    <td class="textcenter">{{ item.received_call_timer }}</td>
-                                                    <td class="textcenter" id="Table_data"> {{ item.missed_call_timer }}</td>
-                                                    <td class="textcenter" id="Table_data">{{ item.outgoing_call_timer }}</td>
-
-                                                    <!-- <td class="textcenter" id="Table_data" *ngIf="item.slot">{{
+                                                    <td class="textcenter" id="Table_data" *ngIf="item.slot">{{
                                                         item.DeviceOnPercent.start_time | customTime }}-{{
-                                                        item.DeviceOnPercent.end_time | customTime }}</td> -->
-                                                  
+                                                        item.DeviceOnPercent.end_time | customTime }}</td>
+                                                    <!-- <td id="Table_data">{{ item.AverageHandlingTimeInMinutes }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.IncomingCalls }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.NoAnswer }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Busy }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.Failed }}</td> -->
+                                                    <!-- <td id="Table_data">{{ item.DeviceOnPercent }}</td> -->
                                                      <td class="textcenter"  id="Table_data"><span *ngIf="item.updatedAt">{{ item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a'}}</span> </td>
 
 
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <!-- <pagination-controls (pageChange)="currentpage = $event"></pagination-controls> -->
                                         <div class="pagination-controls">
                                             <button [disabled]="currentPage <= 1"
                                                 (click)="onPageChange(currentPage - 1)">Previous</button>
