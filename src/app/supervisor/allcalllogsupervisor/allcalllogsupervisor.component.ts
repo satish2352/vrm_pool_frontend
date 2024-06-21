@@ -352,10 +352,10 @@ export class AllcalllogsupervisorComponent {
 
  
   getSearch() {
-    if (!this.fromdateSelected || !this.todateSelected) {
+    // if (!this.fromdateSelected || !this.todateSelected) {
 
-      return; // Exit the function if any required field is missing
-    }
+    //   return; // Exit the function if any required field is missing
+    // }
 
     var finaltoDate = new Date()
     if (this.todateSelected) {
