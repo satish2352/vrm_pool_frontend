@@ -4,6 +4,7 @@ import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Pipe, PipeTransform } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-allcalllog',
@@ -13,6 +14,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 
 export class AllcalllogComponent {
+
+  envvariable: any;
   timeselect: string = "";
   pageSize: number = 200;
   currentPage: number = 1;
@@ -120,6 +123,7 @@ export class AllcalllogComponent {
 
   ngOnInit(): void {
 
+    this.envvariable = environment.BASE_URL
     this.getAllSupervisorList();
     // this.data = {
     //   'page': this.currentPage,
@@ -137,6 +141,148 @@ export class AllcalllogComponent {
 
 
   }
+
+
+  downloadSampleFile() {
+    // if (!this.fromdateSelected || !this.todateSelected) {
+
+    //   return; // Exit the function if any required field is missing
+    // }
+
+    var finaltoDate = new Date()
+    if (this.todateSelected) {
+      finaltoDate = this.todateSelected
+    }
+
+    var finalFromDate = new Date()
+    if (this.fromdateSelected) {
+      finalFromDate = this.fromdateSelected
+    }
+
+
+    var finalToTime = '23:59';
+    if (this.totimeSelected) {
+      finalToTime = this.totimeSelected
+    }
+
+    var finalFromTime = '00:00';
+    if (this.fromtimeSelected) {
+      finalFromTime = this.fromtimeSelected
+    }
+
+    var today = new Date(finalFromDate);
+    // Get the year, month, and day
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+    var day = ('0' + today.getDate()).slice(-2);
+    var formattedDate = year + '-' + month + '-' + day;
+    var finalDate = formattedDate + 'T' + finalFromTime; // Include 'T' for ISO 8601 format
+    var localDateTime = new Date(finalDate);
+    var fromtimeFormatedSingleRowLocal = localDateTime.toISOString();
+
+
+
+    var today_to = new Date(finaltoDate);
+    // Get the year, month, and day
+    var year_to = today_to.getFullYear();
+    var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+    var day_to = ('0' + today_to.getDate()).slice(-2);
+    var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+    var finalDate_to = formattedDate_to + 'T' + finalToTime; // Include 'T' for ISO 8601 format
+    var localDateTime_to = new Date(finalDate_to);
+    var totimeFormatedSingleRowLocal = localDateTime_to.toISOString();
+
+
+    if (fromtimeFormatedSingleRowLocal > totimeFormatedSingleRowLocal) {
+      // alert("To time can't be less than from time");
+      Swal.fire({
+        icon: 'warning',
+        title: "To Time and Date can't be less than from Time and Date ",
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+
+
+
+    } else {
+      this.fromtimeFormatedSingleRow = fromtimeFormatedSingleRowLocal;
+      this.totimeFormatedSingleRow = totimeFormatedSingleRowLocal;
+      this.data = {
+        'user_type': '',
+        // 'fromdate': this.fromdateSelected,
+        // 'todate': this.todateSelected,
+        'status': '',
+        'supervisor_id': this.supervisorSelected,
+        'direction': '',
+        'fromtime': this.fromtimeFormatedSingleRow,
+        'totime': this.totimeFormatedSingleRow,
+        'time': this.timeselect,
+
+        'page': this.currentPage,
+        'pageSize': this.pageSize
+      };
+
+
+      if (!this.fromdateSelected && !this.todateSelected) {
+
+        this.data.fromtime = '';
+        this.data.totime = '';
+       
+    }
+
+
+
+
+      if (this.agentSelected && this.agentSelected.length > 0) {
+        this.data.agent_id = this.agentSelected;
+      }
+
+      if (this.timeselect && this.timeselect.length > 0) {
+
+        if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'Please select both From Time and To Time.',
+            timer: 4000, // Close the alert after 4 seconds
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
+          this.timeselect = "";
+        } else {
+
+          var today = new Date();
+          // Get the year, month, and day
+          var year = today.getFullYear();
+          var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+          var day = ('0' + today.getDate()).slice(-2);
+          var formattedDate = year + '-' + month + '-' + day;
+          var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
+          var localDateTime = new Date(finalDate);
+          var fromtimeFormated = localDateTime.toISOString();
+
+
+          var today_to = new Date();
+          // Get the year, month, and day
+          var year_to = today_to.getFullYear();
+          var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+          var day_to = ('0' + today_to.getDate()).slice(-2);
+          var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+          var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
+          var localDateTime_to = new Date(finalDate_to);
+          var totimeFormated = localDateTime_to.toISOString();
+
+          this.data.fromtime = fromtimeFormated;
+          this.data.totime = totimeFormated;
+          this.getAllAgentbytimeframeFilesDownload(this.data); //download file satish
+        }
+      } else {
+        this.getCallLogSingleRowFileDownload(this.data);
+      }
+    }
+  }
+
 
   calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
     return Math.abs(incomingCalls - missedCalls);
@@ -228,6 +374,34 @@ export class AllcalllogComponent {
 
         }
       });
+    }
+  }
+
+
+  getAllAgentbytimeframeFilesDownload(data: any) {
+
+    if(this.fromdateSelected !== this.todateSelected) {
+      Swal.fire({
+        icon: 'warning',
+        title: "From Date and To Date Should be Same  ",
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+    } else {
+
+      const queryString = this.encodeQueryData(data)
+      const jsonString = JSON.stringify(data);
+      console.log(jsonString);
+      const fileUrl = `${this.envvariable}/getTimeSlotWiseExportExcel?${queryString}`;
+      let preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
+      if (preview) {
+        preview.setAttribute("href", fileUrl);
+        preview.click();
+      } else {
+        console.error("Element with id 'hiddenLink' not found.");
+      }
+      
     }
   }
 
@@ -365,6 +539,30 @@ export class AllcalllogComponent {
       }
     });
   }
+
+  getCallLogSingleRowFileDownload(data: any) {
+    const queryString = this.encodeQueryData(data)
+      const jsonString = JSON.stringify(data);
+      const fileUrl = `${this.envvariable}/getSingleRowExportExcel?${queryString}`;
+      let preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
+      if (preview) {
+        preview.setAttribute("href", fileUrl);
+        preview.click();
+      } else {
+        console.error("Element with id 'hiddenLink' not found.");
+      }
+  }
+
+  encodeQueryData(data:any) {
+    const params = new URLSearchParams();
+    for (const key in data) {
+        if (data.hasOwnProperty(key) && data[key] !== '') {
+            params.append(key, data[key]);
+        }
+    }
+    return params.toString();
+}
+
 
   searchChanged(searchValue: any) {
     console.log(searchValue);
