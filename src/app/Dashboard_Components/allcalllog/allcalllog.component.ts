@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FileDownloadService } from 'src/app/FileDownloadService'
+import { FileDownloadService } from 'src/app/FileDownloadService';
 import { HelperService } from '../../helper.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -9,14 +9,11 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-allcalllog',
   templateUrl: './allcalllog.component.html',
-  styleUrls: ['./allcalllog.component.css']
+  styleUrls: ['./allcalllog.component.css'],
 })
-
-
 export class AllcalllogComponent {
-
   envvariable: any;
-  timeselect: string = "";
+  timeselect: string = '';
   pageSize: number = 200;
   currentPage: number = 1;
   alllist: any = [];
@@ -25,18 +22,18 @@ export class AllcalllogComponent {
   supervisorSelected: any;
   agentSelected: any;
   allagentbysupervisorList: any;
-  data: any = {}
+  data: any = {};
   fromdateSelected: any;
   todateSelected: any;
   totimeSelected: any;
   fromtimeSelected: any;
   agentList: any = [];
-  ignoreFirstChange = true
+  ignoreFirstChange = true;
   maxDatef: string;
   maxDatet!: string;
   minDatef!: string;
   activeSupervisors!: any[];
-  filterList: any = [] = [];
+  filterList: any = ([] = []);
   searchTerm: string = '';
   sortKey: string = ''; // Track the current sort key
   sortOrder: string = 'asc';
@@ -61,15 +58,13 @@ export class AllcalllogComponent {
   totimeFormatedSingleRow: any = '';
   fromtimeFormatedSingleRow: any = '';
 
-
-
-
-
   selectedAgents: any[] = []; // To store selected agents
   // timeselect: any;
-  constructor(private helperService: HelperService,
+  constructor(
+    private helperService: HelperService,
     private fileDownloadService: FileDownloadService,
-    public router: Router,) {
+    public router: Router
+  ) {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -82,15 +77,19 @@ export class AllcalllogComponent {
     const minMm = String(sixMonthsAgo.getMonth() + 1).padStart(2, '0');
     const minYyyy = sixMonthsAgo.getFullYear();
     this.minDatef = `${minYyyy}-${minMm}-${minDd}`;
-
   }
 
   private updateToDateRestriction() {
     if (this.fromdateSelected) {
       const fromDate = new Date(this.fromdateSelected);
-      const thirtyDaysFromFromDate = new Date(fromDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+      const thirtyDaysFromFromDate = new Date(
+        fromDate.getTime() + 30 * 24 * 60 * 60 * 1000
+      );
       const maxDd = String(thirtyDaysFromFromDate.getDate()).padStart(2, '0');
-      const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(2, '0');
+      const maxMm = String(thirtyDaysFromFromDate.getMonth() + 1).padStart(
+        2,
+        '0'
+      );
       const maxYyyy = thirtyDaysFromFromDate.getFullYear();
       this.maxDatet = `${maxYyyy}-${maxMm}-${maxDd}`;
       this.minDatet = this.minDatef;
@@ -118,12 +117,8 @@ export class AllcalllogComponent {
   //     }
   // }
 
-
-
-
   ngOnInit(): void {
-
-    this.envvariable = environment.BASE_URL
+    this.envvariable = environment.BASE_URL;
     this.getAllSupervisorList();
     // this.data = {
     //   'page': this.currentPage,
@@ -131,17 +126,11 @@ export class AllcalllogComponent {
     // }
     this.getCallLogSingleRow(this.data);
     this.getAllAgentList();
-    this.getActiveUserListWithoutPagination()
+    this.getActiveUserListWithoutPagination();
     // this.getAllAgentbySuperviserList()
 
-    this.agentSelected = this.allagentbysupervisorList.id
-
-
-
-
-
+    this.agentSelected = this.allagentbysupervisorList.id;
   }
-
 
   downloadSampleFile() {
     // if (!this.fromdateSelected || !this.todateSelected) {
@@ -149,25 +138,24 @@ export class AllcalllogComponent {
     //   return; // Exit the function if any required field is missing
     // }
 
-    var finaltoDate = new Date()
+    var finaltoDate = new Date();
     if (this.todateSelected) {
-      finaltoDate = this.todateSelected
+      finaltoDate = this.todateSelected;
     }
 
-    var finalFromDate = new Date()
+    var finalFromDate = new Date();
     if (this.fromdateSelected) {
-      finalFromDate = this.fromdateSelected
+      finalFromDate = this.fromdateSelected;
     }
-
 
     var finalToTime = '23:59';
     if (this.totimeSelected) {
-      finalToTime = this.totimeSelected
+      finalToTime = this.totimeSelected;
     }
 
     var finalFromTime = '00:00';
     if (this.fromtimeSelected) {
-      finalFromTime = this.fromtimeSelected
+      finalFromTime = this.fromtimeSelected;
     }
 
     var today = new Date(finalFromDate);
@@ -180,8 +168,6 @@ export class AllcalllogComponent {
     var localDateTime = new Date(finalDate);
     var fromtimeFormatedSingleRowLocal = localDateTime.toISOString();
 
-
-
     var today_to = new Date(finaltoDate);
     // Get the year, month, and day
     var year_to = today_to.getFullYear();
@@ -192,7 +178,6 @@ export class AllcalllogComponent {
     var localDateTime_to = new Date(finalDate_to);
     var totimeFormatedSingleRowLocal = localDateTime_to.toISOString();
 
-
     if (fromtimeFormatedSingleRowLocal > totimeFormatedSingleRowLocal) {
       // alert("To time can't be less than from time");
       Swal.fire({
@@ -200,58 +185,49 @@ export class AllcalllogComponent {
         title: "To Time and Date can't be less than from Time and Date ",
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
-
-
-
     } else {
       this.fromtimeFormatedSingleRow = fromtimeFormatedSingleRowLocal;
       this.totimeFormatedSingleRow = totimeFormatedSingleRowLocal;
       this.data = {
-        'user_type': '',
+        user_type: '',
         // 'fromdate': this.fromdateSelected,
         // 'todate': this.todateSelected,
-        'status': '',
-        'supervisor_id': this.supervisorSelected,
-        'direction': '',
-        'fromtime': this.fromtimeFormatedSingleRow,
-        'totime': this.totimeFormatedSingleRow,
-        'time': this.timeselect,
+        status: '',
+        supervisor_id: this.supervisorSelected,
+        direction: '',
+        fromtime: this.fromtimeFormatedSingleRow,
+        totime: this.totimeFormatedSingleRow,
+        time: this.timeselect,
 
-        'page': this.currentPage,
-        'pageSize': this.pageSize
+        page: this.currentPage,
+        pageSize: this.pageSize,
       };
 
-
       if (!this.fromdateSelected && !this.todateSelected) {
-
         this.data.fromtime = '';
         this.data.totime = '';
-       
-    }
-
-
-
+      }
 
       if (this.agentSelected && this.agentSelected.length > 0) {
         this.data.agent_id = this.agentSelected;
       }
 
       if (this.timeselect && this.timeselect.length > 0) {
-
-        if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
-
+        if (
+          typeof this.fromtimeSelected === 'undefined' &&
+          typeof this.totimeSelected === 'undefined'
+        ) {
           Swal.fire({
             icon: 'warning',
             title: 'Please select both From Time and To Time.',
             timer: 4000, // Close the alert after 4 seconds
             timerProgressBar: true,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
-          this.timeselect = "";
+          this.timeselect = '';
         } else {
-
           var today = new Date();
           // Get the year, month, and day
           var year = today.getFullYear();
@@ -261,7 +237,6 @@ export class AllcalllogComponent {
           var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
           var localDateTime = new Date(finalDate);
           var fromtimeFormated = localDateTime.toISOString();
-
 
           var today_to = new Date();
           // Get the year, month, and day
@@ -283,153 +258,113 @@ export class AllcalllogComponent {
     }
   }
 
-
-  calculateAbsoluteDifference(incomingCalls: number, missedCalls: number): number {
-    return Math.abs(incomingCalls - missedCalls);
-  }
-
-  secondsToDhms(seconds:number) {
-    seconds = Number(seconds);
-    var d = Math.floor(seconds / (3600*24));
-    var h = Math.floor(seconds % (3600*24) / 3600);
-    var m = Math.floor(seconds % 3600 / 60);
-    var s = Math.floor(seconds % 60);
-    
-    var dDisplay = d > 0 ? d : "00";
-    var hDisplay = h > 0 ? h : "00";
-    var mDisplay = m > 0 ? m : "00";
-    var sDisplay = s > 0 ? s : "00";
-    return dDisplay+":"+hDisplay+":"+mDisplay+":"+sDisplay;
-    }
-
-    secondsToDhmsForAvailableTimer(stringData:any) {
-      console.log("stringData");
-      console.log(stringData);
-      
-      var seconds = this.convertStringToSeconds(stringData);
-      console.log("secondsToDhmsForAvailableTimer");
-      console.log(seconds);
-      var d = Math.floor(seconds / (3600*24));
-      var h = Math.floor(seconds % (3600*24) / 3600);
-      var m = Math.floor(seconds % 3600 / 60);
-      var s = Math.floor(seconds % 60);
-      
-      var dDisplay = d > 0 ? d : "00";
-      var hDisplay = h > 0 ? h : "00";
-      var mDisplay = m > 0 ? m : "00";
-      var sDisplay = s > 0 ? s : "00";
-      return dDisplay+":"+hDisplay+":"+mDisplay+":"+sDisplay;
-      }
-
-      convertStringToSeconds(timeString: string): number {
-        const timeUnits = {
-          'days': 0,
-          'hours': 0,
-          'minutes': 0,
-          'seconds': 0
-        };
-    
-        const regex = /(\d+)\s*(days?|hours?|minutes?|seconds?)/gi;
-        let match;
-        while ((match = regex.exec(timeString)) !== null) {
-          const value = parseInt(match[1], 10);
-          const unit = match[2].toLowerCase();
-          if (unit.startsWith('day')) {
-            timeUnits['days'] = value;
-          } else if (unit.startsWith('hour')) {
-            timeUnits['hours'] = value;
-          } else if (unit.startsWith('minute')) {
-            timeUnits['minutes'] = value;
-          } else if (unit.startsWith('second')) {
-            timeUnits['seconds'] = value;
-          }
-        }
-    
-        const daysToSeconds = timeUnits['days'] * 24 * 60 * 60;
-        const hoursToSeconds = timeUnits['hours'] * 60 * 60;
-        const minutesToSeconds = timeUnits['minutes'] * 60;
-        const seconds = timeUnits['seconds'];
-    
-        return daysToSeconds + hoursToSeconds + minutesToSeconds + seconds;
-      }
+ 
 
   getAllAgentbytimeframe(data: any) {
-
-    if(this.fromdateSelected !== this.todateSelected) {
+    if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: "From Date and To Date Should be Same  ",
+        title: 'From Date and To Date Should be Same  ',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } else {
-      this.helperService.getAllAgentbytimeframe(data).subscribe(list => {
+      this.helperService.getAllAgentbytimeframe(data).subscribe((list) => {
         if (list['result'] == true) {
           this.filterList = list['data'];
           this.totalItems = list.totalItems;
           this.totalPages = list.totalPages;
           this.currentPage = list.currentPage;
-          console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
-
+          console.log(
+            'list.totalPagesssssssssssssssssssssssssssssss',
+            list.totalPages
+          );
         }
       });
     }
   }
 
-
   getAllAgentbytimeframeFilesDownload(data: any) {
-
-    if(this.fromdateSelected !== this.todateSelected) {
+    if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: "From Date and To Date Should be Same  ",
+        title: 'From Date and To Date Should be Same  ',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } else {
-
-      const queryString = this.encodeQueryData(data)
+      // Serialize the data to a JSON string
       const jsonString = JSON.stringify(data);
+      console.log('jsonString');
       console.log(jsonString);
-      const fileUrl = `${this.envvariable}/getTimeSlotWiseExportExcel?${queryString}`;
-      let preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
-      if (preview) {
-        preview.setAttribute("href", fileUrl);
-        preview.click();
-      } else {
-        console.error("Element with id 'hiddenLink' not found.");
-      }
-      
+      let authToken = localStorage.getItem('auth_token');
+      // URL for the API endpoint
+      const fileUrl = `${this.envvariable}/getTimeSlotWiseExportExcel`;
+
+      // Fetch request with authorization header
+      fetch(fileUrl, {
+        method: 'POST',
+        headers: {
+          'Auth-Token': `${authToken}`,
+          'Content-Type': 'application/json', // Ensure the content type is JSON
+        },
+        body: jsonString,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.blob();
+        })
+        .then((blob) => {
+          const url = window.URL.createObjectURL(blob);
+          let preview = document.getElementById('hiddenLink'); // getElementById instead of querySelectorAll
+          if (preview) {
+            preview.setAttribute('href', url);
+            preview.setAttribute('download', 'AgentData.xlsx'); // Set a default file name
+            preview.click();
+            // Revoke the object URL after the click
+            setTimeout(() => window.URL.revokeObjectURL(url), 100);
+          } else {
+            console.error("Element with id 'hiddenLink' not found.");
+          }
+        })
+        .catch((error) => {
+          console.error(
+            'There has been a problem with your fetch operation:',
+            error
+          );
+        });
     }
   }
 
   getAllAgentList() {
     this.loading = true; // Show loader when fetching data
-    this.helperService.getAllAgentUploadedList().subscribe(list => {
-      if (list['result'] == true) {
-        this.agentList = list['data'];
-      }
-      this.loading = false; // Hide loader after data is fetched
-    },
+    this.helperService.getAllAgentUploadedList().subscribe(
+      (list) => {
+        if (list['result'] == true) {
+          this.agentList = list['data'];
+        }
+        this.loading = false; // Hide loader after data is fetched
+      },
       (error) => {
         console.error('Error fetching agent list:', error);
         this.loading = false; // Hide loader if an error occurs
-      });
+      }
+    );
   }
 
   onSelectChangeSupervisor(val: any) {
     this.supervisorSelected = val.value;
-    this.getActiveUserListWithoutPagination()
+    this.getActiveUserListWithoutPagination();
     // this.getAllAgentbySuperviserList()
-
   }
 
   ontimeselect(val: any) {
     this.timeselect = val.value;
   }
-
 
   onSelectChangeAgent(val: any) {
     if (this.ignoreFirstChange) {
@@ -439,32 +374,28 @@ export class AllcalllogComponent {
 
     const keyToExtract = 'id';
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
-
   }
-
-
-
 
   pagerecords(val: any) {
     this.pageSize = val.value ? val.value : 200;
-    console.log("pageSize", this.pageSize);
+    console.log('pageSize', this.pageSize);
 
     this.currentPage = 1; // Reset to first page
     this.data = {
-      'user_type': '',
+      user_type: '',
       // 'fromdate': this.fromdateSelected,
       // 'todate': this.todateSelected,
-      'status': '',
-      'supervisor_id': this.supervisorSelected,
-      'direction': '',
-      'fromtime': this.fromtimeFormatedSingleRow,
-      'totime': this.totimeFormatedSingleRow,
-      'time': this.timeselect,
+      status: '',
+      supervisor_id: this.supervisorSelected,
+      direction: '',
+      fromtime: this.fromtimeFormatedSingleRow,
+      totime: this.totimeFormatedSingleRow,
+      time: this.timeselect,
 
-      'page': this.currentPage,
-      'pageSize': this.pageSize
+      page: this.currentPage,
+      pageSize: this.pageSize,
     };
-   
+
     if (this.agentSelected && this.agentSelected.length > 0) {
       this.data.agent_id = this.agentSelected;
     }
@@ -473,21 +404,16 @@ export class AllcalllogComponent {
     } else {
       this.getCallLogSingleRow(this.data);
     }
-
   }
-
 
   fromdate(val: any) {
     this.fromdateSelected = val.value;
     this.updateToDateRestriction();
   }
 
-
   fromtime(val: any) {
     this.fromtimeSelected = val.value;
-
   }
-
 
   todate(val: any) {
     this.todateSelected = val.value;
@@ -497,16 +423,14 @@ export class AllcalllogComponent {
     this.totimeSelected = val.value;
   }
 
-
-
   getAllSupervisorList() {
-    this.helperService.getAllSupervisorList().subscribe(list => {
+    this.helperService.getAllSupervisorList().subscribe((list) => {
       if (list['result'] == true) {
-        console.log(list['data'])
-        var dataNew = list['data']
-        this.supervisorList = dataNew.filter((obj: any) => obj.is_active === "1");
-
-
+        console.log(list['data']);
+        var dataNew = list['data'];
+        this.supervisorList = dataNew.filter(
+          (obj: any) => obj.is_active === '1'
+        );
       }
     });
   }
@@ -514,113 +438,166 @@ export class AllcalllogComponent {
     // getAllAgentbySuperviserList() {
 
     let data = {
-      'superviserId': this.supervisorSelected,
-      'user_type': 3,
-    } 
-   
-    this.helperService.getActiveUserListWithoutPagination(data).subscribe(list => {
-      // this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
+      superviserId: this.supervisorSelected,
+      user_type: 3,
+    };
 
-      if (list['result'] == true) {
-        this.allagentbysupervisorList = list['data'];
-      }
-    });
+    this.helperService
+      .getActiveUserListWithoutPagination(data)
+      .subscribe((list) => {
+        // this.helperService.getAllAgentbySuperviserList(data).subscribe(list => {
+
+        if (list['result'] == true) {
+          this.allagentbysupervisorList = list['data'];
+        }
+      });
   }
 
-
   getCallLogSingleRow(data: any) {
-    this.helperService.getCallLogSingleRow(data).subscribe(list => {
+    this.helperService.getCallLogSingleRow(data).subscribe((list) => {
       if (list['result'] == true) {
         this.filterList = list['data'];
         this.totalItems = list.totalItems;
         this.totalPages = list.totalPages;
         this.currentPage = list.currentPage;
-        console.log('list.totalPagesssssssssssssssssssssssssssssss', list.totalPages);
+        console.log(
+          'list.totalPagesssssssssssssssssssssssssssssss',
+          list.totalPages
+        );
       }
     });
   }
 
   getCallLogSingleRowFileDownload(data: any) {
-    const queryString = this.encodeQueryData(data)
-      const jsonString = JSON.stringify(data);
-      const fileUrl = `${this.envvariable}/getSingleRowExportExcel?${queryString}`;
-      let preview = document.getElementById("hiddenLink"); //getElementById instead of querySelectorAll
-      if (preview) {
-        preview.setAttribute("href", fileUrl);
-        preview.click();
-      } else {
-        console.error("Element with id 'hiddenLink' not found.");
-      }
+    // Serialize the data to a JSON string
+    const jsonString = JSON.stringify(data);
+    console.log('jsonString');
+    console.log(jsonString);
+    let authToken = localStorage.getItem('auth_token');
+    // URL for the API endpoint
+    const fileUrl = `${this.envvariable}/getSingleRowExportExcel`;
+
+    // Fetch request with authorization header
+    fetch(fileUrl, {
+      method: 'POST',
+      headers: {
+        'Auth-Token': `${authToken}`,
+        'Content-Type': 'application/json', // Ensure the content type is JSON
+      },
+      body: jsonString,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        let preview = document.getElementById('hiddenLink'); // getElementById instead of querySelectorAll
+        if (preview) {
+          preview.setAttribute('href', url);
+          preview.setAttribute('download', 'AgentData.xlsx'); // Set a default file name
+          preview.click();
+          // Revoke the object URL after the click
+          setTimeout(() => window.URL.revokeObjectURL(url), 100);
+        } else {
+          console.error("Element with id 'hiddenLink' not found.");
+        }
+      })
+      .catch((error) => {
+        console.error(
+          'There has been a problem with your fetch operation:',
+          error
+        );
+      });
   }
 
-  encodeQueryData(data:any) {
+  encodeQueryData(data: any) {
     const params = new URLSearchParams();
     for (const key in data) {
-        if (data.hasOwnProperty(key) && data[key] !== '') {
-            params.append(key, data[key]);
-        }
+      if (data.hasOwnProperty(key) && data[key] !== '') {
+        params.append(key, data[key]);
+      }
     }
     return params.toString();
-}
-
+  }
 
   searchChanged(searchValue: any) {
     console.log(searchValue);
     if (!searchValue) {
-      let data = {}
-      this.helperService.getCallLogSingleRow(data).subscribe(list => {
+      let data = {};
+      this.helperService.getCallLogSingleRow(data).subscribe((list) => {
         if (list['result'] == true) {
           this.filterList = list['data'];
-
         }
       });
     } else {
-      let data = {}
-      this.helperService.getCallLogSingleRow(data).subscribe(list => {
+      let data = {};
+      this.helperService.getCallLogSingleRow(data).subscribe((list) => {
         if (list['result'] == true) {
           this.filterList = list['data'];
 
-          let filterListNew: any
-          filterListNew = this.filterList
-          filterListNew = filterListNew.filter((item: any) =>
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.name) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.email) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.IncomingCalls.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.MissedCalls.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.NoAnswer.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.Busy.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.Failed.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.OutgoingCalls.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.TotalCallDurationInMinutes.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.AverageHandlingTimeInMinutes.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.DeviceOnPercent.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.DeviceOnHumanReadable.toString()) ||
-            new RegExp('\\b' + searchValue.trim(), 'i').test(item.user.mobile.toString())
+          let filterListNew: any;
+          filterListNew = this.filterList;
+          filterListNew = filterListNew.filter(
+            (item: any) =>
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.user.name
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.user.email
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.IncomingCalls.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.MissedCalls.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.NoAnswer.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.Busy.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.Failed.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.OutgoingCalls.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.TotalCallDurationInMinutes.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.AverageHandlingTimeInMinutes.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.DeviceOnPercent.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.DeviceOnHumanReadable.toString()
+              ) ||
+              new RegExp('\\b' + searchValue.trim(), 'i').test(
+                item.user.mobile.toString()
+              )
             // You can add more conditions here to filter by other properties
           );
-          this.filterList = filterListNew
-
-
+          this.filterList = filterListNew;
         }
       });
-
-
-
     }
-
   }
-
 
   viewagentreposrts(id: any) {
     this.router.navigate(['/admin-dashboard/', 'agent-under-reports', id]);
   }
 
-
-
   sortAgentEmail(email: string) {
     // Toggle sort order
-    this.agentEmailSortOrder = this.agentEmailSortOrder === 'asc' ? 'desc' : 'asc';
-    this.sortColumn = 'email'
+    this.agentEmailSortOrder =
+      this.agentEmailSortOrder === 'asc' ? 'desc' : 'asc';
+    this.sortColumn = 'email';
     // Sort the data based on Agent Email column and the current sort order
     this.filterList.sort((a: any, b: any) => {
       if (a.user[email] < b.user[email]) {
@@ -633,15 +610,15 @@ export class AllcalllogComponent {
     });
   }
 
-
   getArrowClass(column: string): string {
     // alert(this.sortColumn)
     if (column === this.sortColumn) {
-      return this.agentEmailSortOrder === 'asc' ? 'fa-caret-up' : 'fa-caret-down';
+      return this.agentEmailSortOrder === 'asc'
+        ? 'fa-caret-up'
+        : 'fa-caret-down';
     }
     return '';
   }
-
 
   getSearch() {
     // if (!this.fromdateSelected || !this.todateSelected) {
@@ -649,25 +626,24 @@ export class AllcalllogComponent {
     //   return; // Exit the function if any required field is missing
     // }
 
-    var finaltoDate = new Date()
+    var finaltoDate = new Date();
     if (this.todateSelected) {
-      finaltoDate = this.todateSelected
+      finaltoDate = this.todateSelected;
     }
 
-    var finalFromDate = new Date()
+    var finalFromDate = new Date();
     if (this.fromdateSelected) {
-      finalFromDate = this.fromdateSelected
+      finalFromDate = this.fromdateSelected;
     }
-
 
     var finalToTime = '23:59';
     if (this.totimeSelected) {
-      finalToTime = this.totimeSelected
+      finalToTime = this.totimeSelected;
     }
 
     var finalFromTime = '00:00';
     if (this.fromtimeSelected) {
-      finalFromTime = this.fromtimeSelected
+      finalFromTime = this.fromtimeSelected;
     }
 
     var today = new Date(finalFromDate);
@@ -680,8 +656,6 @@ export class AllcalllogComponent {
     var localDateTime = new Date(finalDate);
     var fromtimeFormatedSingleRowLocal = localDateTime.toISOString();
 
-
-
     var today_to = new Date(finaltoDate);
     // Get the year, month, and day
     var year_to = today_to.getFullYear();
@@ -692,7 +666,6 @@ export class AllcalllogComponent {
     var localDateTime_to = new Date(finalDate_to);
     var totimeFormatedSingleRowLocal = localDateTime_to.toISOString();
 
-
     if (fromtimeFormatedSingleRowLocal > totimeFormatedSingleRowLocal) {
       // alert("To time can't be less than from time");
       Swal.fire({
@@ -700,58 +673,49 @@ export class AllcalllogComponent {
         title: "To Time and Date can't be less than from Time and Date ",
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
-
-
-
     } else {
       this.fromtimeFormatedSingleRow = fromtimeFormatedSingleRowLocal;
       this.totimeFormatedSingleRow = totimeFormatedSingleRowLocal;
       this.data = {
-        'user_type': '',
+        user_type: '',
         // 'fromdate': this.fromdateSelected,
         // 'todate': this.todateSelected,
-        'status': '',
-        'supervisor_id': this.supervisorSelected,
-        'direction': '',
-        'fromtime': this.fromtimeFormatedSingleRow,
-        'totime': this.totimeFormatedSingleRow,
-        'time': this.timeselect,
+        status: '',
+        supervisor_id: this.supervisorSelected,
+        direction: '',
+        fromtime: this.fromtimeFormatedSingleRow,
+        totime: this.totimeFormatedSingleRow,
+        time: this.timeselect,
 
-        'page': this.currentPage,
-        'pageSize': this.pageSize
+        page: this.currentPage,
+        pageSize: this.pageSize,
       };
 
-
       if (!this.fromdateSelected && !this.todateSelected) {
-
         this.data.fromtime = '';
         this.data.totime = '';
-       
-    }
-
-
-
+      }
 
       if (this.agentSelected && this.agentSelected.length > 0) {
         this.data.agent_id = this.agentSelected;
       }
 
       if (this.timeselect && this.timeselect.length > 0) {
-
-        if (typeof this.fromtimeSelected === 'undefined' && typeof this.totimeSelected === 'undefined') {
-
+        if (
+          typeof this.fromtimeSelected === 'undefined' &&
+          typeof this.totimeSelected === 'undefined'
+        ) {
           Swal.fire({
             icon: 'warning',
             title: 'Please select both From Time and To Time.',
             timer: 4000, // Close the alert after 4 seconds
             timerProgressBar: true,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
-          this.timeselect = "";
+          this.timeselect = '';
         } else {
-
           var today = new Date();
           // Get the year, month, and day
           var year = today.getFullYear();
@@ -761,7 +725,6 @@ export class AllcalllogComponent {
           var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
           var localDateTime = new Date(finalDate);
           var fromtimeFormated = localDateTime.toISOString();
-
 
           var today_to = new Date();
           // Get the year, month, and day
@@ -782,8 +745,6 @@ export class AllcalllogComponent {
       }
     }
   }
-
-
 
   clearSelections() {
     this.supervisorSelected = null;
@@ -831,20 +792,20 @@ export class AllcalllogComponent {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       this.data = {
-        'user_type': '',
+        user_type: '',
         // 'fromdate': this.fromdateSelected,
         // 'todate': this.todateSelected,
-        'status': '',
-        'supervisor_id': this.supervisorSelected,
-        'direction': '',
-        'fromtime': this.fromtimeFormatedSingleRow,
-        'totime': this.totimeFormatedSingleRow,
-        'time': this.timeselect,
+        status: '',
+        supervisor_id: this.supervisorSelected,
+        direction: '',
+        fromtime: this.fromtimeFormatedSingleRow,
+        totime: this.totimeFormatedSingleRow,
+        time: this.timeselect,
 
-        'page': this.currentPage,
-        'pageSize': this.pageSize
+        page: this.currentPage,
+        pageSize: this.pageSize,
       };
-     
+
       if (this.agentSelected && this.agentSelected.length > 0) {
         this.data.agent_id = this.agentSelected;
       }
