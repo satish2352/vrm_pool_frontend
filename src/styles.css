@@ -122,3 +122,10 @@
   color: #ffffff !important; /* Adjust hover color as needed */
 }
 
+
+.table thead th {
+  background-color: #007bff;
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
