@@ -141,7 +141,7 @@ export class AllcalllogsupervisorComponent {
       return; // Ignore the rest of the function during the first call
     }
 
-    const keyToExtract = 'id';
+    const keyToExtract = 'mobile';
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
   }
 
