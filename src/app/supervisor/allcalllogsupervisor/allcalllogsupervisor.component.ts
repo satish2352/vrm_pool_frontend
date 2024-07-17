@@ -108,7 +108,7 @@ export class AllcalllogsupervisorComponent {
     this.getAllAgentbySuperviserList();
     // this.filteredList = this.alllist;
     // this.searchChanged('')
-    this.agentSelected = this.allagentbysupervisorList.id;
+    this.agentSelected = this.allagentbysupervisorList.mobile;
   }
 
   getAllAgentList() {
@@ -141,7 +141,7 @@ export class AllcalllogsupervisorComponent {
       return; // Ignore the rest of the function during the first call
     }
 
-    const keyToExtract = 'mobile';
+    const keyToExtract = 'id';
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
   }
 
