@@ -39,7 +39,7 @@ export class AllcalllogComponent {
   sortOrder: string = 'asc';
   dropdownSettings = {
     singleSelection: false,
-    idField: 'id',
+    idField: 'mobile',
     textField: 'name',
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
