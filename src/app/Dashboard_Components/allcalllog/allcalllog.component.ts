@@ -129,7 +129,7 @@ export class AllcalllogComponent {
     this.getActiveUserListWithoutPagination();
     // this.getAllAgentbySuperviserList()
 
-    this.agentSelected = this.allagentbysupervisorList.id;
+    this.agentSelected = this.allagentbysupervisorList.mobile;
   }
 
   downloadSampleFile() {
@@ -372,7 +372,7 @@ export class AllcalllogComponent {
       return; // Ignore the rest of the function during the first call
     }
 
-    const keyToExtract = 'id';
+    const keyToExtract = 'mobile';
     this.agentSelected = val.map((obj: any) => obj[keyToExtract]);
   }
 
