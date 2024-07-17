@@ -34,7 +34,7 @@ export class AllcalllogsupervisorComponent {
   searchTerm: string = '';
   dropdownSettings = {
     singleSelection: false,
-    idField: 'id',
+    idField: 'mobile',
     textField: 'name',
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
