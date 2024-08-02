@@ -101,3 +101,8 @@ input:checked + .slider:before {
 .pagination-controls span {
   margin: 0 5px;
 }
+.modal-dialog-centered {
+  display: flex; 
+  align-items: center;
+  min-height: calc(100% - 1.75rem);
+}

@@ -92,16 +92,16 @@
                             <!-- Check if supervisorlist has data -->
                             <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                 <ng-container *ngIf="supervisorlist && supervisorlist.length > 0; else noData">
-                                    <table id="example2" class="table table-bordered table-hover  ">
+                                    <table id="example2" class="table table-bordered table-hover  text-white">
                                         <thead>
                                             <tr>
-                                                <th class="bg-dark textcenter">Sr.No</th>
-                                                <th class="bg-dark textcenter">File ID</th>
-                                                <th class="bg-dark textcenter">Inserted Count</th>
-                                                <th class="bg-dark textcenter">Failed Count</th>
-                                                <th class="bg-dark textcenter">Created At</th>
-                                                <th class="bg-dark textcenter">View</th>
-                                                <th class="bg-dark textcenter">Download</th>
+                                                <th class=" textcenter">Sr.No</th>
+                                                <th class=" textcenter">File ID</th>
+                                                <th class="textcenter">Inserted Count</th>
+                                                <th class="textcenter">Failed Count</th>
+                                                <th class="textcenter">Created At</th>
+                                                <th class=" textcenter">View</th>
+                                                <th class="textcenter">Download</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -111,8 +111,7 @@
                                                 <td class=" text-dark textcenter">{{ alluploadedusers.fileId }}</td>
                                                 <td class=" text-dark textcenter">{{ alluploadedusers.insertedCount }}</td>
                                                 <td class=" text-dark textcenter">{{ alluploadedusers.failedCount }}</td>
-                                                <td class=" text-dark textcenter">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd
-                                                    h:mm:ss a' }}</td>
+                                                <td class=" text-dark textcenter">{{ alluploadedusers.createdAt | date: 'yyyy-MM-dd h:mm:ss a' }}</td>
                                                 <td>
                                                     <a class="text-primary"
                                                         (click)="showDetails(alluploadedusers.fileId)">View</a>

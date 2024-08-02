@@ -311,6 +311,9 @@ import { HelperService } from 'src/app/helper.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, } from '@angular/router';
+
 @Component({
   selector: 'app-admin-alluserlist',
   templateUrl: './admin-alluserlist.component.html',
@@ -323,32 +326,41 @@ export class AdminAlluserlistComponent implements OnInit {
   supervisorsList1: any[] = [];
   totalItems!: number;
   totalPages!: number;
-  dropusertype:string= '';
+  dropusertype: string = '';
+  changePasswordForm!: FormGroup;
+  id: any;
 
   constructor(
     private helperService: HelperService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.getAllSupervisorList();
-    
+
+    this.changePasswordForm = this.formBuilder.group({
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    });
+
   }
 
   pagerecords(val: any) {
     this.pageSize = val.value ? val.value : 200;
-    
+
     this.currentPage = 1; // Reset to first page
     this.getAllSupervisorList();
   }
 
   getAllSupervisorList() {
     console.log('))))))))))))))))))))))))))', this.dropusertype);
-    
+
     let data = {
-      'user_type':this.dropusertype,
-      'page': this.currentPage, 
+      'user_type': this.dropusertype,
+      'page': this.currentPage,
       'pageSize': this.pageSize
 
     };
@@ -363,9 +375,9 @@ export class AdminAlluserlistComponent implements OnInit {
           this.totalItems = response.totalItems;
           this.totalPages = response.totalPages;
           this.currentPage = response.currentPage;
-          console.log("response.currentPage",response);
-          
-        
+          console.log("response.currentPage", response);
+
+
         }
         this.loading = false;
       },
@@ -389,82 +401,114 @@ export class AdminAlluserlistComponent implements OnInit {
     this.router.navigate(['/admin-dashboard/', 'users-change-password', users]);
 
   }
+
+
   // userspassreset(users: any) {
   //   const data = {
   //     'mobile': users
-  //   }
-  //   console.log(users);
-  //   this.helperService.resetuserpassword(data).subscribe(
-  //     {
-  //       next: (response: any) => {
-  //         if (response.result === true) {
-  //           console.log('Password changed successfully', response);
-  //           this.toastr.success('Password changed successfully', 'Success');
+  //   };
+
+  //   Swal.fire({
+  //     title: 'Confirmation',
+  //     text: 'Are you sure you want to reset the password for this user?',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, reset password!',
+  //     cancelButtonText: 'Cancel'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.helperService.resetuserpassword(data).subscribe({
+  //         next: (response: any) => {
+  //           if (response.result === true) {
+  //             console.log('Password changed successfully', response);
+  //             this.toastr.success('Password changed successfully', 'Success');
+  //           } else {
+  //             this.toastr.error('Error updating user data', 'Error');
+  //           }
+  //         },
+  //         error: (error: any) => {
+  //           console.error('Error changing password', error);
+  //           this.toastr.error('Error changing password', 'Error');
   //         }
-  //         else {
-  //           this.toastr.error('Error updating user data', 'Error');
-  //         }
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Error changing password', error);
-  //         this.toastr.error('Error changing password', 'Error');
-  //         // Handle error scenario here
-  //       }
+  //       });
   //     }
-  //   );
-
-
+  //   });
   // }
-
   userspassreset(users: any) {
     const data = {
       'mobile': users
     };
 
-    Swal.fire({
-      title: 'Confirmation',
-      text: 'Are you sure you want to reset the password for this user?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, reset password!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.helperService.resetuserpassword(data).subscribe({
-          next: (response: any) => {
-            if (response.result === true) {
-              console.log('Password changed successfully', response);
-              this.toastr.success('Password changed successfully', 'Success');
-            } else {
-              this.toastr.error('Error updating user data', 'Error');
-            }
-          },
-          error: (error: any) => {
-            console.error('Error changing password', error);
-            this.toastr.error('Error changing password', 'Error');
+     this.id=users
+    console.log("Raviii Bhau", this.id);
+  }
+
+  onChangePassword() {
+    console.log("Raviii Bhauuu", this.id);
+    if (this.changePasswordForm.invalid) {
+      this.toastr.error('Please fill all required fields', 'Error');
+      return;
+    }
+
+    const password = this.changePasswordForm.value.password;
+    const confirmPassword = this.changePasswordForm.value.confirmPassword;
+    const userid = this.id
+    const data = {
+
+      password: this.changePasswordForm.value.password,
+      confirm_password: this.changePasswordForm.value.confirmPassword,
+      id: userid
+    }
+    if (password.length < 8) {
+      this.toastr.error('Password must be at least 8 characters long', 'Error'); 
+      return;
+    }
+    if (password !== confirmPassword) {
+      console.log('Passwords do not match');
+      this.toastr.error('Passwords do not match', 'Error');
+      return;
+    }
+
+    this.helperService.changeUMpassword(data).subscribe(
+      {
+        next: (response: any) => {
+          if (response.result === true) {
+            console.log('Password changed successfully', response);
+            this.toastr.success('Password changed successfully', 'Success');
           }
-        });
+          else {
+            this.toastr.error('Error updating user data', 'Error');
+          }
+        },
+        error: (error: any) => {
+          if (error.status === 400) {
+            this.toastr.error(error.error.message, 'Error');
+          } else { 
+            this.toastr.error('An error occurred. Please try again.', 'Error');
+          }
+        }
       }
-    });
+    );
   }
 
   listsepration(users: any) {
-    this.dropusertype=users.value
+    this.dropusertype = users.value
     console.log("this.dropusertype", this.dropusertype);
-    
-    let data = { 'user_type': users.value,
-    'page': this.currentPage,
-    'pageSize': this.pageSize
 
-     }
+    let data = {
+      'user_type': users.value,
+      'page': this.currentPage,
+      'pageSize': this.pageSize
+
+    }
     this.helperService.getAllUsersList1(data).subscribe(response => {
       if (response['result'] == true) {
         this.supervisorsList1 = response['data'];
-     
-          this.totalItems = response.totalItems;
-          this.totalPages = response.totalPages;
-          this.currentPage = response.currentPage;
-          console.log("response.currentPage",response);
+
+        this.totalItems = response.totalItems;
+        this.totalPages = response.totalPages;
+        this.currentPage = response.currentPage;
+        console.log("response.currentPage", response);
       }
     });
 
@@ -647,8 +691,8 @@ export class AdminAlluserlistComponent implements OnInit {
   getPagination() {
     const delta = 7; // Number of pages to display before and after the current page
     const range = [];
-    const rangeWithDots:any = [];
-    let l:any;
+    const rangeWithDots: any = [];
+    let l: any;
 
     range.push(1);
     for (let i = this.currentPage - delta; i <= this.currentPage + delta; i++) {

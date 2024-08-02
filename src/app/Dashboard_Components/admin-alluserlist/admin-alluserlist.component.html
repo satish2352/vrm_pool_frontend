@@ -34,14 +34,15 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Show Records</label>
-                                            <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                            <select class="form-control" (change)="pagerecords($event.target)"
+                                                style="width: 5pc;">
                                                 <option value="200" disabled selected>No</option>
                                                 <option value="10">10</option>
                                                 <option value="20">20</option>
                                                 <option value="30">30</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                                <option value="200">200</option>
+                                                 <option value="200">200</option>
                                             </select>
                                         </div>
                                     </div>
@@ -59,7 +60,7 @@
                                                     <th class="textcenter">Email ID</th>
                                                     <th class="textcenter">Edit</th>
                                                     <th class="textcenter">Enable/Disable</th>
-                                                    <th class="textcenter">Reset Password</th>
+                                                    <th class="textcenter">Change Password</th>
                                                     <th class="textcenter">Delete User</th>
                                                 </tr>
                                             </thead>
@@ -68,9 +69,10 @@
                                                     *ngFor="let users of supervisorsList1; let i = index ">
                                                     <ng-container *ngIf="users.is_deleted == 0">
                                                         <!-- <th class="text-dark">{{ i + 1 + (pageSize * (currentPage - 1)) }}</th> -->
-                                                        <th class="text-dark textcenter">{{ i + 1 + (pageSize * (currentPage - 1))
+                                                        <th class="text-dark textcenter">{{ i + 1 + (pageSize *
+                                                            (currentPage - 1))
                                                             }}</th>
- 
+
                                                         <td class="text-dark textcenter">
                                                             <span *ngIf="users.user_type == '2'">Supervisor</span>
                                                             <span *ngIf="users.user_type == '3'">Relationship
@@ -93,7 +95,8 @@
                                                         </td>
                                                         <td class="text-dark textcenter">
                                                             <a class="text-primary" *ngIf="users.user_type == '2'"
-                                                                (click)="userspassreset(users.mobile)">Reset
+                                                                data-toggle="modal" data-target="#exampleModal"
+                                                                (click)="userspassreset(users.id)">Change
                                                                 Password</a>
                                                             <span *ngIf="users.user_type == '3'">NA</span>
                                                         </td>
@@ -140,5 +143,87 @@
                 </div>
             </div>
         </section>
+    </div>
+</div>
+
+
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change UM Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
+                    <div class="input-group mb-3">
+                        <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" formControlName="confirmPassword" class="form-control"
+                            placeholder="Confirm Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" (click)="onChangePassword()">Change Password</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change UM Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="password" class="form-control" placeholder="Password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" (click)="onChangePassword()">Change Password</button>
+            </div>
+        </div>
     </div>
 </div>

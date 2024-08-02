@@ -156,6 +156,10 @@ export class HelperService {
 
     return this.http.post<any>(`${this.apiUrl}/changePassword`, data);
   }
+  changeUMpassword(data: any): Observable<any> {
+
+    return this.http.post<any>(`${this.apiUrl}/changePasswordForSupervisor`, data);
+  }
   getAllUsersList1(data: any): Observable<any> {
 
     // const formData: FormData = new FormData();
