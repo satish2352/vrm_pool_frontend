@@ -329,6 +329,7 @@ export class AdminAlluserlistComponent implements OnInit {
   dropusertype: string = '';
   changePasswordForm!: FormGroup;
   id: any;
+  showPassword: boolean = false;
 
   constructor(
     private helperService: HelperService,
@@ -626,7 +627,9 @@ export class AdminAlluserlistComponent implements OnInit {
     });
   }
 
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   // changeUserStatus(id: any, event: any) {
   //   console.log(event.checked);
 

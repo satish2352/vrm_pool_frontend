@@ -146,19 +146,30 @@ export class AllcalllogsupervisorComponent {
   }
 
   getAllAgentbytimeframe(data: any) {
-    this.helperService.getAllAgentbytimeframe(data).subscribe((list) => {
-      if (list['result'] == true) {
-        this.filterList = list['data'];
+    if (this.fromdateSelected !== this.todateSelected) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'From Date and To Date Should be Same  ',
+        // text:'From Date and To Date Should be Same  ',
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    } else {
+      this.helperService.getAllAgentbytimeframe(data).subscribe((list) => {
+        if (list['result'] == true) {
+          this.filterList = list['data'];
 
-        this.totalItems = list.totalItems;
-        this.totalPages = list.totalPages;
-        this.currentPage = list.currentPage;
-        console.log(
-          'list.totalPagesssssssssssssssssssssssssssssss',
-          list.totalPages
-        );
-      }
-    });
+          this.totalItems = list.totalItems;
+          this.totalPages = list.totalPages;
+          this.currentPage = list.currentPage;
+          console.log(
+            'list.totalPagesssssssssssssssssssssssssssssss',
+            list.totalPages
+          );
+        }
+      });
+    }
   }
 
   pagerecords(val: any) {
@@ -357,7 +368,7 @@ export class AllcalllogsupervisorComponent {
       // alert("To time can't be less than from time");
       Swal.fire({
         icon: 'warning',
-        title: "To Time and Date can't be less than from Time and Date ",
+        title: " The to time and to date cannot be earlier than the from time and from date",
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
         showConfirmButton: false,
@@ -403,7 +414,7 @@ export class AllcalllogsupervisorComponent {
           });
           this.timeselect = '';
         } else {
-          var today = new Date();
+          var today = new Date(this.fromdateSelected);
           // Get the year, month, and day
           var year = today.getFullYear();
           var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -413,7 +424,7 @@ export class AllcalllogsupervisorComponent {
           var localDateTime = new Date(finalDate);
           var fromtimeFormated = localDateTime.toISOString();
 
-          var today_to = new Date();
+          var today_to = new Date(this.todateSelected);
           // Get the year, month, and day
           var year_to = today_to.getFullYear();
           var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -529,7 +540,7 @@ export class AllcalllogsupervisorComponent {
           });
           this.timeselect = '';
         } else {
-          var today = new Date();
+          var today = new Date(this.fromdateSelected);
           // Get the year, month, and day
           var year = today.getFullYear();
           var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -539,7 +550,7 @@ export class AllcalllogsupervisorComponent {
           var localDateTime = new Date(finalDate);
           var fromtimeFormated = localDateTime.toISOString();
 
-          var today_to = new Date();
+          var today_to = new Date(this.todateSelected);
           // Get the year, month, and day
           var year_to = today_to.getFullYear();
           var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
@@ -608,7 +619,7 @@ export class AllcalllogsupervisorComponent {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: 'From Date and To Date Should be Same  ',
+        title: 'The From Date and To Date must be the same',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
         showConfirmButton: false,

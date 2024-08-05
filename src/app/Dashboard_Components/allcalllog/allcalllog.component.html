@@ -120,31 +120,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <label>&nbsp;</label>
-                                    <div class="form-group d-sm-grid d-lg-flex d-md-flex">
-                                        <div class="mt-sm-2 mt-lg-0">
-                                            <div class="input-group-append">
-                                                <button class="input-group-text" (click)="getSearch()">Search</button>
-                                            </div>&nbsp;&nbsp;&nbsp;
-                                           
-                                        </div>
-
-                                        <div class="mx-lg-3 mx-sm-0 mt-sm-2 mt-lg-0">
-                                            
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" (click)="failedcalllog()">Failed Call
-                                                    Log</button>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-
-
-                                </div>
+                             
 
 
 
@@ -161,7 +137,7 @@
                                       
                                     </div>
                                 </div> -->
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="searchInput">Search</label>
                                         <div class="form-group">
@@ -170,21 +146,36 @@
                                                 (keyup)="searchChanged(searchTerm)">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                                
                                
 
                             </div>
+                            <div class="col-md-6">
+                                <label>&nbsp;</label>
+                                <div class="form-group d-sm-grid d-lg-flex d-md-flex">
+                                    <div class="mt-sm-2 mt-lg-0">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary " (click)="getSearch()">Search</button>
+                                        </div>&nbsp;&nbsp;&nbsp;
+                                       
+                                    </div>
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    ( <a class="text-primary"
-                                    (click)="downloadSampleFile()">Excel download</a> )
+                                    <div class="mx-lg-3 mx-sm-0 mt-sm-2 mt-lg-0">
+                                        
+                                        <div class="input-group-append">
+                                            <button class="btn input-group-text" (click)="failedcalllog()">Failed Call
+                                                Log</button>
+                                        </div>
+                                    </div> 
                                 </div>
+
+
+
                             </div>
-                            <a id="hiddenLink" target="_blank" style="display: none;" download></a>
+                   
                         </div>
                     </div>
                 </div>
@@ -200,19 +191,31 @@
                         <div class="card">
 
                             <div class="card-body  bg-white">
-                                <div class="col-md-2">
-                                    <div class="form-group">
+                                <div class="col-md-6 row">
+                                    <div class="form-group col-md-3 ">
                                         <label>Show Records</label>
-                                        <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
-                                            <option value="" disabled selected>No</option>
-                                            <option value="10">10</option>
-                                            <option value="20">20</option>
-                                            <option value="30">30</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                            <option value="200">200</option>
-                                        </select>
+                                        <div class="row">
+                                            <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                                                <option value="" disabled selected>No</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                <option value="200">200</option>
+                                            </select>
+                                           
+                                        </div>
+                                       
                                     </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                             <a class="text-primary  "
+                                            (click)="downloadSampleFile()">&nbsp;&nbsp;Export Data</a> 
+                                        </div>
+                                    </div>
+                                    <a id="hiddenLink" target="_blank" style="display: none;" download></a>
                                 </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">

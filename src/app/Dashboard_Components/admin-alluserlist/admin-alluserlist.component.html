@@ -203,20 +203,22 @@
             <div class="modal-body">
                 <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
                     <div class="input-group mb-3">
-                        <input type="text" formControlName="password" class="form-control" placeholder="Password" required>
+                        <input type="text" formControlName="password" type="{{ showPassword ? 'text' : 'password' }}" class="form-control" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                              <!-- Toggle icon based on showPassword value -->
+                              <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
                             </div>
-                        </div>
+                          </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                        <input type="text" formControlName="confirmPassword" class="form-control" type="{{ showPassword ? 'text' : 'password' }}" placeholder="Confirm Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                              <!-- Toggle icon based on showPassword value -->
+                              <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
                             </div>
-                        </div>
+                          </div>
                     </div>
                 </form>
             </div>

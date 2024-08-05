@@ -164,18 +164,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label>&nbsp;</label>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-append">
-                                                <button class="input-group-text" (click)="getSearch()">Search</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label >Search</label>
                                         <div class="form-group">
@@ -184,36 +175,57 @@
                                                 (ngModelChange)="searchChanged($event)">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         ( <a class="text-primary"
-                                        (click)="getSearchDownlaodExcel()">Excel download</a> )
+                                        (click)="getSearchDownlaodExcel()">Export Data</a> )
                                     </div>
                                 </div>
-                                <a id="hiddenLink" target="_blank" style="display: none;" download></a>
+                                <a id="hiddenLink" target="_blank" style="display: none;" download></a> -->
                             </div>
-
+                            <div class="col-md-3">
+                                <label>&nbsp;</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary " (click)="getSearch()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <section class="content">
-            <div class="col-md-2">
-                <div class="form-group">
+            <div class="col-md-4 row">
+                <div class="form-group col-md-3 ">
                     <label>Show Records</label>
-                    <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
-                        <option value="" disabled selected>No</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                    </select>
+                    <div class="col-md-3 row">
+                        <select class="form-control" (change)="pagerecords($event.target)" style="width: 5pc;">
+                            <option value="" disabled selected>No</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                        </select>
+                       
+                    </div>
+                   
                 </div>
+               
+                <div class="col-md-3">
+                    <div class="form-group">
+                         <a class="text-primary  "
+                        (click)="getSearchDownlaodExcel()">&nbsp;&nbsp;Export Data</a> 
+                    </div>
+                </div>
+                <a id="hiddenLink" target="_blank" style="display: none;" download></a>
             </div>
             <div class="container-fluid">
                 <div class="row">
