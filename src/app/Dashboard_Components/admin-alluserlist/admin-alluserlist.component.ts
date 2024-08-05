@@ -320,6 +320,7 @@ import { ActivatedRoute, Params, } from '@angular/router';
   styleUrls: ['./admin-alluserlist.component.css']
 })
 export class AdminAlluserlistComponent implements OnInit {
+
   pageSize: number = 200;
   currentPage: number = 1;
   loading: boolean = false;
@@ -330,6 +331,7 @@ export class AdminAlluserlistComponent implements OnInit {
   changePasswordForm!: FormGroup;
   id: any;
   showPassword: boolean = false;
+
 
   constructor(
     private helperService: HelperService,
@@ -440,7 +442,7 @@ export class AdminAlluserlistComponent implements OnInit {
       'mobile': users
     };
 
-     this.id=users
+    this.id = users
     console.log("Raviii Bhau", this.id);
   }
 
@@ -448,6 +450,7 @@ export class AdminAlluserlistComponent implements OnInit {
     console.log("Raviii Bhauuu", this.id);
     if (this.changePasswordForm.invalid) {
       this.toastr.error('Please fill all required fields', 'Error');
+
       return;
     }
 
@@ -461,7 +464,7 @@ export class AdminAlluserlistComponent implements OnInit {
       id: userid
     }
     if (password.length < 8) {
-      this.toastr.error('Password must be at least 8 characters long', 'Error'); 
+      this.toastr.error('Password must be at least 8 characters long', 'Error');
       return;
     }
     if (password !== confirmPassword) {
@@ -476,7 +479,9 @@ export class AdminAlluserlistComponent implements OnInit {
           if (response.result === true) {
             console.log('Password changed successfully', response);
             this.toastr.success('Password changed successfully', 'Success');
+     this.changePasswordForm.reset();
           }
+
           else {
             this.toastr.error('Error updating user data', 'Error');
           }
@@ -484,7 +489,7 @@ export class AdminAlluserlistComponent implements OnInit {
         error: (error: any) => {
           if (error.status === 400) {
             this.toastr.error(error.error.message, 'Error');
-          } else { 
+          } else {
             this.toastr.error('An error occurred. Please try again.', 'Error');
           }
         }
