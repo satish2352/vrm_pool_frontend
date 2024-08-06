@@ -265,7 +265,7 @@ export class AllcalllogComponent {
     if (!this.data.agent_id) {
       Swal.fire({
         icon: 'warning',
-        title: 'Please select Relationship Manager.',
+        title: 'Please select Relationship Manager if time frame is selected',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
         showConfirmButton: false,
@@ -276,7 +276,7 @@ export class AllcalllogComponent {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: 'The From Date and To Date must be the same',
+        title: 'The From Date and To Date must be the same If time frame is selected',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
         showConfirmButton: false,
@@ -302,7 +302,7 @@ export class AllcalllogComponent {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: 'From Date and To Date Should be Same  ',
+        title: 'The From Date and To Date must be the same If time frame is selected',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
         showConfirmButton: false,

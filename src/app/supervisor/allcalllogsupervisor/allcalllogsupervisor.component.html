@@ -245,6 +245,7 @@
                                                     <th class="textcenter">Missed Calls</th>
                                                     <th class="textcenter">Outgoing Calls</th>
                                                     <!-- <th *ngIf="filterList[0].slot">Time Slot</th> -->
+                                                    <th class="textcenter"   >Created Date</th>
                                                   
 
 
@@ -273,7 +274,9 @@
                                                         item.DeviceOnPercent.end_time | customTime }}</td> -->
                                                   
                                                      <!-- <td class="textcenter"  id="Table_data"><span *ngIf="item.updatedAt">{{ item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a'}}</span> </td> -->
-
+                                                     <td class="textcenter" id="Table_data">
+                                                        {{ item.updatedAt ? (item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a') : 'NA' }}
+                                                      </td>
 
                                                 </tr>
                                             </tbody>

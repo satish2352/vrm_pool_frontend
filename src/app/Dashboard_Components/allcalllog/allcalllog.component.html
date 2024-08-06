@@ -220,7 +220,7 @@
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="filterList && filterList.length > 0; else noData">
                                         <table id="example2"
-                                            class="table table-bordered table-hover bg-dark text-white">
+                                            class="table table-bordered table-hover text-white">
                                             <thead>
                                                 <tr class="text-secondary text-white">
                                                     <th class="text-white">Sr.No</th>
@@ -231,16 +231,14 @@
                                                     <th (click)="sortAgentEmail('mobile')" class="text-white">RM Mobile
                                                         Number</th>
                                                     <th class="textcenter">Available Time</th>
-                                                    <th class="textcenter">Non Available Time</th>
+                                                    <th class="textcenter" >Non Available Time</th>
                                                     <th class="textcenter">On Call Time</th>
                                                     <th class="textcenter">Received Calls</th>
                                                     <th class="textcenter">Missed Calls</th>
-                                                    <th class="textcenter">Outgoing Calls</th>
+                                                    <th class="textcenter" >Outgoing Calls</th>
                                                     <!-- <th *ngIf="filterList[0].slot" class="textcenter">Time Slot</th> -->
-                                                    <th class="textcenter">Created Date</th>
-                                                  
-
-
+                                                    <th class="textcenter"   >Created Date</th>
+                                                
                                                 </tr>
                                            
                                             </thead>
@@ -266,8 +264,10 @@
                                                         item.DeviceOnPercent.start_time | customTime }}-{{
                                                         item.DeviceOnPercent.end_time | customTime }}</td> -->
                                                   
-                                                     <td class="textcenter"  id="Table_data"><span *ngIf="item.updatedAt">{{ item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a'}}</span> </td>
-
+                                                     <!-- <td class="textcenter"  id="Table_data">{{ item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a'}}</td> -->
+                                                     <td class="textcenter" id="Table_data">
+                                                        {{ item.updatedAt ? (item.updatedAt | date: 'yyyy-MM-dd h:mm:ss a') : 'NA' }}
+                                                      </td>
 
                                                 </tr>
                                             </tbody>
