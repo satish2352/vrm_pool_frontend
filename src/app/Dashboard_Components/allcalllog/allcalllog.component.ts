@@ -261,8 +261,7 @@ export class AllcalllogComponent {
 
 
   getAllAgentbytimeframe(data: any) {
-    console.log("urueueueruu",data);
-    
+
     if (!this.data.agent_id) {
       Swal.fire({
         icon: 'warning',

@@ -146,6 +146,17 @@ export class AllcalllogsupervisorComponent {
   }
 
   getAllAgentbytimeframe(data: any) {
+    if (!this.data.agent_id) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please select Relationship Manager.',
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+
+    }
+    else {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
@@ -168,8 +179,10 @@ export class AllcalllogsupervisorComponent {
             list.totalPages
           );
         }
+        
       });
     }
+  }
   }
 
   pagerecords(val: any) {
