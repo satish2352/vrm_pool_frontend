@@ -59,6 +59,7 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.changepassword(data).subscribe({
       next: (response: any) => {
         this.toastr.success(response.message, 'Success');
+        this.changePasswordForm.reset();
         this.router.navigate(['/login']);
       },
       error: (error: any) => {

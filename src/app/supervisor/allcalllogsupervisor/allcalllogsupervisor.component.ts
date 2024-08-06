@@ -414,17 +414,7 @@ export class AllcalllogsupervisorComponent {
       }
 
       if (this.timeselect && this.timeselect.length > 0) {
-        if(typeof this.agentSelected ==="undefined"){
-          Swal.fire({
-            icon: 'warning',
-            title: 'Please select Relationship Manager.',
-            timer: 4000, // Close the alert after 4 seconds
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-       
-        }
-        else{
+    
           if (!this.fromdateSelected || !this.todateSelected) {
             Swal.fire({
               icon: 'warning',
@@ -472,7 +462,7 @@ export class AllcalllogsupervisorComponent {
           this.data.totime = totimeFormated;
           this.getAllAgentbytimeframe(this.data);
         }
-      }
+      
     }
       } else {
         this.getCallLogSingleRow(this.data);
