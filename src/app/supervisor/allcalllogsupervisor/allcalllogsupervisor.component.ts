@@ -160,7 +160,7 @@ export class AllcalllogsupervisorComponent {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
-        title: 'Please select Relationship Manager if time frame is selected',
+        title: 'The From Date and To Date must be the same If time frame is selected',
         // text:'From Date and To Date Should be Same  ',
         timer: 4000, // Close the alert after 4 seconds
         timerProgressBar: true,
