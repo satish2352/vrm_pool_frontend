@@ -299,7 +299,7 @@
 //     this.router.navigate(['/admin-dashboard/', 'update-users-data', mobile]);
 //   }
 // }
-
+ 
 
 
 
@@ -331,14 +331,16 @@ export class AdminAlluserlistComponent implements OnInit {
   changePasswordForm!: FormGroup;
   id: any;
   showPassword: boolean = false;
-
-
+  isModalOpen = false;
+  showSuccessMessage=false
   constructor(
     private helperService: HelperService,
     private router: Router,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+
+
   ) { }
 
   ngOnInit(): void {
@@ -404,7 +406,13 @@ export class AdminAlluserlistComponent implements OnInit {
     this.router.navigate(['/admin-dashboard/', 'users-change-password', users]);
 
   }
+  openModal() {
+    this.isModalOpen = true;
+  }
 
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
   // userspassreset(users: any) {
   //   const data = {
@@ -441,13 +449,12 @@ export class AdminAlluserlistComponent implements OnInit {
     const data = {
       'mobile': users
     };
-
+   this. openModal()
     this.id = users
     console.log("Raviii Bhau", this.id);
   }
 
   onChangePassword() {
-    console.log("Raviii Bhauuu", this.id);
     if (this.changePasswordForm.invalid) {
       this.toastr.error('Please fill all required fields', 'Error');
 
@@ -479,7 +486,12 @@ export class AdminAlluserlistComponent implements OnInit {
           if (response.result === true) {
             console.log('Password changed successfully', response);
             this.toastr.success('Password changed successfully', 'Success');
+            setTimeout(() => {
+              // this.showSuccessMessage = false;
+              this.closeModal(); // Close the modal after hiding the message
+            }, 1000);
      this.changePasswordForm.reset();
+     this.closeModal()
           }
 
           else {

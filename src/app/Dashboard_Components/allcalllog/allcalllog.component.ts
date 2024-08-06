@@ -258,9 +258,22 @@ export class AllcalllogComponent {
     }
   }
 
- 
+
 
   getAllAgentbytimeframe(data: any) {
+    console.log("urueueueruu",data);
+    
+    if (typeof this.agentSelected === "undefined") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please select Relationship Manager.',
+        timer: 4000, // Close the alert after 4 seconds
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+
+    }
+    else {
     if (this.fromdateSelected !== this.todateSelected) {
       Swal.fire({
         icon: 'warning',
@@ -283,6 +296,7 @@ export class AllcalllogComponent {
         }
       });
     }
+  }
   }
 
   getAllAgentbytimeframeFilesDownload(data: any) {
@@ -627,7 +641,7 @@ export class AllcalllogComponent {
     // }
 
     var finaltoDate = new Date();
-    
+
     if (this.todateSelected) {
       finaltoDate = this.todateSelected;
     }
@@ -704,43 +718,56 @@ export class AllcalllogComponent {
       }
 
       if (this.timeselect && this.timeselect.length > 0) {
-        if (
-          typeof this.fromtimeSelected === 'undefined' &&
-          typeof this.totimeSelected === 'undefined'
-        ) {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Please select both From Time and To Time.',
-            timer: 4000, // Close the alert after 4 seconds
-            timerProgressBar: true,
-            showConfirmButton: false,
-          });
-          this.timeselect = '';
-        } else {
-          var today = new Date(this.fromdateSelected);
-          // Get the year, month, and day
-          var year = today.getFullYear();
-          var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
-          var day = ('0' + today.getDate()).slice(-2);
-          var formattedDate = year + '-' + month + '-' + day;
-          var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
-          var localDateTime = new Date(finalDate);
-          var fromtimeFormated = localDateTime.toISOString();
+       
+          if (!this.fromdateSelected || !this.todateSelected) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Please select from date and to date.',
+              timer: 4000, // Close the alert after 4 seconds
+              timerProgressBar: true,
+              showConfirmButton: false,
+            });
 
-          var today_to = new Date(this.todateSelected);
-          // Get the year, month, and day
-          var year_to = today_to.getFullYear();
-          var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
-          var day_to = ('0' + today_to.getDate()).slice(-2);
-          var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
-          var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
-          var localDateTime_to = new Date(finalDate_to);
-          var totimeFormated = localDateTime_to.toISOString();
+          } else {
+            if (
+              typeof this.fromtimeSelected === 'undefined' &&
+              typeof this.totimeSelected === 'undefined'
+            ) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Please select both From Time and To Time.',
+                timer: 4000, // Close the alert after 4 seconds
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
+              this.timeselect = '';
+            } else {
+              var today = new Date(this.fromdateSelected);
+              // Get the year, month, and day
+              var year = today.getFullYear();
+              var month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+              var day = ('0' + today.getDate()).slice(-2);
+              var formattedDate = year + '-' + month + '-' + day;
+              var finalDate = formattedDate + 'T' + this.fromtimeSelected; // Include 'T' for ISO 8601 format
+              var localDateTime = new Date(finalDate);
+              var fromtimeFormated = localDateTime.toISOString();
 
-          this.data.fromtime = fromtimeFormated;
-          this.data.totime = totimeFormated;
-          this.getAllAgentbytimeframe(this.data);
-        }
+              var today_to = new Date(this.todateSelected);
+              // Get the year, month, and day
+              var year_to = today_to.getFullYear();
+              var month_to = ('0' + (today_to.getMonth() + 1)).slice(-2); // Months are zero-based
+              var day_to = ('0' + today_to.getDate()).slice(-2);
+              var formattedDate_to = year_to + '-' + month_to + '-' + day_to;
+              var finalDate_to = formattedDate_to + 'T' + this.totimeSelected; // Include 'T' for ISO 8601 format
+              var localDateTime_to = new Date(finalDate_to);
+              var totimeFormated = localDateTime_to.toISOString();
+
+              this.data.fromtime = fromtimeFormated;
+              this.data.totime = totimeFormated;
+              this.getAllAgentbytimeframe(this.data);
+            }
+          }
+        
       } else {
         this.getCallLogSingleRow(this.data);
       }

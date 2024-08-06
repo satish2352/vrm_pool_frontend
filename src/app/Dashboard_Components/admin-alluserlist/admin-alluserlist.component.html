@@ -5,10 +5,13 @@
     <div class="content-wrapper mt-5 bg-gradient-light text-dark">
         <section class="content-header bg-white text-dark">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
+                <div class="row mb-2 ">
+                    
+                    <div class="col-sm-3  ">
                         <h1 class="text-secondary">Users</h1>
+                        
                     </div>
+                    <!-- <div class="col-sm-3  " *ngIf="showSuccessMessage" class="alert alert-success">Password changed successfully!</div> -->
                 </div>
             </div>
         </section>
@@ -31,7 +34,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 row" >
                                         <div class="form-group">
                                             <label>Show Records</label>
                                             <select class="form-control" (change)="pagerecords($event.target)"
@@ -45,7 +48,9 @@
                                                  <option value="200">200</option>
                                             </select>
                                         </div>
+                                        
                                     </div>
+                                   
                                 </div>
                                 <div style="overflow-x:auto; max-width: 100%;" class="custom-scrollbar">
                                     <ng-container *ngIf="supervisorsList1 && supervisorsList1.length > 0; else noData">
@@ -148,84 +153,42 @@
 
 
 
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Change UM Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
-                    <div class="input-group mb-3">
-                        <input type="password" formControlName="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" formControlName="confirmPassword" class="form-control"
-                            placeholder="Confirm Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" (click)="onChangePassword()">Change Password</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="isModalOpen" class="modal fade show d-block" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Change UM Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
-                    <div class="input-group mb-3">
-                        <input type="text" formControlName="password" type="{{ showPassword ? 'text' : 'password' }}" class="form-control" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                              <!-- Toggle icon based on showPassword value -->
-                              <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
-                            </div>
-                          </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" formControlName="confirmPassword" class="form-control" type="{{ showPassword ? 'text' : 'password' }}" placeholder="Confirm Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                              <!-- Toggle icon based on showPassword value -->
-                              <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
-                            </div>
-                          </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" (click)="onChangePassword() ">Change Password</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Change UM Password</h5>
+          <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
+            <div class="input-group mb-3">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control" placeholder="Password" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></span>
+                </div>
+              </div>
+            </div>
+           
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="changePasswordForm.invalid" (click)="onChangePassword()">Change Password</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
