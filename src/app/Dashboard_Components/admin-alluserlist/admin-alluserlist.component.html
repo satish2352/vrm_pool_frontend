@@ -64,6 +64,7 @@
                                                     <th class="textcenter">Mobile No</th>
                                                     <th class="textcenter">Email ID</th>
                                                     <th class="textcenter">Edit</th>
+                                                    <th class="textcenter">Device Status</th>
                                                     <th class="textcenter">Enable/Disable</th>
                                                     <th class="textcenter">Change Password</th>
                                                     <th class="textcenter">Delete User</th>
@@ -90,6 +91,13 @@
                                                             <a class="text-primary" *ngIf="users.user_type == '2'"
                                                                 (click)="updateusers(users.id)">Edit</a>
                                                             <span *ngIf="users.user_type == '3'">NA</span>
+                                                        </td>
+                                                        <td class="text-dark textcenter">
+                                                            <label class="switch">
+                                                                <input type="checkbox" [checked]="users.DeviceStatus == 1"
+                                                                    (change)="changeUserStatus1(users, $event.target)">
+                                                                <span class="slider"></span>
+                                                            </label>
                                                         </td>
                                                         <td class="text-dark textcenter">
                                                             <label class="switch">

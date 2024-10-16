@@ -702,6 +702,42 @@ export class AdminAlluserlistComponent implements OnInit {
       this.toastr.error('An error occurred while changing user status.', 'Error');
     }
   }
+  changeUserStatus1(users: any, event: any) {
+    console.log(users.mobile,';;;;;');
+    console.log(event.checked,';;;;;');
+    console.log(event.id,';;;;;');
+
+    const statusValue = event.checked == true ? '1' : '0';
+
+    const data = {
+
+      // id: users.id,
+      mobile: users.mobile,
+      status:event.checked
+
+    };
+
+    try {
+      this.helperService.toggleDeviceStatus(data).subscribe(list => {
+        if (list['result'] == true) {
+
+          this.toastr.success(list.message, 'Success');
+        }
+      }, error => {
+        console.error(error.message, error);
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to Status Update',
+          text: error.error['message']
+        });
+        this.getAllSupervisorList()
+      });
+    } catch (error) {
+      console.error('Error occurred:', error);
+      this.toastr.error('An error occurred while changing user status.', 'Error');
+    }
+  }
 
   updateusers(mobile: any) {
     console.log(mobile);

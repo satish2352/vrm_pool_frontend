@@ -197,6 +197,11 @@ export class HelperService {
 
     return this.http.post<any>(`${this.apiUrl}/changeUserStatus`, data);
   }
+  toggleDeviceStatus(data: any): Observable<any> {
+console.log('dada',data);
+
+    return this.http.post<any>(`${this.apiUrl}/toggleDeviceStatus`, data);
+  }
   getunderagentreports(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/getAllReports`, data);
   }
