@@ -305,7 +305,7 @@
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/helper.service';
 import { ToastrService } from 'ngx-toastr';
@@ -339,7 +339,7 @@ export class AdminAlluserlistComponent implements OnInit {
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-
+    private cdr: ChangeDetectorRef
 
   ) { }
 
@@ -703,42 +703,51 @@ export class AdminAlluserlistComponent implements OnInit {
     }
   }
   changeUserStatus1(users: any, event: any) {
-    console.log(users.mobile,';;;;;');
-    console.log(event.checked,';;;;;');
-    console.log(event.id,';;;;;');
+    console.log(users.mobile, ';;;;;');
+    console.log(event.checked, ';;;;;');
+    console.log(event.id, ';;;;;');
+  
 
-    const statusValue = event.checked == true ? '1' : '0';
-
+  
     const data = {
-
-      // id: users.id,
       mobile: users.mobile,
-      status:event.checked
-
+      status: event.checked // Use statusValue instead of event.checked directly
     };
-
-    try {
-      this.helperService.toggleDeviceStatus(data).subscribe(list => {
-        if (list['result'] == true) {
-
-          this.toastr.success(list.message, 'Success');
-        }
-      }, error => {
-        console.error(error.message, error);
-
+  
+    // No need for try-catch with observables
+    this.helperService.toggleDeviceStatus(data).subscribe(
+      list => {
+        if (list['result'] === true) {
+          // Constructing the success message
+          const responseMessage = list.message || 'Status updated successfully';
+          const additionalData = list.data?.response?.data?.available ?? ''; // Optional chaining for safety
+      
+          // Displaying the SweetAlert
+          Swal.fire({
+              icon: 'success', // Corrected 'sucess' to 'success'
+              title: 'Success',
+              html: `${responseMessage}<br>Device Available: ${additionalData}`, // Using the response message
+          });
+      
+          // Displaying Toastr notification
+          // this.toastr.success(`Device Available: ${additionalData}`, 'Success');
+      }
+      },
+      error => {
+        console.error('Error:', error.message || 'Unknown error', error);
+  
         Swal.fire({
           icon: 'error',
-          title: 'Failed to Status Update',
-          text: error.error['message']
+          title: 'Failed to Update Status',
+          text: error.error?.message || 'An unknown error occurred'
         });
-        this.getAllSupervisorList()
-      });
-    } catch (error) {
-      console.error('Error occurred:', error);
-      this.toastr.error('An error occurred while changing user status.', 'Error');
-    }
+  
+        // Refresh supervisor list on error
+        this.getAllSupervisorList();
+      }
+    );
   }
-
+  
   updateusers(mobile: any) {
     console.log(mobile);
     this.router.navigate(['/admin-dashboard/', 'update-users-data', mobile]);
